@@ -17,7 +17,6 @@
     </environment>
   </environments>
   <mappers>
-	<mapper resource="kr/co/sist/dao/mapper/testMapper.xml"/>
-	<mapper resource="kr/co/sist/dao/mapper/deptMapper.xml"/>
+	<mapper resource="potato/dao/mapper/UserMapper.xml"/>
   </mappers>
 </configuration>
