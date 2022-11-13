@@ -99,10 +99,10 @@ public class MyPageController {
 			return "delLike";
 	}//delLike
 	
-	//신고)좋아요한 리뷰
+	//신고)좋아요한 리뷰-팝업
 	@RequestMapping(value = "reportReview.do",method = GET)
 		public String reportReview(HttpSession session, String string) {
-			return "reportReview";
+			return "mypages/jsp/report_review_popup";
 	}//reportReview
 	
 	//즐겨찾기한 휴게소
