@@ -42,7 +42,7 @@ $(function() {
 				로그인/회원가입</a>
 				
 				<div class="profile-img-wrap">
-					<img src="http://localhost/html_prj/day0825/images/cimg.png" alt="프로필" class="profile-img">
+					<img src="images/cimg.png" alt="프로필" class="profile-img">
 					<span class="profile-txt">닉네임들어갈자리</span>님 환영합니다.
 				</div>
 				

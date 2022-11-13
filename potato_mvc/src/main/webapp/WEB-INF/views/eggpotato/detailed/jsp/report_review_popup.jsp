@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>신고창</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../detailed/css/report_review_popup.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="detailed/report_review_popup.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -18,7 +18,7 @@
 <body>
 <div class="wrap">
 	<div class="top">
-		<img src="../../images/report.png" class="report-icon">
+		<img src="images/report.png" class="report-icon">
 		<span>리뷰 신고하기</span>
 	</div>
 	<div class="middle">

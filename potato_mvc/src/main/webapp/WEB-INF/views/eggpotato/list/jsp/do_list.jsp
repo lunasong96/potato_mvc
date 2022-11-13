@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>도별 휴게소</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_navi2.css"/><%-- 네비바 필요한 사람만 --%>
-<link rel="stylesheet" type="text/css" href="../css/do_list.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_navi2.css"/><%-- 네비바 필요한 사람만 --%>
+<link rel="stylesheet" type="text/css" href="list/do_list.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -62,7 +62,7 @@
 				    <area target="_blank" class="effect" alt="전라북도" title="전라북도" href="do_list_details.jsp" coords="325,478,294,481,270,481,251,460,232,458,219,473,191,470,161,483,133,468,130,492,144,509,128,530,120,560,141,590,176,572,237,594,286,589,301,571,290,540,328,499" shape="poly">
 				    <area target="_blank" class="effect" alt="전라남도" title="전라남도" href="do_list_details.jsp" coords="287,589,298,623,319,661,327,691,335,706,282,729,278,758,267,764,255,755,230,771,223,785,111,771,81,778,81,794,46,809,33,787,32,768,55,733,42,730,43,714,56,662,71,648,70,625,99,613,97,601,119,566,141,589,176,571,235,596" shape="poly">
   					</map>
-  					<img src="../../images/k-map.jpg" style="display:block; margin:auto;" usemap="#do-map" class="effect">
+  					<img src="images/k-map.jpg" style="display:block; margin:auto;" usemap="#do-map" class="effect">
 				</div>
 			</div>
 <!-- 건들지마 -->

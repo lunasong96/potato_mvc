@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>고속도로별 휴게소</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_navi2.css"/><%-- 네비바 필요한 사람만 --%>
-<link rel="stylesheet" type="text/css" href="../css/highway_list.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_navi2.css"/><%-- 네비바 필요한 사람만 --%>
+<link rel="stylesheet" type="text/css" href="list/highway_list.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <!-- 지도api -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38b2d30b9d0b819b032f0a5f8dc950c7"></script>

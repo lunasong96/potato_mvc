@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>MainHome</title>
-<link rel="shortcut icon"  href="../../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../m_common/m_css/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../css/member_info_popup.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="manager/member_management/member_info_popup.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 

@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 약관</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../css/service_check.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="login/service_check.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -26,7 +26,7 @@ function popUp1() {
 	var windowStatus = 'width='+width+', height='+height+', left='+left+', top='+top+', scrollbars=no, status=yes, resizable=yes, titlebar=yes';
 	
     	//연결하고싶은url
-    	const url = "tos2.jsp";
+    	const url = "tos2.do";
 
 	//등록된 url 및 window 속성 기준으로 팝업창을 연다.
 	window.open(url, "알감자 약관사항", windowStatus);
@@ -46,7 +46,7 @@ function popUp2() {
 	var windowStatus = 'width='+width+', height='+height+', left='+left+', top='+top+', scrollbars=no, status=yes, resizable=yes, titlebar=yes';
 	
     	//연결하고싶은url
-    	const url = "tos1.jsp";
+    	const url = "tos1.do";
 
 	//등록된 url 및 window 속성 기준으로 팝업창을 연다.
 	window.open(url, "알감자 개인정보 수집 및 이용 동의", windowStatus);

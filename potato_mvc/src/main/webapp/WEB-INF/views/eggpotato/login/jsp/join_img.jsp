@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../css/join_img.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="login/join_img.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -33,7 +33,7 @@
 		<!-- main -->
 		<div class="main-container">
 			<h2 class="main-title">프로필 사진</h2><br/>
-			<img src="../images/img1.png" class="main-profile"/><br/>
+			<img src="login/images/img1.png" class="main-profile"/><br/>
 			<input type="button" value="사진등록" class="imgBtn">
 			<input type="button" value="삭제" class="imgBtn">
 			<input type="button" value="가입하기" class="joinBtn">

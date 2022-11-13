@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>manager_login</title>
-<link rel="shortcut icon"  href="../../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../m_common/m_css/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="manager/home/login.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -24,7 +24,7 @@
 		<!-- loginBox -->
 		<div class="box-login">
 			<div class="logo">
-				<a href="../../../mainhome/jsp/user_mainhome.jsp"><img src="../../../images/logo.png"></a>
+				<a href="user_mainhome.do"><img src="images/logo.png"></a>
 			</div>
 			<div class="login-top">관리자 로그인</div>
 			<!-- main -->

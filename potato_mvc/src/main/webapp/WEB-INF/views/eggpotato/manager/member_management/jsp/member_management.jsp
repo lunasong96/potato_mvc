@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Member Management</title>
-<link rel="shortcut icon"  href="../../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../m_common/m_css/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../css/member_management.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="manager/member_management/member_management.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
@@ -61,12 +61,12 @@ function tableChange(){
 	
 	//사용자 아이디 클릭시 상세 정보 팝업창 보여주기
 	function infoPopup(){
-		window.open("member_info_popup.jsp","member_detail_info_popup",
+		window.open("mgr_memberInfoPopup.do","member_detail_info_popup",
 				"width=539,height=474,top=203,left=1336")
 	}
 	//신고 버튼 클릭시 팝업창 보여주기
 	function showPopup(){
-		window.open("member_block_popup.jsp","member_block_popup",
+		window.open("mgr_memberBlockPopup.do","member_block_popup",
 				"width=539,height=474,top=203,left=1336")
 	}
 </script>

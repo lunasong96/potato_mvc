@@ -5,16 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../css/find_id.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="login/find_id.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("#findBtn").click(function() {
-		window.open("find_id_popup.jsp", "아이디 찾기", "width=350,height=320,top=220,left=700")
+		window.open("forgotIdChk.do", "아이디 찾기", "width=350,height=320,top=220,left=700")
 	});
 });
 </script>
