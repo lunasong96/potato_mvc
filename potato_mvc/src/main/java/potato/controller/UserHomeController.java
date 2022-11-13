@@ -11,9 +11,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class UserHomeController {
 
+	//메인화면 접속
 	@RequestMapping(value = "user_mainhome.do", method=GET)
 	public String userHomeMove(HttpSession session, Model model) {
 		return "mainhome/jsp/user_mainhome";
+	}
+	
+	//도움말 접속
+	@RequestMapping(value = "help.do", method=GET)
+	public String helpMove() {
+		return "cs/jsp/help";
 	}
 	
 }
