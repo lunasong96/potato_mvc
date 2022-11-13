@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_header.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_header.css"/>
 <script type="text/javascript">
 $(function() {
 	 /* 스크롤시 헤더 그림자 */
@@ -68,7 +68,7 @@ $(function() {
 	</div>
 	<div class="wrap-logo">
 		<div class="logo-back">
-			<a href="../../mainhome/jsp/user_mainhome.jsp"><img src="../../images/logo.png" class="logo-png"></a>
+			<a href="../../mainhome/jsp/user_mainhome.jsp"><img src="images/logo.png" class="logo-png"></a>
 		</div>
 	</div>
 </div>

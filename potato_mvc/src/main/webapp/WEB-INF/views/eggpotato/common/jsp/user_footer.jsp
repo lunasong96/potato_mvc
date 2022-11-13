@@ -46,7 +46,7 @@
 
 <div class="footerwrap">
 	<div class="footer">
-		<img src="../../images/logo.png" class="footer-logo-png">
+		<img src="images/logo.png" class="footer-logo-png">
 		<div class="footer-left">
          <div class="footer-title">(주)알감자 사업자 정보</div>
          <div class="footer-left-content">

@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>메인화면</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/swiper-bundle.min.css"/>
-<link rel="stylesheet" type="text/css" href="../../mainhome/css/user_mainhome.css"/>
+<link rel="shortcut icon"  href="images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="common/swiper-bundle.min.css"/>
+<link rel="stylesheet" type="text/css" href="mainhome/user_mainhome.css"/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f17857e30d029f485667a3cf426b0a8e"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -76,7 +76,7 @@ function sidebar() {
 <!-- container -->
 <div class="container">
 	<div class="top-wrap">
-		<img src="../../images/mainphoto.jpg" class="main-photo"/>
+		<img src="images/mainphoto.jpg" class="main-photo"/>
 		<div class="flip-wrap">
 			<div class="flip">
 				<div><div>"편안하고 맛있는 여행이 되세요"</div></div>
@@ -109,21 +109,21 @@ function sidebar() {
 					<div class="slide-bottom">
 						<div class="img-display">
 							<div class="sb-img-wrap">
-								<img src="../../images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">곡성-짜글이</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/주암.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/주암.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">주암-오쭈삼</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/오수.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/오수.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
@@ -144,21 +144,21 @@ function sidebar() {
 					<div class="slide-bottom">
 						<div class="img-display">
 							<div class="sb-img-wrap">
-								<img src="../../images/구리.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/구리.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">구리-해물순두부</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/화성.png" alt="휴게소음식사진" class="foodimg">
+								<img src="images/화성.png" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">화성-청국장</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/서울만남의광장.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/서울만남의광장.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
@@ -178,21 +178,21 @@ function sidebar() {
 					<div class="slide-bottom">
 						<div class="img-display">
 							<div class="sb-img-wrap">
-								<img src="../../images/횡성.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/횡성.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">횡성-설렁탕</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/여주.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/여주.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">여주-갈비찜</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/옥계.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/옥계.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
@@ -213,21 +213,21 @@ function sidebar() {
 					<div class="slide-bottom">
 						<div class="img-display">
 							<div class="sb-img-wrap">
-								<img src="../../images/충주.png" alt="휴게소음식사진" class="foodimg">
+								<img src="images/충주.png" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">충주-돈까스</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/치악.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/치악.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
 								<span class="foodimg-title">치악-제육덮밥</span>
 							</div>
 							<div class="sb-img-wrap">
-								<img src="../../images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
+								<img src="images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
 								<div class="img-hover">
 									<a href="" class="img-link">휴게소 보러가기</a>
 								</div>
