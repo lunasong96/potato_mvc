@@ -1,0 +1,1 @@
+package potato.manager.dao;
