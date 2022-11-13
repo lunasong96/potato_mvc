@@ -40,13 +40,23 @@ public class UserController {
 		return "login/jsp/service_check";
 	}
 	
+	@RequestMapping(value = "/tos1.do", method = GET)
+	public String tos1() {
+		return "login/jsp/tos1";
+	}
+	
+	@RequestMapping(value = "/tos2.do", method = GET)
+	public String tos2() {
+		return "login/jsp/tos2";
+	}
+	
 	@RequestMapping(value = "/signUp.do", method = GET)
 	public String signUpPage1() {
 		return "login/jsp/join";
 	}
 	
 	@RequestMapping(value = "/signUp2.do", method = GET)
-	public String signUpPage(Model model, UserInfoVO uiVO) {
+	public String signUpPage2(Model model, UserInfoVO uiVO) {
 		return "login/jsp/join_img";
 	}
 	
@@ -75,14 +85,14 @@ public class UserController {
 		return "login/jsp/find_pass";
 	}
 	
-	@RequestMapping("forgotIdChk.do")
+	@RequestMapping(value = "forgotIdChk.do", method = GET)
 	public String forgotUserIdChk(ForgotIdVO fiVO) {
-		return "";
+		return "login/jsp/find_id_popup";
 	}
 	
-	@RequestMapping("forgotPwChk.do")
+	@RequestMapping(value = "forgotPwChk.do", method = GET)
 	public String forgotUserPwChk(ForgotPwVO fpVO) {
-		return "";
+		return "login/jsp/find_pass_popup";
 	}
 	
 }//class
