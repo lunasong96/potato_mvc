@@ -1,5 +1,11 @@
 package potato.manager.dao;
 
-public class MgrPassChangeDAO {
+import potato.manager.vo.MgrPassChangeVO;
 
+public class MgrPassChangeDAO {
+	
+	public int updatePassword(MgrPassChangeVO mpcVO) {
+		
+		return 0;
+	}
 }

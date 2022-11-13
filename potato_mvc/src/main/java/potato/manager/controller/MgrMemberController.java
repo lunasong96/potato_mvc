@@ -36,14 +36,14 @@ public class MgrMemberController {
 	}//memberInfoPopup
 	
 	//회원 차단
-	@RequestMapping(value="",method=POST)
+	@RequestMapping(value="/mgr_block.do",method=POST)
 	public String block(ManagerBlockVO mbVO) {
 		
 		return "";
 	}
 	
 	//차단 해제
-	@RequestMapping(value="",method=POST)
+	@RequestMapping(value="/mgr_unblock.do",method=POST)
 	public String unblock(String id) {
 		
 		return "";
