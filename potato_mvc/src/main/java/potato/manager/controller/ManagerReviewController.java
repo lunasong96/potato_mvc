@@ -16,7 +16,7 @@ import potato.manager.vo.SearchReviewVO;
 @Controller
 public class ManagerReviewController {
 	
-	@RequestMapping(value="manager_review.do",method=POST)
+	@RequestMapping(value="manager_review.do",method=GET)
 	public String reviewMain(SearchReviewVO srVO,Model model,HttpSession session) {
 		String url="manager/review_management/jsp/manager_review_management";
 		
@@ -37,10 +37,10 @@ public class ManagerReviewController {
 		return "manager/review_management/jsp/manager_review_management";
 	}
 	
-	@RequestMapping(value="manager_open_reviewPopup.do", method=POST)
+	@RequestMapping(value="manager_open_reviewPopup.do", method=GET)
 	public String openPopup(ReviewVO rVO, Model model ) {
 		
-		return "manager/review_management/jsp/manager_review_popup";
+		return "manager/review_management/jsp/my_review_popup";
 	}
 	
 	@RequestMapping(value="manager_singleReview_delete.do", method=POST)
