@@ -14,18 +14,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+@Controller
 public class UserController {
 	
-	@RequestMapping("login_page.do")
+	@RequestMapping(value = "/login_page.do", method = GET)
 	public String loginPage() {
-		return "/login.jsp";
+		return "login/jsp/login";
 	}//loginPage
 	
-	@RequestMapping("login.do")
+	@RequestMapping(".login.do")
 	public String login(Model model, LoginVO lVO, HttpSession session) {
-		return "/home.jsp";
+		return "";
 	}//login
 	
 	@RequestMapping("logout.do")
@@ -33,27 +35,27 @@ public class UserController {
 		return "home.jsp";
 	}//logout
 	
-	@RequestMapping("signUpAgree.do")
+	@RequestMapping(value = "/signUpAgree.do", method = GET)
 	public String signUpAgreePage() {
-		return "/service_check.jsp";
+		return "login/jsp/service_check";
 	}
 	
-	@RequestMapping("signUp.do")
+	@RequestMapping(value = "/signUp.do", method = GET)
 	public String signUpPage1() {
-		return "";
+		return "login/jsp/join";
 	}
 	
-	@RequestMapping("signUp2.do")
+	@RequestMapping(value = "/signUp2.do", method = GET)
 	public String signUpPage(Model model, UserInfoVO uiVO) {
-		return "";
+		return "login/jsp/join_img";
 	}
 	
-	@RequestMapping("signUp3.do")
+	@RequestMapping(value = "/signUp3.do", method = GET)
 	public String signUpPage3(HttpSession session, Model model, HttpServletRequest request) {
-		return "";
+		return "login/jsp/join_end";
 	}
 	
-	@RequestMapping("duplChkId.do")
+	@RequestMapping("/duplChkId.do")
 	public String duplChkId() {
 		return "";
 	}
@@ -63,14 +65,14 @@ public class UserController {
 		return "";
 	}
 	
-	@RequestMapping("forgotId.do")
+	@RequestMapping(value = "/forgotId.do", method = GET)
 	public String forgotUserId() {
-		return "";
+		return "login/jsp/find_id";
 	}
 	
-	@RequestMapping("forgotPw.do")
+	@RequestMapping(value = "/forgotPw.do", method = GET)
 	public String forgotUserPw() {
-		return "";
+		return "login/jsp/find_pass";
 	}
 	
 	@RequestMapping("forgotIdChk.do")
