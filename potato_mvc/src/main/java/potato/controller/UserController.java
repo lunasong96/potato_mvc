@@ -24,6 +24,10 @@ public class UserController {
 	public String loginPage() {
 		return "login/jsp/login";
 	}//loginPage
+	@RequestMapping(value = "/managerlogin_page.do", method = GET)
+	public String managerloginPage() {
+		return "manager/home/jsp/login";
+	}//loginPage
 	
 	@RequestMapping(".login.do")
 	public String login(Model model, LoginVO lVO, HttpSession session) {
