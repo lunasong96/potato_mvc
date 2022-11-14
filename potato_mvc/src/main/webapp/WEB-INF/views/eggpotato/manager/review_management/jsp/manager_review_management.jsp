@@ -13,9 +13,28 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$("#searchBtn").click(function(){
+		if($("#searchBox").val().trim() == "") {
+			alert("검색어를 입력하세요!");
+			return;
+		}
+		
+		//$("#keyword").val($("#searchBox").val());
+		//$("#")
+		
+	})
+})
+
+
 $(document).on("click",".popup-btn",function(){
 	open("my_review_popup.jsp","review_popup","width=1400,height=550,top=211,left=300");
 });
+
+function movePage( page ) {
+	$("#pageFlag").val(page);
+	$("#hidFrm").submit();
+}
 
 
 </script>
@@ -42,11 +61,11 @@ $(document).on("click",".popup-btn",function(){
 			<div class="review_management">
 				<div class="rm-top">
 					<select class="search-select">
-						<option value="rest">휴게소명</option>
-						<option value="contents">내용/작성자</option>
+						<option value="1"${ 1 eq param.searchType?" selected='selected'":"" }>휴게소명</option>
+						<option value="2"${ 2 eq param.searchType?" selected='selected'":"" }>내용/작성자</option>
 					</select>
 					<div class="search-wrap">
-						<input autocomplete="off" type="text" class="search-txt">
+						<input autocomplete="off" type="text" class="search-txt" id="searchBox" value="${ param.keyword }">
 						<button type="button" class="search-bar" id="searchBtn">
 								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 									 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -63,11 +82,11 @@ $(document).on("click",".popup-btn",function(){
 				<div class="table-wrap">
 					<table class="table">
 						<tr>
-							<th><input type="checkbox"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
+							<th><input type="checkbox" name="mainChk"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
 						</tr>
 						<tr>
 							<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
-							<td><input type="checkbox"/></td><td>기흥</td><td><button type="button" class="popup-btn">기름이 싸서 좋네요</button></td><td>4</td><td>test1</td><td>2022.10.21 10:30:15</td><td>1</td>
+							<td><input type="checkbox"/></td><td>기흥</td><td><button type="button" class="popup-btn" value="">기름이 싸서 좋네요</button></td><td>4</td><td>test1</td><td>2022.10.21 10:30:15</td><td>1</td>
 						</tr>
 						<tr>
 							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -118,5 +137,12 @@ $(document).on("click",".popup-btn",function(){
 
 </div>
 
+<form id="hidFrm" method="get" action="manager_review.do">
+	<input type="hidden" id="keyword" name="keyword" value="${ param.keyword }"/>
+	<input type="hidden" id="searchType" name="searchType" value="${ param.searchType }"/>
+	<input type="hidden" id="dateOrderFlag" name="dateOrderFlag" value="${ param.pageFlag }"/>
+	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ param.pageFlag }"/>
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ param.pageFlag }"/>
+</form>
 </body>
 </html>

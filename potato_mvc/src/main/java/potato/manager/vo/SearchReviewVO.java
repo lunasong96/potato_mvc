@@ -1,5 +1,7 @@
 package potato.manager.vo;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 public class SearchReviewVO {
 	private String keyword;
 	private int searchType, dateOrderFlag, reportOrderFlag, pageFlag;
@@ -44,7 +46,7 @@ public class SearchReviewVO {
 	}
 
 
-	public void setDateOrderFlag(int dateOrderFlag) {
+	public void setDateOrderFlag(@RequestParam(required=false,defaultValue="1") int dateOrderFlag) {
 		this.dateOrderFlag = dateOrderFlag;
 	}
 
@@ -64,7 +66,7 @@ public class SearchReviewVO {
 	}
 
 
-	public void setPageFlag(int pageFlag) {
+	public void setPageFlag(@RequestParam(required=false,defaultValue ="1") int pageFlag) {
 		this.pageFlag = pageFlag;
 	}
 

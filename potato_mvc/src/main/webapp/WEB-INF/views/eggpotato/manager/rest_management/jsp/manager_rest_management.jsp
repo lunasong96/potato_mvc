@@ -15,7 +15,7 @@
 <script type="text/javascript">
 $(function(){
 	$(".write-btn").click(function(){
-		open("manager_rest_write_popup.jsp","write_popup","width=950,height=900,top=311,left=560")
+		open("manager_writePopup.do","write_popup","width=950,height=900,top=311,left=560")
 	});
 	
 });

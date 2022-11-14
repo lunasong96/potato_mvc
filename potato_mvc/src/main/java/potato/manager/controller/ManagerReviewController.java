@@ -20,6 +20,17 @@ public class ManagerReviewController {
 	public String reviewMain(SearchReviewVO srVO,Model model,HttpSession session) {
 		String url="manager/review_management/jsp/manager_review_management";
 		
+		/*
+		 * 技记贸府窍搁 林籍钱扁
+		if(session.getAttribute("id")==null) {
+			url="forward:managerlogin_page.do";
+		}
+		*/
+		
+		
+		
+		
+		
 		return url;
 	}
 	
