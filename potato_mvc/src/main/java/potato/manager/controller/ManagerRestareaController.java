@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import potato.manager.vo.SearchRestVO;
 public class ManagerRestareaController {
 	
 	@RequestMapping(value="manager_restarea.do",method=GET)
-	public String restMain(SearchRestVO srVO, Model model) {
+	public String restMain(SearchRestVO srVO, Model model, HttpSession session) {
 		
 		return "manager/rest_management/jsp/manager_rest_management";
 	}
