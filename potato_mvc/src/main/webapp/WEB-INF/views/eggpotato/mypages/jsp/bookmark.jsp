@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>휴게소 즐겨찾기</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_navi.css"/><%-- 네비바 필요한 사람만 --%>
-<link rel="stylesheet" type="text/css" href="../css/bookmark.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_navi.css"/><%-- 네비바 필요한 사람만 --%>
+<link rel="stylesheet" type="text/css" href="css/mypages/bookmark.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">

@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../detailed/css/report_review_popup.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/detailed/report_review_popup.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -18,7 +18,7 @@
 <body>
 <div class="wrap">
 	<div class="top">
-		<img src="../../images/report.png" class="report-icon">
+		<img src="css/images/report.png" class="report-icon">
 		<span>리뷰 신고하기</span>
 	</div>
 	<div class="middle">

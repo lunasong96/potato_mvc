@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Review Management</title>
-<link rel="shortcut icon"  href="../../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../m_common/m_css/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../home/css/manager_mainhome.css"/>
-<link rel="stylesheet" type="text/css" href="../css/manager_review_management.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/home/manager_mainhome.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/review_management/manager_review_management.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">

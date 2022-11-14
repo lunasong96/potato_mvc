@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
-<link rel="stylesheet" type="text/css" href="common/user_header.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_header.css"/>
 <script type="text/javascript">
 $(function() {
 	 /* 스크롤시 헤더 그림자 */
@@ -42,7 +42,7 @@ $(function() {
 				로그인/회원가입</a>
 				
 				<div class="profile-img-wrap">
-					<img src="images/cimg.png" alt="프로필" class="profile-img">
+					<img src="css/images/cimg.png" alt="프로필" class="profile-img">
 					<span class="profile-txt">닉네임들어갈자리</span>님 환영합니다.
 				</div>
 				
@@ -68,7 +68,7 @@ $(function() {
 	</div>
 	<div class="wrap-logo">
 		<div class="logo-back">
-			<a href="../../mainhome/jsp/user_mainhome.jsp"><img src="images/logo.png" class="logo-png"></a>
+			<a href="../../mainhome/jsp/user_mainhome.jsp"><img src="css/images/logo.png" class="logo-png"></a>
 		</div>
 	</div>
 </div>

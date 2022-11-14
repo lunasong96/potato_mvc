@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 완료</title>
-<link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="common/reset.css"/>
-<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="login/join_end.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/login/join_end.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">

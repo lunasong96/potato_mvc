@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>휴게소 상세창</title>
-<link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="common/reset.css"/>
-<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="common/swiper-bundle2.min.css"/>
-<link rel="stylesheet" type="text/css" href="detailed/user_detailed.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/swiper-bundle2.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/detailed/user_detailed.css"/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f17857e30d029f485667a3cf426b0a8e"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -125,7 +125,7 @@ function slider() {
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
-					<img src="images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -140,7 +140,7 @@ function slider() {
 					</p>
 				</div>
 				<div class="swiper-slide">
-					<img src="images/구리.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/구리.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -155,7 +155,7 @@ function slider() {
 					</p>
 				</div>
 				<div class="swiper-slide">
-					<img src="images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -170,7 +170,7 @@ function slider() {
 					</p>
 				</div>
 				<div class="swiper-slide">
-					<img src="images/여주.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/여주.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -179,7 +179,7 @@ function slider() {
 					</div>
 				</div>
 				<div class="swiper-slide">
-					<img src="images/오수.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/오수.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -215,35 +215,35 @@ function slider() {
 		<span>편의시설 구분</span>
 		<div class="icon-wrap">
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/sleep.png">
+				<img alt="편의시설아이콘" src="css/images/sleep.png">
 				<span>수면실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/shower.png">
+				<img alt="편의시설아이콘" src="css/images/shower.png">
 				<span>샤워실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/washing.png">
+				<img alt="편의시설아이콘" src="css/images/washing.png">
 				<span>세탁실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/rest.png">
+				<img alt="편의시설아이콘" src="css/images/rest.png">
 				<span>쉼터</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/barber.png">
+				<img alt="편의시설아이콘" src="css/images/barber.png">
 				<span>이발소</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/baby.png">
+				<img alt="편의시설아이콘" src="css/images/baby.png">
 				<span>수유실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/pharmacy.png">
+				<img alt="편의시설아이콘" src="css/images/pharmacy.png">
 				<span>약국</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="images/market.png">
+				<img alt="편의시설아이콘" src="css/images/market.png">
 				<span>농산물판매장</span>
 			</div>
 		</div>
@@ -261,14 +261,14 @@ function slider() {
 				<th>편의시설(휴게소)</th>
 				<td>	
 					<div class="table-icon-wrap">
-						<img alt="편의시설아이콘" src="images/baby.png">
+						<img alt="편의시설아이콘" src="css/images/baby.png">
 					</div>
 				</td>
 				<th>편의시설(주유소)</th>
 				<td>
 					<div class="table-icon-wrap">
-						<img alt="편의시설아이콘" src="images/shower.png">
-						<img alt="편의시설아이콘" src="images/rest.png">
+						<img alt="편의시설아이콘" src="css/images/shower.png">
+						<img alt="편의시설아이콘" src="css/images/rest.png">
 					</div>
 				</td>
 			</tr>
@@ -316,7 +316,7 @@ function slider() {
 	
 	<div class="review-exist">
 		<div class="re-left">
-			<img src="images/cimg.png" alt="프로필사진">
+			<img src="css/images/cimg.png" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">
@@ -339,19 +339,19 @@ function slider() {
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
  			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/화성.png" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/치악.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/충주.png" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/주암.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			    	</div>
 			    </div>
@@ -400,7 +400,7 @@ function slider() {
 	
 	<div class="review-exist">
 		<div class="re-left">
-			<img src="images/cimg.png" alt="프로필사진">
+			<img src="css/images/cimg.png" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">
@@ -421,19 +421,19 @@ function slider() {
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
  			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/화성.png" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/치악.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/충주.png" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/주암.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			    	</div>
 			    </div>
@@ -482,7 +482,7 @@ function slider() {
 	
 	<div class="review-exist">
 		<div class="re-left">
-			<img src="images/cimg.png" alt="프로필사진">
+			<img src="css/images/cimg.png" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">
@@ -503,13 +503,13 @@ function slider() {
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
  			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/화성.png" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="images/치악.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
 			    	</div>
 			    </div>
@@ -558,7 +558,7 @@ function slider() {
 	
 	<div class="review-exist">
 		<div class="re-left">
-			<img src="images/cimg.png" alt="프로필사진">
+			<img src="css/images/cimg.png" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">

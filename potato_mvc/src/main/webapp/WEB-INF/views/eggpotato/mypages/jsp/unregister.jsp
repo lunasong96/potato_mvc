@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 탈퇴</title>
-<link rel="shortcut icon"  href="../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../common/css/user_navi.css"/><%-- 네비바 필요한 사람만 --%>
-<link rel="stylesheet" type="text/css" href="../css/unregister.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_navi.css"/><%-- 네비바 필요한 사람만 --%>
+<link rel="stylesheet" type="text/css" href="css/mypages/unregister.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -49,7 +49,7 @@ $(function() {
 <%-- 네비바 끝 --%>
 	<div class="unregister_wrap">
 	<div class="unregister_img">
-		<img src="../../images/unregister.png">
+		<img src="css/images/unregister.png">
 	</div><!-- unregister_img -->
 	
 	<div class="msg">탈퇴를 하시면 회원님의 개인 정보가 삭제됩니다.</div>

@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>전체 휴게소</title>
-<link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="common/reset.css"/>
-<link rel="stylesheet" type="text/css" href="common/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="common/user_navi2.css"/><%-- 네비바 필요한 사람만 --%>
-<link rel="stylesheet" type="text/css" href="list/list_view_all.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_navi2.css"/><%-- 네비바 필요한 사람만 --%>
+<link rel="stylesheet" type="text/css" href="css/list/list_view_all.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -61,7 +61,7 @@
 					<!-- 상품 불러오기 -->
 					<div class="card">
 						<div class="card-photo">
-							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="images/서산휴게소.jpg"/></a>
+							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="css/images/서산휴게소.jpg"/></a>
 						</div>
 						<div class="card-name">휴게소이름</div>
 						<div class="card-star">
@@ -73,7 +73,7 @@
 					</div>
 					<div class="card">
 						<div class="card-photo">
-							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="images/음성휴게소.jpg"/></a>
+							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="css/images/음성휴게소.jpg"/></a>
 						</div>
 						<div class="card-name">휴게소이름</div>
 						<div class="card-star">
@@ -85,7 +85,7 @@
 					</div>
 					<div class="card">
 						<div class="card-photo">
-							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="images/천안휴게소.jpg"/></a>
+							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="css/images/천안휴게소.jpg"/></a>
 						</div>
 						<div class="card-name">휴게소이름</div>
 						<div class="card-star">
@@ -97,7 +97,7 @@
 					</div>
 					<div class="card">
 						<div class="card-photo">
-							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="images/덕평휴게소.jpg"/></a>
+							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="css/images/덕평휴게소.jpg"/></a>
 						</div>
 						<div class="card-name">휴게소이름</div>
 						<div class="card-star">
@@ -109,7 +109,7 @@
 					</div>
 					<div class="card">
 						<div class="card-photo">
-							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="images/시흥하늘휴게소.jpg"/></a>
+							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="css/images/시흥하늘휴게소.jpg"/></a>
 						</div>
 						<div class="card-name">휴게소이름</div>
 						<div class="card-star">
@@ -121,7 +121,7 @@
 					</div>
 					<div class="card">
 						<div class="card-photo">
-							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="images/경기광주휴게소.jpg"/></a>
+							<a class="card-link" href="#void"><img alt="휴게소 이미지" src="css/images/경기광주휴게소.jpg"/></a>
 						</div>
 						<div class="card-name">휴게소이름</div>
 						<div class="card-star">

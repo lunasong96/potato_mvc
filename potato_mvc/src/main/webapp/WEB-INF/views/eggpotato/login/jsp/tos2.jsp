@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>알감자 이용약관</title>
-<link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="login/tos2.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/login/tos2.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">

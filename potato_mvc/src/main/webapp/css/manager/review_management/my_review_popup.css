@@ -1,55 +1,20 @@
 @charset "UTF-8";
 
-
-.title{
-	width:1150px;
-	margin:0px auto; 
-	font-size: 33px;
-	font-weight: bold;
+.container {
+	background: #fff !important;
 }
 
-.imgAlign{
-	margin-top:20px;
+.mainWrap{
+	display:flex;
+	flex-direction: column;
+}
+
+
+.rate-wrap {
 	display: flex;
-}
-.heart-icon{
-	display: flex;
-	margin-right:5px; 
-	
-}
-.heart-btn{
-	background-color: transparent;
-	color: #333333;
-	display: flex;
-	margin-right: 5px;
-	align-items: center;
-}
-.heart-btn:hover {
-	animation-duration: 2s;
-	animation-name: heart;
-	animation-iteration-count: infinite;
+    flex-direction: row;
 }
 
-@keyframes heart {
-	0% {transform: scale(1.2);}
-	10% {transform: scale(0.9);}
-	20% {transform: scale(1.2);}
-	30% {transform: scale(0.9);}
-	40% {transform: scale(1.2);}
-	50% {transform: scale(0.9);}
-	60% {transform: scale(1.2);}
-	70% {transform: scale(0.9);}
-	80% {transform: scale(1.2);}
-	90% {transform: scale(0.9);}
-	100% {transform: scale(1.2);}
-}
-
-.hb-fill {
-	color: red;
-}
-
-
-/* 리뷰 */
 .star-rate {
     display: flex;
     flex-direction: row;
@@ -68,11 +33,11 @@
 	overflow: hidden;
 	background: url(../../images/starblank.png);
 	background-size: 20px;
+	position: relative;
 }
 
 .star-wrap {
 	position: absolute;
-    top: 268.3px;
     width: 100px;
     height: 20px;
 }
@@ -93,33 +58,77 @@
 	margin-left: 5px;
 }
 
-.bi-star-fill {
-	width: 15px;
-	height: 15px;
-}
 
-.review-link {
-    font-size: 20px;
-    background: #C89E6C;
-    color: #fff;
-    padding-right: 145px;
-    padding-left: 145px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-radius: 7px;
-    font-weight: bold;
+
+td > div > img {
+	width: 35px;
+	height: 35px;
+	margin: 10px;
 }
 
 .review-wrap {
-	width: 1300px;
+	width: 1400px;
     margin: 0 auto;
-    margin-top: 50px;
+    border-bottom:2px solid black;
+}
+
+.review-txt {
+	display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .review-txt > div > span:last-child {
 	color: #593000;
 }
 
+.review-filter {
+    border-top: 2px solid #333333;
+    border-bottom: 1px solid #333333;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.review-filter div {
+	width: 700px;
+    text-align: center;
+}
+
+.review-filter div a {
+    display: block;
+    color: #333333;
+    font-size: 15px;
+}
+
+.review-filter div:first-child a {
+	border-right: 1px solid #333333;
+}
+
+.no-review {
+	width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 100px;	
+}
+
+.no-review > svg {
+    width: 100px;
+    height: 100px;
+    fill: #bebebe;
+    margin-bottom: 15px;	
+}
+
+.no-review > span {
+	font-size: 20px;	
+	color: #bebebe;
+}
 
 .review-exist {
 	width: 1300px;
@@ -128,9 +137,10 @@
     flex-direction: row;
     align-items: flex-start;
     margin-top: 40px;
+    border-bottom: 1px solid #333333;
     padding-bottom: 10px;
     margin-bottom: 40px;
-    border-bottom: 1px solid #333333;
+
 }
 
 .re-left > img {
@@ -171,6 +181,7 @@
 .re-swiper-wrapper{
 	width: 1150px;
     margin: 0 auto;
+    height: 200px;
 }
 
 .re-swiper-slide {
@@ -231,72 +242,35 @@
 	font-size: 15px;
 }
 
-.heart-btn:hover {
-	animation-duration: 2s;
-	animation-name: heart;
-	animation-iteration-count: infinite;
-}
-
-@keyframes heart {
-	0% {transform: scale(1.2);}
-	10% {transform: scale(0.9);}
-	20% {transform: scale(1.2);}
-	30% {transform: scale(0.9);}
-	40% {transform: scale(1.2);}
-	50% {transform: scale(0.9);}
-	60% {transform: scale(1.2);}
-	70% {transform: scale(0.9);}
-	80% {transform: scale(1.2);}
-	90% {transform: scale(0.9);}
-	100% {transform: scale(1.2);}
-}
 
 .hb-fill {
 	color: red;
 }
 
-.bi-bell-fill:hover {
-	animation-duration: 2s;
-	animation-name: bell;
-	animation-iteration-count: infinite;	
-	color: #ffca2b;
-}
-
-@keyframes bell {
-	0%, 50% {transform: rotate(0deg);}
-	5%, 15%, 25%, 35%, 45%  {transform: rotate(13deg);}
-	10%, 20%, 30%, 40% {transform: rotate(-13deg);}
-}
 
 .date {
 	font-size: 15px;
 	margin-right: 10px;
 }
-/* 리뷰 */
 
-
-
-/* 페이지 */
-.page{
-	display: flex;
+.review-more-wrap{
+    width: 1300px;
+    margin: 0 auto;
+    display: flex;
     justify-content: center;
-    margin: 50px 0;
+    margin-bottom: 40px;	
 }
 
-.page-num{
-	font-size: 16px;
-    color: #000;
-	background-color: #F4F4F4;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 12px;
+.btnWrap{
+	text-align: center;
 }
-.page-num:hover{
-    color: #FFF;
-    background-color: #C89E6C;
 
-}
-.like_wrap{
-	display: flex;
-	flex-direction: row;
+.delBtn{
+	width: 90px;
+    height: 30px;
+    background-color: red;
+    border-radius: 20px;
+    color: #fff;
+    border:0px;
+	cursor:pointer;
 }

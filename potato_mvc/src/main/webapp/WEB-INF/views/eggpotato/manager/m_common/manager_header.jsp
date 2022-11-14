@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="manager/m_common/manager_header.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_header.css"/>
 
 <script type="text/javascript">
 $(function() {
@@ -23,7 +23,7 @@ $(function() {
 
 	<div class="wrap-banner">
 		<div class="banner">
-			<a href="../../home/jsp/manager_mainhome.jsp"><img src="images/logo.png" class="header-logo-png"></a>
+			<a href="../../home/jsp/manager_mainhome.jsp"><img src="css/images/logo.png" class="header-logo-png"></a>
 			<span class="head-text">관리</span>
 		</div>
 		<div class="wrap-login">

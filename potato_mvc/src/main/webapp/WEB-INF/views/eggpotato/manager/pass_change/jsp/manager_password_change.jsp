@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Manager Password Change</title>
-<link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="common/reset.css"/>
-<link rel="stylesheet" type="text/css" href="manager/m_common/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="manager/pass_change/manager_password_change.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/pass_change/manager_password_change.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 

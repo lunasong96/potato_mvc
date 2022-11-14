@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="shortcut icon"  href="../../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/user_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/swiper-bundle2.min.css"/>
-<link rel="stylesheet" type="text/css" href="../css/rest_popup.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/swiper-bundle2.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/rest_management/rest_popup.css"/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f17857e30d029f485667a3cf426b0a8e"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
@@ -87,7 +87,7 @@ $(function() {
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
-					<img src="../../../images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -102,7 +102,7 @@ $(function() {
 					</p>
 				</div>
 				<div class="swiper-slide">
-					<img src="../../../images/구리.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/구리.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -117,7 +117,7 @@ $(function() {
 					</p>
 				</div>
 				<div class="swiper-slide">
-					<img src="../../../images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -132,7 +132,7 @@ $(function() {
 					</p>
 				</div>
 				<div class="swiper-slide">
-					<img src="../../../images/여주.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/여주.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -141,7 +141,7 @@ $(function() {
 					</div>
 				</div>
 				<div class="swiper-slide">
-					<img src="../../../images/오수.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/오수.jpg" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
 						<span class="food-name">누구나 돌솥 비빔밥</span>
 						<span class="food-price">8900원</span>
@@ -166,35 +166,35 @@ $(function() {
 		<span>편의시설 구분</span>
 		<div class="icon-wrap">
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/sleep.png">
+				<img alt="편의시설아이콘" src="css/images/sleep.png">
 				<span>수면실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/shower.png">
+				<img alt="편의시설아이콘" src="css/images/shower.png">
 				<span>샤워실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/washing.png">
+				<img alt="편의시설아이콘" src="css/images/washing.png">
 				<span>세탁실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/rest.png">
+				<img alt="편의시설아이콘" src="css/images/rest.png">
 				<span>쉼터</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/barber.png">
+				<img alt="편의시설아이콘" src="css/images/barber.png">
 				<span>이발소</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/baby.png">
+				<img alt="편의시설아이콘" src="css/images/baby.png">
 				<span>수유실</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/pharmacy.png">
+				<img alt="편의시설아이콘" src="css/images/pharmacy.png">
 				<span>약국</span>
 			</div>
 			<div class="amenities-icon">
-				<img alt="편의시설아이콘" src="../../../images/market.png">
+				<img alt="편의시설아이콘" src="css/images/market.png">
 				<span>농산물판매장</span>
 			</div>
 		</div>
@@ -212,14 +212,14 @@ $(function() {
 				<th>편의시설(휴게소)</th>
 				<td>	
 					<div class="table-icon-wrap">
-						<img alt="편의시설아이콘" src="../../../images/baby.png">
+						<img alt="편의시설아이콘" src="css/images/baby.png">
 					</div>
 				</td>
 				<th>편의시설(주유소)</th>
 				<td>
 					<div class="table-icon-wrap">
-						<img alt="편의시설아이콘" src="../../../images/shower.png">
-						<img alt="편의시설아이콘" src="../../../images/rest.png">
+						<img alt="편의시설아이콘" src="css/images/shower.png">
+						<img alt="편의시설아이콘" src="css/images/rest.png">
 					</div>
 				</td>
 			</tr>

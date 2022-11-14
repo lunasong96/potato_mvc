@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Rest Management</title>
-<link rel="shortcut icon"  href="../../../images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="../../../common/css/reset.css"/>
-<link rel="stylesheet" type="text/css" href="../../m_common/m_css/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="../../home/css/manager_mainhome.css"/>
-<link rel="stylesheet" type="text/css" href="../css/manager_rest_management.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/home/manager_mainhome.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/rest_management/manager_rest_management.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -71,28 +71,28 @@ $(document).on("click",".popup-btn",function(){
 						<div class="icon-sector">
 							<!-- 추후 이미지 아이콘 추가 -->
 							<span>
-								<img src="../../../images/sleep.png" ><span>수면실</span>
+								<img src="css/images/sleep.png" ><span>수면실</span>
 							</span>
 							<span>
-								<img src="../../../images/shower.png" ><span>샤워실</span>
+								<img src="css/images/shower.png" ><span>샤워실</span>
 							</span>
 							<span>
-								<img src="../../../images/washing.png" ><span>세탁실</span>
+								<img src="css/images/washing.png" ><span>세탁실</span>
 							</span>
 							<span>
-								<img src="../../../images/rest.png" ><span>쉼터</span>
+								<img src="css/images/rest.png" ><span>쉼터</span>
 							</span>
 							<span>
-								<img src="../../../images/barber.png" ><span>이발소</span>
+								<img src="css/images/barber.png" ><span>이발소</span>
 							</span>
 							<span>
-								<img src="../../../images/baby.png" ><span>수유실</span>
+								<img src="css/images/baby.png" ><span>수유실</span>
 							</span>
 							<span>
-								<img src="../../../images/pharmacy.png" ><span>약국</span>
+								<img src="css/images/pharmacy.png" ><span>약국</span>
 							</span>
 							<span>
-								<img src="../../../images/market.png" ><span>농산물 판매</span>
+								<img src="css/images/market.png" ><span>농산물 판매</span>
 							</span>
 						</div>
 					</div>

@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Member Management</title>
-<link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="common/reset.css"/>
-<link rel="stylesheet" type="text/css" href="manager/m_common/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="manager/member_management/member_management.css"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/member_management/member_management.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 

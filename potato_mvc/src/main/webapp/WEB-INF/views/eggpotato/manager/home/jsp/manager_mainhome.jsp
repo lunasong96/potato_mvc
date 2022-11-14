@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Manager Main Home</title>
 <link rel="shortcut icon"  href="images/logo.png"/>
-<link rel="stylesheet" type="text/css" href="common/reset.css"/>
-<link rel="stylesheet" type="text/css" href="manager/m_common/manager_wrap_container.css"/>
-<link rel="stylesheet" type="text/css" href="manager/home/manager_mainhome.css"/>
+<link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_wrap_container.css"/>
+<link rel="stylesheet" type="text/css" href="css/manager/home/manager_mainhome.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <!-- 그래프/차트 -->
