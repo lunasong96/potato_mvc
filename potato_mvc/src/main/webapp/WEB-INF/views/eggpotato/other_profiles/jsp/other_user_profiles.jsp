@@ -36,7 +36,7 @@ $(function() {
 	})
 	
 	$(".report-btn").click(function() {
-		window.open("../../other_profiles/jsp/report_review_popup.jsp","popup_report",
+		window.open("reportReview.do","popup_report",
 		"width=520,height=470,top=203,left=1336");
 	})
 	

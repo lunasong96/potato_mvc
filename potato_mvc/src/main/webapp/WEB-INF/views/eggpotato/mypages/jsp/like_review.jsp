@@ -27,7 +27,7 @@ $(document).on("click", ".heart-btn", function() {
 		})
 		
 		$(".report-btn").click(function() {
-			window.open("report_review_popup.jsp","popup_report",
+			window.open("reportPop.do","popup_report",
 			"width=520,height=470,top=203,left=1336");
 		})
 		

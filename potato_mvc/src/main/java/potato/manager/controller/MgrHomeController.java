@@ -13,7 +13,7 @@ public class MgrHomeController {
 	//로그아웃
 	@RequestMapping(value="/mgr_login.do",method=GET)
 	public String mgrLogout(HttpSession session) {
-		return "manager/member_management/jsp/manager_mainhome";
+		return "manager/home/jsp/login";
 	}//mgrLogout
 	
 	//대시보드(관리자홈) 이동
