@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OtherReviewController {
 	
 	//Å¸»ç¿ëÀÚ¸®ºä
-	@RequestMapping(value="/otherReviewMove.do", method=GET)
+	@RequestMapping(value="otherReviewMove.do", method=GET)
 	public String OtherReviewMove(HttpSession session, String id, Model model) {
 		return "other_profiles/jsp/other_user_profiles";
 	}//OtherReviewMove
 	
 	//½Å°í)¸®ºä-ÆË¾÷
-	@RequestMapping(value = "/reportReview.do",method = GET)
-	public String reportReview(HttpSession session, String string) {
-		return "mypages/jsp/report_review_popup";
+	@RequestMapping(value = "reportPop.do",method = GET)
+	public String reportPop(HttpSession session, String string) {
+		return "other_profiles/jsp/report_review_popup";
 	}//reportReview
 
 }
