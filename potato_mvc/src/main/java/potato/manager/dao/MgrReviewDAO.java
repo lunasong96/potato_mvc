@@ -6,7 +6,7 @@ import potato.manager.domain.ReviewDomain;
 import potato.manager.vo.ReviewVO;
 import potato.manager.vo.SearchReviewVO;
 
-public class ReviewDAO {
+public class MgrReviewDAO {
 	
 	public List<ReviewDomain> selectReview(SearchReviewVO srVO) {
 		
