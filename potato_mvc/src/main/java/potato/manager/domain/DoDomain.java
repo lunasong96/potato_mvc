@@ -4,15 +4,7 @@ public class DoDomain {
 	private String kr_do;
 	private int do_idx;
 	
-	public DoDomain() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public DoDomain(String kr_do, int do_idx) {
-		super();
-		this.kr_do = kr_do;
-		this.do_idx = do_idx;
-	}
+	
 
 	public String getKr_do() {
 		return kr_do;

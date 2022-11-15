@@ -4,17 +4,7 @@ public class AmenityDomain {
 	private String amenity_type, icon;
 	private int restarea_idx;
 	
-	public AmenityDomain() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public AmenityDomain(String amenity_type, String icon, int restarea_idx) {
-		super();
-		this.amenity_type = amenity_type;
-		this.icon = icon;
-		this.restarea_idx = restarea_idx;
-	}
-
+	
 	public String getAmenity_type() {
 		return amenity_type;
 	}

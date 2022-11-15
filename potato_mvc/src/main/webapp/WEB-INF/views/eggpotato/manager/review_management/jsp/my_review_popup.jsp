@@ -61,9 +61,6 @@ function slider() {
 <body>
 <div class="mainWrap">
 	<div class="review-wrap">
-		<div class="review-txt">
-			<span>**휴게소 리뷰</span>
-		</div>
 	</div>
 	<div class="review-exist">
 		<div class="re-left">

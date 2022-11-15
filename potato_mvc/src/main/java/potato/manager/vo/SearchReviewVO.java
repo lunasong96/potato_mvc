@@ -6,19 +6,6 @@ public class SearchReviewVO {
 	private String keyword;
 	private int searchType, dateOrderFlag, reportOrderFlag, pageFlag;
 	
-	
-	public SearchReviewVO() {
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public SearchReviewVO(String keyword, int searchType, int dateOrderFlag, int reportOrderFlag, int pageFlag) {
-		this.keyword = keyword;
-		this.searchType = searchType;
-		this.dateOrderFlag = dateOrderFlag;
-		this.reportOrderFlag = reportOrderFlag;
-		this.pageFlag = pageFlag;
-	}
 
 
 	public String getKeyword() {

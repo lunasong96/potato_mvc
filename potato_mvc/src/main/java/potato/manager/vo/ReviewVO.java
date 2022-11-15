@@ -4,17 +4,7 @@ public class ReviewVO {
 	private String id;
 	private int restarea_idx ,review_idx;
 	
-	public ReviewVO() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public ReviewVO(String id, int restarea_idx, int review_idx) {
-		super();
-		this.id = id;
-		this.restarea_idx = restarea_idx;
-		this.review_idx = review_idx;
-	}
-
+	
 	public String getId() {
 		return id;
 	}

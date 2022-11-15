@@ -4,9 +4,6 @@ public class SearchRestVO {
 	private String keyword, carwash_chk, cargolounge_chk;
 	private int lineFlag,pageFlag;
 	
-	public SearchRestVO() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public String getKeyword() {
 		return keyword;

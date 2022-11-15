@@ -5,25 +5,6 @@ public class RestVO {
 	private int restarea_idx, line_idx, do_idx;
 	private double lng,lat;
 	
-	public RestVO() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public RestVO(String img, String name, String tel, String carwash_chk, String repair_chk, String cargolounge_chk,
-			int restarea_idx, int line_idx, int do_idx, double lng, double lat) {
-		super();
-		this.img = img;
-		this.name = name;
-		this.tel = tel;
-		this.carwash_chk = carwash_chk;
-		this.repair_chk = repair_chk;
-		this.cargolounge_chk = cargolounge_chk;
-		this.restarea_idx = restarea_idx;
-		this.line_idx = line_idx;
-		this.do_idx = do_idx;
-		this.lng = lng;
-		this.lat = lat;
-	}
 
 	public String getImg() {
 		return img;

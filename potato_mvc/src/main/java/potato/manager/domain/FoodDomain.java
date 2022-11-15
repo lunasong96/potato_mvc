@@ -4,21 +4,6 @@ public class FoodDomain {
 	private String main_chk, rec_chk,img,name,contents,ingredient;
 	private int price;
 	
-	public FoodDomain() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public FoodDomain(String main_chk, String rec_chk, String img, String name, String contents, String ingredient,
-			int price) {
-		super();
-		this.main_chk = main_chk;
-		this.rec_chk = rec_chk;
-		this.img = img;
-		this.name = name;
-		this.contents = contents;
-		this.ingredient = ingredient;
-		this.price = price;
-	}
 
 	public String getMain_chk() {
 		return main_chk;

@@ -24,11 +24,13 @@ $(function(){
 		//$("#")
 		
 	})
-})
+})//ready;
 
 
 $(document).on("click",".popup-btn",function(){
-	open("my_review_popup.jsp","review_popup","width=1400,height=550,top=211,left=300");
+	open("","review_popup","width=1400,height=550,top=211,left=300");
+	
+	
 });
 
 function movePage( page ) {
@@ -144,5 +146,9 @@ function movePage( page ) {
 	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ param.pageFlag }"/>
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ param.pageFlag }"/>
 </form>
+<form id="popupFrm" method="get" action="manager_open_reviewPopup.do" target="">
+	<input type="hidden" id="">
+</form>
+
 </body>
 </html>
