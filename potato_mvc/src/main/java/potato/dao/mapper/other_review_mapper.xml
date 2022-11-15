@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="potato.otherReview">
+
+	<!-- mybatis-config로 옮겨두기 -->
+	<!-- VO나 Domain을 모든 Mapper.xml에서 짧은 이름으로 사용하기위해 작성 -->
+<!-- <typeAliases>
+		<typeAlias type="potato.domain.OtherReviewUserDomain" alias="orud"/>
+	</typeAliases> -->
+
+	<!-- 프로필정보 -->
+	<select id="userInfo" resultType="orud" parameterType="string">
+	select img, id
+	from member
+	where id=#{id}
+	</select>
+
+	<!-- 리뷰 수 -->
+	<select id="reviewCnt" resultType="orud" parameterType="string">
+	select count(id)
+	from review
+	where id=#{id}
+	</select>
+	
+	<!-- 리뷰조회 -->
+	
+	
+	
+</mapper>
