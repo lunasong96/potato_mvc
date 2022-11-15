@@ -32,7 +32,7 @@ public class DetailedController {
 
 	//府轰累己芒 立加
 	@RequestMapping(value = "write.do", method=GET)
-	public String writePageMove(HttpSession session, DetailedReviewVO drVO, Model model) {
+	public String writePageMove(HttpSession session, int restarea_idx, Model model) {
 		return "detailed/jsp/write";
 	}
 	

@@ -2,10 +2,14 @@ package potato.service;
 
 import java.util.List;
 
+import potato.domain.DetailedAmenityDomain;
 import potato.domain.DetailedDomain;
 import potato.domain.DetailedFoodDomain;
+import potato.domain.DetailedReportDomain;
 import potato.domain.DetailedReviewDomain;
 import potato.vo.DetailedBookmarkVO;
+import potato.vo.DetailedLikeVO;
+import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
 
 public class DetailedService {
@@ -27,13 +31,13 @@ public class DetailedService {
 	}
 	
 	//휴게소 북마크 추가 (비동기)
-	public void setBookmarkAdd(DetailedBookmarkVO dbVO) {
-		
+	public int setBookmarkAdd(DetailedBookmarkVO dbVO) {
+		return 0;
 	}
 	
 	//휴게소 북마크 해제 (비동기)
-	public void setBookmarkDel(DetailedBookmarkVO dbVO) {
-		
+	public int setBookmarkDel(DetailedBookmarkVO dbVO) {
+		return 0;
 	}
 	
 	//휴게소 별점 total
@@ -47,18 +51,18 @@ public class DetailedService {
 	}
 	
 	//휴게소 편의시설아이콘
-	public String getAmenityImg(int restarea_idx) {
+	public List<DetailedAmenityDomain> getAmenityImg(int restarea_idx) {
 		return null;
 	}
 	
 	//<휴게소 리뷰>
 	//리뷰 작성창 이동
-	public DetailedReviewVO moveReviewWrite(String id) {
+	public DetailedReviewDomain moveReviewWrite(int restarea_idx) {
 		return null;
 	}
 	
 	//리뷰 수정창 이동
-	public DetailedReviewVO moveReReviewWrite(String id) {
+	public DetailedReviewDomain moveReReviewWrite(DetailedReviewVO drVO) {
 		return null;
 	}
 	
@@ -93,7 +97,34 @@ public class DetailedService {
 	}
 	
 	//리뷰 좋아요 total
+	public int getLikeTotal(DetailedLikeVO dlVO) {
+		return 0;
+	}
 	
+	//리뷰 좋아요 추가
+	public int getLikeAdd(DetailedLikeVO dlVO) {
+		return 0;
+	}
 	
+	//리뷰 좋아요 삭제
+	public int getLikeDel(DetailedLikeVO dlVO) {
+		return 0;
+	}
+	
+	//리뷰 삭제
+	public int getReviewDel(DetailedReviewVO drVO) {
+		return 0;
+	}
+	
+	//<신고창>
+	//신고창 접속
+	public List<DetailedReportDomain> getReportPopup() {
+		return null;
+	}
+	
+	//신고 접수
+	public int setReportPopup(DetailedReportVO drVO) {
+		return 0;
+	}
 	
 }
