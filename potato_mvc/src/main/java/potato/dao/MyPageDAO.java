@@ -2,6 +2,7 @@ package potato.dao;
 
 import java.util.List;
 
+import potato.domain.MyPageBookmarkDomain;
 import potato.domain.MyPageMyInfoDomain;
 import potato.domain.MyPageReportDomain;
 import potato.manager.domain.ReviewDomain;
@@ -16,7 +17,7 @@ import potato.vo.MypageReportVO;
 public class MyPageDAO {
 	
 	//마이페이지 접속
-	public String selectLogin(String string) {
+	public String selectLogin(String id) {
 		return null;
 	}//selectLogin
 	
@@ -95,6 +96,14 @@ public class MyPageDAO {
 		
 	}//insertReviewReport
 	
+	//북마크한 휴게소 조회
+	public List<MyPageBookmarkDomain> selectBookmark(String id){
+		return null;
+	}//selectBookmark
 	
+	//북마크한 휴게소 삭제(아이디, 휴게소 인덱스)
+	public int updateBookmark(String id, String restarea_idx) {
+		return 0;
+	}//updateBookmark
 	
 }//class

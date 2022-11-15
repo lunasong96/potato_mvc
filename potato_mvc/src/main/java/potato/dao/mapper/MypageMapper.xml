@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="potato.MypageMapper">
+  	<!-- 마이페이지 -->
+  
+  	<!-- 내 정보 조회 -->
+  	<select id="selectMypageInfo" parameterType="potato.vo.MypageMyInfoEditVO" resultType="MyPageMyInfoDomain">
+  		select		img, name, nick, id, phone, email, birth
+  		from		member				
+  		where		id =#{ id }
+  	</select>
+  	
+  	<!--  내 정보 수정 -->
+  	<select id="" parameterType="">
+  		
+  	
+  	</select>
+  	
+  	<!--  비밀번호 수정 -->
+  	
+  	<!--  회원 탈퇴 -->
+  	
+  	<!-- 북마크한 휴게소 조회 -->
+  	
+  	<!-- 북마크한 휴게소 삭제(아이디, 휴게소 인덱스) -->
+  </mapper>

@@ -123,12 +123,12 @@ public class MyPageService {
 	}//reportReview
 	
 	//∫œ∏∂≈©«— »ﬁ∞‘º“ ¡∂»∏
-	public List<MyPageBookmarkDomain>searchBookmark(String string){
+	public List<MyPageBookmarkDomain>searchBookmark(String id){
 		return null;
 	}//searchBookmark
 	
 	//∫œ∏∂≈©«— »ﬁ∞‘º“ ªË¡¶(æ∆¿Ãµ, »ﬁ∞‘º“ ¿Œµ¶Ω∫-int)
-	public int removeBookmark(String string, int restarea_idx) {
+	public int removeBookmark(String id, int restarea_idx) {
 		return 0;
 	}//removeBookmark
 	
