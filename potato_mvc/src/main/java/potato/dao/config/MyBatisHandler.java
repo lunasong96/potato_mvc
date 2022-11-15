@@ -1,4 +1,4 @@
-package potato.dao;
+package potato.dao.config;
 
 import java.io.IOException;
 import java.io.Reader;
