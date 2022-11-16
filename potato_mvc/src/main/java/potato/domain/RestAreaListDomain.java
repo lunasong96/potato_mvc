@@ -1,7 +1,7 @@
 package potato.domain;
 
 public class RestAreaListDomain {
-	private int restarea_idx;
+	private int restarea_idx,do_idx;
 	private String img,name,line,kr_do;
 	private double rating;
 	
@@ -9,8 +9,10 @@ public class RestAreaListDomain {
 
 	}
 
-	public RestAreaListDomain(int restarea_idx, String img, String name, String line, String kr_do, double rating) {
+	public RestAreaListDomain(int restarea_idx, int do_idx, String img, String name, String line, String kr_do,
+			double rating) {
 		this.restarea_idx = restarea_idx;
+		this.do_idx = do_idx;
 		this.img = img;
 		this.name = name;
 		this.line = line;
@@ -66,10 +68,19 @@ public class RestAreaListDomain {
 		this.rating = rating;
 	}
 
+	
+	public int getDo_idx() {
+		return do_idx;
+	}
+
+	public void setDo_idx(int do_idx) {
+		this.do_idx = do_idx;
+	}
+
 	@Override
 	public String toString() {
-		return "RestAreaListDomain [restarea_idx=" + restarea_idx + ", img=" + img + ", name=" + name + ", line=" + line
-				+ ", kr_do=" + kr_do + ", rating=" + rating + "]";
+		return "RestAreaListDomain [restarea_idx=" + restarea_idx + ", do_idx=" + do_idx + ", img=" + img + ", name="
+				+ name + ", line=" + line + ", kr_do=" + kr_do + ", rating=" + rating + "]";
 	}
 
 }
