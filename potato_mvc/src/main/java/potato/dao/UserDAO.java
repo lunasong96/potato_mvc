@@ -9,11 +9,13 @@ import potato.vo.ManagerLoginVO;
 import potato.vo.UserInfoVO;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 
 /**
  *	유저의 로그인, 회원가입 관련 DAO
  * @author user
  */
+@Component
 public class UserDAO {
 	//mapper namespace 변수 선언
 	public static final String UserMapper="potato.UserMapper.";

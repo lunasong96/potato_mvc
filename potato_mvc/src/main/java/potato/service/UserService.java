@@ -1,5 +1,8 @@
 package potato.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
@@ -10,6 +13,7 @@ import potato.vo.UserInfoVO;
  * 유저 로그인/회원가입 관련 서비스
  * @author user
  */
+@Component
 public class UserService {
 	
 	/**
@@ -17,8 +21,10 @@ public class UserService {
 	 * @param lVO
 	 * @return
 	 */
+	@Autowired(required = false)
 	public boolean searchMember(LoginVO lVO) {
 		boolean flag=false;
+		
 		return flag;
 	}
 	

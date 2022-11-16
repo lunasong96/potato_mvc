@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,11 @@
 			<input type="text" placeholder="별명" class="text-join"><br/>
 			<h2 class="input-title">생년월일</h2>
 			<input type="text" placeholder="년(4자)" class="text-year">
-			<input type="text" placeholder="월" class="text-year">
+			<select class="text-year">
+			<c:forEach var="i" begin="1" end="12">
+				<option value="${ i }">${ i }월</option>
+			</c:forEach>
+			</select>
 			<input type="text" placeholder="일" class="text-year">
 			<h2 class="input-title">이메일</h2>
 			<input type="text" placeholder="이메일" class="text-join"><br/>
