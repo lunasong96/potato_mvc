@@ -17,8 +17,15 @@ public class ManagerRestareaController {
 	
 	@RequestMapping(value="manager_restarea.do",method=GET)
 	public String restMain(SearchRestVO srVO, Model model, HttpSession session) {
+		String url="manager/rest_management/jsp/manager_rest_management";
+		/*
+		 * 技记贸府窍搁 林籍钱扁
+		if(session.getAttribute("manager_id")==null) {
+			url="forward:managerlogin_page.do";
+		}
+		*/
 		
-		return "manager/rest_management/jsp/manager_rest_management";
+		return url;
 	}
 	
 	@RequestMapping(value="manager_writePopup.do", method=GET)

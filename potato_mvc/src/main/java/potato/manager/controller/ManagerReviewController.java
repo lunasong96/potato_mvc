@@ -22,7 +22,7 @@ public class ManagerReviewController {
 		
 		/*
 		 * 技记贸府窍搁 林籍钱扁
-		if(session.getAttribute("id")==null) {
+		if(session.getAttribute("manager_id")==null) {
 			url="forward:managerlogin_page.do";
 		}
 		*/
