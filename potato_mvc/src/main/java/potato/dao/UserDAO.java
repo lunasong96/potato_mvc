@@ -1,6 +1,8 @@
 package potato.dao;
 
+import potato.dao.config.MyBatisHandler;
 import potato.vo.ForgotIdVO;
+
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.ManagerLoginVO;
@@ -8,7 +10,6 @@ import potato.vo.UserInfoVO;
 
 import org.apache.ibatis.session.SqlSession;
 
-import potato.dao.MyBatisHandler;
 /**
  *	유저의 로그인, 회원가입 관련 DAO
  * @author user
