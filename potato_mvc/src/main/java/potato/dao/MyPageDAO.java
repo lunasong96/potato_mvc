@@ -6,6 +6,7 @@ import potato.domain.MyPageBookmarkDomain;
 import potato.domain.MyPageMyInfoDomain;
 import potato.domain.MyPageReportDomain;
 import potato.manager.domain.ReviewDomain;
+import potato.vo.MyPageBookmarkVO;
 import potato.vo.MyPageLikeVO;
 import potato.vo.MyPageMyInfoEditVO;
 import potato.vo.MyPageMyReviewVO;
@@ -101,9 +102,9 @@ public class MyPageDAO {
 		return null;
 	}//selectBookmark
 	
-	//ºÏ¸¶Å©ÇÑ ÈÞ°Ô¼Ò »èÁ¦(¾ÆÀÌµð, ÈÞ°Ô¼Ò ÀÎµ¦½º)
-	public int updateBookmark(String id, String restarea_idx) {
+	//ºÏ¸¶Å©ÇÑ ÈÞ°Ô¼Ò »èÁ¦(¾ÆÀÌµð, ÈÞ°Ô¼Ò ÀÎµ¦½º)(String id¶û restrea_idx°¡ bookmarkVO³×..)
+	public int delBookmark(MyPageBookmarkVO bVO) {
 		return 0;
-	}//updateBookmark
+	}//delBookmark
 	
 }//class

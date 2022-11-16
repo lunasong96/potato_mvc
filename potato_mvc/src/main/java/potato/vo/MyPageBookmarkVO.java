@@ -2,16 +2,15 @@ package potato.vo;
 
 public class MyPageBookmarkVO {
 
-	private String id,name;
+	private String id;
 	private int restarea_idx;
 	
 	public MyPageBookmarkVO() {
 	}
 
-	public MyPageBookmarkVO(String id, String name, int restarea_idx) {
+	public MyPageBookmarkVO(String id, int restarea_idx) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.restarea_idx = restarea_idx;
 	}
 
@@ -21,14 +20,6 @@ public class MyPageBookmarkVO {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getRestarea_idx() {
@@ -41,9 +32,8 @@ public class MyPageBookmarkVO {
 
 	@Override
 	public String toString() {
-		return "MyPageBookmarkVO [id=" + id + ", name=" + name + ", restarea_idx=" + restarea_idx + "]";
+		return "MyPageBookmarkVO [id=" + id + ", restarea_idx=" + restarea_idx + "]";
 	}
-	
-	
+
 	
 }//class 
