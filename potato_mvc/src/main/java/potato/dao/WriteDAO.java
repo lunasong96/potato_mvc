@@ -1,5 +1,6 @@
 package potato.dao;
 
+import potato.vo.WriteReviewImgVO;
 import potato.vo.WriteReviewVO;
 
 public class WriteDAO {
@@ -9,9 +10,18 @@ public class WriteDAO {
 		return 0;
 	}
 	
+	//리뷰 이미지 등록
+	public int insertReviewImg(WriteReviewImgVO wrVO) {
+		return 0;
+	}
+	
 	//수정 리뷰 등록
 	public int updateReReview(WriteReviewVO wrVO) {
 		return 0;
 	}
 	
+	//수정 리뷰 이미지 등록
+	public int updateReReviewImg(WriteReviewImgVO wrVO) {
+		return 0;
+	}
 }

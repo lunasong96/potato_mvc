@@ -9,31 +9,31 @@
 </sql>
 
 <!-- 전라남도 슬라이드 (보성녹차휴게소 중복 제외) -->
-<select id="selectSlide1" resultType="potato.damain.UserHomeSliderDomain">
+<select id="selectSlide1" resultType="potato.domain.UserHomeSliderDomain">
 	<include refid="selSlide"/>
 	where r.RESTAREA_IDX=rf.RESTAREA_IDX and DO_IDX=8 and MAIN_CHK='Y' and not r.RESTAREA_IDX=12 and rownum&lt;=3
 </select>
 
 <!-- 수도권 슬라이드 -->
-<select id="selectSlide2" resultType="potato.damain.UserHomeSliderDomain">
+<select id="selectSlide2" resultType="potato.domain.UserHomeSliderDomain">
 	<include refid="selSlide"/>
 	where r.RESTAREA_IDX=rf.RESTAREA_IDX and DO_IDX=1 and MAIN_CHK='Y' and rownum&lt;=3;
 </select>
 
 <!-- 강원도 슬라이드 -->
-<select id="selectSlide3" resultType="potato.damain.UserHomeSliderDomain">
+<select id="selectSlide3" resultType="potato.domain.UserHomeSliderDomain">
 	<include refid="selSlide"/>
 	where r.RESTAREA_IDX=rf.RESTAREA_IDX and DO_IDX=2 and MAIN_CHK='Y' and rownum&lt;=3;
 </select>
 
 <!-- 충청북도 슬라이드 -->
-<select id="selectSlide4" resultType="potato.damain.UserHomeSliderDomain">
+<select id="selectSlide4" resultType="potato.domain.UserHomeSliderDomain">
 	<include refid="selSlide"/>
 	where r.RESTAREA_IDX=rf.RESTAREA_IDX and DO_IDX=3 and MAIN_CHK='Y' and rownum&lt;=3;
 </select>
 
 <!-- 지도 핀 -->
-<select id="selectMapPin" resultType="potato.damain.UserHomeMapDomain">
+<select id="selectMapPin" resultType="potato.domain.UserHomeMapDomain">
 	select RESTAREA_IDX, name, LNG, LAT
 	from RESTAREA
 </select>

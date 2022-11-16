@@ -3,4 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="potato.WriteMapper">
+
+<!-- 리뷰등록 -->
+<insert id="insReview" parameterType="potato.vo.WriteReviewVO">
+insert into review(review_idx, id, restarea_idx, rating, contents)
+values ((select nvl(max(review_idx),0)+1 from review where restarea_idx=#{restarea_idx}), #{id}, #{restarea_idx}, #{rating}, #{contents});
+</insert>
+
+<!-- 리뷰이미지등록  -->
+
+
+
+<!-- 수정리뷰등록 -->
+
+
 </mapper>
