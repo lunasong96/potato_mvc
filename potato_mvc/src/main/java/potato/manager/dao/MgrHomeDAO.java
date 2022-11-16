@@ -2,22 +2,66 @@ package potato.manager.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import potato.dao.config.MyBatisHandler;
+
 public class MgrHomeDAO {
 	
-	//신규가입자
-	public int selectNewMemberCnt() {
-		return 0;
-	}//selectNewMemberCnt
+	/**
+	 * 오늘 신규가입 수
+	 * @return
+	 */
+	public int selectNewMemCnt() {
+		int newMemCnt=0;
+		
+	//1. MyBatis Handler(SqlSession) 얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss=mbh.getHandler();
+	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	newMemCnt=ss.selectOne("potato.manager.home.selectNewMemCnt");
+	//3. MyBatis Handler 끊기
+	mbh.closeHandler(ss);	
 	
-	//신고현황
-	public int selectNewMember() {
-		return 0;
-	}//selectNewMember
+		return newMemCnt;		
+	}//selectNewMemCnt
 	
-	//인기휴게소(별점+리뷰)
-	public String selectPopRest() {
-		return null;
-	}//selectPopRest
+	/**
+	 * 오늘 신고 수
+	 * @return
+	 */
+	public int selectReportCnt() {
+		int reportCnt=0;
+		
+	//1. MyBatis Handler(SqlSession) 얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss=mbh.getHandler();
+	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	reportCnt=ss.selectOne("potato.manager.home.selectReportCnt");
+	//3. MyBatis Handler 끊기
+	mbh.closeHandler(ss);	
+	
+		return reportCnt;
+	}//selectReportCnt
+	
+	/**
+	 * 인기 휴게소(별점+리뷰)
+	 * @return
+	 */
+	public String selectPopOne() {
+		String popOne=null;
+		
+	//1. MyBatis Handler(SqlSession) 얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss=mbh.getHandler();
+	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	popOne=ss.selectOne("potato.manager.home.selectPopOne");
+	//3. MyBatis Handler 끊기
+	mbh.closeHandler(ss);	
+		
+		return popOne;		
+	}//selectPopOne
+	
 	
 	//관심휴게소(북마크)
 	public String selectBookmarkRest() {
@@ -50,7 +94,17 @@ public class MgrHomeDAO {
 	}//selectMemberStatus
 	
 	//휴게소랭킹
-	public List<String> selectRestRank(){
-		return null;
-	}//selectRestRank
+	public List<String> selectPopAll(){
+		List<String> list=null;
+		
+	//1. MyBatis Handler(SqlSession) 얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss=mbh.getHandler();
+	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	list=ss.selectOne("potato.manager.home.selectPopAll");
+	//3. MyBatis Handler 끊기
+	mbh.closeHandler(ss);	
+			
+		return list;
+	}//selectPopAll
 }

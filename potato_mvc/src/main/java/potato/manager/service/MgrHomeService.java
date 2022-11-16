@@ -4,8 +4,8 @@ import java.util.List;
 
 public class MgrHomeService {
 	
-	//오늘의 신규 가입건수 
-	public int searchNewMemberCnt() {
+	//오늘 신규가입 수
+	public int searchNewMem() {
 		return 0;
 	}
 	

@@ -1,5 +1,7 @@
+<%@page import="potato.manager.dao.MgrHomeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,12 @@
 <div class="container" style="background-color: #F8F9FB;">
 	<div class="main">
 <!-- 건들지마세요 -->
+<%
+MgrHomeDAO mhDAO=new MgrHomeDAO();
+int newMemCnt=mhDAO.selectNewMemCnt();
+int reportCnt=mhDAO.selectReportCnt();
+String popOne=mhDAO.selectPopOne();
+%>
 <!-- 현재 메뉴 -->
 		<div style="display: flex;border-bottom: 1px solid grey;align-items: center; margin-bottom: 20px;">
 			<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
@@ -36,20 +44,20 @@
 <!-- 현재 메뉴 -->
 		<div class="top-dash"><!-- 1 -->
 		<div class="top">
-		<div class="board"><span class="board-text-1">신규가입자 수</span><br><span class="board-text-2">10명</span></div>
+		<div class="board"><span class="board-text-1">신규가입자 수</span><br><span class="board-text-2"><%=newMemCnt%>명</span></div>
 		<div class="board"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" color="#E0E0E0">
   		<path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
  		<path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
 		</svg></div>
 		</div>
 		<div class="top">
-		<div class="board"><span class="board-text-1">누적신고 수</span><br><span class="board-text-2">3건</span></div>
+		<div class="board"><span class="board-text-1">누적신고 수</span><br><span class="board-text-2"><%=reportCnt%>건</span></div>
 		<div class="board"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16" color="#E0E0E0">
   		<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
 		</svg></div>
 		</div>
 		<div class="top">
-		<div class="board"><span class="board-text-1">인기 휴게소</span><br><span class="board-text-2">덕평 휴게소</span></div>
+		<div class="board"><span class="board-text-1">인기 휴게소</span><br><span class="board-text-2"><%=popOne%></span></div>
 		<div class="board"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16" color="#E0E0E0">
   		<path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
 		</svg></div>
