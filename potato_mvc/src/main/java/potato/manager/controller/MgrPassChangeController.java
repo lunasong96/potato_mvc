@@ -12,7 +12,7 @@ import potato.manager.vo.MgrPassChangeVO;
 public class MgrPassChangeController {
 	
 	//비번 변경 화면 가져오기
-	@RequestMapping(value="/mgr_passChange.do",method=GET)
+	@RequestMapping(value="/mgrPassChange.do",method=GET)
 	public String passChange(HttpSession session) {
 		
 		return "manager/pass_change/jsp/manager_password_change";
