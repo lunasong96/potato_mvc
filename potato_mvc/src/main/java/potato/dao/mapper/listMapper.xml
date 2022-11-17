@@ -5,7 +5,15 @@
 <mapper namespace="potato.listMapper">
 <!-- 전체휴게소 목록 - 다이나믹 쿼리 -->
 <select id="allRestAreaList" resultType="potato.domain.RestAreaDomain" parameterType="potato.vo.SearchFlagVO">
-
+select ra.name,(select avg(rating) from review where restarea_idx=ra.restarea_idx) rating,
+l.line,d.kr_do,ra.img
+from restarea ra,line l, do d
+<where>
+<if test="keyword != null and keyword !='' ">
+${ra.name} like '%'||#{keyword}||'%'
+</if>
+</where>
+where ra.line_idx=l.line_idx and ra.do_idx=d.do_idx;
 </select>
 
 <!-- 고속도로 버튼 클릭시 핀 불러오기 -->
@@ -17,23 +25,38 @@ where line_idx=#{line_idx}
 
 <!-- 도 클릭시 해당 휴게소 목록 보여주기 -->
 <select id="doList" resultType="potato.domain.RestAreaDomain" parameterType="int">
-
+select ra.name,(select avg(rating) from review where restarea_idx=ra.restarea_idx) rating,
+l.line,d.kr_do,ra.img
+from restarea ra,line l, do d
+where (ra.line_idx=l.line_idx and ra.do_idx=d.do_idx) and ra.do_idx=#{do_idx}
 </select>
 
 <!-- 도 휴게소 목록에서 검색, 정렬 -->
-<select id="doArrangeSearch">
-
+<select id="doArrangeSearch" resultType="potato.domain.RestAreaDomain" parameterType="potato.vo.SearchFlagVO">
+select ra.name,(select avg(rating) from review where restarea_idx=ra.restarea_idx) rating,
+l.line,d.kr_do,ra.img
+from restarea ra,line l, do d
+<where>
+<if test="keyword != null and keyword !='' ">
+${ra.name} like '%'||#{keyword}||'%'
+</if>
+</where>
+where (ra.line_idx=l.line_idx and ra.do_idx=d.do_idx) and ra.do_idx=#{do_idx}
 </select>
-<!-- 휴게소 목록에서 상세창으로 이동 -->
-<select id="listToDetail" resultType="potato.domain.DetailedDomain">
 
-</select>
 <!-- 페이징 -->
-<select id="listPaging">
+<select id="listPaging" resultType="int" parameterType="potato.vo.SearchFlagVO">
+select count(restarea_idx) cnt
+from restarea
+<where>
+<if test="keyword != null and keyword !='' ">
+${name} like '%'||#{keyword}||'%'
+</if>
+</where>
 
 </select>
 <!-- 연관검색어 -->
-<select id="relatedKeyword">
+<select id="relatedKeyword" resultType="String" parameterType="String">
 
 </select>
 </mapper>
