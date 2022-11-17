@@ -33,7 +33,7 @@
 </select>
 
 <!-- 지도 핀 -->
-<select id="selectMapPin" resultType="potato.domain.userhomemapdomain">
+<select id="selectMapPin" resultType="potato.domain.UserHomeMapDomain">
 	select restarea_idx, name, lng, lat
 	from restarea
 </select>
