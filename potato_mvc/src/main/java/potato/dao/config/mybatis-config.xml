@@ -24,7 +24,7 @@
     <mapper resource="potato/dao/mapper/MypageMapper.xml"/>
    	<mapper resource="potato/dao/mapper/otherReviewMapper.xml"/>
    	<mapper resource="potato/dao/mapper/listMapper.xml"/>
-    <mapper resource="potato/manager/dao/mapper/mgrhomeMapper.xml"/>
+    <mapper resource="potato/manager/dao/mapper/mgrHomeMapper.xml"/>
 	<mapper resource="potato/manager/dao/mapper/mgrMemberMapper.xml"/>
 	<mapper resource="potato/manager/dao/mapper/mgrPassChangeMapper.xml"/>
 	<mapper resource="potato/manager/dao/mapper/manager_restarea_mapper.xml"/>

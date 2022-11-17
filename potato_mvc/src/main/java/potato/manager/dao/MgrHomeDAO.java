@@ -37,7 +37,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	reportCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectReportCnt");
+	reportCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectReportCnt");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 	
@@ -55,7 +55,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	popOne=ss.selectOne("potato.manager.mgr_homeMapper.selectPopOne");
+	popOne=ss.selectOne("potato.manager.mgrHomeMapper.selectPopOne");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 		
@@ -73,7 +73,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	bookmark=ss.selectOne("potato.manager.mgr_homeMapper.selectBookmark");
+	bookmark=ss.selectOne("potato.manager.mgrHomeMapper.selectBookmark");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 	
@@ -111,7 +111,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	AllMemCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectAllMem");
+	AllMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectAllMem");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 		
@@ -129,7 +129,7 @@ public class MgrHomeDAO {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-		QuitMemCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectQuitMem");
+		QuitMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectQuitMem");
 		//3. MyBatis Handler 끊기
 		mbh.closeHandler(ss);	
 		
@@ -144,7 +144,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	list=ss.selectOne("potato.manager.home.selectPopAll");
+	list=ss.selectOne("potato.manager.mgrHomeMapper.selectPopAll");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 			
