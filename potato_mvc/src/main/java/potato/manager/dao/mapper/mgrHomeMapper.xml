@@ -39,13 +39,13 @@
 	where rownum = 1
 	</select>
 	<!-- 방문자현황 -->
-	<select id="" resultType="domain">
+	<!-- <select id="" resultType="domain">
 	
-	</select>
+	</select> -->
 	<!-- 회원현황 -->
-	<select id="" resultType="domain">
+<!-- 	<select id="" resultType="domain">
 	
-	</select>
+	</select> -->
 	<!-- 방문자현황(오늘,어제,총) -->
 	<select id="selectVisitorCnt" resultType="int">
 	select count(*)
