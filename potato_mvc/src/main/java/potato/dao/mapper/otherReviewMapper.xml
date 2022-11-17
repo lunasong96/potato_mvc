@@ -11,14 +11,8 @@
 	</typeAliases> -->
 
 	<!-- 프로필정보 -->
-	<select id="" resultType="" parameterType="">
-
-	</select>
 
 	<!-- 리뷰 수 -->
-	<select id="" resultType="" parameterType="">
-
-	</select>
 	
 	<!-- 리뷰조회 -->
 	
