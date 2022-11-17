@@ -8,13 +8,13 @@
 	<select id="selectNewMemCnt" resultType="int">
 	select count(*)
 	from member
-	where to_char(join_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd');
+	where to_char(join_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
 	</select>
 	<!-- 오늘 신고 수 -->
 	<select id="selectReportCnt" resultType="int">
 	select count(*)
 	from report
-	where to_char(report_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd');
+	where to_char(report_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
 	</select>
 	<!-- 인기 휴게소(1) -->
 	<select id="selectPopOne" resultType="String">
@@ -25,7 +25,7 @@
 					group by restarea_idx ) rev, restarea res
 			where (rev.restarea_idx=res.restarea_idx)
 			order by rating desc, cnt desc)
-	where rownum= 1;
+	where rownum= 1
 	</select>
 	<!-- 관심 휴게소 -->
 	<select id="selectBookmark" resultType="String">
@@ -36,10 +36,8 @@
 				group by restarea_idx) b, restarea res
 			where (b.restarea_idx=res.restarea_idx)
 			order by bookmarkcnt desc)
-	where rownum = 1	;
+	where rownum = 1
 	</select>
-	
-	
 	<!-- 방문자현황 -->
 	<select id="" resultType="domain">
 	
@@ -48,21 +46,29 @@
 	<select id="" resultType="domain">
 	
 	</select>
-	<!-- 방문자현황 -->
-	<select id="" resultType="int">
-	
+	<!-- 방문자현황(오늘,어제,총) -->
+	<select id="selectVisitorCnt" resultType="int">
+	select count(*)
+	from visitor
+	<where>
+	<if test="visitFlag=0">
+	where to_char(access_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
+	</if>
+	<if test="visitFlag=1">
+	where to_char(access_date,'yyyymmdd')=to_char(sysdate-1,'yyyymmdd')
+	</if>
+	</where>
 	</select>
-	
 	<!-- 회원현황(전체) -->
 	<select id="selectAllMem" resultType="int">
 	select count(*)
-	from member;
+	from member
 	</select>
 	<!-- 회원현황(탈퇴) -->
 	<select id="selectQuitMem" resultType="int">
 	select count(*)
 	from member
-	where to_char(quit_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd');
+	where to_char(quit_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
 	</select>
 	<!-- 인기 휴게소(5) -->
 	<select id="selectPopAll" resultType="String">
@@ -73,7 +79,7 @@
 					group by restarea_idx ) rev, restarea res
 			where (rev.restarea_idx=res.restarea_idx)
 			order by rating desc, cnt desc)
-	where rownum between 1 and 5;
+	where rownum between 1 and 5
 	</select>
 
 </mapper>
