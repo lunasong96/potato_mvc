@@ -20,6 +20,11 @@ public class WriteService {
 		return 0;
 	}
 	
+	//이미지 삭제 
+	public int delReReviewImg(WriteReviewImgVO wrVO) {
+		return 0;
+	}
+	
 	//수정 리뷰 이미지 등록
 	public int setReReviewImg(WriteReviewImgVO wrVO) {
 		return 0;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="potato.HomeMapper">
+<mapper namespace="potato.homeMapper">
 <sql id="selSlide">
 	select r.RESTAREA_IDX, substr(r.name,1, instr(r.name,'휴게소')-1) name, rf.IMG, rf.NAME foodName
 	from RESTAREA r, RESTAREA_FOOD rf

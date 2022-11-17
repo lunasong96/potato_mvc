@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="potato.DetailedMapper">
+<mapper namespace="potato.detailedMapper">
 
 <!-- 휴게소 상세창 불러오기 -->
 <select id="selRestDetailed" resultType="potato.domain.DetailedDomain" parameterType="int">
@@ -49,7 +49,7 @@
 	select main_chk, rec_chk, img, name, price, contents, ingredient
 	from restarea_food
 	where restarea_idx=#{restarea_idx}
-</select>
+</select>                                                                                                                                                                                                   
 
 <!-- 휴게소 편의시설아이콘 -->
 <select id="selAmenityImg" resultType="potato.domain.DetailedAmenityDomain" parameterType="int">
@@ -105,8 +105,6 @@ order by post_date, review_idx
 offset 0 rows
 fetch next #{addFlag}*5 rows only
 </select>
-
-<!-- 타사용자 프로필 이동 -->
 
 <!-- 리뷰 좋아요 total -->
 
