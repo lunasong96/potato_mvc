@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDAO {
 	//mapper namespace 변수 선언
-	public static final String UserMapper="potato.UserMapper.";
+	public static final String UserMapper="potato.userMapper.";
 	
 	/**
 	 * 유저 회원가입
