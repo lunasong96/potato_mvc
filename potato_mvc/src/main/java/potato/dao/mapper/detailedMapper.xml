@@ -89,24 +89,15 @@ where (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.
 			and l.review_idx(+)=ri.review_idx and l.review_idx(+)=r.review_idx and l.id_writer(+)=ri.id and l.id_writer(+)=r.id
 			and l.restarea_idx(+)=ri.restarea_idx and l.restarea_idx(+)=r.restarea_idx and m.id=ri.id) and ri.restarea_idx=#{review_idx}
 group by ri.review_idx, ri.id, r.rating, r.contents, r.post_date, m.nick, m.img
+<if test="dateFlag==1 or dateFlag=''">
 order by post_date desc, review_idx desc
-offset 0 rows
-fetch next #{addFlag}*5 rows only
-
-<!--  리뷰 조회(과거순) -->
-select ri.review_idx, ri.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
-	nvl(regexp_count(regexp_replace(listagg(ID_CLICKER, ',') within group(order by l.REVIEW_IDX), '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
-from review_img ri, review r, liked l, member m
-where (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
-			and l.review_idx(+)=ri.review_idx and l.review_idx(+)=r.review_idx and l.id_writer(+)=ri.id and l.id_writer(+)=r.id
-			and l.restarea_idx(+)=ri.restarea_idx and l.restarea_idx(+)=r.restarea_idx and m.id=ri.id) and ri.restarea_idx=#{review_idx}
-group by ri.review_idx, ri.id, r.rating, r.contents, r.post_date, m.nick, m.img
+</if>
+<if test="dateFlag==2">
 order by post_date, review_idx
+</if>
 offset 0 rows
 fetch next #{addFlag}*5 rows only
 </select>
-
-<!-- 리뷰 좋아요 total -->
 
 <!-- 리뷰 좋아요 추가 -->
 <insert id="insLikeAdd" parameterType="potato.vo.DetailedLikeVO">
@@ -135,7 +126,7 @@ from report_reason;
 <!-- 신고 접수 -->
 <insert id="insReportPopup" parameterType="potato.vo.DetailedReportVO">
 insert into report(id_reporter, id_writer, report_idx, restarea_idx, review_idx)
-values (#{id_reporter}, #{id_writer}, #{report_idx}, #{restarea_idx}, #{review_idx});
+values (#{id_reporter}, #{id_writer}, #{report_idx}, #{restarea_idx}, #{review_idx})
 </insert>
 
 </mapper>

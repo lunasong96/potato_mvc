@@ -2,41 +2,97 @@ package potato.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import potato.dao.config.MyBatisHandler;
 import potato.domain.UserHomeMapDomain;
 import potato.domain.UserHomeSliderDomain;
-import potato.vo.UserHomeVisitorVO;
 
 public class HomeDAO {
 	
 	//슬라이드 휴게소 링크
 	//전라남도
 	public List<UserHomeSliderDomain> selectRestInx1() {
-		return null;
+		List<UserHomeSliderDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		list=ss.selectList("potato.homeMapper.selectSlide1");
+		
+		mbh.closeHandler(ss);
+		
+		return list;
 	}
 	
 	//수도권
 	public List<UserHomeSliderDomain> selectRestInx2() {
-		return null;
+		List<UserHomeSliderDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		list=ss.selectList("potato.homeMapper.selectSlide2");
+		
+		mbh.closeHandler(ss);
+		
+		return list;
 	}
 	
 	//강원도
 	public List<UserHomeSliderDomain> selectRestInx3() {
-		return null;
+		List<UserHomeSliderDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		list=ss.selectList("potato.homeMapper.selectSlide3");
+		
+		mbh.closeHandler(ss);
+		
+		return list;
 	}
 	
 	//충청북도
 	public List<UserHomeSliderDomain> selectRestInx4() {
-		return null;
+		List<UserHomeSliderDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		list=ss.selectList("potato.homeMapper.selectSlide4");
+		
+		mbh.closeHandler(ss);
+		
+		return list;
 	}
 	
 	//지도 핀 설정
 	public List<UserHomeMapDomain> selectMapPin() {
-		return null;
+		List<UserHomeMapDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		list=ss.selectList("potato.homeMapper.selectMapPin");
+		
+		mbh.closeHandler(ss);
+		
+		return list;
 	}
 	
 	//방문자수 집계
 	public int insertVisitor(String ip) {
-		return 0;
+		int visitorCnt=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		visitorCnt=ss.selectOne("potato.homeMapper.insertVisitor", ip);
+		
+		mbh.closeHandler(ss);
+		
+		return visitorCnt;
 	}
 
 }

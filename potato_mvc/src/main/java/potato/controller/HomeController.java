@@ -15,6 +15,9 @@ public class HomeController {
 	//메인화면 접속
 	@RequestMapping(value = "user_mainhome.do", method=GET)
 	public String userHomeMove(HttpSession session, Model model) {
+		
+		
+		
 		return "mainhome/jsp/user_mainhome";
 	}
 	
