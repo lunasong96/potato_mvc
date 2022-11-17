@@ -2,6 +2,9 @@ package potato.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import potato.dao.config.MyBatisHandler;
 import potato.domain.MyPageBookmarkDomain;
 import potato.domain.MyPageMyInfoDomain;
 import potato.domain.MyPageReportDomain;
@@ -19,6 +22,12 @@ public class MyPageDAO {
 	
 	//마이페이지 접속
 	public String selectLogin(String id) {
+		//1. MyBatis Handler 얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return null;
 	}//selectLogin
 	
