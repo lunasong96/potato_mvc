@@ -22,12 +22,12 @@
 	<mapper resource="potato/dao/mapper/DetailedMapper.xml"/>
 	<mapper resource="potato/dao/mapper/WriteMapper.xml"/>
     <mapper resource="potato/dao/mapper/MypageMapper.xml"/>
-   	<mapper resource="potato/dao/mapper/Other_review_mapper.xml"/>
+   	<mapper resource="potato/dao/mapper/otherReviewMapper.xml"/>
    	<mapper resource="potato/dao/mapper/listMapper.xml"/>
+    <mapper resource="potato/manager/dao/mapper/mgr_homeMapper.xml"/>
 	<mapper resource="potato/manager/dao/mapper/mgrMemberMapper.xml"/>
 	<mapper resource="potato/manager/dao/mapper/mgrPassChangeMapper.xml"/>
 	<mapper resource="potato/manager/dao/mapper/Manager_restarea_mapper.xml"/>
     <mapper resource="potato/manager/dao/mapper/Manager_review_mapper.xml"/>
-    <mapper resource="potato/manager/dao/mapper/Manager_home_mapper.xml"/>
   </mappers>
 </configuration>

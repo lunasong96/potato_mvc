@@ -33,6 +33,9 @@ MgrHomeDAO mhDAO=new MgrHomeDAO();
 int newMemCnt=mhDAO.selectNewMemCnt();
 int reportCnt=mhDAO.selectReportCnt();
 String popOne=mhDAO.selectPopOne();
+String bookmark=mhDAO.selectBookmark();
+int AllMemCnt=mhDAO.selectAllMem();
+int QuitMemCnt=mhDAO.selectQuitMem();
 %>
 <!-- 현재 메뉴 -->
 		<div style="display: flex;border-bottom: 1px solid grey;align-items: center; margin-bottom: 20px;">
@@ -63,7 +66,7 @@ String popOne=mhDAO.selectPopOne();
 		</svg></div>
 		</div>
 		<div class="top">
-		<div class="board"><span class="board-text-1">관심 휴게소</span><br><span class="board-text-2">행담도 휴게소</span></div>
+		<div class="board"><span class="board-text-1">관심 휴게소</span><br><span class="board-text-2"><%=bookmark%></span></div>
 		<div class="board"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-bookmark-heart-fill" viewBox="0 0 16 16" color="#E0E0E0">
   		<path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v13.5zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
 		</svg></div>

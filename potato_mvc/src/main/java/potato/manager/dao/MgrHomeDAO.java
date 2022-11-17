@@ -19,7 +19,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	newMemCnt=ss.selectOne("potato.manager.home.selectNewMemCnt");
+	newMemCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectNewMemCnt");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 	
@@ -37,7 +37,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	reportCnt=ss.selectOne("potato.manager.home.selectReportCnt");
+	reportCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectReportCnt");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 	
@@ -55,18 +55,30 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	popOne=ss.selectOne("potato.manager.home.selectPopOne");
+	popOne=ss.selectOne("potato.manager.mgr_homeMapper.selectPopOne");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	
 		
 		return popOne;		
 	}//selectPopOne
 	
+	/**
+	 * 관심 휴게소(북마크)
+	 * @return
+	 */
+	public String selectBookmark() {
+		String bookmark=null;
+		
+	//1. MyBatis Handler(SqlSession) 얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss=mbh.getHandler();
+	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	bookmark=ss.selectOne("potato.manager.mgr_homeMapper.selectBookmark");
+	//3. MyBatis Handler 끊기
+	mbh.closeHandler(ss);	
 	
-	//관심휴게소(북마크)
-	public String selectBookmarkRest() {
-		return null;
-	}//selectBookmarkRest
+		return bookmark;
+	}//selectBookmark
 	
 	//방문자 수 현황
 	public List<Integer> selectVisitor(){
@@ -88,10 +100,41 @@ public class MgrHomeDAO {
 		return 0;
 	}//selectWeekVisitor
 	
-	//회원 현황
-	public int selectMemberStatus(int visitFlag) {
-		return 0;
-	}//selectMemberStatus
+	/**
+	 * 회원 현황(전체)
+	 * @return
+	 */
+	public int selectAllMem() {
+		int AllMemCnt=0;
+		
+	//1. MyBatis Handler(SqlSession) 얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss=mbh.getHandler();
+	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	AllMemCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectAllMem");
+	//3. MyBatis Handler 끊기
+	mbh.closeHandler(ss);	
+		
+		return AllMemCnt;		
+	}//selectAllMem
+	
+	/**
+	 * 회원 현황(전체)
+	 * @return
+	 */
+	public int selectQuitMem() {
+		int QuitMemCnt=0;
+		
+		//1. MyBatis Handler(SqlSession) 얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+		QuitMemCnt=ss.selectOne("potato.manager.mgr_homeMapper.selectQuitMem");
+		//3. MyBatis Handler 끊기
+		mbh.closeHandler(ss);	
+		
+		return QuitMemCnt;		
+	}//selectQuitMem
 	
 	//휴게소랭킹
 	public List<String> selectPopAll(){

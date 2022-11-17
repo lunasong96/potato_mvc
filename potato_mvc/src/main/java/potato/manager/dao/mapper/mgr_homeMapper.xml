@@ -4,10 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="potato.manager.home">
 
-	<!-- config에 옮기자~~
-	<typeAlias type="potato.manager.domain.EMpDomain" alias="ed"/>
-	 -->
-
 	<!-- 오늘 신규가입 수 -->
 	<select id="selectNewMemCnt" resultType="int">
 	select count(*)
@@ -31,12 +27,19 @@
 			order by rating desc, cnt desc)
 	where rownum= 1;
 	</select>
-	
-	
-	<!-- 관심휴게소 -->
-	<select id="" resultType="String">
-	
+	<!-- 관심 휴게소 -->
+	<select id="selectBookmark" resultType="String">
+	select name
+	from (select b.restarea_idx, name, bookmarkcnt
+			from (select restarea_idx, count(*) bookmarkcnt
+				from bookmark
+				group by restarea_idx) b, restarea res
+			where (b.restarea_idx=res.restarea_idx)
+			order by bookmarkcnt desc)
+	where rownum = 1	;
 	</select>
+	
+	
 	<!-- 방문자현황 -->
 	<select id="" resultType="domain">
 	
@@ -49,11 +52,18 @@
 	<select id="" resultType="int">
 	
 	</select>
-	<!-- 회원현황 -->
-	<select id="" resultType="int">
 	
+	<!-- 회원현황(전체) -->
+	<select id="selectAllMem" resultType="int">
+	select count(*)
+	from member;
 	</select>
-	
+	<!-- 회원현황(탈퇴) -->
+	<select id="selectQuitMem" resultType="int">
+	select count(*)
+	from member
+	where to_char(quit_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd');
+	</select>
 	<!-- 인기 휴게소(5) -->
 	<select id="selectPopAll" resultType="String">
 	select name
