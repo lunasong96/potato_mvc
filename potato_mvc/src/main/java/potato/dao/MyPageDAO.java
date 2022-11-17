@@ -24,7 +24,7 @@ public class MyPageDAO {
 	public String selectLogin(String id) {
 		//1. MyBatis Handler 얻기
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
-		SqlSession session=mbh.getHandler();
+		SqlSession ss=mbh.getHandler();
 		
 		//2. 쿼리문 실행
 		//3. MyBatis Handler 끊기
@@ -33,41 +33,66 @@ public class MyPageDAO {
 	
 	//내 정보 조회
 	public MyPageMyInfoDomain selectInfo(MyPageMyInfoEditVO mieVO) {
+		
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return null;
 	}//selectInfo
 	
 	//내 정보 수정
 	public int updateInfo(MyPageMyInfoEditVO mieVO) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//updateInfo
 	
 	//비밀번호 수정
 	public int updatePw(MyPagePwEditVO peVO) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//updatePw
 	
 	//회원 탈퇴
 	public int updateQuit(MyPageQuitVO qVO) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//updateQuit
 	
 	//리뷰 조회
 	public List<ReviewDomain> selectMyReview(String id){
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return null;
 	}//selectMyReview
 	
 	//총 리뷰 수
 	public int selectMyReviewCnt(String string) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//selectMyReviewCnt
 	
 	//내 리뷰 - 좋아요 수 
 	public int selectLikeCnt(String string) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//selectLikeCnt
 	
 	//내 리뷰 - 리뷰 삭제, 수정
 	public int updateMyReview(MyPageMyReviewVO mrVO) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//updateMyReview
 	
@@ -108,11 +133,23 @@ public class MyPageDAO {
 	
 	//북마크한 휴게소 조회
 	public List<MyPageBookmarkDomain> selectBookmark(String id){
-		return null;
+		List<MyPageBookmarkDomain> list=null;
+		//1. MyBatis Handler 얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		//2. 쿼리문 실행
+		list=ss.selectList("potato.bookmark.selectBookmark", id);
+		//3. MyBatis Handler 끊기
+		mbh.closeHandler(ss);
+		
+		return list;
 	}//selectBookmark
 	
 	//북마크한 휴게소 삭제(아이디, 휴게소 인덱스)(String id랑 restrea_idx가 bookmarkVO네..)
 	public int delBookmark(MyPageBookmarkVO bVO) {
+		//1. MyBatis Handler 얻기
+		//2. 쿼리문 실행
+		//3. MyBatis Handler 끊기
 		return 0;
 	}//delBookmark
 	

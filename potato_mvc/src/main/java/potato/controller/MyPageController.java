@@ -4,16 +4,21 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import potato.service.MyPageService;
 import potato.vo.MyPageMyInfoEditVO;
 import potato.vo.MyPagePwEditVO;
 import potato.vo.MyPageQuitVO;
 
 @Controller
 public class MyPageController {
+	
+	@Autowired(required = false)
+	private MyPageService mps;
 	
 	//마이페이지 진입화면
 	@RequestMapping(value="myPageIn.do", method=GET)
@@ -108,7 +113,11 @@ public class MyPageController {
 	//즐겨찾기한 휴게소
 	@RequestMapping(value = "bookmark.do", method=GET)
 		public String bookmark(HttpSession session, Model model) {
-			return "mypages/jsp/bookmark";
+			String url="mypages/jsp/bookmark";
+			
+			model.addAttribute("bookmarkList",mps.searchBookmark(url));
+			//url아니고 id인데 왜 안되냐고옹
+			return url;
 	}//bookmark
 	
 	//즐겨찾기한 휴게소 삭제

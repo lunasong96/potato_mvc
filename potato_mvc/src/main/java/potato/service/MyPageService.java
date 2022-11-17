@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import potato.dao.MyPageDAO;
 import potato.domain.MyPageBookmarkDomain;
 import potato.domain.MyPageReportDomain;
 import potato.domain.MyPageReviewDomain;
@@ -17,6 +20,8 @@ import potato.vo.MyPageQuitVO;
 import potato.vo.MypageReportVO;
 
 public class MyPageService {
+	@Autowired(required = false)
+	private MyPageDAO mDAO;
 	
 	//마이페이지 접속
 	public String searchMyPageIn(String id) {
@@ -124,7 +129,10 @@ public class MyPageService {
 	
 	//북마크한 휴게소 조회
 	public List<MyPageBookmarkDomain>searchBookmark(String id){
-		return null;
+		List<MyPageBookmarkDomain> list=null;
+		list=mDAO.selectBookmark(id);
+		
+		return list;
 	}//searchBookmark
 	
 	//북마크한 휴게소 삭제(아이디, 휴게소 인덱스-int)
