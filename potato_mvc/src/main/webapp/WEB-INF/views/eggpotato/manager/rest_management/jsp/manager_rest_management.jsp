@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,9 +50,9 @@ $(document).on("click",".popup-btn",function(){
 						<label>노선명 : </label>
 						<select class="search-select">
 							<option value="none">----------전체----------</option>
-							<option value="rest">경부선</option>
-							<option value="contents">서해안</option>
-							<option value="contents">수도권제1고속도로</option>
+							<c:forEach var="line" items="${ lineList }">
+							<option value="${ line.line_idx }"><c:out value="${ line.line }"/></option>
+							</c:forEach>
 						</select>
 						<label>휴게소명 : </label>
 						<input type="text" placeholder="휴게소명 입력" class="search-txt"/>

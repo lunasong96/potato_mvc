@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ReviewDomain {
 	private String nick, contents, id, reviewImg, profilImg, name;
-	private int review_idx,rating,report_cnt,like_cnt;
+	private int restarea_idx,review_idx,rating,report_cnt,like_cnt;
 	private Date post_date;
 	public String getNick() {
 		return nick;
@@ -42,6 +42,12 @@ public class ReviewDomain {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getRestarea_idx() {
+		return restarea_idx;
+	}
+	public void setRestarea_idx(int restarea_idx) {
+		this.restarea_idx = restarea_idx;
+	}
 	public int getReview_idx() {
 		return review_idx;
 	}
@@ -76,8 +82,9 @@ public class ReviewDomain {
 	@Override
 	public String toString() {
 		return "ReviewDomain [nick=" + nick + ", contents=" + contents + ", id=" + id + ", reviewImg=" + reviewImg
-				+ ", profilImg=" + profilImg + ", name=" + name + ", review_idx=" + review_idx + ", rating=" + rating
-				+ ", report_cnt=" + report_cnt + ", like_cnt=" + like_cnt + ", post_date=" + post_date + "]";
+				+ ", profilImg=" + profilImg + ", name=" + name + ", restarea_idx=" + restarea_idx + ", review_idx="
+				+ review_idx + ", rating=" + rating + ", report_cnt=" + report_cnt + ", like_cnt=" + like_cnt
+				+ ", post_date=" + post_date + "]";
 	}
 	
 }

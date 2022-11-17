@@ -2,7 +2,10 @@ package potato.manager.service;
 
 import java.util.List;
 
-import potato.manager.domain.AmenityDomain;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import potato.manager.dao.MgrRestDAO;
 import potato.manager.domain.DoDomain;
 import potato.manager.domain.FoodDomain;
 import potato.manager.domain.LineDomain;
@@ -12,7 +15,11 @@ import potato.manager.vo.FoodVO;
 import potato.manager.vo.RestVO;
 import potato.manager.vo.SearchRestVO;
 
+@Component
 public class ManagerRestService {
+	@Autowired(required = false)
+	private MgrRestDAO mrDAO;
+	
 	
 	public List<RestDomain> searchRest(SearchRestVO srVO) {
 		
@@ -20,8 +27,11 @@ public class ManagerRestService {
 	}
 	
 	public List<LineDomain> searchLine() {
+		List<LineDomain> list = null;
 		
-		return null;
+		list = mrDAO.selectLine();
+		
+		return list;
 	}
 	
 	public int searchTotalRest(SearchRestVO srVO) {
@@ -62,11 +72,13 @@ public class ManagerRestService {
 		
 	}
 	
+	
 	public RestDomain searchRestDetail(int restarea_idx) {
 		
 		return null;
 	}
 	
+	//휴게소상세창과 수정창동시사용
 	public List<FoodDomain> searchRestFood(int restarea_idx) {
 		
 		return null;
@@ -76,17 +88,7 @@ public class ManagerRestService {
 		
 		return null;
 	}
-	
-	public List<FoodDomain> searchFoodInfo(int restarea_idx) {
 		
-		return null;
-	}
-	
-	public List<AmenityDomain> searchAmenityInfo(int restarea_idx) {
-		
-		return null;
-	}
-	
 	public int modifyRest(RestVO rVO) {
 		
 		return 0;

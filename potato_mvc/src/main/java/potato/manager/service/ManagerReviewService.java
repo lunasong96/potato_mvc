@@ -2,15 +2,26 @@ package potato.manager.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import potato.manager.dao.MgrReviewDAO;
 import potato.manager.domain.ReviewDomain;
 import potato.manager.vo.ReviewVO;
 import potato.manager.vo.SearchReviewVO;
 
+@Component
 public class ManagerReviewService {
 	
-	public List<ReviewDomain> searchReview() {
+	@Autowired(required = false)
+	private MgrReviewDAO mrDAO;
+	
+	public List<ReviewDomain> searchReview(SearchReviewVO srVO) {
+		List<ReviewDomain> list = null;
+				
+		list = mrDAO.selectReview(srVO);
 		
-		return null;
+		return list;
 	}
 	
 	public int searchTotalReview(SearchReviewVO srVO) {

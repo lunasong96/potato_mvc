@@ -124,35 +124,35 @@
 							<!-- 추후 이미지 아이콘 추가 -->
 							<span>
 								<img src="css/images/sleep.png" ><span>수면실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons" value=""/>
 							</span>
 							<span>
 								<img src="css/images/shower.png" ><span>샤워실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 							<span>
 								<img src="css/images/washing.png" ><span>세탁실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 							<span>
 								<img src="css/images/rest.png" ><span>쉼터</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 							<span>
 								<img src="css/images/barber.png" ><span>이발소</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 							<span>
 								<img src="css/images/baby.png" ><span>수유실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 							<span>
 								<img src="css/images/pharmacy.png" ><span>약국</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 							<span>
 								<img src="css/images/market.png" ><span>농산물 판매</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="restIcons"/>
 							</span>
 						</div>
 					</div>
@@ -164,35 +164,35 @@
 							<!-- 추후 이미지 아이콘 추가 -->
 							<span>
 								<img src="css/images/sleep.png" ><span>수면실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/shower.png" ><span>샤워실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/washing.png" ><span>세탁실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/rest.png" ><span>쉼터</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/barber.png" ><span>이발소</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/baby.png" ><span>수유실</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/pharmacy.png" ><span>약국</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 							<span>
 								<img src="css/images/market.png" ><span>농산물 판매</span>
-								<input type="checkbox"/>
+								<input type="checkbox" name="gasIcons"/>
 							</span>
 						</div>
 					</div>

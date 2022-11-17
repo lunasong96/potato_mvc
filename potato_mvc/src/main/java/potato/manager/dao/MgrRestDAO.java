@@ -2,6 +2,10 @@ package potato.manager.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
+
+import potato.dao.config.MyBatisHandler;
 import potato.manager.domain.AmenityDomain;
 import potato.manager.domain.DoDomain;
 import potato.manager.domain.FoodDomain;
@@ -12,6 +16,7 @@ import potato.manager.vo.FoodVO;
 import potato.manager.vo.RestVO;
 import potato.manager.vo.SearchRestVO;
 
+@Component
 public class MgrRestDAO {
 	
 	public List<RestDomain> selectRest(SearchRestVO srVO) {
@@ -20,8 +25,13 @@ public class MgrRestDAO {
 	}
 	
 	public List<LineDomain> selectLine() {
+		List<LineDomain> list = null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		list = ss.selectList("potato.manager.restarea.getLine");
 		
-		return null;
+		mbh.closeHandler(ss);
+		return list;
 	}
 	
 	public int selectTotalRest(SearchRestVO srVO) {
@@ -35,7 +45,6 @@ public class MgrRestDAO {
 	}
 	
 	public void insertRest(RestVO rVO) {
-		
 		
 	}
 	
@@ -52,6 +61,7 @@ public class MgrRestDAO {
 		return null;
 	}
 	
+	//휴게소상세창과 수정창동시사용
 	public List<FoodDomain> selectRestFood(int restarea_idx) {
 		
 		return null;
@@ -61,18 +71,8 @@ public class MgrRestDAO {
 		
 		return null;
 	}
-	
-	public List<FoodDomain> selectFoodInfo(int restarea_idx ) {
 		
-		return null;
-	}
-	
-	public List<AmenityDomain> selectAmenityInfo(int restarea_idx) {
-		
-		return null;
-	}
-	
-	public int udateRest(RestVO rVO) {
+	public int updateRest(RestVO rVO) {
 		
 		return 0;
 	}

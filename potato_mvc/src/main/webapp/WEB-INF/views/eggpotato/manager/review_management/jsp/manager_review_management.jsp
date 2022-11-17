@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,9 +63,10 @@ function movePage( page ) {
 		<div class="review_management-wrap">
 			<div class="review_management">
 				<div class="rm-top">
-					<select class="search-select">
+					<select class="search-select"> <!-- controller에서 숫자를 필드명으로 바꿔주는 작업필요 -->
 						<option value="1"${ 1 eq param.searchType?" selected='selected'":"" }>휴게소명</option>
-						<option value="2"${ 2 eq param.searchType?" selected='selected'":"" }>내용/작성자</option>
+						<option value="2"${ 2 eq param.searchType?" selected='selected'":"" }>내용</option>
+						<option value="3"${ 3 eq param.searchType?" selected='selected'":"" }>작성자</option>
 					</select>
 					<div class="search-wrap">
 						<input autocomplete="off" type="text" class="search-txt" id="searchBox" value="${ param.keyword }">
@@ -90,33 +92,11 @@ function movePage( page ) {
 							<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
 							<td><input type="checkbox"/></td><td>기흥</td><td><button type="button" class="popup-btn" value="">기름이 싸서 좋네요</button></td><td>4</td><td>test1</td><td>2022.10.21 10:30:15</td><td>1</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"/></td><td></td><td></td><td></td><td></td><td></td><td></td>
-						</tr>
+						<c:forEach var="rev" items="${ requestScope.reviewList }" >
+							<tr>
+								<td><input type="checkbox" name="reviewChk" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"/></td>
+							</tr>
+						</c:forEach> 
 					</table>
 				</div>
 				<div class="page">
