@@ -5,7 +5,7 @@
 <mapper namespace="potato.manager.review">
 	
 	<select id="selectReview" resultType="potato.manager.domain.ReviewDomain" >
-		select re.restarea_idx, ra.name, re.contents, re.rating, re.id, re.post_date, (select count(ID_REPORTER) from report where REVIEW_IDX = re.REVIEW_IDX and ID_WRITER=re.ID and RESTAREA_IDX = re.RESTAREA_IDX  ) report_cnt
+		select re.review_idx, re.restarea_idx, ra.name, re.contents, re.rating, re.id, re.post_date, (select count(ID_REPORTER) from report where REVIEW_IDX = re.REVIEW_IDX and ID_WRITER=re.ID and RESTAREA_IDX = re.RESTAREA_IDX  ) report_cnt
 		from review re, restarea ra
 		
 		<where>
@@ -38,8 +38,8 @@
 		</otherwise>
 		</choose>
 		</if>
-		offset (#{pageFlag}-1)*15 rows
-		fetch next 15 rows only
+		offset (#{pageFlag}-1)*10 rows
+		fetch next 10 rows only
 	</select>
 
 </mapper>

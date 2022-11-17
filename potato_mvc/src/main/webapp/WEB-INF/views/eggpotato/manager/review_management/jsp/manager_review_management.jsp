@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,19 +22,30 @@ $(function(){
 			return;
 		}
 		
-		//$("#keyword").val($("#searchBox").val());
-		//$("#")
+		$("#keyword").val($("#searchBox").val());
 		
-	})
+		
+	});
+	
+	if($("[name='mainChk']").is(":checked")){
+		
+	}
+	
 })//ready;
 
-
+//리뷰상세창열기
 $(document).on("click",".popup-btn",function(){
 	open("","review_popup","width=1400,height=550,top=211,left=300");
-	
+    var param = $(this).val().split(",");
+    $("#reIdx").val(param[0]);
+    $("#id").val(param[1]);
+    $("#rsIdx").val(param[2]);
+    $("#popupFrm").submit();
+    
 	
 });
 
+//페이징
 function movePage( page ) {
 	$("#pageFlag").val(page);
 	$("#hidFrm").submit();
@@ -86,15 +98,14 @@ function movePage( page ) {
 				<div class="table-wrap">
 					<table class="table">
 						<tr>
-							<th><input type="checkbox" name="mainChk"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
-						</tr>
-						<tr>
-							<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
-							<td><input type="checkbox"/></td><td>기흥</td><td><button type="button" class="popup-btn" value="">기름이 싸서 좋네요</button></td><td>4</td><td>test1</td><td>2022.10.21 10:30:15</td><td>1</td>
+							<th><input type="checkbox" id="mainChk" name="mainChk"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
 						</tr>
 						<c:forEach var="rev" items="${ requestScope.reviewList }" >
 							<tr>
+								<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
 								<td><input type="checkbox" name="reviewChk" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"/></td>
+								<td><c:out value="${ rev.name }"/></td><td><button type="button" class="popup-btn" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"><c:out value="${ rev.contents }"/></button></td>
+								<td><c:out value="${ rev.rating }"/></td><td><c:out value="${ rev.id }"/></td><td><fmt:formatDate value="${ rev.post_date }" pattern="yyyy-MM-dd hh:mm:ss"/></td><td><c:out value="${ rev.report_cnt }"/></td>
 							</tr>
 						</c:forEach> 
 					</table>
@@ -126,8 +137,10 @@ function movePage( page ) {
 	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ param.pageFlag }"/>
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ param.pageFlag }"/>
 </form>
-<form id="popupFrm" method="get" action="manager_open_reviewPopup.do" target="">
-	<input type="hidden" id="">
+<form id="popupFrm" method="get" action="manager_open_reviewPopup.do" target="review_popup">
+	<input type="hidden" id="reIdx" name="review_idx">
+	<input type="hidden" id="id" name="id">
+	<input type="hidden" id="rsIdx" name="restarea_idx">
 </form>
 
 </body>
