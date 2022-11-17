@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="potato.listMapper">
 <!-- 전체휴게소 목록 - 다이나믹 쿼리 -->
-<select id="allRestAreaList" resultType="potato.domain.RestAreaDomain" parameterType="potato.vo.SearchFlagVO">
+<select id="allRestAreaList" resultType="potato.domain.RestAreaListDomain" parameterType="potato.vo.SearchFlagVO">
 select ra.name,(select avg(rating) from review where restarea_idx=ra.restarea_idx) rating,
 l.line,d.kr_do,ra.img
 from restarea ra,line l, do d
@@ -24,7 +24,7 @@ where line_idx=#{line_idx}
 </select>
 
 <!-- 도 클릭시 해당 휴게소 목록 보여주기 -->
-<select id="doList" resultType="potato.domain.RestAreaDomain" parameterType="int">
+<select id="doList" resultType="potato.domain.RestAreaListDomain" parameterType="int">
 select ra.name,(select avg(rating) from review where restarea_idx=ra.restarea_idx) rating,
 l.line,d.kr_do,ra.img
 from restarea ra,line l, do d
@@ -32,7 +32,7 @@ where (ra.line_idx=l.line_idx and ra.do_idx=d.do_idx) and ra.do_idx=#{do_idx}
 </select>
 
 <!-- 도 휴게소 목록에서 검색, 정렬 -->
-<select id="doArrangeSearch" resultType="potato.domain.RestAreaDomain" parameterType="potato.vo.SearchFlagVO">
+<select id="doArrangeSearch" resultType="potato.domain.RestAreaListDomain" parameterType="potato.vo.SearchFlagVO">
 select ra.name,(select avg(rating) from review where restarea_idx=ra.restarea_idx) rating,
 l.line,d.kr_do,ra.img
 from restarea ra,line l, do d
