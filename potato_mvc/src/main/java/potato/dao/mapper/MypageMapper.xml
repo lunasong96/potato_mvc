@@ -12,7 +12,7 @@
   	</select>
   
   	<!-- 내 정보 조회 -->
-  	<select id="selectMypageInfo" parameterType="potato.vo.MypageMyInfoEditVO" resultType="MyPageMyInfoDomain">
+  	<select id="selectMypageInfo" parameterType="potato.vo.MyPageMyInfoEditVO" resultType="potato.domain.MyPageMyInfoDomain">
   		select		img, name, nick, id, phone, email, birth
   		from		member				
   		where		id =#{ id }
@@ -41,14 +41,14 @@
   	</select>
   	
   	<!-- 북마크한 휴게소 조회 -->
-  	<select id="selectBookmark" parameterType="String"  resultType="MyPageBookmarkDomain">
+  	<select id="selectBookmark" parameterType="String"  resultType="potato.domain.MyPageBookmarkDomain">
   		select		b.id, r.name ,r.restarea_idx
 		from    	bookmark b, restarea r
 		where   	b.restarea_idx=r.restarea_idx and b.id in #{ id }
   	</select>
   	
   	<!-- 북마크한 휴게소 삭제(아이디, 휴게소 인덱스) -->
-  	<select id="updateBookmark" parameterType="potato.co.MyPageBookmarkVO">
+  	<select id="updateBookmark" parameterType="potato.vo.MyPageBookmarkVO">
   	delete
 	from     	bookmark
 	where    	restarea_idx = #{ restarea_idx}  and id=#{ id }
