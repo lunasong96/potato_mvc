@@ -28,7 +28,14 @@
 	</if>
 	<!-- 차단회원 목록 조회 -->
 	<if test="memberType == 3">
-	 
+	select mb.id,m.nick,br.reason
+	from member m,member_block mb,block_reason br  
+	<where>
+	(m.id=mb.id and mb.block_idx=br.block_idx)
+	<if test="id != null and id != ''">
+		and mb.id '%'||#{id}||'%'
+	</if>
+	</where>
 	</if>
 </select>
 
