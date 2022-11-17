@@ -138,7 +138,7 @@ int QuitMemCnt=mhDAO.selectQuitMem();
 					<p>오늘 방문자 수</p><p>470명</p>
 				</div>
 				<div class="list-text-1">
-					<p>주간 방문자 수</p><p>1029명</p>
+					<p>총 방문자 수</p><p>1029명</p>
 				</div>
 			</div>
 			<div  class="graph2-list">
