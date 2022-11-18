@@ -3,11 +3,13 @@ package potato.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
 import potato.domain.UserHomeMapDomain;
 import potato.domain.UserHomeSliderDomain;
 
+@Component
 public class HomeDAO {
 	
 	//슬라이드 휴게소 링크
@@ -82,8 +84,8 @@ public class HomeDAO {
 	}
 	
 	//방문자수 집계
-	public int insertVisitor(String ip) {
-		int visitorCnt=0;
+	public String insertVisitor(String ip) {
+		String visitorCnt="";
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();

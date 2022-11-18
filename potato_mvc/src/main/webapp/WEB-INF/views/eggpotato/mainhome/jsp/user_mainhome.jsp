@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>메인화면</title>
-<link rel="shortcut icon"  href="css/css/images/logo.png"/>
+<link rel="shortcut icon"  href="css/images/logo.png"/>
 <link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
 <link rel="stylesheet" type="text/css" href="css/common/swiper-bundle.min.css"/>
@@ -36,12 +38,70 @@ $(function() {
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
-	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
+	        center: new kakao.maps.LatLng(36.1752197169176, 127.7488279073141), // 지도의 중심좌표
+	        level: 12 // 지도의 확대 레벨
 	    };
 	
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	  
+	// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+	var positions = [
+			<c:forEach var="mapPin" items="${requestScope.mapPin }">
+	    {
+	        content: '<div>${mapPin.name}<br><a href="user_detailed.do?restarea_idx=${mapPin.restarea_idx }" style="color: #593000; font-weight: bold;">상세보기</a></div>', 
+	        latlng: new kakao.maps.LatLng(${mapPin.lat}, ${mapPin.lng})
+	    },
+			</c:forEach>
+	];
+
+	for (var i = 0; i < positions.length; i ++) {
+	    // 마커를 생성합니다
+	    var marker = new kakao.maps.Marker({
+	        map: map, // 마커를 표시할 지도
+	        position: positions[i].latlng // 마커의 위치
+	    });
+
+	    // 마커에 표시할 인포윈도우를 생성합니다 
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content: positions[i].content // 인포윈도우에 표시할 내용
+	    });
+
+	    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+	    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+	    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+	    kakao.maps.event.addListener(marker, 'click', clickListener(map, marker, infowindow));
+	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	    kakao.maps.event.removeListener(marker, 'click', clickOutListener(infowindow));
+	}
+
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) {
+	    return function() {
+	        infowindow.open(map, marker);
+	    };
+	}
+	
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function clickListener(map, marker, infowindow) {
+	    return function() {
+	    	position, content
+	    };
+	}
+	
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
+	}
+	
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function clickOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
+	}
 	
 	// top 버튼 생성
 	var header = $('.header');
@@ -108,27 +168,15 @@ function sidebar() {
 					</div>
 					<div class="slide-bottom">
 						<div class="img-display">
-							<div class="sb-img-wrap">
-								<img src="css/images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
+							<c:forEach var="link1" items="${requestScope.link1 }">
+								<div class="sb-img-wrap">
+									<img src="css/images/${link1.img }" alt="휴게소음식사진" class="foodimg">
+									<div class="img-hover">
+										<a href="user_detailed.do?restarea_idx=${link1.restarea_idx }" class="img-link">휴게소 보러가기</a>
+									</div>
+									<span class="foodimg-title"><c:out value="${link1.name }"/>-<c:out value="${link1.foodName }"/></span>
 								</div>
-								<span class="foodimg-title">곡성-짜글이</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/주암.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">주암-오쭈삼</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/오수.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">오수-매콤치즈돈까스</span>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -143,27 +191,15 @@ function sidebar() {
 					</div>
 					<div class="slide-bottom">
 						<div class="img-display">
-							<div class="sb-img-wrap">
-								<img src="css/images/구리.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
+							<c:forEach var="link2" items="${requestScope.link2 }">
+								<div class="sb-img-wrap">
+									<img src="css/images/${link2.img }" alt="휴게소음식사진" class="foodimg">
+									<div class="img-hover">
+										<a href="user_detailed.do?restarea_idx=${link2.restarea_idx }" class="img-link">휴게소 보러가기</a>
+									</div>
+									<span class="foodimg-title"><c:out value="${link2.name }"/>-<c:out value="${link2.foodName }"/></span>
 								</div>
-								<span class="foodimg-title">구리-해물순두부</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/화성.png" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">화성-청국장</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/서울만남의광장.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">서울-김치찌개</span>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -177,27 +213,15 @@ function sidebar() {
 					</div>
 					<div class="slide-bottom">
 						<div class="img-display">
-							<div class="sb-img-wrap">
-								<img src="css/images/횡성.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
+							<c:forEach var="link3" items="${requestScope.link3 }">
+								<div class="sb-img-wrap">
+									<img src="css/images/${link3.img }" alt="휴게소음식사진" class="foodimg">
+									<div class="img-hover">
+										<a href="user_detailed.do?restarea_idx=${link3.restarea_idx }" class="img-link">휴게소 보러가기</a>
+									</div>
+									<span class="foodimg-title"><c:out value="${link3.name }"/>-<c:out value="${link3.foodName }"/></span>
 								</div>
-								<span class="foodimg-title">횡성-설렁탕</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/여주.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">여주-갈비찜</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/옥계.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">옥계-물막국수</span>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -212,27 +236,15 @@ function sidebar() {
 					</div>
 					<div class="slide-bottom">
 						<div class="img-display">
-							<div class="sb-img-wrap">
-								<img src="css/images/충주.png" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
+							<c:forEach var="link4" items="${requestScope.link4 }">
+								<div class="sb-img-wrap">
+									<img src="css/images/${link4.img }" alt="휴게소음식사진" class="foodimg">
+									<div class="img-hover">
+										<a href="user_detailed.do?restarea_idx=${link4.restarea_idx }" class="img-link">휴게소 보러가기</a>
+									</div>
+									<span class="foodimg-title"><c:out value="${link4.name }"/>-<c:out value="${link4.foodName }"/></span>
 								</div>
-								<span class="foodimg-title">충주-돈까스</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/치악.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">치악-제육덮밥</span>
-							</div>
-							<div class="sb-img-wrap">
-								<img src="css/images/속리산.jpg" alt="휴게소음식사진" class="foodimg">
-								<div class="img-hover">
-									<a href="" class="img-link">휴게소 보러가기</a>
-								</div>
-								<span class="foodimg-title">속리산-영양솥밥</span>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -256,7 +268,7 @@ function sidebar() {
 				더 많은 휴게소의 <br>
 				정보가 궁금하다면? <br>
 			</p>
-			<a href="" class="map-link">휴게소 더보기</a>
+			<a href="allList.do" class="map-link">휴게소 더보기</a>
 		</div>
 	</div>
 	
