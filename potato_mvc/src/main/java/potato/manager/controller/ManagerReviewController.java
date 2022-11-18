@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import potato.manager.service.ManagerReviewService;
@@ -22,12 +23,13 @@ public class ManagerReviewController {
 	private ManagerReviewService mrs;
 
 	@RequestMapping(value = "manager_review.do", method = GET)
-	public String reviewMain(SearchReviewVO srVO, Model model, HttpSession session) {
+	public String reviewMain(@RequestParam SearchReviewVO srVO, Model model, HttpSession session) {
 		String url = "manager/review_management/jsp/manager_review_management";
 		/*
 		 * 技记贸府窍搁 林籍钱扁 if(session.getAttribute("manager_id")==null) {
 		 * url="forward:managerlogin_page.do"; }
 		 */
+		
 
 		if (srVO.getSearchType() != null && !"".equals(srVO.getSearchType())) {
 			if (srVO.getSearchType().equals("1")) {
@@ -38,9 +40,9 @@ public class ManagerReviewController {
 				srVO.setSearchType("re.id");
 			}
 		}
-
+		System.out.println(srVO);
 		model.addAttribute("reviewList", mrs.searchReview(srVO));
-
+		
 		return url;
 	}
 

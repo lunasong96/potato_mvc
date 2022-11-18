@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="potato.manager.review">
 	
-	<select id="selectReview" resultType="potato.manager.domain.ReviewDomain" >
+	<select id="selectReview" resultType="potato.manager.domain.ReviewDomain" parameterType="potato.manager.vo.SearchReviewVO" >
 		select re.review_idx, re.restarea_idx, ra.name, re.contents, re.rating, re.id, re.post_date, (select count(ID_REPORTER) from report where REVIEW_IDX = re.REVIEW_IDX and ID_WRITER=re.ID and RESTAREA_IDX = re.RESTAREA_IDX  ) report_cnt
 		from review re, restarea ra
 		
@@ -17,27 +17,20 @@
 		</if>
 		</where>
 		
-		<if test="dateOrderFlag != 0">
-		<choose>
-		<when test="dateOrderFlag != 1">
+		<if test="dateOrderFlag eq 1">
 		order by re.post_date desc
-		</when>
-		<otherwise>
-		order by re.post_date
-		</otherwise>
-		</choose>
+		</if>
+		<if test="dateOrderFlag eq 2">
+		order by re.post_date 
 		</if>
 		
-		<if test="reportOrderFlag != 0">
-		<choose>
-		<when test="reportOrderFlag != 1">
+		<if test="reportOrderFlag eq 1">
 		order by report_cnt desc
-		</when>
-		<otherwise>
-		order by report_cnt
-		</otherwise>
-		</choose>
 		</if>
+		<if test="reportOrderFlag eq 2">
+		order by report_cnt 
+		</if>
+		
 		offset (#{pageFlag}-1)*10 rows
 		fetch next 10 rows only
 	</select>

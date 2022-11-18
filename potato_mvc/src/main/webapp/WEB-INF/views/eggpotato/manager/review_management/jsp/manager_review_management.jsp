@@ -27,9 +27,7 @@ $(function(){
 		
 	});
 	
-	if($("[name='mainChk']").is(":checked")){
-		
-	}
+	
 	
 })//ready;
 
@@ -49,6 +47,15 @@ $(document).on("click",".popup-btn",function(){
 function movePage( page ) {
 	$("#pageFlag").val(page);
 	$("#hidFrm").submit();
+}
+
+function allChk() {
+	if($("#mainChk").is(":checked")){
+		$("[name='reviewChk']").prop("checked", true);
+	} else {
+		$("[name='reviewChk']").prop("checked", false);
+	}
+		
 }
 
 
@@ -98,7 +105,7 @@ function movePage( page ) {
 				<div class="table-wrap">
 					<table class="table">
 						<tr>
-							<th><input type="checkbox" id="mainChk" name="mainChk"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
+							<th><input type="checkbox" id="mainChk" name="mainChk" onclick="allChk()"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
 						</tr>
 						<c:forEach var="rev" items="${ requestScope.reviewList }" >
 							<tr>
@@ -133,9 +140,9 @@ function movePage( page ) {
 <form id="hidFrm" method="get" action="manager_review.do">
 	<input type="hidden" id="keyword" name="keyword" value="${ param.keyword }"/>
 	<input type="hidden" id="searchType" name="searchType" value="${ param.searchType }"/>
-	<input type="hidden" id="dateOrderFlag" name="dateOrderFlag" value="${ param.pageFlag }"/>
-	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ param.pageFlag }"/>
-	<input type="hidden" id="pageFlag" name="pageFlag" value="${ param.pageFlag }"/>
+	<input type="hidden" id="dateOrderFlag" name="dateOrderFlag" value="${ param.dateOrderFlag }"/>
+	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ param.reportOrderFlag }"/>
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ param.dateOrderFlag }"/>
 </form>
 <form id="popupFrm" method="get" action="manager_open_reviewPopup.do" target="review_popup">
 	<input type="hidden" id="reIdx" name="review_idx">
