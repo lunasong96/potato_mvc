@@ -2,6 +2,8 @@ package potato.service;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -87,13 +89,40 @@ public class DetailedService {
 	//∏Æ∫‰ √— total
 	public int getReviewTotal(int restarea_idx) {
 		int reviewtotal=0;
-		reviewtotal=dDAO.selectRateTotal(restarea_idx);
+		reviewtotal=dDAO.selectReviewTotal(restarea_idx);
 		return reviewtotal;
 	}
 	
 	//∏Æ∫‰ ¡∂»∏(∫Òµø±‚)
-	public List<DetailedReviewDomain> getReviewAll(DetailedReviewVO drVO) {
-		return null;
+	public String getReviewAll(DetailedReviewVO drVO) {
+		List<DetailedReviewDomain> list=null;
+		list=dDAO.selectReviewAll(drVO);
+		System.out.println(drVO+"findMe");
+		System.out.println(list+"findMe");
+		JSONObject jsonObj=null;
+		JSONObject jo=null;
+		JSONArray js=new JSONArray();
+
+		for(DetailedReviewDomain dd: list) {
+			jo=new JSONObject();
+			jo.put("contents", dd.getContents());
+			jo.put("foodImg", dd.getFoodimg());
+			jo.put("id", dd.getId());
+			jo.put("img", dd.getImg());
+			jo.put("liked", dd.getLiked());
+			jo.put("likeTotal", dd.getLikeTotal());
+			jo.put("nick", dd.getNick());
+			jo.put("post_date", dd.getPost_date());
+			jo.put("rating", dd.getRating());
+			jo.put("review_idx", dd.getReview_idx());
+			js.add(jo);
+		}//end for
+		System.out.println(js+"find me");
+		
+		jsonObj.put("review", js);
+		
+		
+		return jsonObj.toJSONString();
 	}
 	
 	//∆‰¿Ã¬° √≥¿Ω Ω√¿€ 

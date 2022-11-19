@@ -132,7 +132,16 @@ public class DetailedDAO {
 	
 	//리뷰 조회
 	public List<DetailedReviewDomain> selectReviewAll(DetailedReviewVO drVO) {
-		return null;
+		List<DetailedReviewDomain> drd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		drd=ss.selectList("potato.detailedMapper.selReviewAll",drVO);
+		
+		mbh.closeHandler(ss);
+		
+		return drd;
 	}
 	
 	//타사용자 프로필 이동

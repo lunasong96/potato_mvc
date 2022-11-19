@@ -64,10 +64,25 @@ $(function() {
 	
 	$(".more-btn").click(function() {
 		var current=$(".more-btn").val();
-		alert(current);
+		/* alert(current); */
 		$(".more-btn").attr('value',Number(current)+1);
 		var next=$(".more-btn").val();
-		alert(next);
+		/* alert(next); */
+		
+		$.ajax({
+			url:"ajax_detailed_page.do",
+			data: { restarea_idx: ${param.restarea_idx},
+					dateFlag: 1,
+					addFlag: 2},
+			dataType: "text",
+			error: function(xhr) {
+				alert("에러발생"),
+				console.log(xhr.status);
+			},
+			sucess: function(data) {
+				alert("성공");
+			}
+		})
 		
 	})
 	
@@ -111,6 +126,24 @@ function slider() {
 	})
 	
 }
+
+function reviewAll() {
+	$.ajax({
+		url:"ajax_detailed_page.do",
+		dataType: "html",
+		error: function(xhr) {
+			alert("에러발생"),
+			console.log(xhr.status);
+		},
+		sucess: function(data) {
+			
+			data.appendTo($("#reviewAll"));
+			
+		}
+	})	
+	
+}
+
 </script>
 </head>
 <body>
@@ -319,14 +352,15 @@ function slider() {
 		</div>
 		<div class="review-filter">
 			<div>
-				<a href="">최신순</a>
+				<a href="" value="1" id="dateFlag" name="dataFlag">최신순</a>
 			</div>
 			<div>
-				<a href="">과거순</a>
+				<a href="" value="1" id="dateFlag" name="dataFlag">과거순</a>
 			</div>
 		</div>
 	</div>
-	
+	<div class="reviewAll">
+	</div>
 	<!-- 리뷰 없을 때 -->
 	<div class="no-review">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
@@ -637,7 +671,7 @@ function slider() {
 	</div>
 	
 	<div class="review-more-wrap">
-		<button type="button" class="more-btn" value="1">
+		<button type="button" class="more-btn" value="1" id="addFlag" name="addFlag">
 		더보기
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
 			  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>

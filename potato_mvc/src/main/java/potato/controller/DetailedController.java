@@ -3,6 +3,9 @@ package potato.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import potato.domain.DetailedReviewDomain;
 import potato.service.DetailedService;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
@@ -58,8 +62,15 @@ public class DetailedController {
 	//ÈÞ°Ô¼Ò ¸®ºä + ¹öÆ° ÆäÀÌÂ¡ (ºñµ¿±â)
 	@ResponseBody
 	@RequestMapping(value = "ajax_detailed_page.do", method=GET)
-	public String reviewPageFilter(DetailedReviewVO drVO) {
-		String ajax_json="";
+	public String reviewPageFilter(HttpServletRequest request, DetailedReviewVO drVO, Model model) {
+		/*
+		 * drVO.setDateFlag(Integer.parseInt(request.getParameter("dataFlag")));
+		 * drVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
+		 * drVO.setAddFlag(Integer.parseInt(request.getParameter("addFlag")));
+		 */
+		/* System.out.println(drVO+"findMe"); */
+		String ajax_json=ds.getReviewAll(drVO);
+		/* model.addAttribute("aj", ajax_json); */
 		return ajax_json;
 	}
 	
