@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
  *	유저의 로그인, 회원가입 관련 DAO
  * @author user
  */
-@Component
 public class UserDAO {
 	//mapper namespace 변수 선언
 	public static final String UserMapper="potato.userMapper.";
@@ -149,5 +148,11 @@ public class UserDAO {
 		return cnt;
 	}//updatePw
 	
+	public static void main(String[] args) {
+		LoginVO lVO= new LoginVO("boahbam", "1234");
+		UserDAO uDAO = new UserDAO();
+		String id=uDAO.selectLogin(lVO);
+		System.out.println(id);
+	}
 	
 }//class

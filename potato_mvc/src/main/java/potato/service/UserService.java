@@ -13,7 +13,6 @@ import potato.vo.UserInfoVO;
  * 유저 로그인/회원가입 관련 서비스
  * @author user
  */
-@Component
 public class UserService {
 	
 	/**
