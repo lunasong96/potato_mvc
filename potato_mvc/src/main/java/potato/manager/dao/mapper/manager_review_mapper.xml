@@ -65,7 +65,7 @@
 	</delete>
 	
 	<select id="selectReviewDetail" parameterType="potato.manager.vo.ReviewVO" resultType="potato.manager.domain.ReviewDomain">
-		select name, img, nick, rating, contents, reviewimg, post_date, (select count(*) from liked where review_idx = #{review_idx} and id_writer=#{id} and restarea_idx= #{restarea_idx}) like_cnt
+		select name, img profilImg, nick, rating, contents, reviewimg, post_date, (select count(*) from liked where review_idx = #{review_idx} and id_writer=#{id} and restarea_idx= #{restarea_idx}) like_cnt
 		from
 	      ( 
 	        select re.contents, re.id, listagg(rimg.img,',') within group(order by rimg.img_idx) reviewimg, me.nick, re.rating, ra.name, me.img, re.post_date

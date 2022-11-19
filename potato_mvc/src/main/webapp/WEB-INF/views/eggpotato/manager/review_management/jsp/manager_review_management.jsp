@@ -16,13 +16,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 //삭제후 알림
-<c:if test="${ mulDelCnt gt 0 }"> //메뉴바 연결하고 테스트
+<c:if test="${ mulDelCnt gt 0 }"> 
 alert("총 ${mulDelCnt}개 리뷰가 삭제되었습니다.");
 </c:if>
 
-<c:if test="${ oneDelCnt eq 1 }"> //메뉴바 연결하고 테스트
+<c:if test="${ oneDelCnt eq 1 }"> 
 alert(" 1개의 리뷰가 삭제되었습니다.");
+self.close();
 </c:if>
+
 
 $(function(){
 	//검색어 입력시

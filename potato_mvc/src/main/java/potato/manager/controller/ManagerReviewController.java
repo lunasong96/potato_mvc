@@ -61,12 +61,12 @@ public class ManagerReviewController {
 	@RequestMapping(value = "manager_review_ajax.do", method = GET)
 	public String keywordList(String keyword) {
 		String json = "";
-
+			
 		return json;
 	}
 
 	@RequestMapping(value = "manager_multipleReviews_delete.do", method = POST)
-	public String delReviews(String[] reviewChk,Model model) {
+	public String delReviews(String[] reviewChk, Model model) {
 		int cnt = mrs.removeReviews(reviewChk);
 		model.addAttribute("mulDelCnt", cnt);
 		return "forward:manager_review.do";
@@ -75,6 +75,7 @@ public class ManagerReviewController {
 	@RequestMapping(value = "manager_open_reviewPopup.do", method = POST)
 	public String openPopup(ReviewVO rVO, Model model) {
 		model.addAttribute("reviewDetail", mrs.searchReviewDetail(rVO));
+		model.addAttribute("reviewData", rVO);
 		return "manager/review_management/jsp/my_review_popup";
 	}
 

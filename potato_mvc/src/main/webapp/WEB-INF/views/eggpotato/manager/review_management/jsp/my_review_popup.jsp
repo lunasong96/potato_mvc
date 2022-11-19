@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,23 @@
 $(function() {
 	//리뷰 슬라이드 호출
 	slider();
-})
+	
+	//삭제하기
+	$("#delBtn").click(function(){
+		if(confirm("정말로 삭제하시겠습니까?")) {
+		var arr = $("#delBtn").val().split(",");
+			$("#reIdx").val(arr[0]);
+			$("#id").val(arr[1]);
+			$("#rsIdx").val(arr[2]);
+			$("#delFrm").submit();
+			<c:if test="${ oneDelCnt eq 1 }"> //메뉴바 연결하고 테스트
+			alert(" 1개의 리뷰가 삭제되었습니다.");
+			</c:if>
+		}
+			
+		
+	});
+});//ready
 
 function slider() {
 	$(".re-mySwiper").each(function(index,element) {
@@ -64,7 +81,7 @@ function slider() {
 	</div>
 	<div class="review-exist">
 		<div class="re-left">
-			<img src="css/images/cimg.png" alt="프로필사진">
+			<img src="css/images/${reviewDetail.profilImg}" alt="${reviewDetail.profilImg}">
 		</div>
 		
 		<div class="re-right">
@@ -92,18 +109,12 @@ function slider() {
 			   			<div class="swiper-slide re-swiper-slide">
 			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
+			   			<c:set var="imgArr" value="${ fn:split(reviewDetail.reviewImg,',') }"/>
+ 			   			<c:forEach var="img" items="${ imgArr }">
  			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/${ imgArr }" alt="${ imgArr }" class="re-foodimg">
 			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
+ 			   			</c:forEach>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
@@ -125,8 +136,13 @@ function slider() {
 		</div>
 	</div>	
 	<div class="btnWrap">
-		<button type="button" class="delBtn" id="delBtn">삭제</button>
+		<button type="button" class="delBtn" id="delBtn" value="${ reviewData.review_idx },${ reviewData.id},${ reviewData.restarea_idx }" >삭제</button>
 	</div>			
 </div>
+<form id="delFrm" method="post" action="manager_singleReview_delete.do">
+	<input type="hidden" id="reIdx" name="review_idx">
+	<input type="hidden" id="id" name="id">
+	<input type="hidden" id="rsIdx" name="restarea_idx">
+</form>
 </body>
 </html>
