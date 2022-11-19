@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Manager Main Home</title>
+<title>Manager MainHome</title>
 <link rel="shortcut icon"  href="images/logo.png"/>
 <link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/manager/m_common/manager_wrap_container.css"/>
@@ -28,26 +28,15 @@
 <div class="container" style="background-color: #F8F9FB;">
 	<div class="main">
 <!-- 건들지마세요 -->
-<%-- <%
-MgrHomeDAO mhDAO=new MgrHomeDAO();
-int newMemCnt=mhDAO.selectNewMemCnt();
-int reportCnt=mhDAO.selectReportCnt();
-String popOne=mhDAO.selectPopOne();
-String bookmark=mhDAO.selectBookmark();
-int AllMemCnt=mhDAO.selectAllMem();
-int QuitMemCnt=mhDAO.selectQuitMem();
-%> --%>
-<!-- 현재 메뉴 -->
-		<div style="display: flex;border-bottom: 1px solid grey;align-items: center; margin-bottom: 20px;">
-			<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
-  			<path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707L7.293 1.5Z"/>
-  			<path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9.293Zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018Z"/>
-			</svg><span class="text">대시보드</span>
-		</div>
-<!-- 현재 메뉴 -->
+	<div style="display: flex;border-bottom: 1px solid grey;align-items: center; margin-bottom: 20px;">
+		<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
+	  	<path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707L7.293 1.5Z"/>
+	  	<path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9.293Zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018Z"/>
+		</svg><span class="text">대시보드</span>
+	</div>
 		<div class="top-dash"><!-- 1 -->
 		<div class="top">
-		<div class="board"><span class="board-text-1">신규가입자 수</span><br><span class="board-text-2">명</span></div>
+		<div class="board"><span class="board-text-1">신규가입자 수</span><br><span class="board-text-2"><c:out value="${NewMemCnt}"/>명</span></div>
 		<div class="board"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16" color="#E0E0E0">
   		<path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
  		<path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>

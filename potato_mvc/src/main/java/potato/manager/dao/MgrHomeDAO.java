@@ -18,7 +18,7 @@ public class MgrHomeDAO {
 	 //1. MyBatis Handler(SqlSession) 얻기
 	 MyBatisHandler mbh=MyBatisHandler.getInstance();
 	 SqlSession ss=mbh.getHandler();
-	 //2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	 //2.쿼리문 실행 
 	 newMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectNewMemCnt");
 	 //3. MyBatis Handler 끊기
 	 mbh.closeHandler(ss);
