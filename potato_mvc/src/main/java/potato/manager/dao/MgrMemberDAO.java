@@ -3,6 +3,7 @@ package potato.manager.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
 import potato.manager.domain.MgrBlockReasonDomain;
@@ -10,6 +11,7 @@ import potato.manager.domain.MgrMemberDomain;
 import potato.manager.vo.ManagerBlockVO;
 import potato.manager.vo.MgrMemberVO;
 
+@Component
 public class MgrMemberDAO {
 	
 	//회원 목록 조회

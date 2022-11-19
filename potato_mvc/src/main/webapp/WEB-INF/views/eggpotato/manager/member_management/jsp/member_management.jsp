@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,54 +113,16 @@ function tableChange(){
 				<table class="table1">
 				<!-- 전체사용자 클릭 시 -->
 				<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>생년월일</th><th>차단</th></tr>
+				<c:forEach var="member" items="${ memberList }">
 				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>감자빵</td><td>2022-06-17</td><td>2022.09.11</td>
+				<td><a href="javascript:infoPopup()" style="color:black">${member.id}</a></td><td>${member.nick}</td><td>${member.birth}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/> </td>
 				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
 				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>수미칩</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>눈을감자</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>오감자</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>감자칩</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>허니버터칩</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>웨지감자</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>감자나라</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>감자국</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>포카칩은초록색</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>구운감자</td><td>2022-06-17</td><td>2022.09.11</td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
-				<tr>
+				</c:forEach>
+			<!-- 	<tr>
 				<td><a href="javascript:infoPopup()" style="color:black">q1w2e3r4t5</a></td><td>프링글스</td><td>2022-06-17</td><td>2022.09.11</td>
 				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
+				</tr> -->
 				</table>
 				</div>
 				
@@ -207,6 +170,10 @@ function tableChange(){
 <!-- footer end -->
 
 </div>
-
+<!-- 회원 불러오기 -->
+<form id="hidden" action="mgr_memberManagement.do" method="post">
+	<input type="hidden" id="id" name="id" value="${param.id}"/>
+	<input type="hidden" id="memberType" name="memberType" value="${param.memberType }"/>
+</form>
 </body>
 </html>

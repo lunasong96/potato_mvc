@@ -6,7 +6,7 @@
 <!-- 관리자 비번 변경 -->
 <update id="updateMgrPass" parameterType="potato.manager.vo.MgrPassChangeVO">
 	update manager
-	set pass=#{pass}
-	where pass=#{new_pw}
+	set pass=#{new_pw}
+	where pass=#{pass}
 </update>
 </mapper>

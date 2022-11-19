@@ -3,21 +3,27 @@ package potato.manager.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import potato.manager.service.MgrMemberService;
 import potato.manager.vo.ManagerBlockVO;
 import potato.manager.vo.MgrMemberVO;
 
 @Controller
 public class MgrMemberController {
 	
+	@Autowired(required = false)
+	private MgrMemberService mms;
+	
 	//회원목록 조회
-	@RequestMapping(value="/mgr_memberManagement.do",method=GET)
+	@RequestMapping(value="/mgr_memberManagement.do",method= {GET,POST})
 	public String memberList(MgrMemberVO mVO,Model model) {
-		
+		mVO.setMemberType(1);
+		model.addAttribute("memberList", mms.searchMember(mVO));
 		return "manager/member_management/jsp/member_management";
 	}//memberList
 	

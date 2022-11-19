@@ -57,6 +57,8 @@ ${name} like '%'||#{keyword}||'%'
 </select>
 <!-- 연관검색어 -->
 <select id="relatedKeyword" resultType="String" parameterType="String">
-
+select 
+from 
+where
 </select>
 </mapper>

@@ -2,26 +2,41 @@ package potato.manager.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import potato.manager.service.MgrPassChangeService;
 import potato.manager.vo.MgrPassChangeVO;
 
 @Controller
 public class MgrPassChangeController {
 	
+	@Autowired(required = false)
+	private MgrPassChangeService pc;
+	
 	//비번 변경 화면 가져오기
-	@RequestMapping(value="/mgrPassChange.do",method=GET)
+	//forward로 변경하기
+	@RequestMapping(value="/mgrPassChange.do",method={GET,POST})
 	public String passChange(HttpSession session) {
-		
+		session.setAttribute("id","potatoking");
 		return "manager/pass_change/jsp/manager_password_change";
 	}
 	
-	//비번 변경 후 로그인 페이지로 이동 //매개변수 : MgrPassChangeVO mpcVO
-	@RequestMapping(value="/passToLogin.do",method=GET)
-	public String moveLogin() {
+	//비번 변경 처리
+	@RequestMapping(value="/mgrPassChangeProcess.do",method=GET)
+	public String passChangeProcess(MgrPassChangeVO mpcVO, Model model) {
 		
-		return "manager/home/jsp/login";
+		
+		int cnt=pc.modifyPass(mpcVO);
+		
+		model.addAttribute("cnt", cnt);
+		
+		return "forward:mgrPassChange.do";
 	}
+	
 }

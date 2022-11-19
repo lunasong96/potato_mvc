@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +14,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 <script type="text/javascript">
+
+<c:if test="${cnt eq 1}">
+alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
+location.href="login_page.do";
+</c:if>
+
+<c:if test="${cnt eq 0}">
+alert("비밀번호를 다시 확인해주세요.");
+location.href="mgrPassChange.do";
+</c:if>
+
+
 $(function(){
 	$("#btn").click(function(){
 		//현재 비밀번호 유효성 검사
 		
 		//새 비밀번호 유효성 검사
-		newPw = $("#newPw").val();
+		newPw = $("#new_pw").val();
 		newPwChk = $("#newPwChk").val();
 		
 		if(newPw!=newPwChk){
@@ -26,8 +39,8 @@ $(function(){
 			return;
 		}
 		
-		alert("비밀번호가 변경되었습니다.");
-	});//click
+		$("#passFrm").submit();
+	});//click 
 });
 
 </script>
@@ -53,24 +66,25 @@ $(function(){
 <!-- 현재 메뉴 --><!-- 비번변경이 아니면 지워주세요. 지우기 끝 -->
 
 <!-- 관리자 비밀번호 변경 -->
+		<form action="mgrPassChangeProcess.do" id="passFrm" method="get">
 		<div class="passChange">
 			<table>
 			<tr>
 				<th><label for="managerId">아이디</label></th>
 				<td>
-					<input type="text" id="manager_id" name="manager_id" class="inputBox" value="admin" readonly="readonly"/>
+					<input type="text" id="manager_id" class="inputBox" value="admin" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="password">현재 비밀번호</label></th>
 				<td>
-					<input type="password" id="password" name="password" class="inputBox" placeholder="현재 비밀번호를 입력하세요."/>
+					<input type="password" id="pass" name="pass" class="inputBox" placeholder="현재 비밀번호를 입력하세요."/>
 				</td>
 			</tr>
 			<tr>
 				<th><label>새 비밀번호</label></th>
 				<td>
-					<input type="password" id="newPw" name="newPw" class="inputBox" placeholder="새 비밀번호를 입력하세요"/> 
+					<input type="password" id="new_pw" name="new_pw" class="inputBox" placeholder="새 비밀번호를 입력하세요"/> 
 					<span>*8~20자의 영문, 숫자, 특수문자 3가지를 조합하여 입력</span>
 				</td>
 			</tr>
@@ -82,6 +96,7 @@ $(function(){
 			</tr>
 			</table>
 		</div><!-- passChange end -->
+		</form>
 	
 		<div>
 			<input type="button" value="확인" class="btn" id="btn"/>

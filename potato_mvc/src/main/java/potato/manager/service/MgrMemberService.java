@@ -4,23 +4,28 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import potato.manager.dao.MgrMemberDAO;
 import potato.manager.domain.MgrBlockReasonDomain;
 import potato.manager.domain.MgrMemberDomain;
 import potato.manager.vo.ManagerBlockVO;
 import potato.manager.vo.MgrMemberVO;
 
+@Component
 public class MgrMemberService {
 
-	//회원 조회
-	public List<MgrMemberDomain> searchMember(MgrMemberVO mmVO, HttpSession session){
-		
-		return null;
-	}
+	@Autowired(required = false)
+	private MgrMemberDAO mmDAO;
 	
-	//아이디로 회원 검색
-	public MgrMemberDomain searchId(String id) {
+	//회원 조회
+	public List<MgrMemberDomain> searchMember(MgrMemberVO mmVO){
+		List<MgrMemberDomain> list=null;
 		
-		return null;
+		list=mmDAO.selectMember(mmVO);
+				
+		return list;
 	}
 	
 	//차단 사유 불러오기
