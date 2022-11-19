@@ -15,21 +15,81 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+//삭제후 알림
+<c:if test="${ mulDelCnt gt 0 }"> //메뉴바 연결하고 테스트
+alert("총 ${mulDelCnt}개 리뷰가 삭제되었습니다.");
+</c:if>
+
+<c:if test="${ oneDelCnt eq 1 }"> //메뉴바 연결하고 테스트
+alert(" 1개의 리뷰가 삭제되었습니다.");
+</c:if>
+
 $(function(){
+	//검색어 입력시
 	$("#searchBtn").click(function(){
 		if($("#searchBox").val().trim() == "") {
 			alert("검색어를 입력하세요!");
 			return;
 		}
-		
-		$("#keyword").val($("#searchBox").val());
-		
-		
+		 $("#keyword").val($("#searchBox").val());
+		 $("#searchType").val($("#keywordSel").val());
+		 $("#hidFrm").submit();
 	});
 	
 	
+	//등록일순 내림차순
+	$("#dateAsc").click(function(){
+		$("#dateOrderFlag").val(2);
+		$("#reportOrderFlag").val(0)
+		$("#hidFrm").submit();
+	});
 	
-})//ready;
+	//등록일순 오름차순
+	$("#dateDesc").click(function(){
+		$("#dateOrderFlag").val(1);
+		$("#reportOrderFlag").val(0)
+		$("#hidFrm").submit();
+	});
+	
+	//신고순 내림차순
+	$("#reportDesc").click(function(){
+		$("#reportOrderFlag").val(1);
+		$("#dateOrderFlag").val(0)
+		$("#hidFrm").submit();
+	});
+	
+	//신고순 오름차순
+	$("#reportAsc").click(function(){
+		$("#reportOrderFlag").val(2);
+		$("#dateOrderFlag").val(0)
+		$("#hidFrm").submit();
+	});
+	
+	//체크박스로 삭제
+	$("#deleteBtn").click(function(){
+		if(!$("[name=reviewChk]").is(":checked")) {
+			alert("한개이상 선택해 주세요!");
+			return;
+		}
+		
+		//한개만 선택되었을 시
+		if(confirm("정말로 삭제하시겠습니까?")) {
+			var cnt= $("input:checkbox[name='reviewChk']:checked").length;
+			if(cnt == 1) {
+				var param =  $("[name=reviewChk]:checked").val();
+				var arr = param.split(",");
+				$("#delRevIdx").val(arr[0]);
+				$("#delId").val(arr[1]);
+				$("#delRsIdx").val(arr[2]);
+				$("#deleteOneFrm").submit();
+			//다중선택시	
+			} else {
+				$("#deleteFrm").submit();
+			}
+		}
+	});
+	
+});//ready
 
 //리뷰상세창열기
 $(document).on("click",".popup-btn",function(){
@@ -39,28 +99,23 @@ $(document).on("click",".popup-btn",function(){
     $("#id").val(param[1]);
     $("#rsIdx").val(param[2]);
     $("#popupFrm").submit();
-    
-	
 });
 
 //페이징
 function movePage( page ) {
-	$("#pageFlag").val(page);
+	$("#pageFlag").val( page );
 	$("#hidFrm").submit();
 }
 
+//체크박스 설정
 function allChk() {
 	if($("#mainChk").is(":checked")){
 		$("[name='reviewChk']").prop("checked", true);
 	} else {
 		$("[name='reviewChk']").prop("checked", false);
 	}
-		
 }
-
-
 </script>
-
 </head>
 <body>
 <div class="wrap">
@@ -82,7 +137,7 @@ function allChk() {
 		<div class="review_management-wrap">
 			<div class="review_management">
 				<div class="rm-top">
-					<select class="search-select"> <!-- controller에서 숫자를 필드명으로 바꿔주는 작업필요 -->
+					<select class="search-select" id="keywordSel"> 
 						<option value="1"${ 1 eq param.searchType?" selected='selected'":"" }>휴게소명</option>
 						<option value="2"${ 2 eq param.searchType?" selected='selected'":"" }>내용</option>
 						<option value="3"${ 3 eq param.searchType?" selected='selected'":"" }>작성자</option>
@@ -97,16 +152,35 @@ function allChk() {
 					</div>
 				</div>
 				<div class="btn-line">
-					<!-- 버튼 누를 시 해당 기능동작, 정렬버튼들은 각각 오름차순, 내림차순 기능으로 분리하기 -->
-					<button type="button" class="delete-btn">선택삭제</button>
-					<button type="button" class="align-btn">등록일순</button>
-					<button type="button" class="align-btn">신고수순</button>
+					<!-- 일괄삭제 버튼 -->
+					<button type="button" class="delete-btn" id="deleteBtn">선택삭제</button>
+					
+					<!-- 정렬버튼 -->
+					<c:if test="${ empty param.dateOrderFlag || param.dateOrderFlag eq 1 }">
+						<button type="button" class="align-btn" id="dateAsc" value="2"${ param.reportOrderFlag eq 0 or empty param.reportOrderFlag ?" style='font-weight:bold;color:black'" : "" }>등록일순↑</button>
+					</c:if>
+					<c:if test="${  param.dateOrderFlag eq 2 || param.dateOrderFlag eq 0 }">
+						<button type="button" class="align-btn" id="dateDesc" value="1"${ param.reportOrderFlag eq 0 ?" style='font-weight:bold;color:black'" : "" }>등록일순↓</button>
+					</c:if>
+					<c:if test="${ empty param.reportOrderFlag || param.reportOrderFlag eq 2 || param.reportOrderFlag eq 0}">
+						<button type="button" class="align-btn" id="reportDesc" value="1"${ param.dateOrderFlag eq 0 ?" style='font-weight:bold;color:black'" : "" }>신고수순↓</button>
+					</c:if>
+					<c:if test="${ param.reportOrderFlag eq 1 }">
+						<button type="button" class="align-btn" id="reportAsc" value="2"${ param.dateOrderFlag eq 0 ?" style='font-weight:bold;color:black'" : "" }>신고수순↑</button>
+					</c:if>
 				</div>
 				<div class="table-wrap">
+					<!-- 리뷰일괄삭제폼 -->
+					<form id="deleteFrm" method="post" action="manager_multipleReviews_delete.do">
 					<table class="table">
 						<tr>
 							<th><input type="checkbox" id="mainChk" name="mainChk" onclick="allChk()"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
 						</tr>
+						<c:if test="${ empty requestScope.reviewList }">
+							<tr>
+								<td colspan="7">조회된 데이터가 없습니다.</td>
+							</tr>
+						</c:if>
 						<c:forEach var="rev" items="${ requestScope.reviewList }" >
 							<tr>
 								<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
@@ -116,13 +190,23 @@ function allChk() {
 							</tr>
 						</c:forEach> 
 					</table>
+					</form>
 				</div>
+				<!-- 페이징 -->
 				<div class="page">
-					<a href="#void" class="page-num">&nbsp;&lt;&nbsp;</a>
-					<a href="#void" class="page-num">&nbsp;1&nbsp;</a>
-					<a href="#void" class="page-num">&nbsp;2&nbsp;</a>
-					<a href="#void" class="page-num">&nbsp;3&nbsp;</a>
-					<a href="#void" class="page-num">&nbsp;&gt;&nbsp;</a>
+					<c:if test="${ not empty requestScope.reviewList }">
+						<c:if test="${ startNum ne 1 }">
+							<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+							<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+						</c:if>
+						<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+							<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+						</c:forEach>
+						<c:if test="${ lastPage gt startNum+2 }">
+							<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+							<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+						</c:if>
+					</c:if>
 				</div>
 			</div>	
 		</div>
@@ -131,24 +215,28 @@ function allChk() {
 </div>
 <!-- container end -->
 
-<!-- footer -->
-
-<!-- footer end -->
-
 </div>
-
-<form id="hidFrm" method="get" action="manager_review.do">
+<!-- 리뷰불러오기 -->
+<form id="hidFrm" method="post" action="manager_review.do">
 	<input type="hidden" id="keyword" name="keyword" value="${ param.keyword }"/>
 	<input type="hidden" id="searchType" name="searchType" value="${ param.searchType }"/>
-	<input type="hidden" id="dateOrderFlag" name="dateOrderFlag" value="${ param.dateOrderFlag }"/>
-	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ param.reportOrderFlag }"/>
-	<input type="hidden" id="pageFlag" name="pageFlag" value="${ param.dateOrderFlag }"/>
+	<input type="hidden" id="dateOrderFlag" name="dateOrderFlag" value="${ empty param.dateOrderFlag ? 1 : param.dateOrderFlag }"/>
+	<input type="hidden" id="reportOrderFlag" name="reportOrderFlag" value="${ empty param.reportOrderFlag ? 0 : param.reportOrderFlag }"/>
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
 </form>
-<form id="popupFrm" method="get" action="manager_open_reviewPopup.do" target="review_popup">
+
+<!-- 리뷰상세팝업창 불러오기 -->
+<form id="popupFrm" method="post" action="manager_open_reviewPopup.do" target="review_popup">
 	<input type="hidden" id="reIdx" name="review_idx">
 	<input type="hidden" id="id" name="id">
 	<input type="hidden" id="rsIdx" name="restarea_idx">
 </form>
 
+<!-- 리뷰단일삭제 -->
+<form id="deleteOneFrm" method="post" action="manager_singleReview_delete.do">
+	<input type="hidden" id="delRevIdx" name="review_idx">
+	<input type="hidden" id="delId" name="id">
+	<input type="hidden" id="delRsIdx" name="restarea_idx">
+</form>
 </body>
 </html>

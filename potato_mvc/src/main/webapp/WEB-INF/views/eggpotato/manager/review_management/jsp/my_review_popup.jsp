@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +18,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-   
 	//리뷰 슬라이드 호출
 	slider();
-
 })
 
-	
 function slider() {
 	$(".re-mySwiper").each(function(index,element) {
 		var $this = $(this);
@@ -55,7 +54,8 @@ function slider() {
 		 }
 	})
 	
-}
+}// end slider
+
 </script>
 </head>
 <body>
@@ -70,21 +70,19 @@ function slider() {
 		<div class="re-right">
 			<div>
 				<a href="#void" style="text-decoration : none;font-size: 19px; color: white;border: 0px solid; padding: 4px 20px 1px 20px;background-color: #DCC1A0; border-radius: 7px;">
-				냠냠냠냠냐먀냐먀냠히호호 휴게소
+				<c:out value="${ reviewDetail.name }"/>
 				</a>
 			</div>
-			<span>휴게소하면알감자</span>
+			<span><c:out value="${ reviewDetail.nick }"/></span>
 			<div class="star-rate">
 				<span class="star-blank"></span>
 				<div class="re-star-wrap">
-					<span class="star" style="width: 100%"></span>
+					<span class="star" style="width:${ reviewDetail.rating * 20}%"></span>
 				</div>
-				<span class="rate-txt">5</span>
+				<span class="rate-txt"><c:out value="${ reviewDetail.rating }"/></span>
 			</div>
 			<p class="re-txt">
-				휴게소 화장실도 깨끗하게 관리되어있고 <br>
-				알감자도 너무 맛있어요 <br>
-				라멘은 안팔아서 아쉬웠어요.
+				<c:out value="${ reviewDetail.contents }"/>
 			</p>
 			
 			<div class="re-slider">
@@ -119,15 +117,15 @@ function slider() {
 							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 							</svg>
 						</button>
-						<span>좋아요(1)</span>
+						<span><c:out value="좋아요(${ reviewDetail.like_cnt })개"/></span>
 					</div>
 				</div>
-				<span class="date">2022.10.26</span>
+				<span class="date"><fmt:formatDate value="${ reviewDetail.post_date }" pattern="yyyy-MM-dd EEEE hh:mm:ss" /></span>
 			</div>
 		</div>
 	</div>	
 	<div class="btnWrap">
-		<button type="button" class="delBtn">삭제</button>
+		<button type="button" class="delBtn" id="delBtn">삭제</button>
 	</div>			
 </div>
 </body>

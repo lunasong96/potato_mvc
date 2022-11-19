@@ -47,12 +47,12 @@
 
 .btn-line{
 	display: flex;
-	width:195px;
+	width:220px;
 	margin-bottom:10px;
 }
 
 .delete-btn {
-    width: 60px;
+    width: 70px;
     height: 25px;
     background-color: #C80000;
     border-radius: 6px;
@@ -61,7 +61,7 @@
 }
 
 .align-btn{
-	width: 60px;
+	width: 70px;
     height: 25px;
     background-color: #3498DB;
     border-radius: 6px;
@@ -117,3 +117,13 @@
     background-color: #C89E6C;
 
 }
+
+.page-num-click{
+	font-size: 16px;
+    color: #000;
+	background-color: #C89E6C;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 12px;
+}
+
