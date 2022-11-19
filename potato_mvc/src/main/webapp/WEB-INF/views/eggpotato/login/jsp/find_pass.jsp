@@ -14,9 +14,13 @@
 <script type="text/javascript">
 $(function() {
 	$("#findBtn").click(function() {
-		window.open("forgotPwChk.do", "비밀번호 찾기", "width=350,height=280,top=220,left=700")
+		/* window.open("forgotPwChk.do", "비밀번호 찾기", "width=350,height=280,top=220,left=700") */
+		chkNull();
 	});
 });
+function chkNull() {
+	$("#forgotPwFrm").submit();
+}
 </script>
 
 </head>
@@ -36,12 +40,14 @@ $(function() {
 		
 		<!-- main -->
 		<div class="main-container">
+			<form method="post" action="forgotPwChk.do" id="forgotPwFrm">
 			<h2 class="input-title">이름</h2>
-			<input type="text" placeholder="이름" class="text-box"><br/>
+			<input type="text" placeholder="이름" class="text-box" name="name" id="name"><br/>
 			<h2 class="input-title">아이디</h2>
-			<input type="text" placeholder="아이디" class="id"><br/>
+			<input type="text" placeholder="아이디" class="id" name="id" id="id"><br/>
 			<h2 class="input-title">휴대전화</h2>
-			<input type="text" placeholder="전화번호 입력" class="text-box"><br/>
+			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone"><br/>
+			</form>
 			<input type="button" value="비밀번호 찾기" class="findBtn" id="findBtn">
 		</div>
 		<!-- //main -->

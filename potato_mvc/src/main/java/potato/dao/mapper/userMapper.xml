@@ -26,8 +26,7 @@
 	</select>
 	
 	<!-- 아이디 찾기 -->
-	<select id="selectForgotId" parameterType="fiVO"
-	resultType="String">
+	<select id="selectForgotId" parameterType="fiVO" resultType="String">
 		select id
 		from member
 		where name= #{ name } and birth= #{ birth } and phone= #{ phone }

@@ -14,9 +14,14 @@
 <script type="text/javascript">
 $(function() {
 	$("#findBtn").click(function() {
-		window.open("forgotIdChk.do", "아이디 찾기", "width=350,height=320,top=220,left=700")
+		/* window.open("forgotIdChk.do", "아이디 찾기", "width=350,height=320,top=220,left=700"); */
+		chkNull();
 	});
 });
+
+function chkNull() {
+	$("#forgotIdFrm").submit();
+}
 </script>
 
 </head>
@@ -36,12 +41,14 @@ $(function() {
 		
 		<!-- main -->
 		<div class="main-container">
+			<form action="forgotIdChk.do" method="post" id="forgotIdFrm">
 			<h2 class="input-title">이름</h2>
-			<input type="text" placeholder="이름" class="text-box"><br/>
+			<input type="text" placeholder="이름" class="text-box" name="name" id="name"><br/>
 			<h2 class="input-title">생년월일</h2>
-			<input type="text" placeholder="생년월일" class="text-box"><br/>
+			<input type="text" placeholder="생년월일" class="text-box" name="birth" id="birth"><br/>
 			<h2 class="input-title">휴대전화</h2>
-			<input type="text" placeholder="전화번호 입력" class="text-box"><br/>
+			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone"><br/>
+			</form>
 			<input type="button" value="아이디 찾기" class="findBtn" id="findBtn">
 		</div>
 		<!-- //main -->

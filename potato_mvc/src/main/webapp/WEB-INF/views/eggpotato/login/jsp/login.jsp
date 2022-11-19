@@ -12,7 +12,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$("#loginBtn").click(function(){
+		//null 검사
+		chkNull();
+	});//click
+});//ready
 
+function chkNull(){
+	$("#loginFrm").submit();
+}
 </script>
 
 </head>
@@ -30,19 +39,21 @@
 		<div class="login-top">로그인</div>
 		<!-- main -->
 		<div class="login-main">
-			<input type="text" placeholder="아이디" class="id"><br/>
-			<input type="password" placeholder="비밀번호" class="pass"><br/>
-			<input type="button" value="로그인" class="loginBtn">
+		<form method="post" action="login.do"  id="loginFrm">
+			<input type="text" placeholder="아이디" name="id" id="id" class="id"><br/>
+			<input type="password" placeholder="비밀번호" name="pass" id="pass" class="pass"><br/>
+			<input type="button" value="로그인" class="loginBtn" id="loginBtn">
+		</form>
 		</div>
 		<!-- //main -->
 		<!-- info -->
 		<div class="login-info">
 			<div class="info-sign">
-				<a href="http://localhost/potato_prj/eggpotato/login/jsp/service_check.jsp">회원가입</a>
+				<a href="signUp.do">회원가입</a>
 			</div>
 			<div class="info-find">
-				<a href="http://localhost/potato_prj/eggpotato/login/jsp/find_id.jsp">아이디</a> | 
-				<a href="http://localhost/potato_prj/eggpotato/login/jsp/find_pass.jsp">비밀번호 찾기</a>
+				<a href="forgotId.do">아이디</a> | 
+				<a href="forgotPw.do">비밀번호 찾기</a>
 			</div>
 		</div>
 		<!-- //info -->

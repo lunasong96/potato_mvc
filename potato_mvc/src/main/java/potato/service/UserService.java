@@ -3,6 +3,7 @@ package potato.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import potato.dao.UserDAO;
 import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
@@ -13,7 +14,11 @@ import potato.vo.UserInfoVO;
  * 유저 로그인/회원가입 관련 서비스
  * @author user
  */
+@Component
 public class UserService {
+	
+	@Autowired(required = false)
+	private UserDAO uDAO;
 	
 	/**
 	 * 유저 로그인
@@ -21,10 +26,11 @@ public class UserService {
 	 * @return
 	 */
 	@Autowired(required = false)
-	public boolean searchMember(LoginVO lVO) {
-		boolean flag=false;
+	public String searchMember(LoginVO lVO) {
 		
-		return flag;
+		String id=null;
+		id=uDAO.selectLogin(lVO);
+		return id;
 	}
 	
 	/**
@@ -64,13 +70,10 @@ public class UserService {
 		return false;
 	}
 	
-	/**
-	 * 아이디 찾기
-	 * @param fiVO
-	 * @return
-	 */
 	public String searchId(ForgotIdVO fiVO) {
-		return null;
+		String id="";
+		id = uDAO.selectId(fiVO);
+		return id;
 	}
 	
 	/**
@@ -79,7 +82,9 @@ public class UserService {
 	 * @return
 	 */
 	public String searchPw(ForgotPwVO fpVO) {
-		return null;
-	}
+		String pass="";
+		pass=uDAO.selectPw(fpVO);
+		return pass;
+	}//searchPw
 	
 }//class

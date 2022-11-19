@@ -3,6 +3,7 @@ package potato.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import potato.service.UserService;
 import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
@@ -14,6 +15,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ import org.springframework.ui.Model;
 @Controller
 @Component
 public class UserController {
+	
+	@Autowired(required = false)
+	private UserService us;
 	
 	@RequestMapping(value = "/login_page.do", method = GET)
 	public String loginPage() {
@@ -31,9 +36,13 @@ public class UserController {
 		return "manager/home/jsp/login";
 	}//loginPage
 	
-	@RequestMapping(".login.do")
+	@RequestMapping(value = "/login.do", method = POST)
 	public String login(Model model, LoginVO lVO, HttpSession session) {
-		return "";
+		String id="";
+		id=us.searchMember(lVO);
+		session.setAttribute("id", id);
+		return "login/jsp/lolo";
+		
 	}//login
 	
 	@RequestMapping("logout.do")
@@ -56,26 +65,51 @@ public class UserController {
 		return "login/jsp/tos2";
 	}
 	
+	/**
+	 * 회원가입1 페이지 이동
+	 * @return
+	 */
 	@RequestMapping(value = "/signUp.do", method = GET)
 	public String signUpPage1() {
 		return "login/jsp/join";
 	}
 	
+	/**
+	 * 회원가입2 페이지 이동
+	 * @param model
+	 * @param uiVO
+	 * @return
+	 */
 	@RequestMapping(value = "/signUp2.do", method = GET)
 	public String signUpPage2(Model model, UserInfoVO uiVO) {
 		return "login/jsp/join_img";
 	}
 	
+	/**
+	 * 회원가입 3페이지 이동
+	 * @param session
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/signUp3.do", method = GET)
 	public String signUpPage3(HttpSession session, Model model, HttpServletRequest request) {
 		return "login/jsp/join_end";
 	}
 	
+	/**
+	 * 아이디 중복확인
+	 * @return
+	 */
 	@RequestMapping("/duplChkId.do")
 	public String duplChkId() {
 		return "";
 	}
 	
+	/**
+	 * 닉네임 중복 확인
+	 * @return
+	 */
 	@RequestMapping("duplChkNick.do")
 	public String duplChkNick() {
 		return "";
@@ -91,14 +125,24 @@ public class UserController {
 		return "login/jsp/find_pass";
 	}
 	
-	@RequestMapping(value = "forgotIdChk.do", method = GET)
-	public String forgotUserIdChk(ForgotIdVO fiVO) {
-		return "login/jsp/find_id_popup";
+	@RequestMapping(value = "forgotIdChk.do", method = POST)
+	public String forgotUserIdChk(ForgotIdVO fiVO, Model model) {
+		String id="";
+		id=us.searchId(fiVO);
+		System.out.println(fiVO+"findeMe");
+		model.addAttribute("id", id);
+		return "login/jsp/lolo";
+//		return "login/jsp/find_id_popup";
 	}
 	
-	@RequestMapping(value = "forgotPwChk.do", method = GET)
-	public String forgotUserPwChk(ForgotPwVO fpVO) {
-		return "login/jsp/find_pass_popup";
+	@RequestMapping(value = "forgotPwChk.do", method = POST)
+	public String forgotUserPwChk(ForgotPwVO fpVO, Model model) {
+		String pass="";
+		pass=us.searchPw(fpVO);
+		model.addAttribute("id", fpVO.getId());
+		model.addAttribute("pass", pass);
+		return "login/jsp/lolo";
+//		return "login/jsp/find_pass_popup";
 	}
 	
 }//class
