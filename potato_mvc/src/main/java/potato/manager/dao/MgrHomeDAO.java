@@ -3,28 +3,14 @@ package potato.manager.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
 
+@Component
 public class MgrHomeDAO {
 	
-	/**
-	 * 오늘 신규가입 수
-	 * @return
-	 */
-	public int selectNewMemCnt() {
-		 int newMemCnt=0;
-	 
-	 //1. MyBatis Handler(SqlSession) 얻기
-	 MyBatisHandler mbh=MyBatisHandler.getInstance();
-	 SqlSession ss=mbh.getHandler();
-	 //2.쿼리문 실행 
-	 newMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectNewMemCnt");
-	 //3. MyBatis Handler 끊기
-	 mbh.closeHandler(ss);
-	 
-	 	return newMemCnt; 
-	 }//selectNewMemCnt
+
 
 	/**
 	 * 오늘 신고 수
@@ -36,7 +22,7 @@ public class MgrHomeDAO {
 	//1. MyBatis Handler(SqlSession) 얻기
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
-	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	//2.쿼리문 실행
 	reportCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectReportCnt");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);
@@ -54,7 +40,7 @@ public class MgrHomeDAO {
 	//1. MyBatis Handler(SqlSession) 얻기
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
-	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+	//2.쿼리문 실행
 	popOne=ss.selectOne("potato.manager.mgrHomeMapper.selectPopOne");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);
@@ -97,7 +83,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	visitorCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectVisitorCnt");
+	visitorCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectVisitorCnt",visitFlag);
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	 
 		
@@ -109,35 +95,53 @@ public class MgrHomeDAO {
 	 * @return
 	 */
 	public int selectAllMem() {
-		 int AllMemCnt=0;
+		 int allMemCnt=0;
 	
 	//1. MyBatis Handler(SqlSession) 얻기
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	AllMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectAllMem");
+	allMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectAllMem");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	 
 		 
-	 	return AllMemCnt;
+	 	return allMemCnt;
 	 }//selectAllMem
+	
+	/**
+	 * 회원 현황(신규)
+	 * @return
+	 */
+	public int selectNewMemCnt() {
+		 int newMemCnt=0;
+	 
+	 //1. MyBatis Handler(SqlSession) 얻기
+	 MyBatisHandler mbh=MyBatisHandler.getInstance();
+	 SqlSession ss=mbh.getHandler();
+	 //2.쿼리문 실행 
+	 newMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectNewMemCnt");
+	 //3. MyBatis Handler 끊기
+	 mbh.closeHandler(ss);
+	 
+	 	return newMemCnt; 
+	 }//selectNewMemCnt
 	
 	/**
 	 * 회원 현황(탈퇴)
 	 * @return
 	 */
 	public int selectQuitMem() {
-		int QuitMemCnt=0;
+		int quitMemCnt=0;
 		
 	//1. MyBatis Handler(SqlSession) 얻기
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	QuitMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectQuitMem");
+	quitMemCnt=ss.selectOne("potato.manager.mgrHomeMapper.selectQuitMem");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	 
 		
-		return QuitMemCnt;
+		return quitMemCnt;
 	}//selectQuitMem
 	 
 	/**
@@ -151,7 +155,7 @@ public class MgrHomeDAO {
 	MyBatisHandler mbh=MyBatisHandler.getInstance();
 	SqlSession ss=mbh.getHandler();
 	//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
-	list=ss.selectOne("potato.manager.mgrHomeMapper.selectPopAll");
+	list=ss.selectList("potato.manager.mgrHomeMapper.selectPopAll");
 	//3. MyBatis Handler 끊기
 	mbh.closeHandler(ss);	 	
 		

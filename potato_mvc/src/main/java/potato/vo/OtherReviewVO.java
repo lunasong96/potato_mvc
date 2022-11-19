@@ -2,44 +2,37 @@ package potato.vo;
 
 public class OtherReviewVO {
 	private String id;
-	private int restarea_idx, review_idx;
+	private int dateOrderFlag=1, pageFlag=1, reportOrderFlag;
 	
-	public OtherReviewVO() {
-	}
-
-	public OtherReviewVO(String id, int restarea_idx, int review_idx) {
-		this.id = id;
-		this.restarea_idx = restarea_idx;
-		this.review_idx = review_idx;
-	}
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public int getRestarea_idx() {
-		return restarea_idx;
+	public int getDateOrderFlag() {
+		return dateOrderFlag;
 	}
-
-	public void setRestarea_idx(int restarea_idx) {
-		this.restarea_idx = restarea_idx;
+	public void setDateOrderFlag(int dateOrderFlag) {
+		this.dateOrderFlag = dateOrderFlag;
 	}
-
-	public int getReview_idx() {
-		return review_idx;
+	public int getPageFlag() {
+		return pageFlag;
 	}
-
-	public void setReview_idx(int review_idx) {
-		this.review_idx = review_idx;
+	public void setPageFlag(int pageFlag) {
+		this.pageFlag = pageFlag;
 	}
-
+	public int getReportOrderFlag() {
+		return reportOrderFlag;
+	}
+	public void setReportOrderFlag(int reportOrderFlag) {
+		this.reportOrderFlag = reportOrderFlag;
+	}
+	
 	@Override
 	public String toString() {
-		return "OtherReviewVO [id=" + id + ", restarea_idx=" + restarea_idx + ", review_idx=" + review_idx + "]";
+		return "OtherReviewVO [id=" + id + ", dateOrderFlag=" + dateOrderFlag + ", pageFlag=" + pageFlag
+				+ ", reportOrderFlag=" + reportOrderFlag + "]";
 	}
 	
 }

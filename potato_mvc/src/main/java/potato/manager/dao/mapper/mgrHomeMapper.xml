@@ -40,15 +40,18 @@
 	</select>
 	<!-- 방문자현황[그래프] -->
 	<!-- 방문자현황(오늘,어제,총) -->
-	<select id="selectVisitorCnt" resultType="int">
+	<select id="selectVisitorCnt" parameterType="int" resultType="int">
 	select count(*)
 	from visitor
 	<where>
-	<if test="visitFlag=0">
-	where to_char(access_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
+	<if test="visitFlag == 2">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-1,'yyyymmdd')
 	</if>
-	<if test="visitFlag=1">
-	where to_char(access_date,'yyyymmdd')=to_char(sysdate-1,'yyyymmdd')
+	<if test="visitFlag == 1">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
+	</if>
+	<if test="visitFlag == 0">
+	1 = 1
 	</if>
 	</where>
 	</select>

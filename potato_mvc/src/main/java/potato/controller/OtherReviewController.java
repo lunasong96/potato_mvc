@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import potato.service.OtherReviewService;
+import potato.vo.OtherReviewVO;
 
 @Controller
 public class OtherReviewController {
@@ -19,9 +20,11 @@ public class OtherReviewController {
 	
 	//Å¸»ç¿ëÀÚ¸®ºä
 	@RequestMapping(value="other_review.do", method=GET)
-	public String OtherReview(HttpSession session, String id, Model model) {
-		return "other_profiles/jsp/other_user_profiles";
-	}//OtherReviewMove
+	public String otherReview(HttpSession session,OtherReviewVO orVO, Model model) {
+		String url = "other_profiles/jsp/other_user_profiles";
+		
+		return url;
+	}//otherReview
 	
 	//½Å°í)¸®ºä-ÆË¾÷
 	@RequestMapping(value = "reportPop.do",method = GET)
