@@ -1,10 +1,10 @@
 package potato.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.support.SessionStatus;
 
 import potato.service.UserService;
-import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.UserInfoVO;
@@ -123,16 +123,6 @@ public class UserController {
 	@RequestMapping(value = "/forgotPw.do", method = GET)
 	public String forgotUserPw() {
 		return "login/jsp/find_pass";
-	}
-	
-	@RequestMapping(value = "forgotIdChk.do", method = POST)
-	public String forgotUserIdChk(ForgotIdVO fiVO, Model model) {
-		String id="";
-		id=us.searchId(fiVO);
-		System.out.println(fiVO+"findeMe");
-		model.addAttribute("id", id);
-		return "login/jsp/lolo";
-//		return "login/jsp/find_id_popup";
 	}
 	
 	@RequestMapping(value = "forgotPwChk.do", method = POST)
