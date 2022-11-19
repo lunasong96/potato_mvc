@@ -2,6 +2,10 @@ package potato.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
+
+import potato.dao.config.MyBatisHandler;
 import potato.domain.DetailedAmenityDomain;
 import potato.domain.DetailedDomain;
 import potato.domain.DetailedFoodDomain;
@@ -12,17 +16,36 @@ import potato.vo.DetailedLikeVO;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
 
+@Component
 public class DetailedDAO {
 	
 	//<ÈÞ°Ô¼Ò »ó¼¼Ã¢>
 	//ÈÞ°Ô¼Ò »ó¼¼Ã¢ Á¤º¸ ºÒ·¯¿À±â
 	public DetailedDomain selectRestDetailed(int restarea_idx) {
-		return null;
+		DetailedDomain dd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		dd=ss.selectOne("potato.detailedMapper.selRestDetailed",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return dd;
 	}
 	
 	//ÈÞ°Ô¼Ò ºÏ¸¶Å© total
 	public int selectBookmarkTotal(int restarea_idx) {
-		return 0;
+		int booktotal=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		booktotal=ss.selectOne("potato.detailedMapper.selBookmarkToTal",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return booktotal;
 	}
 	
 	//ÈÞ°Ô¼Ò ºÏ¸¶Å© ¿©ºÎ
@@ -42,17 +65,44 @@ public class DetailedDAO {
 	
 	//ÈÞ°Ô¼Ò º°Á¡ total
 	public int selectRateTotal(int restarea_idx) {
-		return 0;
+		int startotal=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		startotal=ss.selectOne("potato.detailedMapper.selRateTotal",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return startotal;
 	}
 	
 	//ÈÞ°Ô¼Ò À½½Ä Á¤º¸
 	public List<DetailedFoodDomain> selectFoodDatailed(int restarea_idx) {
-		return null;
+		List<DetailedFoodDomain> dfd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		dfd=ss.selectList("potato.detailedMapper.selFoodDatailed",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return dfd;
 	}
 	
 	//ÈÞ°Ô¼Ò ÆíÀÇ½Ã¼³¾ÆÀÌÄÜ
 	public List<DetailedAmenityDomain> selectAmenityImg(int restarea_idx) {
-		return null;
+		List<DetailedAmenityDomain> dad=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		dad=ss.selectList("potato.detailedMapper.selAmenityImg",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return dad;
 	}
 	
 	//<ÈÞ°Ô¼Ò ¸®ºä>
@@ -68,7 +118,16 @@ public class DetailedDAO {
 	
 	//¸®ºä ÃÑ total
 	public int selectReviewTotal(int restarea_idx) {
-		return 0;
+		int reviewtotal=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		reviewtotal=ss.selectOne("potato.detailedMapper.selReviewTotal",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return reviewtotal;
 	}
 	
 	//¸®ºä Á¶È¸

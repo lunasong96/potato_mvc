@@ -157,6 +157,7 @@
     justify-content: center;
     color: #ffff;
     flex-direction: column;
+    word-break: keep-all;
 }
 
 .swiper-slide:hover .food-detailed-wrap {
@@ -164,9 +165,10 @@
 }
 
 .food-name {
-	font-size: 35px;
+    font-size: 35px;
     font-weight: bold;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .food-price {

@@ -2,6 +2,10 @@ package potato.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import potato.dao.DetailedDAO;
 import potato.domain.DetailedAmenityDomain;
 import potato.domain.DetailedDomain;
 import potato.domain.DetailedFoodDomain;
@@ -12,17 +16,25 @@ import potato.vo.DetailedLikeVO;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
 
+@Component
 public class DetailedService {
 
+	@Autowired(required = false)
+	private DetailedDAO dDAO;
+	
 	//<ÈÞ°Ô¼Ò »ó¼¼Ã¢>
 	//ÈÞ°Ô¼Ò »ó¼¼Ã¢ Á¤º¸ ºÒ·¯¿À±â
 	public DetailedDomain getRestDetailed(int restarea_idx) {
-		return null;
+		DetailedDomain dd=null;
+		dd=dDAO.selectRestDetailed(restarea_idx);
+		return dd;
 	}
 	
 	//ÈÞ°Ô¼Ò ºÏ¸¶Å© total
 	public int getBookmarkTotal(int restarea_idx) {
-		return 0;
+		int booktotal=0;
+		booktotal=dDAO.selectBookmarkTotal(restarea_idx);
+		return booktotal;
 	}
 	
 	//ÈÞ°Ô¼Ò ºÏ¸¶Å© ¿©ºÎ
@@ -42,17 +54,23 @@ public class DetailedService {
 	
 	//ÈÞ°Ô¼Ò º°Á¡ total
 	public int getRateTotal(int restarea_idx) {
-		return 0;
+		int startotal=0;
+		startotal=dDAO.selectRateTotal(restarea_idx);
+		return startotal;
 	}
 	
 	//ÈÞ°Ô¼Ò À½½Ä Á¤º¸
 	public List<DetailedFoodDomain> getFoodDatailed(int restarea_idx) {
-		return null;
+		List<DetailedFoodDomain> dfd=null;
+		dfd=dDAO.selectFoodDatailed(restarea_idx);
+		return dfd;
 	}
 	
 	//ÈÞ°Ô¼Ò ÆíÀÇ½Ã¼³¾ÆÀÌÄÜ
 	public List<DetailedAmenityDomain> getAmenityImg(int restarea_idx) {
-		return null;
+		List<DetailedAmenityDomain> dad=null;
+		dad=dDAO.selectAmenityImg(restarea_idx);
+		return dad;
 	}
 	
 	//<ÈÞ°Ô¼Ò ¸®ºä>
@@ -68,7 +86,9 @@ public class DetailedService {
 	
 	//¸®ºä ÃÑ total
 	public int getReviewTotal(int restarea_idx) {
-		return 0;
+		int reviewtotal=0;
+		reviewtotal=dDAO.selectRateTotal(restarea_idx);
+		return reviewtotal;
 	}
 	
 	//¸®ºä Á¶È¸(ºñµ¿±â)

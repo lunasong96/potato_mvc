@@ -39,7 +39,7 @@
 
 <!-- 휴게소 별점 total -->
 <select id="selRateTotal" resultType="int" parameterType="int">
-	select avg(rating)
+	select nvl(avg(rating),0)
 	from review
 	where restarea_idx=#{restarea_idx}
 </select>

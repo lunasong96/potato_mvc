@@ -5,20 +5,33 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import potato.service.DetailedService;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
 
 @Controller
 public class DetailedController {
+	
+	@Autowired(required = false)
+	private DetailedService ds;
 
 	//绒霸家 惑技芒 立加
 	@RequestMapping(value = "user_detailed.do", method=GET)
 	public String userDetailedMove(int restarea_idx, Model model) {
+		
+		model.addAttribute("rd", ds.getRestDetailed(restarea_idx));
+		model.addAttribute("bt", ds.getBookmarkTotal(restarea_idx));
+		model.addAttribute("rt", ds.getRateTotal(restarea_idx));
+		model.addAttribute("fd", ds.getFoodDatailed(restarea_idx));
+		model.addAttribute("ai", ds.getAmenityImg(restarea_idx));
+		model.addAttribute("rt", ds.getReviewTotal(restarea_idx));
+		
 		return "detailed/jsp/user_detailed";
 	}
 	
