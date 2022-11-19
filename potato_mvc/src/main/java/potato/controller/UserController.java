@@ -14,10 +14,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 @Controller
+@Component
 public class UserController {
 	
 	@RequestMapping(value = "/login_page.do", method = GET)
