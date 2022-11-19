@@ -2,6 +2,9 @@ package potato.manager.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import potato.dao.config.MyBatisHandler;
 import potato.manager.domain.MgrBlockReasonDomain;
 import potato.manager.domain.MgrMemberDomain;
 import potato.manager.vo.ManagerBlockVO;
@@ -11,8 +14,16 @@ public class MgrMemberDAO {
 	
 	//회원 목록 조회
 	public List<MgrMemberDomain> selectMember(MgrMemberVO mmVO){
+		List<MgrMemberDomain> list=null;
 		
-		return null;
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		
+		list=session.selectList("potato.manager.mgrMemberMapper.memberList",mmVO);
+		
+		mbh.closeHandler(session);
+		
+		return list;
 	}
 	
 	//회원 상세 정보 팝업창
