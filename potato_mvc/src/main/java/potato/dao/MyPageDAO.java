@@ -56,10 +56,22 @@ public class MyPageDAO {
 	
 	//ºñ¹Ð¹øÈ£ ¼öÁ¤
 	public int updatePw(MyPagePwEditVO peVO) {
+		int cnt=0;
 		//1. MyBatis Handler ¾ò±â
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
 		//2. Äõ¸®¹® ½ÇÇà
+		cnt=session.update("potato.mypageMapper.updatePw",peVO);
+		
+		if(cnt==1) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
 		//3. MyBatis Handler ²÷±â
-		return 0;
+		mbh.closeHandler(session);
+		
+		return cnt;
 	}//updatePw
 	
 	//È¸¿ø Å»Åð
@@ -154,10 +166,14 @@ public class MyPageDAO {
 	
 	//ºÏ¸¶Å©ÇÑ ÈÞ°Ô¼Ò »èÁ¦(¾ÆÀÌµð, ÈÞ°Ô¼Ò ÀÎµ¦½º)(String id¶û restrea_idx°¡ bookmarkVO³×..)
 	public int delBookmark(MyPageBookmarkVO bVO) {
+		int cnt=0;
 		//1. MyBatis Handler ¾ò±â
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
 		//2. Äõ¸®¹® ½ÇÇà
+		cnt=ss.delete("potato.mypageMapper.updateBookmark",bVO);
 		//3. MyBatis Handler ²÷±â
-		return 0;
+		return cnt;
 	}//delBookmark
 	
 }//class

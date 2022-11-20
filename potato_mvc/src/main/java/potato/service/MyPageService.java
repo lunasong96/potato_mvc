@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import potato.dao.MyPageDAO;
 import potato.domain.MyPageBookmarkDomain;
@@ -15,6 +14,7 @@ import potato.domain.MyPageReportDomain;
 import potato.domain.MyPageReviewDomain;
 import potato.manager.domain.ReviewDomain;
 import potato.vo.LoginVO;
+import potato.vo.MyPageBookmarkVO;
 import potato.vo.MyPageLikeVO;
 import potato.vo.MyPageMyInfoEditVO;
 import potato.vo.MyPageMyReviewVO;
@@ -54,7 +54,9 @@ public class MyPageService {
 	
 	//비밀번호 수정 처리
 	public int modifyPw(MyPagePwEditVO peVO) {
-		return 0;
+		int updateCnt=0;
+		updateCnt=mDAO.updatePw(peVO);
+		return updateCnt;
 	}//modifyPw
 	
 	//회원탈퇴
@@ -142,8 +144,9 @@ public class MyPageService {
 	}//searchBookmark
 	
 	//북마크한 휴게소 삭제(아이디, 휴게소 인덱스-int)
-	public int removeBookmark(String id, int restarea_idx) {
-		return 0;
+	public int removeBookmark(HttpSession session, MyPageBookmarkVO bVO) {
+		int cnt=mDAO.delBookmark(bVO);
+		return cnt;
 	}//removeBookmark
 	
 	

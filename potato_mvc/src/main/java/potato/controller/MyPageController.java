@@ -1,6 +1,7 @@
 package potato.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,13 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import potato.service.MyPageService;
+import potato.vo.MyPageBookmarkVO;
 import potato.vo.MyPageMyInfoEditVO;
 import potato.vo.MyPagePwEditVO;
 import potato.vo.MyPageQuitVO;
-
 @Controller
 public class MyPageController {
 	
@@ -25,7 +25,7 @@ public class MyPageController {
 	@RequestMapping(value="myPageIn.do", method=GET)
 	public String myPageIn(HttpSession session) {
 		//임의로 세션 만들기	
-		session.setAttribute("id", "canopener");
+		session.setAttribute("id", "");
 		
 		return "mypages/jsp/mypage_in";
 	}//myPageIn
@@ -40,18 +40,23 @@ public class MyPageController {
 	@RequestMapping(value="my_info_edit.do",method = GET)
 	public String myInfoEdit(HttpSession session, Model model ) {
 		//임의로 세션 만들기	
-		session.setAttribute("id", "canopener");
+		session.setAttribute("id", "coffee");
 		
-			model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("id")));
-			
+		//model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("name")));
+		//model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("nick")));
+		model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("id")));
+		//model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("birth")));
+		//model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("phone")));
+		//model.addAttribute("mie",mps.searchInfo((String)session.getAttribute("email")));
+		//System.out.println(mps.searchInfo((String)session.getAttribute("id"))+"findMe");
 		
 		return "mypages/jsp/my_info_edit";
 	}//myInfoEdit
 	
 	//내 정보 수정(처리)
-	@RequestMapping(value="myInfoEditProcess.do",method = GET)
+	@RequestMapping(value="my_info_edit_process.do",method = GET)
 		public String myEditProcess(HttpSession session, MyPageMyInfoEditVO mmeVO, Model model) {
-			return "myInfoEditProcess";
+			return "my_info_edit_process";
 	}//myInfoEditProcess
 	
 	//프로필 사진등록
@@ -67,15 +72,19 @@ public class MyPageController {
 	}//delProfileImg
 	
 	//비밀번호 수정 폼
-	@RequestMapping(value="password_edit.do",method = GET)
-		public String pwEdit() {
+	@RequestMapping(value="password_edit.do",method = {GET, POST})
+		public String pwEdit(HttpSession session) {
+		session.setAttribute("id", "coffee");
 			return "mypages/jsp/password_edit";
 	}//pwEdit
 	
 	//비밀번호 수정 처리
-	@RequestMapping(value = "password_edit_process.do" ,method=GET)
-		public String pwEditProcess(HttpSession session, MyPagePwEditVO mpeVO ) {
-			return "password_edit_processs";
+	@RequestMapping(value = "password_edit_process.do" ,method= GET)
+		public String pwEditProcess(MyPagePwEditVO mpeVO, Model model ) {
+			int cnt=mps.modifyPw(mpeVO);
+			model.addAttribute("cnt", cnt);
+		
+		return "forward:password_edit.do";
 	}//pwEditProcess
 	
 	//회원 탈퇴 폼
@@ -85,9 +94,9 @@ public class MyPageController {
 	}//quit
 	
 	//회원 탈퇴 처리
-	@RequestMapping(value = "quitProcess.do", method = GET)
+	@RequestMapping(value = "unregister_process.do", method = GET)
 		public String quitProcess(HttpSession session, MyPageQuitVO mqVO ) {
-			return "quitProcess";
+			return "unregister_process";
 	}//quitProcess
 	
 	//내가 쓴 리뷰 조회
@@ -124,7 +133,7 @@ public class MyPageController {
 	@RequestMapping(value = "bookmark.do", method=GET)
 		public String bookmark(HttpSession session, Model model) {
 		//임의로 세션 만들기	
-		session.setAttribute("id", "canopener");
+		session.setAttribute("id", "coffee");
 		//System.out.println(session.getAttribute("id")+"findMe");
 		//System.out.println(mps.searchBookmark((String)session.getAttribute("id"))+"findMe");
 		model.addAttribute("bookmarklist",mps.searchBookmark((String)session.getAttribute("id")));
@@ -132,9 +141,11 @@ public class MyPageController {
 	}//bookmark
 	
 	//즐겨찾기한 휴게소 삭제
-	@RequestMapping(value = "delBookmark.do", method=GET)
-		public String delBookmark(HttpSession session, String string) {
-			return "bookmark";
+	@RequestMapping(value = "delBookmark.do", method=POST)
+		public String delBookmark(HttpSession session, MyPageBookmarkVO bVO, Model model) {
+			int cnt=mps.removeBookmark(session, bVO);
+			model.addAttribute("delBookmark", cnt);
+		return "forward:bookmark.do";
 	}//bookmark
 	
 	

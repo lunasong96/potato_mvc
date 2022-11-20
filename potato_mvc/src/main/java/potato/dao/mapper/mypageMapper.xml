@@ -27,9 +27,9 @@
   	</select>
   	
   	<!--  비밀번호 수정 -->
-  	<select id="updatePw" resultType="int" parameterType="potato.vo.MyPagePwEditVO">
+  	<select id="updatePw" parameterType="potato.vo.MyPagePwEditVO">
   		update		member
-		set       		pass
+		set       		pass=#{new_pw}
 		where     	id= #{ id } and  pass= #{ pass }
   	</select>
   	

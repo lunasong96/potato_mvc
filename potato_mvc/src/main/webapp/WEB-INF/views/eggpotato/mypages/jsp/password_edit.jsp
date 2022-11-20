@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,30 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+
+<c:if test="${cnt eq 1}">
+alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
+location.href="login_page.do";
+</c:if>
+
+<c:if test="${cnt eq 0}">
+alert("비밀번호를 다시 확인해주세요.");
+location.href="password_edit.do";
+</c:if>
+
 $(function() {
 	$(".pw_edit_form_btn").click(function() {
+		//현재 비밀번호 유효성 검사
+		
+		//새 비밀번호 유효성 검사
+		newPw=$("#new_pw").val();
+		newPwChk=$("#newPwChk").val();
+		
+		if(newPw !=newPwChk){
+			alert("신규 비밀번호와 신규 비밀번호 확인이 일치하지 않습니다.");
+			return;
+		}
+		$("#passEditFrm").submit();
 		confirm("비밀번호가 수정되었습니다.")
 	});//click
 });//ready
@@ -52,37 +75,40 @@ $(function() {
 
 <%-- 네비바 끝 --%>
 <!-- 작업 시작 -->
-<div class="pw_edit_title">비밀번호 수정
+<div class="pw_edit_wrap">
+<div class="pw_edit_title">비밀번호 수정</div> 
+<form action="password_edit_process.do" id="passEditFrm" method="get">
 	<div class="pw_edit_form">
 		<table>
 			<tr>
 				<th><label for="password">현재 비밀번호</label></th>
 				<td>
-					<input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." class="pw">
+					<input type="password" id="pass" name="pass" placeholder="비밀번호를 입력해주세요." class="pw">
 				</td>
 			</tr>
 			<tr>
 				<th><label for="password">신규 비밀번호</label></th>
 				<td>
-					<input type="password" id="password" name="newpassword" placeholder="비밀번호를 입력해주세요." class="pw">
+					<input type="password" id="new_pw" name="new_pw" placeholder="비밀번호를 입력해주세요." class="pw">
 					<span class="txt">* 비밀번호는 *8~20자의 영문,숫자,특수문자를 혼합하여 입력해주세요.</span>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="password">신규 비밀번호 확인</label></th>
 				<td>
-					<input type="password" id="password" name="newpassword1" placeholder="비밀번호를 입력해주세요." class="pw">
+					<input type="password" id="newPwChk" name="newPwChk" placeholder="비밀번호를 입력해주세요." class="pw">
 				</td>
 			</tr>
 		</table>
 	
+	</div><!-- pw_edit_form -->
+	</form>
 	<button class="pw_edit_form_btn">확인</button>
 
-	</div><!-- pw_edit_form -->
-	</div> 
 </div><!-- wrap-navi -->
 
 </div><!-- container 건들면 안됩니다....! -->
+</div>
 <!-- container end -->
 
 <!-- footer -->
