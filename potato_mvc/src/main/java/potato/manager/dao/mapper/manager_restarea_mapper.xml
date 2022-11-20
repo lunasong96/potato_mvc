@@ -2,11 +2,45 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="potato.manager.restarea">
+<mapper namespace="potato.manager.rest">
 	<select id="getLine" resultType="potato.manager.domain.LineDomain">
-	select line_idx, line
-    from LINE
-    order by line_idx
+		select line_idx, line
+	    from LINE
+	    order by line_idx
 	</select>
+	
+	<select id="selectRestarea">
+		select re.restarea_idx, re.name, re.tel,
+		   
+			( select img
+ 			  from( select RESTAREA_IDX,AMENITY_TYPE,listagg(icon,',') within group(order by ICON) img
+			        from restarea_amenity
+			        group by RESTAREA_IDX, AMENITY_TYPE)
+ 			  where restarea_idx = re.restarea_idx and AMENITY_TYPE='A') retAmImgs,
+
+			( select img
+ 			  from( select RESTAREA_IDX,AMENITY_TYPE,listagg(icon,',') within group(order by ICON) img
+			        from restarea_amenity
+			        group by RESTAREA_IDX, AMENITY_TYPE)
+              where restarea_idx = re.restarea_idx and AMENITY_TYPE='B') gasAmImgs,
+
+			case when CARWASH_CHK='Y' then 'O'
+					 when CARWASH_CHK='N' then 'X'
+			     end CARWASH_CHK,
+			case when REPAIR_CHK='Y' then 'O'
+					 when REPAIR_CHK='N' then 'X'
+			     end REPAIR_CHK,
+			case when CARGOLOUNGE_CHK='Y' then 'O'
+					 when CARGOLOUNGE_CHK='N' then 'X'
+			     end CARGOLOUNGE_CHK
+		from  restarea re
+		where 1=1 --향후조건추가
+		order by restarea_idx
+		offset 30 rows
+		fetch next 10 rows only
+	
+	</select>
+	
+	
 
 </mapper>

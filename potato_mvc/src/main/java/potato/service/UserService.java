@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import potato.dao.UserDAO;
-import potato.vo.ForgotIdVO1;
+//import potato.vo.ForgotIdVO1;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.ManagerLoginVO;
@@ -71,12 +71,10 @@ public class UserService {
 		return false;
 	}
 	
-	public String  searchId(ForgotIdVO1 fiVO) {
-		String id="";
-		id=uDAO.selectId(fiVO);
-		return id;
-	}//searchId
-	
+	/*
+	 * public String searchId(ForgotIdVO1 fiVO) { String id="";
+	 * id=uDAO.selectId(fiVO); return id; }//searchId
+	 */	
 	/**
 	 * 비밀번호 찾기
 	 * @param fpVO

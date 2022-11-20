@@ -32,9 +32,11 @@ public class ManagerRestareaController {
 		}
 		*/
 		
-		List<LineDomain> list = mrs.searchLine();
 		
-		model.addAttribute("lineList", list );
+		
+		
+		//viewÀü¼Û
+		model.addAttribute("lineList", mrs.searchLine());
 		
 		
 		return url;

@@ -8,7 +8,7 @@
 	<typeAliases>
 		<typeAlias type="potato.vo.LoginVO" alias="lVO"/>
 		<typeAlias type="potato.vo.UserInfoVO" alias="uiVO"/>
-		<typeAlias type="potato.vo.ForgotIdVO" alias="fiVO"/>
+		<!-- <typeAlias type="potato.vo.ForgotIdVO" alias="fiVO"/> -->
 		<typeAlias type="potato.vo.ForgotPwVO" alias="fpVO"/>
 		<typeAlias type="potato.vo.ManagerLoginVO" alias="mlVO"/>
 	</typeAliases>
@@ -24,7 +24,7 @@
     </environment>
   </environments>
   <mappers>
-	<mapper resource="potato/dao/mapper/userMapper.xml"/>
+	<!-- <mapper resource="potato/dao/mapper/userMapper.xml"/> -->
 	<mapper resource="potato/dao/mapper/homeMapper.xml"/>
 	<mapper resource="potato/dao/mapper/detailedMapper.xml"/>
 	<mapper resource="potato/dao/mapper/writeMapper.xml"/>
