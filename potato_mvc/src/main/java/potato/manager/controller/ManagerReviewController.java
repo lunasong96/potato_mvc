@@ -58,9 +58,11 @@ public class ManagerReviewController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "manager_review_ajax.do", method = GET)
+	@RequestMapping(value = "manager_review_ajax.do", method = GET, produces = "application/json;charset=UTF-8")
 	public String keywordList(String keyword) {
 		String json = "";
+		
+		json = mrs.searchKeywordList(keyword);
 			
 		return json;
 	}

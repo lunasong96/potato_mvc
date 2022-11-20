@@ -106,15 +106,19 @@ function slider() {
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
 			   			<c:set var="imgArr" value="${ fn:split(reviewDetail.reviewImg,',') }"/>
+			   			<c:choose>
+			   			<c:when test="${  not empty reviewDetail.reviewImg }">
  			   			<c:forEach var="img" items="${ imgArr }">
  			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/${ imgArr }" alt="${ imgArr }" class="re-foodimg">
+			   				<img src="css/images/${ img }"  class="re-foodimg">
 			   			</div>
  			   			</c:forEach>
+ 			   			</c:when>
+ 			   			<c:otherwise>
+ 			   			&lt;리뷰 이미지가 없습니다.&gt;
+ 			   			</c:otherwise>
+ 			   			</c:choose>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>

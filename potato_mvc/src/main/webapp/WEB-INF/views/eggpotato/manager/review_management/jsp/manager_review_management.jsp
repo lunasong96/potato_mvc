@@ -21,7 +21,7 @@ alert("총 ${mulDelCnt}개 리뷰가 삭제되었습니다.");
 </c:if>
 
 <c:if test="${ oneDelCnt eq 1 }"> 
-alert(" 1개의 리뷰가 삭제되었습니다.");
+alert(" 1개의 리뷰가 삭제되었습니다."); // 팝업창을 닫고 메인창을 새로고침할 조건 물어보기
 self.close();
 </c:if>
 
@@ -91,6 +91,37 @@ $(function(){
 		}
 	});
 	
+	
+	//AJAX검색어
+	$("#searchBox").keyup(function(evt){
+		if($("#searchBox").val().trim().length > 0 && $("#keywordSel").val() == 1 ){
+			$.ajax({
+				url:"manager_review_ajax.do",
+				type:"get",
+				data:"keyword="+$("#searchBox").val(),
+				async:"true",
+				dataType:"json",
+				error:function(xhr){
+					alert("에러");
+					console.log("에러발생 : "+xhr.status);
+				},
+				success:function(json) {
+					if(json.isData) {
+						$("#keywordList").show();
+						var outData ="<table>";
+						$(json.data).each(function(i,data){
+							outData +="<tr onclick=\"getResult('"+data.keyword+"')\"><td>"+data.keyword+"</td></tr>"
+						});
+						outData +="</table>";
+						$("#keywordList").html(outData);
+					} else if($("#searchBox").val().trim().length > 0) {
+						$("#keywordList").hide();
+					}
+				}
+			});
+		}// if end
+	});//ajax end
+	
 });//ready
 
 //리뷰상세창열기
@@ -116,6 +147,11 @@ function allChk() {
 	} else {
 		$("[name='reviewChk']").prop("checked", false);
 	}
+}
+
+function getResult( data ) {
+	$("#searchBox").val(data);
+	$("#keywordList").hide();
 }
 </script>
 </head>
@@ -151,6 +187,8 @@ function allChk() {
 									 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 								</svg>
 						</button>
+						<div class="keywordList" id="keywordList">
+						</div>
 					</div>
 				</div>
 				<div class="btn-line">
@@ -183,7 +221,7 @@ function allChk() {
 								<td colspan="7">조회된 데이터가 없습니다.</td>
 							</tr>
 						</c:if>
-						<c:forEach var="rev" items="${ requestScope.reviewList }" >
+						<c:forEach var="rev" items="${ reviewList }" >
 							<tr>
 								<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
 								<td><input type="checkbox" name="reviewChk" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"/></td>

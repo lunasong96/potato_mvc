@@ -3,6 +3,8 @@ package potato.manager.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,9 +55,24 @@ public class ManagerReviewService {
 	}
 
 	//ajax
-	public List<String> searchKeywordList(String keyword) {
-
-		return null;
+	public String searchKeywordList(String keyword) {
+		if(keyword == null) {
+			keyword ="";
+		}
+		List<String> list = mrDAO.selectKeywordList(keyword);
+		JSONObject jobj = new JSONObject();
+		JSONArray jArr = new JSONArray();
+		
+		jobj.put("isData", !list.isEmpty());
+		
+		JSONObject temp = null;
+		for(String name : list) {
+			temp = new JSONObject();
+			temp.put("keyword", name);
+			jArr.add(temp);
+		}
+		jobj.put("data", jArr);
+		return jobj.toJSONString();
 	}
 	
 	//∏Æ∫‰¿œ∞˝ªË¡¶

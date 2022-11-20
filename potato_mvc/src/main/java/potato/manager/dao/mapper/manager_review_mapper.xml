@@ -49,6 +49,12 @@
 		</where>	
 	</select>
 	
+	<select id="selectKeywordAJAX" parameterType="String" resultType="String">
+		select name
+		from restarea
+		where name like '%'||#{keyword}||'%'
+	</select>
+	
 	<delete id="deleteMultipleReviews" parameterType="java.util.List" >
 		delete from review
 		<where>
@@ -75,5 +81,5 @@
 			group by re.contents, re.id, me.nick, re.rating, ra.name, me.img, re.post_date
 	      )
 	</select>
-
+	
 </mapper>

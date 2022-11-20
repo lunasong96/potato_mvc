@@ -6,6 +6,7 @@
 	<select id="getLine" resultType="potato.manager.domain.LineDomain">
 	select line_idx, line
     from LINE
+    order by line_idx
 	</select>
 
 </mapper>

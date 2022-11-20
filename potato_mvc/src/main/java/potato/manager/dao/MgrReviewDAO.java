@@ -49,8 +49,11 @@ public class MgrReviewDAO {
 	 * @return
 	 */
 	public List<String> selectKeywordList(String keyword) {
-		
-		return null;
+		List<String> list = null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		list = ss.selectList("potato.manager.review.selectKeywordAJAX", keyword);
+		return list;
 	}
 	
 	/**
