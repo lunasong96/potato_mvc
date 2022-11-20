@@ -56,10 +56,14 @@ public class MgrHomeService {
 		return bookmark;
 	}//searchBookmark
 	
-	//방문자 현황
-	public List<Integer> searchVisitor() {		
-		return null;
-	}
+	//방문자현황(일주일 날짜)
+	public String searchVisitDate(int DateFlag) {	
+		String visitDate=null;
+		
+		visitDate=mhDAO.selectVisitDate(DateFlag);
+		
+		return visitDate;
+	}//searchVisitDate
 	
 	//방문자 현황(어제,오늘,총)
 	public int searchVisitorCnt(int visitFlag) {	

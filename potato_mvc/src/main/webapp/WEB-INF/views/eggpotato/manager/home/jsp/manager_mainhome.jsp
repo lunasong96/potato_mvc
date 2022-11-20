@@ -75,12 +75,12 @@
 				new Chart(document.getElementById("mixed-chart"), {
 				    type: 'bar',
 				    data: {
-						  labels: ["11/23", "11/24", "11/25", "11/26", "11/27", "11/28", "11/29"],
+						  labels: [${D6},${D5},${D4},${D3},${D2},${D1},${D0}],
 				      datasets: [{
 				          label: "일별 방문자 수",
 				          type: "bar",
 				          backgroundColor: "#e8c3b9",
-				          data: [1,17,22,30,20,34,47],
+				          data: [${V6},${V5},${V4},${V3},${V2},${yesvisit},${tovisit}],
 				        }]
 				    }
 				});

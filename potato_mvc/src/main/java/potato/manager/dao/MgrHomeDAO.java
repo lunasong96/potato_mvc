@@ -9,8 +9,6 @@ import potato.dao.config.MyBatisHandler;
 
 @Component
 public class MgrHomeDAO {
-	
-
 
 	/**
 	 * 오늘 신고 수
@@ -66,13 +64,27 @@ public class MgrHomeDAO {
 		 return bookmark;
 	}//selectBookmark
 	  
-	 //방문자 현황 (????)
-	public List<Integer> selectVisitor(){
-		return null;
-	 }//selectVisitor
-	 
 	/**
-	 * 방문자 현황(어제,오늘,총)
+	 * 방문자현황(일주일 날짜)
+	 * @param DateFlag
+	 * @return
+	 */
+	public String selectVisitDate(int DateFlag) { 
+		String visitDate=null;
+		
+		//1. MyBatis Handler(SqlSession) 얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		//2.쿼리문 실행 : 입력값 없이 총 레코드의 수를 얻자
+		visitDate=ss.selectOne("potato.manager.mgrHomeMapper.selectVisitDate",DateFlag);
+		//3. MyBatis Handler 끊기
+		mbh.closeHandler(ss);	 
+		
+		return visitDate;
+	}//selectVisitorCnt
+	
+	/**
+	 * 방문자 현황(어제,오늘,총,주간)
 	 * @param visitFlag
 	 * @return
 	 */
@@ -162,4 +174,4 @@ public class MgrHomeDAO {
 		return list;
 	}//selectPopAll
 	
-	 }//class
+}//class

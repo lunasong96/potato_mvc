@@ -38,19 +38,63 @@
 			order by bookmarkcnt desc)
 	where rownum = 1
 	</select>
-	<!-- 방문자현황[그래프] -->
+	<!-- 방문자현황(일주일 날짜) -->
+	<select id="selectVisitDate" parameterType="int" resultType="String">
+	select *
+	from( select to_char(access_date,'mmdd') visitDate from visitor
+			group by to_char(access_date,'mmdd')
+			order by to_char(access_date,'mmdd') desc )
+	<where>
+	<if test="DateFlag == 0">
+	visitDate=to_char(sysdate,'mmdd')	
+	</if>
+	<if test="DateFlag == 1">
+	visitDate=to_char(sysdate-1,'mmdd')	
+	</if>
+	<if test="DateFlag == 2">
+	visitDate=to_char(sysdate-2,'mmdd')	
+	</if>
+	<if test="DateFlag == 3">
+	visitDate=to_char(sysdate-3,'mmdd')	
+	</if>
+	<if test="DateFlag == 4">
+	visitDate=to_char(sysdate-4,'mmdd')
+	</if>
+	<if test="DateFlag == 5">
+	visitDate=to_char(sysdate-5,'mmdd')
+	</if>
+	<if test="DateFlag == 6">
+	visitDate=to_char(sysdate-6,'mmdd')	
+	</if>
+	</where>		
+	</select>
 	<!-- 방문자현황(오늘,어제,총) -->
 	<select id="selectVisitorCnt" parameterType="int" resultType="int">
 	select count(*)
 	from visitor
 	<where>
+	<if test="visitFlag == 6">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-6,'yyyymmdd')
+	</if>
+	<if test="visitFlag == 5">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-5,'yyyymmdd')
+	</if>
+	<if test="visitFlag == 4">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-4,'yyyymmdd')
+	</if>
+	<if test="visitFlag == 3">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-3,'yyyymmdd')
+	</if>
 	<if test="visitFlag == 2">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-1,'yyyymmdd')
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-2,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 1">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
+	to_char(access_date,'yyyymmdd')=to_char(sysdate-1,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 0">
+	to_char(access_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
+	</if>
+	<if test="visitFlag == 10">
 	1 = 1
 	</if>
 	</where>
