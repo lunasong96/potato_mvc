@@ -1,5 +1,7 @@
 package potato.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -97,29 +99,32 @@ public class DetailedService {
 	public String getReviewAll(DetailedReviewVO drVO) {
 		List<DetailedReviewDomain> list=null;
 		list=dDAO.selectReviewAll(drVO);
-		System.out.println(drVO+"findMe");
-		System.out.println(list+"findMe");
-		JSONObject jsonObj=null;
+		JSONObject jsonObj=new JSONObject();
 		JSONObject jo=null;
 		JSONArray js=new JSONArray();
 
+		DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+		String date=null;
+		
 		for(DetailedReviewDomain dd: list) {
 			jo=new JSONObject();
 			jo.put("contents", dd.getContents());
-			jo.put("foodImg", dd.getFoodimg());
+			jo.put("foodimg", dd.getFoodimg());
 			jo.put("id", dd.getId());
 			jo.put("img", dd.getImg());
 			jo.put("liked", dd.getLiked());
-			jo.put("likeTotal", dd.getLikeTotal());
 			jo.put("nick", dd.getNick());
-			jo.put("post_date", dd.getPost_date());
+			date=dateFormat.format(dd.getPost_date());
+			jo.put("post_date", date);
 			jo.put("rating", dd.getRating());
 			jo.put("review_idx", dd.getReview_idx());
 			js.add(jo);
 		}//end for
-		System.out.println(js+"find me");
+		//System.out.println("js:   "+js+"find me");
 		
 		jsonObj.put("review", js);
+		
+		//System.out.println("jsonObj:   "+jsonObj.toJSONString()+"find me");
 		
 		
 		return jsonObj.toJSONString();
@@ -132,10 +137,11 @@ public class DetailedService {
 	
 	//페이징 마지막 페이지
 	public int getLastPageNum(int total) {
-		return 0;
+		int lastPage = (int) Math.ceil((double) total / 1);
+		return lastPage;
 	}
 	
-	//페이징 기본 보여줄 수
+	//페이징 기본 보여줄 페이지수
 	public int getPageScale() {
 		return 0;
 	}

@@ -89,14 +89,14 @@ where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r
 			and l.review_idx(+)=ri.review_idx and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=ri.restarea_idx and l.restarea_idx(+)=r.restarea_idx
 			and m.id(+)=r.id)and r.restarea_idx=#{restarea_idx}
 group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img
-<if test="dateFlag==1 or dateFlag=''">
+<if test="dateFlag eq 1">
 order by post_date desc, review_idx desc
 </if>
-<if test="dateFlag==2">
+<if test="dateFlag eq 2">
 order by post_date, review_idx
 </if>
 offset 0 rows
-fetch next #{addFlag}*5 rows only
+fetch next #{addFlag}*1+1 rows only
 </select>
 
 <!-- 리뷰 좋아요 추가 -->

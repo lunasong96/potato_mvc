@@ -3,8 +3,6 @@ package potato.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import potato.domain.DetailedReviewDomain;
 import potato.service.DetailedService;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
@@ -35,6 +32,7 @@ public class DetailedController {
 		model.addAttribute("fd", ds.getFoodDatailed(restarea_idx));
 		model.addAttribute("ai", ds.getAmenityImg(restarea_idx));
 		model.addAttribute("rt", ds.getReviewTotal(restarea_idx));
+		model.addAttribute("lp", ds.getLastPageNum(ds.getReviewTotal(restarea_idx)));
 		
 		return "detailed/jsp/user_detailed";
 	}
@@ -61,17 +59,10 @@ public class DetailedController {
 	
 	//휴게소 리뷰 + 버튼 페이징 (비동기)
 	@ResponseBody
-	@RequestMapping(value = "ajax_detailed_page.do", method=GET)
-	public String reviewPageFilter(HttpServletRequest request, DetailedReviewVO drVO, Model model) {
-		/*
-		 * drVO.setDateFlag(Integer.parseInt(request.getParameter("dataFlag")));
-		 * drVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
-		 * drVO.setAddFlag(Integer.parseInt(request.getParameter("addFlag")));
-		 */
-		/* System.out.println(drVO+"findMe"); */
-		String ajax_json=ds.getReviewAll(drVO);
-		/* model.addAttribute("aj", ajax_json); */
-		return ajax_json;
+	@RequestMapping(value = "ajax_detailed_page.do", method= {GET,POST}, produces = "application/json;charset=UTF-8")
+	public String reviewPageFilter(HttpServletRequest request, DetailedReviewVO drVO) {
+		String jsonObj=ds.getReviewAll(drVO);
+		return jsonObj;
 	}
 	
 	//타사용자 페이지 이동
