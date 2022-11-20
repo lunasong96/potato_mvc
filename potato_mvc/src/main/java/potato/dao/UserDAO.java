@@ -1,8 +1,7 @@
 package potato.dao;
 
 import potato.dao.config.MyBatisHandler;
-
-
+import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.ManagerLoginVO;
@@ -99,6 +98,18 @@ public class UserDAO {
 		mbh.closeHandler(ss);
 		return result;
 	}//selectMDuplChkNick
+	
+	public String selectId(ForgotIdVO fiVO) {
+		String id="";
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		
+		id= ss.selectOne(UserMapper+"selectForgotId", fiVO);
+		mbh.closeHandler(ss);
+		
+		return id;
+	}//selectId
 	
 	/**
 	 * 비밀번호 찾기

@@ -25,6 +25,13 @@
 		where manager_id= #{ manager_id } and pass= #{ pass }
 	</select>
 	
+	<!-- 아이디 찾기 -->
+	<select id="selectForgotId" parameterType="fiVO" resultType="String">
+		select id
+		from member
+		where name= #{ name } and birth= #{ birth } and phone= #{ phone }
+	</select>
+	
 	<!-- 비밀번호 찾기 -->
 	<select id="selectForgotPw" parameterType="fpVO"
 	resultType="String">
