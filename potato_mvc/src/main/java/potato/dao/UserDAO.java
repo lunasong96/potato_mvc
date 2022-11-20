@@ -1,7 +1,7 @@
 package potato.dao;
 
 import potato.dao.config.MyBatisHandler;
-import potato.vo.ForgotIdVO;
+import potato.vo.ForgotIdVO1;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.ManagerLoginVO;
@@ -99,7 +99,7 @@ public class UserDAO {
 		return result;
 	}//selectMDuplChkNick
 	
-	public String selectId(ForgotIdVO fiVO) {
+	public String selectId(ForgotIdVO1 fiVO) {
 		String id="";
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
