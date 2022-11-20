@@ -39,12 +39,12 @@ $(function() {
 				</div>
 				<div class="nickname">감자킴</div>
 			</div>			
-			<a class="navi-link" href="my_info_edit.jsp">내 정보 수정</a>
-			<a class="navi-link2" href="password_edit.jsp">비밀번호 수정</a>
-			<a class="navi-link2" href="unregister.jsp">회원탈퇴</a>
-			<a class="navi-link" href="my_review.jsp">내가 쓴 리뷰</a>
-			<a class="navi-link" href="like_review.jsp">좋아요한 리뷰</a>
-			<a class="navi-link" href="bookmark.jsp">휴게소 즐겨찾기</a>
+			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
+			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
+			<a class="navi-link2" href="unregister.do">회원탈퇴</a>
+			<a class="navi-link" href="my_review.do">내가 쓴 리뷰</a>
+			<a class="navi-link" href="like_review.do">좋아요한 리뷰</a>
+			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
 		</div><!-- navi -->
 <%-- 네비바 끝 --%>
 	<div class="unregister_wrap">

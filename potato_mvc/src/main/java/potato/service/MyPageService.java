@@ -5,9 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 import potato.dao.MyPageDAO;
 import potato.domain.MyPageBookmarkDomain;
+import potato.domain.MyPageMyInfoDomain;
 import potato.domain.MyPageReportDomain;
 import potato.domain.MyPageReviewDomain;
 import potato.manager.domain.ReviewDomain;
@@ -19,6 +22,7 @@ import potato.vo.MyPagePwEditVO;
 import potato.vo.MyPageQuitVO;
 import potato.vo.MypageReportVO;
 
+@Component
 public class MyPageService {
 	@Autowired(required = false)
 	private MyPageDAO mDAO;
@@ -30,9 +34,10 @@ public class MyPageService {
 	}//searchMyPageIn
 	
 	//내 정보 조회
-	public String searchInfo(String id) {
-		
-		return null;
+	public List<MyPageMyInfoDomain>searchInfo(String id) {
+		List<MyPageMyInfoDomain>mid=null;
+		mid=mDAO.selectInfo(id);
+		return mid;
 	}//searchInfo
 	
 	//아이디,비밀번호 확인
@@ -129,10 +134,11 @@ public class MyPageService {
 	
 	//북마크한 휴게소 조회
 	public List<MyPageBookmarkDomain>searchBookmark(String id){
-		List<MyPageBookmarkDomain> list=null;
-		list=mDAO.selectBookmark(id);
+		List<MyPageBookmarkDomain> mbd=null;
+		mbd=mDAO.selectBookmark(id);
 		
-		return list;
+		
+		return mbd;
 	}//searchBookmark
 	
 	//북마크한 휴게소 삭제(아이디, 휴게소 인덱스-int)

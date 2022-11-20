@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" info=""%>
+    pageEncoding="UTF-8" info=""  isELIgnored="false"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,12 +40,12 @@ $(function() {
 				</div>
 				<div class="nickname">감자킴</div>
 			</div>			
-			<a class="navi-link" href="my_info_edit.jsp">내 정보 수정</a>
-			<a class="navi-link2" href="password_edit.jsp">비밀번호 수정</a>
-			<a class="navi-link2" href="unregister.jsp">회원탈퇴</a>
-			<a class="navi-link" href="my_review.jsp">내가 쓴 리뷰</a>
-			<a class="navi-link" href="like_review.jsp">좋아요한 리뷰</a>
-			<a class="navi-link" href="bookmark.jsp">휴게소 즐겨찾기</a>
+			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
+			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
+			<a class="navi-link2" href="unregister.do">회원탈퇴</a>
+			<a class="navi-link" href="my_review.do">내가 쓴 리뷰</a>
+			<a class="navi-link" href="like_review.do">좋아요한 리뷰</a>
+			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
 		</div><!-- navi -->
 	
 
@@ -71,15 +72,15 @@ $(function() {
 		</tr>
 		<tr>
 			<th><label>성명</label></th>
-			<td><input type="text" value="" id="name" ></td>
+			<td><input type="text" value="" id="name" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>닉네임</label></th>
-			<td><input type="text" value=""id="nick"></td>
+			<td><input type="text" value="<c:out value="${ mie.nick }"/>" id="nick"></td>
 		</tr>
 		<tr>
 			<th><label>아이디</label></th>
-			<td><input type="text" value="" id="id"></td>
+			<td><input type="text" value="" id="id" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>생년월일</label></th>
@@ -90,7 +91,7 @@ $(function() {
 		<tr>
 			<th><label>휴대폰</label></th>
 				<td>
-					<input type="text" name="phone_num" value="" r>
+					<input type="text" name="phone_num" value="" >
 				</td>
 		</tr>
 		<tr>

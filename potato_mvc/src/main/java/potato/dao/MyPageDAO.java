@@ -3,6 +3,7 @@ package potato.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
 import potato.domain.MyPageBookmarkDomain;
@@ -17,14 +18,14 @@ import potato.vo.MyPagePwEditVO;
 import potato.vo.MyPageQuitVO;
 import potato.vo.MypageLikeReviewVO;
 import potato.vo.MypageReportVO;
-
+@Component
 public class MyPageDAO {
 	
 	//마이페이지 접속
 	public String selectLogin(String id) {
 		//1. MyBatis Handler 얻기
-		MyBatisHandler mbh=MyBatisHandler.getInstance();
-		SqlSession ss=mbh.getHandler();
+		//MyBatisHandler mbh=MyBatisHandler.getInstance();
+		//SqlSession ss=mbh.getHandler();
 		
 		//2. 쿼리문 실행
 		//3. MyBatis Handler 끊기
@@ -32,12 +33,17 @@ public class MyPageDAO {
 	}//selectLogin
 	
 	//내 정보 조회
-	public MyPageMyInfoDomain selectInfo(MyPageMyInfoEditVO mieVO) {
-		
+	public List<MyPageMyInfoDomain> selectInfo(String id) {
+		List<MyPageMyInfoDomain> mid=null;
 		//1. MyBatis Handler 얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
 		//2. 쿼리문 실행
+		mid=ss.selectList("potato.mypageMapper.selectMypageInfo", id);
 		//3. MyBatis Handler 끊기
-		return null;
+		mbh.closeHandler(ss);
+		
+		return mid;
 	}//selectInfo
 	
 	//내 정보 수정
@@ -133,16 +139,17 @@ public class MyPageDAO {
 	
 	//북마크한 휴게소 조회
 	public List<MyPageBookmarkDomain> selectBookmark(String id){
-		List<MyPageBookmarkDomain> list=null;
+		List<MyPageBookmarkDomain> mbd=null;
 		//1. MyBatis Handler 얻기
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		//2. 쿼리문 실행
-		list=ss.selectList("potato.bookmark.selectBookmark", id);
+		//System.out.println(ss.selectList("potato.mypageMapper.selectBookmark", id)+"findMe");
+		mbd=ss.selectList("potato.mypageMapper.selectBookmark", id);
 		//3. MyBatis Handler 끊기
 		mbh.closeHandler(ss);
 		
-		return list;
+		return mbd;
 	}//selectBookmark
 	
 	//북마크한 휴게소 삭제(아이디, 휴게소 인덱스)(String id랑 restrea_idx가 bookmarkVO네..)
