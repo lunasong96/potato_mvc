@@ -1,8 +1,8 @@
 package potato.manager.vo;
 
 public class SearchRestVO {
-	private String keyword, carwash_chk, repair_chk,cargolounge_chk;
-	private int lineFlag,pageFlag;
+	private String keyword, carwash_chk, repair_chk, cargolounge_chk;
+	private int lineFlag, pageFlag = 1;
 	public String getKeyword() {
 		return keyword;
 	}

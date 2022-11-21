@@ -145,5 +145,13 @@ label{
 .page-num:hover{
     color: #FFF;
     background-color: #C89E6C;
+}
 
+.page-num-click{
+	font-size: 16px;
+    color: #000;
+	background-color: #C89E6C;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 12px;
 }

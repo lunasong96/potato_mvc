@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
-import potato.manager.domain.AmenityDomain;
 import potato.manager.domain.DoDomain;
 import potato.manager.domain.FoodDomain;
 import potato.manager.domain.LineDomain;
@@ -20,23 +19,45 @@ import potato.manager.vo.SearchRestVO;
 public class MgrRestDAO {
 	
 	public List<RestDomain> selectRest(SearchRestVO srVO) {
-		
-		return null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		List<RestDomain> list = ss.selectList("potato.manager.rest.selectRestarea", srVO);
+		mbh.closeHandler(ss);
+		return list;
 	}
 	
 	public List<LineDomain> selectLine() {
 		List<LineDomain> list = null;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		list = ss.selectList("potato.manager.restarea.getLine");
-		
+		list = ss.selectList("potato.manager.rest.getLine");
 		mbh.closeHandler(ss);
 		return list;
 	}
 	
 	public int selectTotalRest(SearchRestVO srVO) {
-		
-		return 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int totalReview = ss.selectOne("potato.manager.rest.selectRestTotal", srVO);
+		mbh.closeHandler(ss);
+		return totalReview;
+	}
+	
+	public RestDomain selectRestDetail(int restarea_idx) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		RestDomain rd = ss.selectOne("potato.manager.rest.selectRestDetail", restarea_idx); 
+		mbh.closeHandler(ss);
+		return rd;
+	}
+	
+	//휴게소상세창과 수정창동시사용
+	public List<FoodDomain> selectRestFood(int restarea_idx) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		List<FoodDomain> list = ss.selectList("potato.manager.rest.selectFood", restarea_idx);
+		mbh.closeHandler(ss);
+		return list;
 	}
 	
 	public List<DoDomain> selectDo() {
@@ -56,16 +77,6 @@ public class MgrRestDAO {
 		
 	}
 	
-	public RestDomain selectRestDetail(int restarea_idx) {
-		
-		return null;
-	}
-	
-	//휴게소상세창과 수정창동시사용
-	public List<FoodDomain> selectRestFood(int restarea_idx) {
-		
-		return null;
-	}
 	
 	public RestDomain selectRestInfo(int restarea_idx) {
 		

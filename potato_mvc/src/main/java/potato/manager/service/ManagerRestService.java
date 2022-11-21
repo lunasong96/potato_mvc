@@ -20,12 +20,13 @@ public class ManagerRestService {
 	@Autowired(required = false)
 	private MgrRestDAO mrDAO;
 	
-	
+	//휴게소가져오기
 	public List<RestDomain> searchRest(SearchRestVO srVO) {
-		
-		return null;
+		List<RestDomain> list = mrDAO.selectRest(srVO);
+		return list;
 	}
 	
+	//노선가져오기
 	public List<LineDomain> searchLine() {
 		List<LineDomain> list = null;
 		
@@ -34,25 +35,42 @@ public class ManagerRestService {
 		return list;
 	}
 	
+	//총휴게소가져오기
 	public int searchTotalRest(SearchRestVO srVO) {
-		
-		return 0;
+		int totalReview = mrDAO.selectTotalRest(srVO);
+		return totalReview;
 	}
 	
+	//마지막페이지구하기
 	public int lastPage(int totalReview) {
-		
-		return 0;
+		int lastPage = (int)Math.ceil((double)totalReview/10);
+		return lastPage ;
 	}
 	
+	//현제 페이지단의 시작페이지
 	public int startNum(int curPage) {
-		
-		return 0;
+		int startNum = curPage-(curPage-1)%3;
+		return startNum;
 	}
 	
 	//내가 원하는 보여줄 페이지 수를 먼저 넣고 만약에 초과할 경우 isLast를 매개변수로 새로 set
 	public int isLast(int lastPage, int startNum) {
-		
-		return 0;
+		int isLast=2;
+		if(startNum +3 > lastPage) {
+			isLast = lastPage - startNum;
+		}
+		return isLast;
+	}
+	
+	public RestDomain searchRestDetail(int restarea_idx) {
+		RestDomain rd = mrDAO.selectRestDetail(restarea_idx);
+		return rd;
+	}
+	
+	//휴게소상세창과 수정창동시사용
+	public List<FoodDomain> searchRestFood(int restarea_idx) {
+		List<FoodDomain> list = mrDAO.selectRestFood(restarea_idx);
+		return list;
 	}
 	
 	public List<DoDomain> searchDO() {
@@ -72,17 +90,6 @@ public class ManagerRestService {
 		
 	}
 	
-	
-	public RestDomain searchRestDetail(int restarea_idx) {
-		
-		return null;
-	}
-	
-	//휴게소상세창과 수정창동시사용
-	public List<FoodDomain> searchRestFood(int restarea_idx) {
-		
-		return null;
-	}
 	
 	public RestDomain searchRestInfo(int restarea_idx) {
 		

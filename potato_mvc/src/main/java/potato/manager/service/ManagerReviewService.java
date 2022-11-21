@@ -20,10 +20,7 @@ public class ManagerReviewService {
 	private MgrReviewDAO mrDAO;
 
 	public List<ReviewDomain> searchReview(SearchReviewVO srVO) {
-		List<ReviewDomain> list = null;
-
-		list = mrDAO.selectReview(srVO);
-
+		List<ReviewDomain> list = mrDAO.selectReview(srVO);
 		return list;
 	}
 

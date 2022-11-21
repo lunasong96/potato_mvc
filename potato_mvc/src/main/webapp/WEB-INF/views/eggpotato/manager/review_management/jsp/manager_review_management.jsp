@@ -216,7 +216,7 @@ function getResult( data ) {
 						<tr>
 							<th><input type="checkbox" id="mainChk" name="mainChk" onclick="allChk()"/></th><th>휴게소명</th><th>내용</th><th>평점</th><th>작성자</th><th>작성일시</th><th>신고수</th>
 						</tr>
-						<c:if test="${ empty requestScope.reviewList }">
+						<c:if test="${ empty reviewList }">
 							<tr>
 								<td colspan="7">조회된 데이터가 없습니다.</td>
 							</tr>
@@ -234,7 +234,7 @@ function getResult( data ) {
 				</div>
 				<!-- 페이징 -->
 				<div class="page">
-					<c:if test="${ not empty requestScope.reviewList }">
+					<c:if test="${ not empty reviewList }">
 						<c:if test="${ startNum ne 1 }">
 							<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
 							<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
