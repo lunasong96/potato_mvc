@@ -10,9 +10,8 @@
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="selectMemberLogin" parameterType="lVO"
-	resultType="String">
-		select id
+	<select id="selectMemberLogin" parameterType="lVO" resultType="ud">
+		select id, nick
 		from member
 		where id= #{ id } and pass= #{ pass }
 	</select>

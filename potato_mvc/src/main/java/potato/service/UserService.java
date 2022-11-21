@@ -1,11 +1,11 @@
 package potato.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Component;
 
 import potato.dao.UserDAO;
-//import potato.vo.ForgotIdVO1;
+import potato.domain.UserDomain;
+import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.ManagerLoginVO;
@@ -26,12 +26,10 @@ public class UserService {
 	 * @param lVO
 	 * @return
 	 */
-	@Autowired(required = false)
-	public String searchMember(LoginVO lVO) {
-		
-		String id=null;
-		id=uDAO.selectLogin(lVO);
-		return id;
+	public UserDomain searchMember(LoginVO lVO) {
+		UserDomain ud = null;
+		ud=uDAO.selectLogin(lVO);
+		return ud;
 	}
 	
 	/**
@@ -71,10 +69,18 @@ public class UserService {
 		return false;
 	}
 	
-	/*
-	 * public String searchId(ForgotIdVO1 fiVO) { String id="";
-	 * id=uDAO.selectId(fiVO); return id; }//searchId
-	 */	
+	
+	/**
+	 * 아이디 찾기
+	 * @param fiVO
+	 * @return
+	 */
+	public String searchId(ForgotIdVO fiVO) { 
+		String id="";
+		id=uDAO.selectId(fiVO); 
+		return id; 
+	 }//searchId
+	 
 	/**
 	 * 비밀번호 찾기
 	 * @param fpVO

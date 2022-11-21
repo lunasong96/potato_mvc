@@ -1,14 +1,15 @@
 package potato.dao;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Component;
+
 import potato.dao.config.MyBatisHandler;
-//import potato.vo.ForgotIdVO1;
+import potato.domain.UserDomain;
+import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.ManagerLoginVO;
 import potato.vo.UserInfoVO;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Component;
 
 /**
  *	유저의 로그인, 회원가입 관련 DAO
@@ -42,14 +43,14 @@ public class UserDAO {
 	 * @param lVO
 	 * @return
 	 */
-	public String selectLogin(LoginVO lVO) {
-		String result;
+	public UserDomain selectLogin(LoginVO lVO) {
+		UserDomain ud= null;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		result =ss.selectOne(UserMapper+"selectMemberLogin", lVO);
+		ud=ss.selectOne(UserMapper+"selectMemberLogin", lVO);
 		mbh.closeHandler(ss);
-		return result;
+		return ud;
 	}//selectLogin
 	
 	/**
@@ -99,16 +100,22 @@ public class UserDAO {
 		return result;
 	}//selectMDuplChkNick
 	
-	/*
-	 * public String selectId(ForgotIdVO1 fiVO) { String id="";
-	 * 
-	 * MyBatisHandler mbh=MyBatisHandler.getInstance(); SqlSession ss=
-	 * mbh.getHandler();
-	 * 
-	 * id= ss.selectOne(UserMapper+"selectForgotId", fiVO); mbh.closeHandler(ss);
-	 * 
-	 * return id; }//selectId
-	 */	
+	
+	/**
+	 * 아이디 찾기
+	 * @param fiVO
+	 * @return
+	 */
+	public String selectId(ForgotIdVO fiVO) {
+		String id="";
+	 
+		MyBatisHandler mbh=MyBatisHandler.getInstance(); 
+		SqlSession ss=mbh.getHandler();
+		id= ss.selectOne(UserMapper+"selectForgotId", fiVO); 
+		mbh.closeHandler(ss);
+		return id; 
+	}//selectId
+	 
 	/**
 	 * 비밀번호 찾기
 	 * @param fpVO
