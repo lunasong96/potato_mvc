@@ -3,6 +3,9 @@ package potato.manager.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import potato.manager.service.ManagerRestService;
+import potato.manager.vo.RestVO;
 import potato.manager.vo.SearchRestVO;
 
 @Controller
@@ -37,7 +44,6 @@ public class ManagerRestareaController {
 		int startNum = mrs.startNum(curPage);
 		int isLast = mrs.isLast(lastPage, startNum);
 		
-		
 		//view전송
 		model.addAttribute("restList", mrs.searchRest(srVO));
 		model.addAttribute("lastPage", lastPage);
@@ -57,12 +63,23 @@ public class ManagerRestareaController {
 	
 	@RequestMapping(value="manager_writePopup.do", method=GET)
 	public String openWriteRest(Model model) {
-		
+		model.addAttribute("lineList", mrs.searchLine());
+		model.addAttribute("doList", mrs.searchDo());
 		return "manager/rest_management/jsp/manager_rest_write_popup";
 	}
 	
 	@RequestMapping(value="manager_rest_add.do", method=GET)
 	public String newRest(HttpServletRequest request) {
+		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");//맨마지막에 / 넣기
+		int maxSize=1024*1024*20;
+		try {
+			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
+			RestVO rVO = new RestVO();
+			
+		} catch(IOException ie) {
+			
+		}
+		
 		
 		return "manager/rest_management/jsp/manager_rest_write_popup";
 	}

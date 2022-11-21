@@ -20,7 +20,7 @@ $(function(){
 	
 	//휴게소추가
 	$(".write-btn").click(function(){
-		open("manager_rest_add.do","write_popup","width=950,height=900,top=311,left=560")
+		open("manager_writePopup.do","write_popup","width=950,height=900,top=311,left=560")
 	});
 	
 	//검색버튼클릭시
@@ -49,7 +49,11 @@ $(function(){
 		$("#lineFlag").val($("#lineSel").val());
 		$("#pageFlag").val(1);
 		$("#hidFrm").submit();	
-		
+	});
+	
+	//초기화버튼
+	$("#reset-btn").click(function(){
+		location.href="manager_restarea.do";
 	});
 	
 });
@@ -108,7 +112,7 @@ $(document).on("click",".popup-btn",function(){
 						<input type="checkbox" id="cargoChk"${ param.cargolounge_chk eq 'Y' ?" checked='checked'" :""  }  >
 						<label>화물차라운지</label>
 						<button type="button" class="search-btn" id="searchBtn">검색</button>
-						<button type="button" class="reset-btn">초기화</button>
+						<button type="button" class="reset-btn" id="reset-btn">초기화</button>
 						<button type="button" class="write-btn">휴게소 추가</button>
 					</div>
 					<div class="icon-wrap">

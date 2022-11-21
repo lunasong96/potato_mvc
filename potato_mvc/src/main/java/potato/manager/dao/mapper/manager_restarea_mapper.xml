@@ -120,6 +120,8 @@
 		order by food_idx	
 	</select>
 	
-	
-
+	<select id="getDo" resultType="potato.manager.domain.DoDomain">
+		select do_idx, kr_do
+ 		from do	
+ 	</select>
 </mapper>

@@ -61,8 +61,11 @@ public class MgrRestDAO {
 	}
 	
 	public List<DoDomain> selectDo() {
-		
-		return null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		List<DoDomain> list = ss.selectList("potato.manager.rest.getDo");
+		mbh.closeHandler(ss);
+		return list;
 	}
 	
 	public void insertRest(RestVO rVO) {

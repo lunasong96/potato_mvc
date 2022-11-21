@@ -30,9 +30,8 @@
 					<span>썸네일</span>
 					<div>
 						<div class="file-btn-wrap">
-							<input type="file" class="fileup"/>
 							<input type="button" class="round-blue-btn" value="등록">
-							<input type="button" class="round-blue-btn" value="삭제">
+							<input type="file" class="fileup"/>
 						</div>
 					</div>
 				</div>

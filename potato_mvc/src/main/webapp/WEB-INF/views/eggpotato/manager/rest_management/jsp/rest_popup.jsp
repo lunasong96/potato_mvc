@@ -30,14 +30,24 @@ $(function() {
         },
     });
     
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(${ detail.lat }, ${detail.lng }), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+    var markerPosition  = new kakao.maps.LatLng(${detail.lat}, ${detail.lng}); 
+
+    // 이미지 지도에 표시할 마커입니다
+    // 이미지 지도에 표시할 마커는 Object 형태입니다
+    var marker = {
+        position: markerPosition,
+        text: '${detail.name}'
+    };
+	
+    var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
+    staticMapOption = { 
+        center: new kakao.maps.LatLng(${detail.lat}, ${detail.lng}), // 이미지 지도의 중심좌표
+        level: 3, // 이미지 지도의 확대 레벨
+        marker: marker // 이미지 지도에 표시할 마커 
     };
 
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+	var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption); 
    
 	
 	
@@ -125,7 +135,7 @@ $(function() {
 	<div class="map-bookmark">
 		<div class="map-wrap">
 			<span>지도</span>
-			<div id="map" class="kk-map"></div>
+			<div id="staticMap" class="kk-map"></div>
 		</div>
 	</div>
 	

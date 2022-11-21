@@ -28,10 +28,7 @@ public class ManagerRestService {
 	
 	//노선가져오기
 	public List<LineDomain> searchLine() {
-		List<LineDomain> list = null;
-		
-		list = mrDAO.selectLine();
-		
+		List<LineDomain> list = mrDAO.selectLine();
 		return list;
 	}
 	
@@ -73,9 +70,9 @@ public class ManagerRestService {
 		return list;
 	}
 	
-	public List<DoDomain> searchDO() {
-		
-		return null;
+	public List<DoDomain> searchDo() {
+		List<DoDomain> list = mrDAO.selectDo();
+		return list;
 	}
 	
 	public void addRest(RestVO rVO) {
