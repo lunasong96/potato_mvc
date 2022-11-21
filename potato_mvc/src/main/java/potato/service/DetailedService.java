@@ -43,17 +43,23 @@ public class DetailedService {
 	
 	//»ﬁ∞‘º“ ∫œ∏∂≈© ø©∫Œ
 	public int getBookmarkChk(DetailedBookmarkVO dbVO) {
-		return 0;
+		int bookChk=0;
+		bookChk=dDAO.selectBookmarkChk(dbVO);
+		return bookChk;
 	}
 	
 	//»ﬁ∞‘º“ ∫œ∏∂≈© √ﬂ∞° (∫Òµø±‚)
-	public int setBookmarkAdd(DetailedBookmarkVO dbVO) {
-		return 0;
+	public String setBookmarkAdd(DetailedBookmarkVO dbVO) {
+		String bookAdd=null;
+		bookAdd=dDAO.insertBookmarkAdd(dbVO);
+		return bookAdd;
 	}
 	
 	//»ﬁ∞‘º“ ∫œ∏∂≈© «ÿ¡¶ (∫Òµø±‚)
-	public int setBookmarkDel(DetailedBookmarkVO dbVO) {
-		return 0;
+	public String setBookmarkDel(DetailedBookmarkVO dbVO) {
+		String bookDel=null;
+		bookDel=dDAO.deleteBookmarkDel(dbVO);
+		return bookDel;
 	}
 	
 	//»ﬁ∞‘º“ ∫∞¡° total
@@ -93,6 +99,13 @@ public class DetailedService {
 		int reviewtotal=0;
 		reviewtotal=dDAO.selectReviewTotal(restarea_idx);
 		return reviewtotal;
+	}
+	
+	//∏Æ∫‰ √— sum
+	public int getReviewSum(int restarea_idx) {
+		int reviewSum=0;
+		reviewSum=dDAO.selectReviewSum(restarea_idx);
+		return reviewSum;
 	}
 	
 	//∏Æ∫‰ ¡∂»∏(∫Òµø±‚)
@@ -157,13 +170,17 @@ public class DetailedService {
 	}
 	
 	//∏Æ∫‰ ¡¡æ∆ø‰ √ﬂ∞°
-	public int getLikeAdd(DetailedLikeVO dlVO) {
-		return 0;
+	public String getLikeAdd(DetailedLikeVO dlVO) {
+		String likeAdd=null;
+		likeAdd=dDAO.insertLikeAdd(dlVO);
+		return likeAdd;
 	}
 	
 	//∏Æ∫‰ ¡¡æ∆ø‰ ªË¡¶
-	public int getLikeDel(DetailedLikeVO dlVO) {
-		return 0;
+	public String getLikeDel(DetailedLikeVO dlVO) {
+		String likeDel=null;
+		likeDel=dDAO.deleteLikeDel(dlVO);
+		return likeDel;
 	}
 	
 	//∏Æ∫‰ ªË¡¶

@@ -79,6 +79,13 @@
 	where restarea_idx=#{restarea_idx}
 </select>
 
+<!-- 리뷰 총 합계 -->
+<select id="selReviewSum" resultType="int" parameterType="int">
+	select nvl(sum(rating),0) rSum
+	from review
+	where restarea_idx=#{restarea_idx}
+</select>
+
 <!-- 리뷰 조회 -->
 <select id="selReviewAll" resultType="potato.domain.DetailedReviewDomain" parameterType="potato.vo.DetailedReviewVO">
 <!--  리뷰 조회(최신순) -->
@@ -97,6 +104,13 @@ order by post_date, review_idx
 </if>
 offset 0 rows
 fetch next #{addFlag}*1+1 rows only
+</select>
+
+<!-- 좋아요 여부 -->
+<select id="selLikeChk" resultType="int" parameterType="potato.vo.DetailedLikeVO">
+select count(*) lcnt 
+from liked 
+where id_clicker=${id_clicker} and review_idx=${restarea_idx} and id_writer=${id_writer} and restarea_idx=${review_idx};
 </select>
 
 <!-- 리뷰 좋아요 추가 -->

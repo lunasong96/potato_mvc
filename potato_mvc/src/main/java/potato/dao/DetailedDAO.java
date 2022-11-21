@@ -50,17 +50,44 @@ public class DetailedDAO {
 	
 	//»ﬁ∞‘º“ ∫œ∏∂≈© ø©∫Œ
 	public int selectBookmarkChk(DetailedBookmarkVO dbVO) {
-		return 0;
+		int bookmarkChk=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		bookmarkChk=ss.selectOne("potato.detailedMapper.selBookmarkChk",dbVO);
+		
+		mbh.closeHandler(ss);
+		
+		return bookmarkChk;
 	}
 	
 	//»ﬁ∞‘º“ ∫œ∏∂≈© √ﬂ∞°
-	public int insertBookmarkAdd(DetailedBookmarkVO dbVO) {
-		return 0;
+	public String insertBookmarkAdd(DetailedBookmarkVO dbVO) {
+		String bookmarkAdd="";
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		bookmarkAdd=ss.selectOne("potato.detailedMapper.insBookmarkAdd",dbVO);
+		
+		mbh.closeHandler(ss);
+		
+		return bookmarkAdd;
 	}
 	
 	//»ﬁ∞‘º“ ∫œ∏∂≈© «ÿ¡¶
-	public int deleteBookmarkDel(DetailedBookmarkVO dbVO) {
-		return 0;
+	public String deleteBookmarkDel(DetailedBookmarkVO dbVO) {
+		String bookmarkDel=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		bookmarkDel=ss.selectOne("potato.detailedMapper.delBookmarkDel",dbVO);
+		
+		mbh.closeHandler(ss);
+		
+		return bookmarkDel;
 	}
 	
 	//»ﬁ∞‘º“ ∫∞¡° total
@@ -130,6 +157,20 @@ public class DetailedDAO {
 		return reviewtotal;
 	}
 	
+	//∏Æ∫‰ √— total
+	public int selectReviewSum(int restarea_idx) {
+		int reviewSum=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		reviewSum=ss.selectOne("potato.detailedMapper.selReviewSum",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return reviewSum;
+	}
+	
 	//∏Æ∫‰ ¡∂»∏
 	public List<DetailedReviewDomain> selectReviewAll(DetailedReviewVO drVO) {
 		List<DetailedReviewDomain> drd=null;
@@ -149,19 +190,32 @@ public class DetailedDAO {
 		return null;
 	}
 	
-	//∏Æ∫‰ ¡¡æ∆ø‰ total X
-	public int selectLikeTotal(DetailedLikeVO dlVO) {
-		return 0;
-	} 
-	
 	//∏Æ∫‰ ¡¡æ∆ø‰ √ﬂ∞°
-	public int insertLikeAdd(DetailedLikeVO dlVO) {
-		return 0;
+	public String insertLikeAdd(DetailedLikeVO dlVO) {
+		String likeAdd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		likeAdd=ss.selectOne("potato.detailedMapper.insLikeAdd",dlVO);
+		
+		mbh.closeHandler(ss);
+		
+		return likeAdd;
 	}
 	
 	//∏Æ∫‰ ¡¡æ∆ø‰ ªË¡¶
-	public int deleteLikeDel(DetailedLikeVO dlVO) {
-		return 0;
+	public String deleteLikeDel(DetailedLikeVO dlVO) {
+		String likeDel=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		likeDel=ss.selectOne("potato.detailedMapper.delLikeDel",dlVO);
+		
+		mbh.closeHandler(ss);
+		
+		return likeDel;
 	}
 	
 	//∏Æ∫‰ ªË¡¶
