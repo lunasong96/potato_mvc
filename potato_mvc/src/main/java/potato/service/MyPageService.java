@@ -29,8 +29,9 @@ public class MyPageService {
 	
 	//마이페이지 접속
 	public String searchMyPageIn(String id) {
-		
-		return null;
+		String sl=null;
+		sl=mDAO.selectLogin(id);
+		return sl;
 	}//searchMyPageIn
 	
 	//내 정보 조회
@@ -61,7 +62,10 @@ public class MyPageService {
 	
 	//회원탈퇴
 	public int updateQuit(MyPageQuitVO qVO) {
-		return 0;
+		int quitCnt=0;
+		quitCnt=mDAO.updateQuit(qVO);
+		
+		return quitCnt;
 	}//updateQuit
 	
 	//회원탈퇴 처리
@@ -124,7 +128,7 @@ public class MyPageService {
 		return 0;
 	}//delLike
 	
-	//신고창 팝업(이거 맞나,,,)
+	//신고창 팝업
 	public MyPageReportDomain reportPopup() {
 		return null;
 	}//MyPageReportDomain
@@ -138,8 +142,6 @@ public class MyPageService {
 	public List<MyPageBookmarkDomain>searchBookmark(String id){
 		List<MyPageBookmarkDomain> mbd=null;
 		mbd=mDAO.selectBookmark(id);
-		
-		
 		return mbd;
 	}//searchBookmark
 	

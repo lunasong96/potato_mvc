@@ -2,6 +2,8 @@ package potato.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,7 @@ import potato.domain.MyPageBookmarkDomain;
 import potato.domain.MyPageMyInfoDomain;
 import potato.domain.MyPageReportDomain;
 import potato.manager.domain.ReviewDomain;
+import potato.vo.LoginVO;
 import potato.vo.MyPageBookmarkVO;
 import potato.vo.MyPageLikeVO;
 import potato.vo.MyPageMyInfoEditVO;
@@ -23,13 +26,15 @@ public class MyPageDAO {
 	
 	//마이페이지 접속
 	public String selectLogin(String id) {
+		String sl=null;
 		//1. MyBatis Handler 얻기
-		//MyBatisHandler mbh=MyBatisHandler.getInstance();
-		//SqlSession ss=mbh.getHandler();
-		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
 		//2. 쿼리문 실행
+		sl=ss.selectOne("potato.mypageMapper.selectLogin");
 		//3. MyBatis Handler 끊기
-		return null;
+		mbh.closeHandler(ss);
+		return sl;
 	}//selectLogin
 	
 	//내 정보 조회
@@ -172,7 +177,9 @@ public class MyPageDAO {
 		SqlSession ss=mbh.getHandler();
 		//2. 쿼리문 실행
 		cnt=ss.delete("potato.mypageMapper.updateBookmark",bVO);
+		ss.commit();
 		//3. MyBatis Handler 끊기
+		mbh.closeHandler(ss);
 		return cnt;
 	}//delBookmark
 	

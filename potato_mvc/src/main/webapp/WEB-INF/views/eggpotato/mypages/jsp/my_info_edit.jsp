@@ -38,7 +38,7 @@ $(function() {
 				<div class="img">
 					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
-				<div class="nickname">감자킴</div>
+				<div class="nickname"><c:out value="${ nick }"/></div>
 			</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
@@ -70,34 +70,36 @@ $(function() {
 				</div>
 			</td>
 		</tr>
+		<c:forEach var="mil" items="${ MyInfoList }">
 		<tr>
 			<th><label>성명</label></th>
-			<td><input type="text" value="" id="name" readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.name }"/>" id="name" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>닉네임</label></th>
-			<td><input type="text" value="<c:out value="${ mie.nick }"/>" id="nick"></td>
+			<td><input type="text" value="<c:out value="${ mil.nick }"/>" id="nick"></td>
 		</tr>
 		<tr>
 			<th><label>아이디</label></th>
-			<td><input type="text" value="" id="id" readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.id }"/>" id="id" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>생년월일</label></th>
 				<td>
-					<input type="date" name="birth" id="birth"  value=""  class="birth">
+					<input type="date" name="birth" id="birth"  value="<c:out value="${ mil.birth }"/>"  class="birth">
 				</td>
 		</tr>
 		<tr>
 			<th><label>휴대폰</label></th>
 				<td>
-					<input type="text" name="phone_num" value="" >
+					<input type="text" name="phone_num" value="<c:out value="${ mil.phone }"/>" >
 				</td>
 		</tr>
 		<tr>
 			<th><label>이메일</label></th>
-			<td><input type="text"  value="" name="email" id="email" maxlength="100"></td>
+			<td><input type="text"  value="<c:out value="${ mil.email }"/>" name="email" id="email" maxlength="100"></td>
 		</tr>
+		</c:forEach>
 	</table>
 	
 	<button class="edit_btn">확인</button>

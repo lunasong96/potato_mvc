@@ -5,17 +5,17 @@
   
   <mapper namespace="potato.mypageMapper">
   	<!-- 마이페이지 -->
-  	<select id="selectLogin" resultType="String" parameterType="potato.vo.LoginVO">
+  	<select id="selectLogin"  parameterType="potato.vo.LoginVO" resultType="String">
   		select  	id, pass
 		from    	member
-		where 	id= #{ id } and pass= #{ pass }
+		where 	id= #{ id, jdbcType=VARCHAR  } and pass= #{ pass, jdbcType=NUMERIC }
   	</select>
   
   	<!-- 내 정보 조회 -->
-  	<select id="selectMypageInfo" parameterType="String" resultType="potato.domain.MyPageMyInfoDomain">
+  	<select id="selectMypageInfo" resultType="potato.domain.MyPageMyInfoDomain" parameterType="String" >
   		select		img, name, nick, id, phone, email, birth
   		from		member				
-  		where		id =#{ id }
+  		where		id =#{ id, jdbcType=VARCHAR }
   	</select>
   	
   	<!--  내 정보 수정 -->
@@ -41,16 +41,16 @@
   	</select>
   	
   	<!-- 북마크한 휴게소 조회 -->
-  	<select id="selectBookmark" parameterType="String"  resultType="potato.domain.MyPageBookmarkDomain">
-  		select		b.id, r.name ,r.restarea_idx
+  	<select id="selectBookmark" resultType="potato.domain.MyPageBookmarkDomain" parameterType="String"  >
+  		select		b.id, r.name , r.restarea_idx 
 		from    	bookmark b, restarea r
-		where   	b.restarea_idx=r.restarea_idx and b.id in #{ id }
+		where   	b.restarea_idx=r.restarea_idx and b.id in #{ id, jdbcType=VARCHAR }
   	</select>
   	
   	<!-- 북마크한 휴게소 삭제(아이디, 휴게소 인덱스) -->
   	<select id="updateBookmark" parameterType="potato.vo.MyPageBookmarkVO">
   	delete
 	from     	bookmark
-	where    	restarea_idx = #{ restarea_idx}  and id=#{ id }
+	where    	restarea_idx = #{ restarea_idx, jdbcType=NUMERIC }  and id=#{ id, jdbcType=VARCHAR }
   	</select>
   </mapper>

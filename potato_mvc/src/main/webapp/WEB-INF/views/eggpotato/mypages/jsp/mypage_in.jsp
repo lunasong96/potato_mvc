@@ -12,7 +12,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
+$(function() {
+	$(".pw_chk_btn").click(function() {
+		chkNull();
+		confirm("확인되었습니다");
+	});//click
+	
+});//ready
+function chkNull() {
+	$("#InFrm").submit();
+}
 </script>
 
 </head>
@@ -40,14 +49,16 @@
 </div>
 
 <!-- 비밀번호 입력-확인 -->
+<form id="InFrm" action="chkIdPass.do" method="get" >
 <div class="pw_chk">
-	<input type="password" name="password" id="password" placeholder="비밀번호 입력" size="30" class="pw">
+	<input type="hidden" name="id"  id="id" value="<c:out value='${ sessionScope.id }'/>">
+	<input type="password" name="pass" id="pass" placeholder="비밀번호 입력" size="30" class="pw">
 	<input type="button" value="확인" class="pw_chk_btn" >
 </div>
-
+</form>
 <!-- 메인으로 돌아가기 -->
 <div class="mainLink">
-	<a href="../../mainhome/jsp/user_mainhome.jsp" class="mainLink">메인으로 돌아가기</a>
+	<a href="user_mainhome.do" class="mainLink">메인으로 돌아가기</a>
 </div>
 
 </div><!-- my_page_wrap -->

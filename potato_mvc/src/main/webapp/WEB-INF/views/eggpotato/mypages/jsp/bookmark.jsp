@@ -16,12 +16,18 @@
 <script type="text/javascript">
 $(function() {
 	$(".del").click(function() {
-		confirm("즐겨찾기가 삭제되었습니다.")
+		var delFlag=confirm("즐겨찾기가 삭제되었습니다.")
+		
+		if(delFlag ==true){
+			$("#delBookmarkFrm").submit();
+			
+		}//end if
 	});//click
 });//ready
 </script>
 
 </head>
+
 <body>
 <div class="wrap">
 
@@ -41,7 +47,7 @@ $(function() {
 				<div class="img">
 					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
-				<div class="nickname">감자킴</div>
+				<div class="nickname"><c:out value="${ nick }"/> </div>
 			</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
@@ -67,26 +73,21 @@ $(function() {
 			</div>profileImg
 		</div>profile -->
 	<div class="listWrap">
+<form id="delBookmarkFrm" method="get" action="delBookmark.do" >
+<input type="hidden" value="${id }" name="id">
 <c:forEach var="b" items="${bookmarklist}">
 		<div class="list">
+			<input type="hidden" value="${b.restarea_idx }" name="${b.restarea_idx }"><%-- RIDX${ b.restarea_idx }" --%>
 			<span class="list-item"><c:out value="${ b.name }"/></span>
 			<button class="del">삭제</button>
 		</div>
-	<!-- 	<div class="list">
-			<span class="list-item">냠냠 휴게소</span>
-			<button class="del">삭제</button>
-		</div>
-		<div class="list">
-			<span class="list-item">꼭꼭 휴게소</span>
-			<button class="del">삭제</button>
-		</div>
-		<div class="list">
-			<span class="list-item">얍얍 휴게소</span>
-			<button class="del">삭제</button>
-		</div> -->
-		
-		
 </c:forEach>
+</form>
+<!-- 북마크한 휴게소가 없을 경우 -->
+<c:if test="${ empty bookmarklist }">
+	즐겨찾기한 휴게소가 없습니다.
+</c:if>
+
 	</div><!-- listWrap -->
 	</div><!-- bookmarkWrap -->
 </div><!-- wrap-navi -->
