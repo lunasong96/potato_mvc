@@ -55,6 +55,8 @@ public class UserController {
 	@RequestMapping(value = "logout.do", method = GET)
 	public String logout( SessionStatus ss, HttpSession session ) {
 		String url="redirect:user_mainhome.do";
+		session.removeAttribute("id");
+		session.removeAttribute("nick");
 		ss.setComplete();
 		session.invalidate();
 		return url;
