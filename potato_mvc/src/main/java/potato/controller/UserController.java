@@ -44,16 +44,20 @@ public class UserController {
 	
 	@RequestMapping(value = "/login.do", method = POST)
 	public String login(Model model, LoginVO lVO, HttpSession session) {
+		String url="redirect:user_mainhome.do";
 		UserDomain ud = null;
 		ud=us.searchMember(lVO);
 		session.setAttribute("id", ud.getId());
 		session.setAttribute("nick", ud.getNick());
-		return "mainhome/jsp/user_mainhome";
+		return url;
 	}//login
 	
-	@RequestMapping("logout.do")
-	public String logout( SessionStatus ss ) {
-		return "home.jsp";
+	@RequestMapping(value = "logout.do", method = GET)
+	public String logout( SessionStatus ss, HttpSession session ) {
+		String url="redirect:user_mainhome.do";
+		ss.setComplete();
+		session.invalidate();
+		return url;
 	}//logout
 	
 	@RequestMapping(value = "/signUpAgree.do", method = GET)
