@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="potato.myReview">
+
+<!-- 리뷰조회 -->
+	<select id="selOtherRevAll" parameterType="potato.vo.OtherReviewVO" resultType="potato.domain.OtherReviewDomain">
+	select r.review_idx,res.name, r.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
+			nvl(regexp_count(regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
+	from   review_img ri, review r, liked l, member m ,restarea res
+	where  (res.restarea_idx(+)=r.restarea_idx and ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
+			and l.review_idx(+)=ri.review_idx and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=ri.restarea_idx and l.restarea_idx(+)=r.restarea_idx
+			and m.id(+)=r.id)and r.restarea_idx=#{restarea_idx}
+	group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img, res.name
+	order by post_date desc, review_idx desc
+	offset 0 rows
+	</select>
+
+	
+</mapper>

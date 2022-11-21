@@ -3,7 +3,7 @@ package potato.domain;
 import java.sql.Date;
 import java.util.Arrays;
 
-public class OtherReviewDomain {
+public class MyReviewDomain {
 	private String nick, contents, id, profilImg, name;
 	private String[] revimg;
 	private int restarea_idx, review_idx, rating, like_cnt;

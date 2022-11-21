@@ -1,8 +1,8 @@
 package potato.vo;
 
-public class OtherReviewVO {
-	private String img, id, otherPId;
-	private int dateFlag, restarea_idx, review_idx, dateOrderFlag=1, pageFlag=1, reportOrderFlag;
+public class MyReviewVO {
+	private String img, id;
+	private int dateFlag, addFlag, restarea_idx, review_idx, dateOrderFlag=1, pageFlag=1, reportOrderFlag;
 	public String getImg() {
 		return img;
 	}
@@ -20,6 +20,12 @@ public class OtherReviewVO {
 	}
 	public void setDateFlag(int dateFlag) {
 		this.dateFlag = dateFlag;
+	}
+	public int getAddFlag() {
+		return addFlag;
+	}
+	public void setAddFlag(int addFlag) {
+		this.addFlag = addFlag;
 	}
 	public int getRestarea_idx() {
 		return restarea_idx;
@@ -51,18 +57,11 @@ public class OtherReviewVO {
 	public void setReportOrderFlag(int reportOrderFlag) {
 		this.reportOrderFlag = reportOrderFlag;
 	}
-	public String getOtherPId() {
-		return otherPId;
-	}
-	public void setOtherPId(String otherPId) {
-		this.otherPId = otherPId;
-	}
 	@Override
 	public String toString() {
-		return "OtherReviewVO [img=" + img + ", id=" + id + ", otherPId=" + otherPId + ", dateFlag=" + dateFlag
+		return "OtherReviewVO [img=" + img + ", id=" + id + ", dateFlag=" + dateFlag + ", addFlag=" + addFlag
 				+ ", restarea_idx=" + restarea_idx + ", review_idx=" + review_idx + ", dateOrderFlag=" + dateOrderFlag
 				+ ", pageFlag=" + pageFlag + ", reportOrderFlag=" + reportOrderFlag + "]";
 	}
-
 	
-}//class
+}

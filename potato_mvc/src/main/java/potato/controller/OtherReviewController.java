@@ -1,6 +1,7 @@
 package potato.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,18 +19,14 @@ public class OtherReviewController {
 	@Autowired(required = false)
 	private OtherReviewService ors;
 	
-	//타사용자리뷰
-	@RequestMapping(value="other_review.do", method=GET)
-	public String otherReview(HttpSession session,OtherReviewVO orVO, Model model) {
-		String url = "other_profiles/jsp/other_user_profiles";
+	//타사용자리뷰조회
+	@RequestMapping(value="other_review.do", method= {POST,GET})
+	public String otherReviewMove(String otherPId, HttpSession session, OtherReviewVO orVO, Model model) {
 		
-		return url;
-	}//otherReview
+		session.setAttribute("id", "sotteok");
+		model.addAttribute("revAll",ors.searchOtherRevAll(orVO));
+		
+		return  "other_profiles/jsp/other_user_profiles";
+	}//otherReviewMove
 	
-	//신고)리뷰-팝업
-	@RequestMapping(value = "reportPop.do",method = GET)
-	public String reportPop(HttpSession session, String string) {
-		return "other_profiles/jsp/report_review_popup";
-	}//reportReview
-
-}
+}//class
