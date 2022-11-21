@@ -2,7 +2,7 @@ package potato.manager.vo;
 
 public class MgrMemberVO {
 	private String id;
-	private int memberType=1,pageFlag=1;
+	private int memberType,pageFlag=1;
 	
 	public MgrMemberVO() {
 

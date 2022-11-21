@@ -20,11 +20,17 @@ public class MgrMemberService {
 	private MgrMemberDAO mmDAO;
 	
 	//회원 조회
-	public List<MgrMemberDomain> searchMember(MgrMemberVO mmVO){
+	public List<MgrMemberDomain> searchMember(MgrMemberVO mmVO,String memberCat,HttpSession session){
 		List<MgrMemberDomain> list=null;
 		
-		list=mmDAO.selectMember(mmVO);
-				
+		if(memberCat == null || "1".equals(memberCat)) {
+			list=mmDAO.selectMember(mmVO);
+		}else if("2".equals(memberCat)) {
+			list=mmDAO.selectQuitMember(mmVO);
+		}else if("3".equals(memberCat)) {
+			list=mmDAO.selectBlockMember(mmVO);
+		}//end else 
+		System.out.println( list );
 		return list;
 	}
 	
@@ -46,8 +52,9 @@ public class MgrMemberService {
 	
 	//회원 차단하기(차단회원 목록에 추가)
 	public int addBlock(ManagerBlockVO mbVO) {
+		int cnt=mmDAO.insertBlock(mbVO);
 		
-		return 0;
+		return cnt;
 	}
 	
 	//차단 해제
@@ -72,7 +79,7 @@ public class MgrMemberService {
 	
 	public int startNum(int currentPage) {
 		int startNum=0;
-		startNum=currentPage-(currentPage-1)%3;
+		startNum=currentPage-(currentPage-1) % 3;
 		
 		return startNum;
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
+$("#blockBtn").click(function(){
+	$("#blockFrm").submit();
+	self.close();
+});
 </script>
 
 </head>
@@ -22,43 +26,28 @@
 		<span>회원 차단하기</span>
 	</div>
 	<div class="middle">
-		<p>차단대상자: <span>송성우</span></p>
+		<p>차단대상자: <span>${ blockId }</span></p>
 		<div class="radio-wrap">
+			<c:forEach var="block" items="${ reasonList }">
 			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">홍보/상업성
+				<input type="radio" name="report-radio" class="rr">${block.reason }
 			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">같은 내용 도배
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">욕설/인신공격
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">음란/선정성
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">불법정보
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">개인정보 노출
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">권리침해 신고
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">관련 없는 내용
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">기타
-			</div>
+			</c:forEach>
+
 			<!-- 삭제 금지 -->
 			<div class="rr-wrap"></div>
 			<!-- 삭제금지 -->
 		</div>
 	</div>
 	<div class="bottom">
-		<button type="button" class="report-btn">차단하기</button>
+		<button type="button" class="report-btn" id="blockBtn" name="blockBtn">차단하기</button>
 	</div>
 </div>
+
+<!-- 차단하기 -->
+<form id="blockFrm" action="mgr_block.do" method="post">
+	<input type="hidden" id="blockId" name="id">
+	<input type="hidden" id="blockIdx" name="block_idx">
+</form>
 </body>
 </html>

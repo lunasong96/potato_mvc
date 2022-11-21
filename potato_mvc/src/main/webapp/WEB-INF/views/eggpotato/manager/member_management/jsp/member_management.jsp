@@ -23,6 +23,8 @@ $(function(){
 			alert("2자 이상 입력하세요.");
 			return;
 		}
+	$("#id").val($("#idSearch").val());
+	$("#memberFrm").submit();
 	});
 		
 	//차단 해제 버튼 클릭 시
@@ -43,32 +45,20 @@ $(function(){
 function tableChange(){
 	var key=$("#memberCat").val();
 	
-	if(key==1){
-		 document.all["t1"].style.display="block";
-		 document.all["t2"].style.display="none";
-		 document.all["t3"].style.display="none";
-	}
-	if(key==2){
-		 document.all["t1"].style.display="none";
-		 document.all["t2"].style.display="block";
-		 document.all["t3"].style.display="none";
-	}
-	if(key==3){
-		 document.all["t1"].style.display="none";
-		 document.all["t2"].style.display="none";
-		 document.all["t3"].style.display="block";
-	}
+	$("#memberCategory").val($("#memberCat").val());
+	$("#memberFrm").submit();
 }//tableChange
 	
 	//사용자 아이디 클릭시 상세 정보 팝업창 보여주기
-	function infoPopup(){
-		window.open("mgr_memberInfoPopup.do","member_detail_info_popup",
+	function infoPopup(userId){
+		window.open("mgr_memberInfoPopup.do?memberId="+userId,"member_detail_info_popup",
 				"width=539,height=474,top=203,left=1336")
 	}
-	//신고 버튼 클릭시 팝업창 보여주기
-	function showPopup(){
-		window.open("mgr_memberBlockPopup.do","member_block_popup",
+	//차단 버튼 클릭시 팝업창 보여주기
+	function showPopup(memberId){
+		window.open("mgr_memberBlockPopup.do?memberId"+memberId,"member_block_popup",
 				"width=539,height=474,top=203,left=1336")
+				alert(memberId);
 	}
 </script>
 </head>
@@ -96,10 +86,11 @@ function tableChange(){
 		<div class="member_management">
 			
 			<div class="mm_top">
-				<input hidden="hidden"><select id="memberCat" name="memberCat" class="select_category" onchange="tableChange()">
-					<option value="1">전체 사용자</option>
-					<option value="2">탈퇴 회원</option>
-					<option value="3">차단 회원</option>
+				<input hidden="hidden">
+				<select id="memberCat" name="memberCat" class="select_category" onchange="tableChange()">
+					<option value="1"${ param.memberCat eq "1"?" selected='selected'":"" }>전체 사용자</option>
+					<option value="2"${ param.memberCat eq "2"?" selected='selected'":"" }>탈퇴 회원</option>
+					<option value="3"${ param.memberCat eq "3"?" selected='selected'":"" }>차단 회원</option>
 				</select>
 				
 				<div class="search_wrap">
@@ -109,42 +100,53 @@ function tableChange(){
 			</div><!-- mm_top end -->
 			
 			<div class="table_wrap">
-				<div id="t1" style="display: block"><!-- 초기로딩시 보임 -->
+			
 				<table class="table1">
-				<!-- 전체사용자 클릭 시 -->
-				<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>생년월일</th><th>차단</th></tr>
-				<c:forEach var="member" items="${ memberList }">
-				<tr>
-				<td><a href="javascript:infoPopup()" style="color:black">${member.id}</a></td><td>${member.nick}</td><td>${member.birth}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/> </td>
-				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
-				</tr>
+				<c:choose>
+				<c:when test="${ empty param.memberCat or param.memberCat eq 1 }">
+					<!-- 전체사용자 클릭 시 -->
+					<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>생년월일</th><th>차단</th></tr>
+					<c:if test="${ empty memberList }">
+						<tr><td colspan="5">조회된 결과가 없습니다.</td></tr>
+					</c:if>
+					<c:forEach var="member" items="${ memberList }">
+					<tr>
+					<td><a href="javascript:infoPopup('${member.id}')" style="color:black">${member.id}</a></td><td>${member.nick}</td><td>${member.birth}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/> </td>
+					<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
+					</tr>
 				</c:forEach>
-				</table>
-				</div>
+				</c:when>
+				<c:when test="${ param.memberCat eq 2 }">
+					<!-- 탈퇴 회원 클릭 시 -->
+					<table class="table2">
+					<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>탈퇴날짜</th></tr>
+					<c:if test="${ empty memberList }">
+						<tr><td colspan="5">조회된 결과가 없습니다.</td></tr>
+					</c:if>
+					<c:forEach var="quit" items="${memberList}">
+					<tr><td>${quit.id }</td><td>${quit.nick}</td><td>${quit.join_date}</td><td>${quit.quit_date}</td></tr>
+					</c:forEach>
+					</table>
 				
-				<div id="t2" style="display: none"> <!-- 처음 로딩시 숨김 상태 -->
-				<!-- 탈퇴 회원 클릭 시 -->
-				<table class="table2">
-				<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>탈퇴날짜</th></tr>
-				<c:forEach var="quit" items="${memberList}">
-				<tr><td>${quit.id }</td><td>${quit.nick}</td><td>${quit.join_date}</td><td>${quit.quit_date}</td></tr>
-				</c:forEach>
-				<!-- <tr><td>purplepotato</td><td>감자머리</td><td>2022-06-17</td><td>2022-11-28</td></tr> -->
-				</table>
-				</div>
-				
-				<div id="t3" style="display: none"> <!-- 처음 로딩시 숨김상태 -->
+				</c:when>	
+				<c:when test="${ param.memberCat eq 3 }">
 				<!-- 차단 회원 클릭 시 -->
-				<table class="table3">
-				<tr><th>아이디명</th><th>별명</th><th>차단사유</th><th>차단해제</th></tr>
-				<c:forEach var="block" items="${memberList}">
-				<tr><td>${block.id }</td><td>${block.nick}</td><td>리뷰와 상관없는 내용 도배</td>
-				<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr>
-				</c:forEach>
-				<tr><td>potato</td><td>감자돌이</td><td>개인정보 유출 위험</td>
-				<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr>
+					<table class="table3">
+						<tr><th>아이디명</th><th>별명</th><th>차단사유</th><th>차단해제</th></tr>
+					<c:if test="${ empty memberList }">
+						<tr><td colspan="5">조회된 결과가 없습니다.</td></tr>
+					</c:if>
+					<c:forEach var="block" items="${memberList}">
+						<tr><td>${block.id }</td><td>${block.nick}</td><td>${block.reason }</td>
+						<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr>
+					</c:forEach>
+					</table>
+				
+				</c:when>				
+				</c:choose>
 				</table>
 				</div>
+				
 			
 			</div>
 		</div><!-- 본문 끝 -->
@@ -159,7 +161,6 @@ function tableChange(){
 		</div>
 
 <!-- 건들지마세요 -->
-	</div>
 </div>
 <!-- container end -->
 
@@ -171,14 +172,20 @@ function tableChange(){
 
 <!-- 회원 불러오기 -->
 <form id="memberFrm" action="mgr_memberManagement.do" method="post">
-	<input type="hidden" id="id" name="id" value="${param.id}"/>
-	<input type="hidden" id="memberType" name="memberType" value="${param.memberType }"/>
+	<input type="hidden" id="id" name="id" value="${param.id }"/>
+	<input type="hidden" id="memberCategory" name="memberCat" value="${empty param.memberType? 1:param.memberType }"/>
+	<input type="hidden" id="memberType" name="memberType" value="${empty param.memberType? 1:param.memberType }"/>
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
 </form>
 
 <!-- 회원정보 상세창 불러오기 -->
 <form id="infoFrm" action="mgr_memberInfoPopup.do" method="post">
-	<input type="hidden" id="id" name="id">
+	<input type="hidden" id="infoId" name="id">
+</form>
+
+<!-- 회원 차단 팝업창 불러오기 -->
+<form id="infoFrm" action="mgr_memberBlockPopup.do" method="post">
+	<input type="hidden" id="blockId" name="id">
 </form>
 </body>
 </html>

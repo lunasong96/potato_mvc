@@ -14,7 +14,7 @@ import potato.manager.vo.MgrMemberVO;
 @Component
 public class MgrMemberDAO {
 	
-	//회원 목록 조회
+	//전체 회원 목록 조회
 	public List<MgrMemberDomain> selectMember(MgrMemberVO mmVO){
 		List<MgrMemberDomain> list=null;
 		
@@ -22,6 +22,34 @@ public class MgrMemberDAO {
 		SqlSession session=mbh.getHandler();
 		
 		list=session.selectList("potato.manager.mgrMemberMapper.memberList",mmVO);
+		
+		mbh.closeHandler(session);
+		
+		return list;
+	}
+	
+	//탈퇴 회원 목록 조회
+	public List<MgrMemberDomain> selectQuitMember(MgrMemberVO mmVO){
+		List<MgrMemberDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		
+		list=session.selectList("potato.manager.mgrMemberMapper.quitMemberList",mmVO);
+		
+		mbh.closeHandler(session);
+		
+		return list;
+	}
+	
+	//차단 회원 목록 조회
+	public List<MgrMemberDomain> selectBlockMember(MgrMemberVO mmVO){
+		List<MgrMemberDomain> list=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		
+		list=session.selectList("potato.manager.mgrMemberMapper.blockMemberList",mmVO);
 		
 		mbh.closeHandler(session);
 		
@@ -36,7 +64,7 @@ public class MgrMemberDAO {
 		SqlSession session=mbh.getHandler();
 		
 		mmd=session.selectOne("potato.manager.mgrMemberMapper.infoPopup",id);
-		
+		System.out.println( "-------------"+ mmd);
 		mbh.closeHandler(session);
 		
 		return mmd;
@@ -57,7 +85,10 @@ public class MgrMemberDAO {
 	}
 	
 	//회원 차단
-	public void insertBlock(ManagerBlockVO mbVO) {
+	public int insertBlock(ManagerBlockVO mbVO) {
+		int cnt=0;
+		
+		return cnt;
 		
 	}
 	

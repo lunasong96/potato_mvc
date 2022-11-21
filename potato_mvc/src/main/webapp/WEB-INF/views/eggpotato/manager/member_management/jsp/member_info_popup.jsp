@@ -15,7 +15,7 @@
 <script type="text/javascript">
 $(function(){
 	//닫기 버튼 눌렀을 때
-	$("#closeBtn").click(function(){
+	$("#btn").click(function(){
 		self.close();
 	});
 });
@@ -30,27 +30,27 @@ $(function(){
 <div class="info-wrap">
 		<div class="info">
 			<label>아이디</label>
-			<input type="text" value="q1w2e3r4t5" id="id" name="id" class="inputTxt" readonly="readonly"/>
+			<input type="text" value="${ memberData.id }" id="id" name="id" class="inputTxt" readonly="readonly"/>
 		</div>
 		<div class="info">
 			<label>별명</label>
-			<input type="text" value="홍길동" id="name" name="name" class="inputTxt" readonly="readonly"/>
+			<input type="text" value="${ memberData.nick }" id="name" name="name" class="inputTxt" readonly="readonly"/>
 		</div>
 		<div class="info">
 			<label>생년월일</label>
-			<input type="date" name="birth" id="birth" value="2022-06-17" readonly="readonly"/>
+			<input type="date" name="birth" id="birth" value="${ memberData.birth }" readonly="readonly"/>
 		</div>
 		<div class="info">
 			<label>전화번호</label>
-			<input type="text" name="phoneNum" id="phoneNum" value="010-1234-4567" class="inputTxt" readonly="readonly"/>
+			<input type="text" name="phone" id="phone" value="${ memberData.phone }" class="inputTxt" readonly="readonly"/>
 		</div>
 		<div class="info">
 			<label>이메일</label>
-			<input type="text" name="email" id="email" value="abc@gmail.com" class="inputEmail" readonly="readonly"/>
+			<input type="text" name="email" id="email" value="${ memberData.email }" class="inputEmail" readonly="readonly"/>
 		</div>
 		<div class="info">
 			<label>가입날짜</label>
-			<input type="date" name="join" id="join" value="2022-09-11" readonly="readonly"/>
+			<input type="date" name="join_date" id="join_date" value="${ memberData.join_date }" readonly="readonly"/>
 		</div>
 	</div><!-- info-wrap -->
 	

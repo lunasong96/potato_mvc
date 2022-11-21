@@ -3,18 +3,20 @@ package potato.manager.domain;
 import java.sql.Date;
 
 public class MgrMemberDomain {
-	private String id,nick,birth,phone;
+	private String id,nick,birth,phone,email;
 	private Date join_date,quit_date;
 	
 	public MgrMemberDomain() {
 
 	}
 
-	public MgrMemberDomain(String id, String nick, String birth, String phone, Date join_date, Date quit_date) {
+	public MgrMemberDomain(String id, String nick, String birth, String phone, String email, Date join_date,
+			Date quit_date) {
 		this.id = id;
 		this.nick = nick;
 		this.birth = birth;
 		this.phone = phone;
+		this.email = email;
 		this.join_date = join_date;
 		this.quit_date = quit_date;
 	}
@@ -43,6 +45,22 @@ public class MgrMemberDomain {
 		this.birth = birth;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Date getJoin_date() {
 		return join_date;
 	}
@@ -58,20 +76,11 @@ public class MgrMemberDomain {
 	public void setQuit_date(Date quit_date) {
 		this.quit_date = quit_date;
 	}
-	
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
 
 	@Override
 	public String toString() {
-		return "MgrMemberDomain [id=" + id + ", nick=" + nick + ", birth=" + birth + ", phone=" + phone + ", join_date="
-				+ join_date + ", quit_date=" + quit_date + "]";
+		return "MgrMemberDomain [id=" + id + ", nick=" + nick + ", birth=" + birth + ", phone=" + phone + ", email="
+				+ email + ", join_date=" + join_date + ", quit_date=" + quit_date + "]";
 	}
 
-	
 }
