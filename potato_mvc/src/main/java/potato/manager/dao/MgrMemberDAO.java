@@ -30,8 +30,16 @@ public class MgrMemberDAO {
 	
 	//회원 상세 정보 팝업창
 	public MgrMemberDomain selectDetailInfo(String id) {
+		MgrMemberDomain mmd=null;
 		
-		return null;
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		
+		mmd=session.selectOne("potato.manager.mgrMemberMapper.infoPopup",id);
+		
+		mbh.closeHandler(session);
+		
+		return mmd;
 	}
 	
 	//차단 팝업창) 차단 사유 불러오기
@@ -52,7 +60,7 @@ public class MgrMemberDAO {
 	}
 	
 	//페이징
-	public int searchTotalMember(MgrMemberVO mmVO) {
+	public int selectTotalPages(MgrMemberVO mmVO) {
 		
 		return 0;
 	}

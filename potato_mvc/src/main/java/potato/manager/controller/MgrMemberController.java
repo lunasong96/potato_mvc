@@ -21,15 +21,34 @@ public class MgrMemberController {
 	
 	//회원목록 조회
 	@RequestMapping(value="/mgr_memberManagement.do",method= {GET,POST})
-	public String memberList(MgrMemberVO mVO,Model model) {
-		mVO.setMemberType(1);
-		model.addAttribute("memberList", mms.searchMember(mVO));
+	public String memberList(MgrMemberVO mmVO,Model model) {
+		
+		//페이징 변수
+		int totalPages = mms.searchTotalPages(mmVO);
+		int lastPage = mms.lastPage(totalPages);
+		int currentPage = mmVO.getPageFlag();
+		int startNum = mms.startNum(currentPage);
+		int isLast = mms.isLast(lastPage, startNum);
+		
+		//멤버 타입
+		int memberType=mmVO.getMemberType();
+		
+		//view로 전송
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startNum", startNum);
+		model.addAttribute("isLast", isLast);
+		model.addAttribute("currentPage", currentPage);
+		
+		model.addAttribute("memberType",memberType);
+		model.addAttribute("memberList", mms.searchMember(mmVO));
+
 		return "manager/member_management/jsp/member_management";
 	}//memberList
 	
 	//회원 상세정보 팝업창 띄우기
 	@RequestMapping(value="/mgr_memberInfoPopup.do",method=GET)
 	public String memberInfoPopup(String id, Model model) {
+		model.addAttribute("id",mms.searchMemberInfo(id));
 		
 		return "manager/member_management/jsp/member_info_popup";
 	}//memberInfoPopup
@@ -37,7 +56,7 @@ public class MgrMemberController {
 	//회원 차단 팝업창 띄우기
 	@RequestMapping(value="/mgr_memberBlockPopup.do",method=GET)
 	public String memberBlockPopup(String id, Model model) {
-		
+
 		return "manager/member_management/jsp/member_block_popup";
 	}//memberInfoPopup
 	

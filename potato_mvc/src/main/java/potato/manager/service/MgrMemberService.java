@@ -28,10 +28,20 @@ public class MgrMemberService {
 		return list;
 	}
 	
+	//회원 상세정보창 불러오기
+	public MgrMemberDomain searchMemberInfo(String id) {
+		MgrMemberDomain mmd=null;
+		mmd=mmDAO.selectDetailInfo(id);
+		
+		return mmd;
+	}
+	
 	//차단 사유 불러오기
 	public List<MgrBlockReasonDomain> searchReason(){
+		List<MgrBlockReasonDomain> list=null;
+		list=mmDAO.selectReason();
 		
-		return null;
+		return list;
 	}
 	
 	//회원 차단하기(차단회원 목록에 추가)
@@ -47,19 +57,24 @@ public class MgrMemberService {
 	}
 	
 	//페이징
-	public int searchTotalMember(MgrMemberVO mmVO) {
+	public int searchTotalPages(MgrMemberVO mmVO) {
+		int cnt=mmDAO.selectTotalPages(mmVO);
 		
-		return 0;
+		return cnt;
 	}
 	
-	public int lastPage(int totalMember) {
-		
-		return 0;
+	public int lastPage(int totalPages) {
+		int lastPage=0;
+		lastPage=(int)Math.ceil((double)totalPages/6); //게시물 6개씩 보여주기
+
+		return lastPage;
 	}
 	
 	public int startNum(int currentPage) {
+		int startNum=0;
+		startNum=currentPage-(currentPage-1)%5;
 		
-		return 0;
+		return startNum;
 	}
 	
 	public int isLast(int startNum, int lastPage) {

@@ -5,7 +5,7 @@
 <mapper namespace="potato.manager.mgrMemberMapper">
 <select id="memberList" resultType="potato.manager.domain.MgrMemberDomain" parameterType="potato.manager.vo.MgrMemberVO">
 	<!-- 전체회원 목록 조회 -->
-	<if test="memberType == 1">
+	<if test="memberType eq 1">
 	select id,nick,join_date,birth
 	from member
 	<where>
@@ -15,8 +15,9 @@
          </if> 
 	</where>
 	</if>
+	
 	<!-- 탈퇴회원 목록 조회 -->
-	<if test="memberType == 2">
+	<if test="memberType eq 2">
 	select id,nick,join_date,quit_date
 	from member
 	<where>
@@ -27,7 +28,7 @@
 	</where>
 	</if>
 	<!-- 차단회원 목록 조회 -->
-	<if test="memberType == 3">
+	<if test="memberType eq 3">
 	select mb.id,m.nick,br.reason
 	from member m,member_block mb,block_reason br  
 	<where>
