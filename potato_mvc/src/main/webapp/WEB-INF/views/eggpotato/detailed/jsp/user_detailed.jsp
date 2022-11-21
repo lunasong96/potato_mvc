@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
   
 <!DOCTYPE html>
 <html>
@@ -193,7 +194,7 @@ function slider() {
 			
 			for(var i=0; i<review.length; i++){
 				var content =
-					"<div class='review-exist'><div class='re-left'><img src='css/images/"+review[i].img+"' alt='프로필사진'></div>"+
+					"<a href='javascript:profileMove(\""+review[i].id+"\");'><div class='review-exist'><div class='re-left'><img src='css/images/"+review[i].img+"' alt='프로필사진'></a></div>"+
 					"<div class='re-right'><span>"+review[i].nick+"</span><div class='star-rate'><span class='star-blank'></span><div class='re-star-wrap'><span class='star' style='width: "+(review[i].rating*20)+"%''></span></div><span class='rate-txt'>"+review[i].rating+"</span></div><p class='re-txt'>"+review[i].contents+"</p>";
 				
 				if(review[i].foodimg!=null) {
@@ -207,8 +208,26 @@ function slider() {
 					content +="</div></div><div class='swiper-button-next re-swiper-button-next'></div></div>";
 				}
 				
+				var riresult;
+				
+				if("${id}"=="") {
+					result="heart-btn";
+				}else {
+					if(review[i].idclick!=null) {
+						var ric=review[i].idclick;
+						var riresult=ric.includes("${id}");
+						if(riresult==true) {
+							result="heart-btn hb-fill";
+						}else {
+							result="heart-btn";
+						}
+					}else {
+						result="heart-btn";
+					}
+				}
+				
 				content +="<div class='etc-icon-wrap'><div class='etc-icon'>"+
-					"<div class='heart-icon-wrap'><input type='hidden' name='review_idx' id='review_idx' value='"+review[i].review_idx+"'><button type='button' class='heart-btn' value='"+review[i].id+"'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart-fill' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button><span>좋아요(<span>"+review[i].liked+"</span>)</span></div>";
+					"<div class='heart-icon-wrap'><input type='hidden' name='review_idx' id='review_idx' value='"+review[i].review_idx+"'><button type='button' class='"+result+"' value='"+review[i].id+"'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart-fill' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button><span>좋아요(<span>"+review[i].liked+"</span>)</span></div>";
 				
 				if("${id}" != review[i].id) { //로그인id와 글쓴id 다를때
 				content +="<div class='report-icon'><button type='button' class='report-btn'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-bell-fill' viewBox='0 0 16 16'><path d='M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z'/></svg></button><span>신고</span></div>";
@@ -269,7 +288,7 @@ function slider() {
 				
 				for(var i=0; i<review.length; i++){
 					var content =
-						"<div class='review-exist'><div class='re-left'><img src='css/images/"+review[i].img+"' alt='프로필사진'></div>"+
+						"<a href='javascript:profileMove(\""+review[i].id+"\");'><div class='review-exist'><div class='re-left'><img src='css/images/"+review[i].img+"' alt='프로필사진'></a></div>"+
 						"<div class='re-right'><span>"+review[i].nick+"</span><div class='star-rate'><span class='star-blank'></span><div class='re-star-wrap'><span class='star' style='width: "+(review[i].rating*20)+"%''></span></div><span class='rate-txt'>"+review[i].rating+"</span></div><p class='re-txt'>"+review[i].contents+"</p>";
 					
 					if(review[i].foodimg!=null) {
@@ -283,8 +302,26 @@ function slider() {
 						content +="</div></div><div class='swiper-button-next re-swiper-button-next'></div></div>";
 					}
 					
+					var riresult;
+					
+					if("${id}"=="") {
+						result="heart-btn";
+					}else {
+						if(review[i].idclick!=null) {
+							var ric=review[i].idclick;
+							var riresult=ric.includes("${id}");
+							if(riresult==true) {
+								result="heart-btn hb-fill";
+							}else {
+								result="heart-btn";
+							}
+						}else {
+							result="heart-btn";
+						}
+					}
+					
 					content +="<div class='etc-icon-wrap'><div class='etc-icon'>"+
-						"<div class='heart-icon-wrap'><input type='hidden' name='review_idx' id='review_idx' value='"+review[i].review_idx+"'><button type='button' class='heart-btn' value='"+review[i].id+"'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart-fill' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button><span>좋아요(<span>"+review[i].liked+"</span>)</span></div>";
+						"<div class='heart-icon-wrap'><input type='hidden' name='review_idx' id='review_idx' value='"+review[i].review_idx+"'><button type='button' class='"+result+"' value='"+review[i].id+"'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart-fill' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'/></svg></button><span>좋아요(<span>"+review[i].liked+"</span>)</span></div>";
 					
 					if("${id}" != review[i].id) { //로그인id와 글쓴id 다를때
 					content +="<div class='report-icon'><button type='button' class='report-btn'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-bell-fill' viewBox='0 0 16 16'><path d='M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z'/></svg></button><span>신고</span></div>";
@@ -300,7 +337,7 @@ function slider() {
 				
 				$(content).appendTo("#reviewDiv");
 				slider();
-				
+			
 				if(lp<=next) { //불러올 데이터 없을시 버튼 삭제
 					 $(".review-more-wrap").hide();
 				};
@@ -324,6 +361,7 @@ function slider() {
 		var likeClass=$(this).attr("class");
 		var $id=$(this).attr("value");
 		var $reviewidx=$(this).prev().attr("value");
+		var hb=$(this);
 		/* var $test=$(this).next().children().text(); */
 		
 		var jsonParam= { restarea_idx: ${param.restarea_idx},
@@ -340,7 +378,7 @@ function slider() {
  			$.ajax({
 				url:"ajax_detailed_likeDel.do",
 				data: jsonParam,
-				type: "get",
+				type: "post",
 				dataType: "text",
 				error: function(xhr) {
 					alert(xhr.responseText),
@@ -349,7 +387,7 @@ function slider() {
 					alert("에러")
 				},
 				success: function(data) {
-					$(this).next().children().text(parseInt($(this).next().children().text()) - 1);
+					hb.next().children().text(parseInt(hb.next().children().text()) - 1);
 					console.log("삭제성공");
 				}
 			}) 
@@ -361,7 +399,7 @@ function slider() {
  		 	$.ajax({
 				url:"ajax_detailed_likeAdd.do",
 				data:  jsonParam,
-				type: "get",
+				type: "post",
 				dataType: "text",
 				error: function(xhr) {
 					alert(xhr.responseText),
@@ -370,7 +408,7 @@ function slider() {
 					alert("에러")
 				},
 				success: function(data) {
-					$(this).next().children().text(parseInt($(this).next().children().text()) + 1);
+					hb.next().children().text(parseInt(hb.next().children().text()) + 1);
 					console.log("추가성공");
 				}
 			})
@@ -379,6 +417,10 @@ function slider() {
 		
 		
 	})
+	
+	function profileMove(otherPId){
+		alert(otherPId);
+	}
 
 </script>
 </head>

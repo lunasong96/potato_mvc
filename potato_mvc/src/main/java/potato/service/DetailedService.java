@@ -131,6 +131,7 @@ public class DetailedService {
 			jo.put("post_date", date);
 			jo.put("rating", dd.getRating());
 			jo.put("review_idx", dd.getReview_idx());
+			jo.put("idclick", dd.getIdclick());
 			js.add(jo);
 		}//end for
 		//System.out.println("js:   "+js+"find me");

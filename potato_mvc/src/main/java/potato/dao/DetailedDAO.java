@@ -190,6 +190,20 @@ public class DetailedDAO {
 		return null;
 	}
 	
+	//리뷰 좋아요 여부
+	public int selectLikeChk(DetailedBookmarkVO dbVO) {
+		int LikeChk=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		LikeChk=ss.selectOne("potato.detailedMapper.selBookmarkChk",dbVO);
+		
+		mbh.closeHandler(ss);
+		
+		return LikeChk;
+	}
+	
 	//리뷰 좋아요 추가
 	public String insertLikeAdd(DetailedLikeVO dlVO) {
 		String likeAdd=null;

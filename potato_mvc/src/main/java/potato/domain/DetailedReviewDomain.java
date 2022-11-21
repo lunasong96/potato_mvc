@@ -7,8 +7,8 @@ import java.util.List;
 public class DetailedReviewDomain {
 
 	private String id, contents, nick, img;
-	private String foodimg;
-	private int review_idx, rating, likeTotal, liked;
+	private String foodimg, idclick;
+	private int review_idx, rating, likeTotal, liked, lcnt;
 	private Date post_date;
 	public String getId() {
 		return id;
@@ -40,6 +40,12 @@ public class DetailedReviewDomain {
 	public void setFoodimg(String foodimg) {
 		this.foodimg = foodimg;
 	}
+	public String getIdclick() {
+		return idclick;
+	}
+	public void setIdclick(String idclick) {
+		this.idclick = idclick;
+	}
 	public int getReview_idx() {
 		return review_idx;
 	}
@@ -64,6 +70,12 @@ public class DetailedReviewDomain {
 	public void setLiked(int liked) {
 		this.liked = liked;
 	}
+	public int getLcnt() {
+		return lcnt;
+	}
+	public void setLcnt(int lcnt) {
+		this.lcnt = lcnt;
+	}
 	public Date getPost_date() {
 		return post_date;
 	}
@@ -73,11 +85,9 @@ public class DetailedReviewDomain {
 	@Override
 	public String toString() {
 		return "DetailedReviewDomain [id=" + id + ", contents=" + contents + ", nick=" + nick + ", img=" + img
-				+ ", foodimg=" + foodimg + ", review_idx=" + review_idx + ", rating=" + rating + ", likeTotal="
-				+ likeTotal + ", liked=" + liked + ", post_date=" + post_date + "]";
+				+ ", foodimg=" + foodimg + ", idclick=" + idclick + ", review_idx=" + review_idx + ", rating=" + rating
+				+ ", likeTotal=" + likeTotal + ", liked=" + liked + ", lcnt=" + lcnt + ", post_date=" + post_date + "]";
 	}
-	
-	
 
 	
 	
