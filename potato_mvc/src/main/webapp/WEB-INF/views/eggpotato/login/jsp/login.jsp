@@ -19,9 +19,23 @@ $(function(){
 	});//click
 });//ready
 
+//null 검사
 function chkNull(){
+	if( $("#id").val().trim() == "" ){
+		alert("아이디를 입력하세요");
+		$("#id").val("");
+		$("#id").focus();
+		return;
+	}//end if
+	if( $("#pass").val().trim() == "" ){
+		alert("비밀번호를 입력하세요");
+		$("#pass").val("");
+		$("#pass").focus();
+		return;
+	}//end if
+	
 	$("#loginFrm").submit();
-}
+}//chkNull
 </script>
 
 </head>
@@ -49,7 +63,7 @@ function chkNull(){
 		<!-- info -->
 		<div class="login-info">
 			<div class="info-sign">
-				<a href="signUp.do">회원가입</a>
+				<a href="signUpAgree.do">회원가입</a>
 			</div>
 			<div class="info-find">
 				<a href="forgotId.do">아이디</a> | 

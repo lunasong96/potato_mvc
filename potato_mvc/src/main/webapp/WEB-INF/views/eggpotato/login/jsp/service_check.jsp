@@ -51,6 +51,37 @@ function popUp2() {
 	//등록된 url 및 window 속성 기준으로 팝업창을 연다.
 	window.open(url, "알감자 개인정보 수집 및 이용 동의", windowStatus);
 }
+
+$(function() {
+	$("#chkAll").click(function() {
+		if($("#chkAll").is(":checked")) {
+			$("input[name=chk]").prop("checked", true);
+		} else {
+			$("input[name=chk]").prop("checked", false);
+		}//end else
+	});//click
+	
+	$("input[name=chk]").click(function() {
+		var total=$("input[name=chk]").length;
+		var checked=$("input[name=chk]:checked").length;
+		
+		if(total != checked) {
+			$("#chkAll").prop("checked", false);
+		} else {
+			$("#chkAll").prop("checked", true);
+		}//end else
+	});//click
+	
+	$("#nextBtn").click(function() {
+		if($("#chkAll").is(":checked")) {
+			location.replace("signUp.do");
+		} else {
+			alert("[필수]서비스 약관을 동의해주세요.");
+			$("input[name=chk]").prop("checked", false);
+		}//end else
+	});//click
+});//ready
+
 </script>
 
 </head>
@@ -77,7 +108,7 @@ function popUp2() {
 		<div class="main-container">
 			<div class="check_all">
 			<span class="check_wrap">
-  				<input type="checkbox"/>
+  				<input type="checkbox" id="chkAll"/>
   				<label class="text-s">모두 동의합니다.</label>
 			</span>
 			</div>
@@ -86,16 +117,16 @@ function popUp2() {
 			</span>
 			<div class="check_agree">
 				<span class="form-check">
-  				<input type="checkbox"/>
+  				<input type="checkbox" name="chk"/>
   				<label class="text-s"><a href="javascript:popUp1()">[필수] 서비스 약관 동의</a></label>
 				</span>
 			<div class="interval"></div>
 				<span class="form-check">
-  				<input type="checkbox"/>
+  				<input type="checkbox" name="chk"/>
   				<label class="text-s"><a href="javascript:popUp2()">[필수] 개인정보 수집 및 이용 동의</a></label>
 				</span>
 			</div>
-			<input type="button" value="다음" class="nextBtn">
+			<input type="button" value="다음" class="nextBtn" id="nextBtn">
 		</div>
 		<!-- //main -->
 	</div>

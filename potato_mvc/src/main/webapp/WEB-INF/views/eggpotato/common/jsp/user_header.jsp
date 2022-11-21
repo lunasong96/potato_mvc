@@ -20,6 +20,9 @@ $(function() {
 	     }
 	 });
 })
+function logout() {
+	location.href("logout.do");
+}
 </script>
 </head>
 <body>
@@ -46,12 +49,12 @@ $(function() {
 				
 				<c:if test="${ sessionScope.id !=null }">
 				<div class="profile-img-wrap">
-					<img src="css/images/cimg.png" alt="프로필" class="profile-img">
+					<img src="css/images/${ sessionScope.img }" alt="프로필" class="profile-img">
 					<span class="profile-txt"><c:out value="${ sessionScope.nick }"/> </span>님 환영합니다.
 				</div>
 				
 				
-				<a href="logout.do">
+				<a href="javascript:logout();">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="22" viewBox="0 0 32 32"  data-svg-content="true"><g><path d="M 30,30L 30,14 c0-1.104-0.896-2-2-2L 7.99,12 L 8,11.152C 8,5.764, 11.328,2, 16.096,2c 3.49,0, 6.6,2.006, 8.118,5.236 c 0.234,0.5, 0.828,0.714, 1.33,0.478c 0.5-0.234, 0.714-0.83, 0.478-1.33C 24.172,2.448, 20.37,0, 16.096,0C 10.246,0, 6,4.69, 6,11.14 L 5.99,12L 4,12 C 2.896,12, 2,12.896, 2,14l0,16 c0,1.104, 0.896,2, 2,2l 24,0 C 29.104,32, 30,31.104, 30,30z M 4,14l 24,0 l0,16 L 4,30 L 4,14 zM 16,18c-2.21,0-4,1.79-4,4s 1.79,4, 4,4s 4-1.79, 4-4S 18.21,18, 16,18z M 16,24c-1.102,0-2-0.898-2-2s 0.898-2, 2-2 s 2,0.898, 2,2S 17.102,24, 16,24z"></path></g></svg>
 				로그아웃</a>
 				<a href="myPageIn.do">
@@ -59,7 +62,7 @@ $(function() {
 				마이페이지</a>
 				</c:if>
 				
-				<a href="#void">
+				<a href="help.do">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="22px" height="22px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve" data-svg-content="true" >
 				<g>
 					<path d="M16-0.034C7.159-0.034-0.035,7.158-0.035,16S7.159,32.034,16,32.034S32.035,24.842,32.035,16   S24.841-0.034,16-0.034z M16,30.966C7.748,30.966,1.035,24.252,1.035,16S7.748,1.034,16,1.034S30.965,7.748,30.965,16   S24.252,30.966,16,30.966z"></path>

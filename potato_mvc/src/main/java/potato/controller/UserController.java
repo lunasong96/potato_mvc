@@ -1,8 +1,17 @@
 package potato.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import potato.domain.UserDomain;
@@ -12,20 +21,7 @@ import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
 import potato.vo.UserInfoVO;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-
+@SessionAttributes({"id","nick", "img"})
 @Controller
 @Component
 public class UserController {
@@ -43,22 +39,20 @@ public class UserController {
 	}//loginPage
 	
 	@RequestMapping(value = "/login.do", method = POST)
-	public String login(Model model, LoginVO lVO, HttpSession session) {
+	public String login(Model model, LoginVO lVO) {
 		String url="redirect:user_mainhome.do";
 		UserDomain ud = null;
 		ud=us.searchMember(lVO);
-		session.setAttribute("id", ud.getId());
-		session.setAttribute("nick", ud.getNick());
+		model.addAttribute("id", ud.getId());
+		model.addAttribute("nick", ud.getNick());
+		model.addAttribute("img", ud.getImg());
 		return url;
 	}//login
 	
 	@RequestMapping(value = "logout.do", method = GET)
-	public String logout( SessionStatus ss, HttpSession session ) {
+	public String logout( SessionStatus ss) {
 		String url="redirect:user_mainhome.do";
-		session.removeAttribute("id");
-		session.removeAttribute("nick");
 		ss.setComplete();
-		session.invalidate();
 		return url;
 	}//logout
 	
