@@ -124,4 +124,22 @@
 		select do_idx, kr_do
  		from do	
  	</select>
+ 	
+ 	<insert id="insertRest" parameterType="potato.manager.vo.RestVO">
+ 		insert into
+		RESTAREA(RESTAREA_IDX,IMG, NAME, LNG, LAT, LINE_IDX, DO_IDX, TEL, CARWASH_CHK, REPAIR_CHK, CARGOLOUNGE_CHK)
+		values((select nvl(max(restarea_idx),0)+1 from restarea),#{img},#{name},#{lng},#{lat},#{line_idx},#{do_idx},#{tel},#{carwash_chk},#{repair_chk},#{cargolounge_chk})
+ 	</insert>
+ 	
+ 	<select id="selectNewIdx" parameterType="potato.manager.vo.RestVO" resultType="int">
+ 		select restarea_idx
+ 		from restarea
+ 		where img=#{img} and name=#{name}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </mapper>

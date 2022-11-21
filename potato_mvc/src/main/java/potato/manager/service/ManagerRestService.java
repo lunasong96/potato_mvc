@@ -59,6 +59,7 @@ public class ManagerRestService {
 		return isLast;
 	}
 	
+	//휴게소 상세
 	public RestDomain searchRestDetail(int restarea_idx) {
 		RestDomain rd = mrDAO.selectRestDetail(restarea_idx);
 		return rd;
@@ -70,21 +71,32 @@ public class ManagerRestService {
 		return list;
 	}
 	
+	//도가져오기
 	public List<DoDomain> searchDo() {
 		List<DoDomain> list = mrDAO.selectDo();
 		return list;
 	}
 	
-	public void addRest(RestVO rVO) {
-		
+	//휴게소추가
+	public int addRest(RestVO rVO) {
+		int cnt = mrDAO.insertRest(rVO);
+		return cnt;
 	}
 	
-	public void addFood(List<FoodVO> list) {
-		
+	//추가된휴게소의 인덱스가져오기
+	public int searchNewIdx(RestVO rVO) {
+		int idx = mrDAO.selectNewIdx(rVO);
+		return idx;
 	}
 	
-	public void addAmenity(List<AmenityVO> list) {
+	public int addFood(List<FoodVO> list) {
 		
+		return 0;
+	}
+	
+	public int addAmenity(List<AmenityVO> list) {
+		
+		return 0;
 	}
 	
 	

@@ -60,6 +60,7 @@ public class MgrRestDAO {
 		return list;
 	}
 	
+	//
 	public List<DoDomain> selectDo() {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -68,16 +69,34 @@ public class MgrRestDAO {
 		return list;
 	}
 	
-	public void insertRest(RestVO rVO) {
-		
+	//ÈÞ°Ô¼Ò Ãß°¡
+	public int insertRest(RestVO rVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.insert("potato.manager.rest.insertRest", rVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
 	}
 	
-	public void insertFood(List<FoodVO> list) {
-		
+	public int selectNewIdx(RestVO rVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int idx = ss.selectOne("potato.manager.rest.selectNewIdx", rVO);
+		mbh.closeHandler(ss);
+		return idx;
 	}
 	
-	public void insertAmenity(List<AmenityVO> list) {
+	public int insertFood(List<FoodVO> list) {
 		
+		return 0;
+	}
+	
+	public int insertAmenity(List<AmenityVO> list) {
+		
+		return 0;
 	}
 	
 	

@@ -27,6 +27,16 @@ $(function(){
 	$("#insertBtn").click(function(){
 		chkNull();
 	});
+	
+	//사진올리기에 이름다르게명시
+	$(".fileup2").each(function(i,file){
+		$(this).attr("name","foodFile"+(i+1));
+	});
+	
+	/* $("[type='radio']").each(function(i,radio)) {
+		$
+	} */
+	
 });
 
 //프로필사진 등록 미리보기
@@ -39,16 +49,17 @@ function previewFile(input) {
         reader.readAsDataURL(input.files[0]);
     }
       //프로필사진 확장자제한
-	  if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
+	if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
 	        alert('이미지 파일만 업로드 가능합니다.');
 	        $("#restProfile").attr("src", "http://localhost/potato/css/images/basic_rest.jpg");
 	        input.value = ''; 
 	        input.focus(); 
-	  }
+	}
 }
 
 //유효성 검증
 function chkNull(){
+	
  	//휴게소명
 	if($("#restName").val().trim().length < 1) {
 		alert("휴게소명은 필수입력입니다.");
@@ -83,7 +94,11 @@ function chkNull(){
 	if($("#doSel").val() == 0 || $("#lineSel").val() == 0) {
 		$("#doSel").focus();
 		alert("위치정보는 필수 입력입니다.");
-	} 
+		return;
+	}  else {
+		$("#doIdx").val($("#doSel").val());
+		$("#lineIdx").val($("#lineSel").val());
+	}
 	
 	//전화번호 여부
 	if($("#tel").val().trim() == "") {
@@ -92,7 +107,7 @@ function chkNull(){
 		return;
 	}
 	
-	
+	$("#insertFrm").submit();
 }
 
 //전화번호 하이푼추가
@@ -106,7 +121,7 @@ const autoHyphen2 = (target) => {
 </script>
 </head>
 <body>
-<form id="insertFrm" method="get" enctype="multipart/form-data">
+<form id="insertFrm" method="post" enctype="multipart/form-data" action="manager_rest_add.do">
 <div class="wrap">
 	<div class="popup-wrap">
 		<div class="rest-name">
@@ -121,7 +136,7 @@ const autoHyphen2 = (target) => {
 					<div>
 						<div class="file-btn-wrap">
 							<input type="button" class="round-blue-btn" value="등록">
-							<input type="file" id="uploadBtn" class="fileup"/>
+							<input type="file" id="uploadBtn" name="upFile" class="fileup"/>
 						</div>
 					</div>
 				</div>
@@ -134,8 +149,8 @@ const autoHyphen2 = (target) => {
 			</div>
 			<div class="food-info">
 				<span>
-					<input type="file" class="fileup2"/>
 					<input type="button" class="round-blue-btn" value="사진첨부" />
+					<input type="file" class="fileup2"/>
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
@@ -144,39 +159,41 @@ const autoHyphen2 = (target) => {
 					<div class="food-content">
 						<span>
 							<label>이름 : </label>
-							<input type="text"  placeholder="음식명을 기입해주세요."/>
+							<input type="text" name="foodName"  placeholder="음식명을 기입해주세요."/>
 						</span>
 						<span>
 							<label>가격 : </label>
-							<input type="text" placeholder="가격을 기입해주세요."/>
+							<input type="text" name="foodPrice" placeholder="가격을 기입해주세요."/>
 						</span>
 						<span>
 							<span>
 								<label>설명 : </label>
 							</span>
 							<textarea placeholder="음식설명을 기입해주세요."></textarea>
+							<input type="hidden" name="foodConts">
 						</span>
 						<span>
 							<span>
 								<label>재료 : </label>
 							</span>
 							<textarea placeholder="재료를 기입해주세요."></textarea>
+							<input type="hidden" name="foodIng">
 						</span>
 						<span>
 							<label>대표메뉴</label>
-							<input type="radio" checked="checked" />
+							<input type="radio" checked="checked" value="main" />
 							<label>추천메뉴</label>
-							<input type="radio" />
+							<input type="radio"  value="good" />
 							<label>선택안함</label>
-							<input type="radio" />
+							<input type="radio"  value="soso" />
 						</span>
 					</div>
 				</div>
 			</div>
 			<div class="food-info">
 				<span>
-					<input type="file" class="fileup2"/>
 					<input type="button" class="round-blue-btn" value="사진첨부" />
+					<input type="file" class="fileup2"/>
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
@@ -185,105 +202,25 @@ const autoHyphen2 = (target) => {
 					<div class="food-content">
 						<span>
 							<label>이름 : </label>
-							<input type="text" placeholder="음식명을 기입해주세요."/>
+							<input type="text" name="foodName" placeholder="음식명을 기입해주세요."/>
 						</span>
 						<span>
 							<label>가격 : </label>
-							<input type="text" placeholder="가격을 기입해주세요."/>
+							<input type="text" name="foodPrice" placeholder="가격을 기입해주세요."/>
 						</span>
 						<span>
 							<span>
 								<label>설명 : </label>
 							</span>
 							<textarea placeholder="음식설명을 기입해주세요."></textarea>
+							<input type="hidden" name="foodConts">
 						</span>
 						<span>
 							<span>
 								<label>재료 : </label>
 							</span>
 							<textarea placeholder="재료를 기입해주세요."></textarea>
-						</span>
-						<span>
-							<label>대표메뉴</label>
-							<input type="radio" />
-							<label>추천메뉴</label>
-							<input type="radio" />
-							<label>선택안함</label>
-							<input type="radio"  checked="checked"/>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="food-info">
-				<span>
-					<input type="file" class="fileup2"/>
-					<input type="button" class="round-blue-btn" value="사진첨부" />
-				</span>
-				<div class="food-detail">
-					<div class="food-img-wrap">
-						<img src="">
-					</div>
-					<div class="food-content">
-						<span>
-							<label>이름 : </label>
-							<input type="text" placeholder="음식명을 기입해주세요."/>
-						</span>
-						<span>
-							<label>가격 : </label>
-							<input type="text" placeholder="가격을 기입해주세요."/>
-						</span>
-						<span>
-							<span>
-								<label>설명 : </label>
-							</span>
-							<textarea placeholder="음식설명을 기입해주세요."></textarea>
-						</span>
-						<span>
-							<span>
-								<label>재료 : </label>
-							</span>
-							<textarea placeholder="재료를 기입해주세요."></textarea>
-						</span>
-						<span>
-							<label>대표메뉴</label>
-							<input type="radio" />
-							<label>추천메뉴</label>
-							<input type="radio" />
-							<label>선택안함</label>
-							<input type="radio"  checked="checked"/>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="food-info">
-				<span>
-					<input type="file" class="fileup2"/>
-					<input type="button" class="round-blue-btn" value="사진첨부" />
-				</span>
-				<div class="food-detail">
-					<div class="food-img-wrap">
-						<img src="">
-					</div>
-					<div class="food-content">
-						<span>
-							<label>이름 : </label>
-							<input type="text" placeholder="음식명을 기입해주세요."/>
-						</span>
-						<span>
-							<label>가격 : </label>
-							<input type="text" placeholder="가격을 기입해주세요."/>
-						</span>
-						<span>
-							<span>
-								<label>설명 : </label>
-							</span>
-							<textarea placeholder="음식설명을 기입해주세요."></textarea>
-						</span>
-						<span>
-							<span>
-								<label>재료 : </label>
-							</span>
-							<textarea placeholder="재료를 기입해주세요."></textarea>
+							<input type="hidden" name="foodIng">
 						</span>
 						<span>
 							<label>대표메뉴</label>
@@ -316,6 +253,7 @@ const autoHyphen2 = (target) => {
 					<span>
 						<label>위치 : </label>
 					</span>
+					
 					<select id="doSel">
 						<option value="0">----도----</option>
 						<c:forEach var="krdo" items="${ doList }">
@@ -328,6 +266,8 @@ const autoHyphen2 = (target) => {
 						<option value="${ line.line_idx }"><c:out value="${ line.line }"/></option>
 						</c:forEach>
 					</select>
+					<input type="hidden" id="doIdx" name="doIdx">					
+					<input type="hidden" id="lineIdx" name="lineIdx">					
 				</div>
 				<div>
 					<span>

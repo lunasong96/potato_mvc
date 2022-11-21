@@ -2,6 +2,8 @@ package potato.manager.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static java.lang.Integer.parseInt;
+import static java.lang.Double.parseDouble;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,16 +70,46 @@ public class ManagerRestareaController {
 		return "manager/rest_management/jsp/manager_rest_write_popup";
 	}
 	
-	@RequestMapping(value="manager_rest_add.do", method=GET)
+	@RequestMapping(value="manager_rest_add.do", method=POST)
 	public String newRest(HttpServletRequest request) {
-		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");//맨마지막에 / 넣기
+		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
 		int maxSize=1024*1024*20;
 		try {
 			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
 			RestVO rVO = new RestVO();
 			
-		} catch(IOException ie) {
+			//휴게소 테이블 입력 파라메터 처리
+			rVO.setName(mr.getParameter("restName"));
+			rVO.setImg(mr.getFilesystemName("upFile"));
+			rVO.setLat(parseDouble(mr.getParameter("lat")));
+			rVO.setLng(parseDouble(mr.getParameter("lng")));
+			rVO.setDo_idx(parseInt(mr.getParameter("doIdx")));
+			rVO.setLine_idx(parseInt(mr.getParameter("lineIdx")));
+			rVO.setTel(mr.getParameter("tel"));
+			rVO.setCarwash_chk(mr.getParameter("washChk"));
+			if(mr.getParameter("washChk") == null) {
+				rVO.setCarwash_chk("N");
+			}
+			rVO.setRepair_chk(mr.getParameter("repairChk"));
+			if(mr.getParameter("repairChk") == null) {
+				rVO.setRepair_chk("N");
+			}
+			rVO.setCargolounge_chk(mr.getParameter("cargoChk"));
+			if(mr.getParameter("cargoChk") == null) {
+				rVO.setCargolounge_chk("N");
+			}
 			
+			//휴게소 테이블 성공여부확인
+			int restResultCnt = mrs.addRest(rVO);
+			
+			//휴게소테이블에 추가성공시 음식, 시설테이블에 추가
+			if(restResultCnt == 1) {
+				int idx = mrs.searchNewIdx(rVO); // 추가된 인덱스반환
+				
+			}
+			
+		} catch(IOException ie) {
+			ie.printStackTrace();
 		}
 		
 		
