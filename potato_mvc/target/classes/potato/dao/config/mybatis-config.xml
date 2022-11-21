@@ -30,6 +30,7 @@
 	<mapper resource="potato/dao/mapper/detailedMapper.xml"/>
 	<mapper resource="potato/dao/mapper/writeMapper.xml"/>
     <mapper resource="potato/dao/mapper/mypageMapper.xml"/>
+   	<mapper resource="potato/dao/mapper/myReviewMapper.xml"/>
    	<mapper resource="potato/dao/mapper/otherReviewMapper.xml"/>
    	<mapper resource="potato/dao/mapper/listMapper.xml"/>
     <mapper resource="potato/manager/dao/mapper/mgrHomeMapper.xml"/>
