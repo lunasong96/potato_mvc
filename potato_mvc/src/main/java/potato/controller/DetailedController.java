@@ -39,7 +39,7 @@ public class DetailedController {
 		
 		DetailedBookmarkVO dbVO=new DetailedBookmarkVO();
 		
-		session.setAttribute("id", "coffee"); 
+		/* session.setAttribute("id", "coffee"); */
 		
 		String id=(String) session.getAttribute("id");
 		if(id!=null) {
