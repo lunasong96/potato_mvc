@@ -240,11 +240,43 @@ public class DetailedDAO {
 	//<신고창>
 	//신고창 접속
 	public List<DetailedReportDomain> selectReportPopup() {
-		return null;
+		List<DetailedReportDomain> drd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		drd=ss.selectList("potato.detailedMapper.selReportPopup");
+		
+		mbh.closeHandler(ss);
+		
+		return drd;
 	}
 	
 	//신고 접수
-	public int insertReportPopup(DetailedReportVO drVO) {
-		return 0;
+	public Integer insertReportPopup(DetailedReportVO drVO) {
+		Integer insertPeport=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		insertPeport=ss.selectOne("potato.detailedMapper.insReportPopup",drVO);
+		
+		mbh.closeHandler(ss);
+		
+		return insertPeport;
+	}
+	
+	//신고 접수 유무
+	public Integer selectReportPopupChk(DetailedReportVO drVO) {
+		Integer selectPeportChk=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		selectPeportChk=ss.selectOne("potato.detailedMapper.selReportPopupChk",drVO);
+		
+		mbh.closeHandler(ss);
+		
+		return selectPeportChk;
 	}
 }

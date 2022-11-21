@@ -135,7 +135,7 @@ where review_idx=#{review_idx} and restarea_idx=#{restarea_idx}
 <!-- 신고창 접속 -->
 <select id="selReportPopup" resultType="potato.domain.DetailedReportDomain">
 select report_idx, reason
-from report_reason;
+from report_reason
 </select>
 
 <!-- 신고 접수 -->
@@ -143,5 +143,12 @@ from report_reason;
 insert into report(id_reporter, id_writer, report_idx, restarea_idx, review_idx)
 values (#{id_reporter}, #{id_writer}, #{report_idx}, #{restarea_idx}, #{review_idx})
 </insert>
+
+<!-- 신고 접수 유무ㅡ -->
+<select id="selReportPopupChk" resultType="int" parameterType="potato.vo.DetailedReportVO">
+select count(*) rpcnt
+from report
+where id_reporter=#{id_reporter} and review_idx=#{review_idx} and restarea_idx=#{restarea_idx}
+</select>
 
 </mapper>

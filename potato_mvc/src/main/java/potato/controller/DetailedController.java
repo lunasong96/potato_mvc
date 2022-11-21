@@ -114,24 +114,25 @@ public class DetailedController {
 		return jsonObj;
 	}
 	
-	//타사용자 페이지 이동
-	@RequestMapping(value = "detailed_other_profiles.do", method=GET)
-	public String otherProFileMove(HttpSession session, String id, Model model) {
-		return "other_profiles/jsp/other_user_profiles";
-	}
-	
 	//리뷰 신고창 오픈
-	@RequestMapping(value = "report_review_popup.do", method=GET)
-	public String reportPopup(HttpSession session, String id_writer, Model model) {
+	@RequestMapping(value = "report_review_popup.do", method= {GET,POST})
+	public String reportPopup(HttpServletRequest request, DetailedReportVO drVO, Model model) {
+		model.addAttribute("rp", ds.getReportPopup());
+		
+		drVO.setId_reporter(request.getParameter("id"));
+		drVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
+		drVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
+		
+		model.addAttribute("rpc", ds.setReportPopupChk(drVO));
 		return "detailed/jsp/report_review_popup";
 	}
 	
-	//리뷰 신고 접수(비동기.. ?)
+	//리뷰 신고 접수
 	@ResponseBody
-	@RequestMapping(value = "ajax_detailed_report.do", method=GET)
+	@RequestMapping(value = "ajax_detailed_report.do", method= {GET,POST})
 	public String setReport(DetailedReportVO drVO) {
-		String ajax_json="";
-		return ajax_json;
+		ds.setReportPopup(drVO);
+		return "redirect:detailed/jsp/user_detailed.do";
 	}
 	
 	//리뷰 삭제

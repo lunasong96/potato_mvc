@@ -448,7 +448,7 @@ td > div > img {
 
 }
 
-.re-left > img {
+.re-left > a > img {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
@@ -461,9 +461,10 @@ td > div > img {
     height: 20px;
 }
 
-.re-right > span {
+.re-right > a {
 	font-size: 17px;
-    font-weight: bold;	
+    font-weight: bold;
+    color: #000;	
 }
 
 .re-txt {

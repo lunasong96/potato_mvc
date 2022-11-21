@@ -143,26 +143,11 @@ public class DetailedService {
 		
 		return jsonObj.toJSONString();
 	}
-	
-	//페이징 처음 시작 
-	public int getStartPageNum() {
-		return 0;
-	}
-	
+
 	//페이징 마지막 페이지
 	public int getLastPageNum(int total) {
 		int lastPage = (int) Math.ceil((double) total / 1);
 		return lastPage;
-	}
-	
-	//페이징 기본 보여줄 페이지수
-	public int getPageScale() {
-		return 0;
-	}
-	
-	//타사용자 프로필 이동
-	public DetailedReviewDomain moveOtherProfile(String id) {
-		return null;
 	}
 	
 	//리뷰 좋아요 total
@@ -192,12 +177,23 @@ public class DetailedService {
 	//<신고창>
 	//신고창 접속
 	public List<DetailedReportDomain> getReportPopup() {
-		return null;
+		List<DetailedReportDomain> dd=null;
+		dd=dDAO.selectReportPopup();
+		return dd;
 	}
 	
 	//신고 접수
-	public int setReportPopup(DetailedReportVO drVO) {
-		return 0;
+	public Integer setReportPopup(DetailedReportVO drVO) {
+		Integer setReport=0;
+		setReport=dDAO.insertReportPopup(drVO);
+		return setReport;
+	}
+	
+	//신고 접수 유무
+	public Integer setReportPopupChk(DetailedReportVO drVO) {
+		Integer setReportChk=0;
+		setReportChk=dDAO.selectReportPopupChk(drVO);
+		return setReportChk;
 	}
 	
 }
