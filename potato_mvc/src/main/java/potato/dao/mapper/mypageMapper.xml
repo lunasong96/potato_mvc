@@ -5,7 +5,7 @@
   
   <mapper namespace="potato.mypageMapper">
   	<!-- 마이페이지 -->
-  	<select id="selectLogin"  parameterType="potato.vo.LoginVO" resultType="String">
+  	<select id="selectLogin"   resultType="String" parameterType="potato.vo.LoginVO">
   		select  	id, pass
 		from    	member
 		where 	id= #{ id, jdbcType=VARCHAR  } and pass= #{ pass, jdbcType=NUMERIC }
@@ -51,6 +51,6 @@
   	<select id="updateBookmark" parameterType="potato.vo.MyPageBookmarkVO">
   	delete
 	from     	bookmark
-	where    	restarea_idx = #{ restarea_idx, jdbcType=NUMERIC }  and id=#{ id, jdbcType=VARCHAR }
+	where    	restarea_idx = #{ restarea_idx }  and id=#{ id }
   	</select>
   </mapper>

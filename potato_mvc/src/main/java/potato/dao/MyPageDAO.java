@@ -89,33 +89,21 @@ public class MyPageDAO {
 	
 	//¸®ºä Á¶È¸
 	public List<ReviewDomain> selectMyReview(String id){
-		//1. MyBatis Handler ¾ò±â
-		//2. Äõ¸®¹® ½ÇÇà
-		//3. MyBatis Handler ²÷±â
 		return null;
 	}//selectMyReview
 	
 	//ÃÑ ¸®ºä ¼ö
 	public int selectMyReviewCnt(String string) {
-		//1. MyBatis Handler ¾ò±â
-		//2. Äõ¸®¹® ½ÇÇà
-		//3. MyBatis Handler ²÷±â
 		return 0;
 	}//selectMyReviewCnt
 	
 	//³» ¸®ºä - ÁÁ¾Æ¿ä ¼ö 
 	public int selectLikeCnt(String string) {
-		//1. MyBatis Handler ¾ò±â
-		//2. Äõ¸®¹® ½ÇÇà
-		//3. MyBatis Handler ²÷±â
 		return 0;
 	}//selectLikeCnt
 	
 	//³» ¸®ºä - ¸®ºä »èÁ¦, ¼öÁ¤
 	public int updateMyReview(MyPageMyReviewVO mrVO) {
-		//1. MyBatis Handler ¾ò±â
-		//2. Äõ¸®¹® ½ÇÇà
-		//3. MyBatis Handler ²÷±â
 		return 0;
 	}//updateMyReview
 	

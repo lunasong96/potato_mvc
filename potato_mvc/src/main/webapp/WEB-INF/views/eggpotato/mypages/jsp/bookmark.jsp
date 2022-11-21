@@ -15,15 +15,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$(".del").click(function() {
-		var delFlag=confirm("즐겨찾기가 삭제되었습니다.")
-		
-		if(delFlag ==true){
-			$("#delBookmarkFrm").submit();
-			
-		}//end if
-	});//click
+	
 });//ready
+
+function removeBookmark( restarea_idx){
+	//alert( "삭제할 키 " +  restarea_idx)	
+	$("#restarea_idx").val( restarea_idx );
+	alert($("#restarea_idx").val());
+	$("#delBookmarkFrm").submit();
+}
+	
 </script>
 
 </head>
@@ -75,11 +76,11 @@ $(function() {
 	<div class="listWrap">
 <form id="delBookmarkFrm" method="get" action="delBookmark.do" >
 <input type="hidden" value="${id }" name="id">
+			<input type="hidden" id="restarea_idx" name="restarea_idx">
 <c:forEach var="b" items="${bookmarklist}">
 		<div class="list">
-			<input type="hidden" value="${b.restarea_idx }" name="${b.restarea_idx }"><%-- RIDX${ b.restarea_idx }" --%>
 			<span class="list-item"><c:out value="${ b.name }"/></span>
-			<button class="del">삭제</button>
+			<button class="del" onclick="removeBookmark(${b.restarea_idx })">삭제</button>
 		</div>
 </c:forEach>
 </form>

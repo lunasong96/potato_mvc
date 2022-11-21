@@ -2,16 +2,17 @@ package potato.vo;
 
 public class MyPagePwEditVO {
 	
-	private  String id,pass,newpass;
+	private  String id,pass,new_pw;
 	
 	public MyPagePwEditVO() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public MyPagePwEditVO(String id, String pass, String newpass) {
+	public MyPagePwEditVO(String id, String pass, String new_pw) {
 		super();
 		this.id = id;
 		this.pass = pass;
-		this.newpass = newpass;
+		this.new_pw = new_pw;
 	}
 
 	public String getId() {
@@ -30,17 +31,20 @@ public class MyPagePwEditVO {
 		this.pass = pass;
 	}
 
-	public String getNewpass() {
-		return newpass;
+	public String getNew_pw() {
+		return new_pw;
 	}
 
-	public void setNewpass(String newpass) {
-		this.newpass = newpass;
+	public void setNew_pw(String new_pw) {
+		this.new_pw = new_pw;
 	}
 
 	@Override
 	public String toString() {
-		return "MyPagePwEditVO [id=" + id + ", pass=" + pass + ", newpass=" + newpass + "]";
+		return "MyPagePwEditVO [id=" + id + ", pass=" + pass + ", new_pw=" + new_pw + "]";
 	}
+	
+	
+	
 	
 }//class
