@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import potato.manager.service.MgrMemberService;
@@ -21,7 +23,7 @@ public class MgrMemberController {
 	
 	//회원목록 조회
 	@RequestMapping(value="/mgr_memberManagement.do",method= {GET,POST})
-	public String memberList(MgrMemberVO mmVO,Model model) {
+	public String memberList(MgrMemberVO mmVO,Model model, HttpSession session) {
 		
 		//페이징 변수
 		int totalPages = mms.searchTotalPages(mmVO);
@@ -56,7 +58,7 @@ public class MgrMemberController {
 	//회원 차단 팝업창 띄우기
 	@RequestMapping(value="/mgr_memberBlockPopup.do",method=GET)
 	public String memberBlockPopup(String id, Model model) {
-
+		model.addAttribute("reason",mms.searchReason());
 		return "manager/member_management/jsp/member_block_popup";
 	}//memberInfoPopup
 	

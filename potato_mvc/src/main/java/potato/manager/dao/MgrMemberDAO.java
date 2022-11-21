@@ -44,8 +44,16 @@ public class MgrMemberDAO {
 	
 	//차단 팝업창) 차단 사유 불러오기
 	public List<MgrBlockReasonDomain> selectReason(){
+		List<MgrBlockReasonDomain> list =null;
 		
-		return null;
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		
+		list=session.selectList("potato.manager.mgrMemberMapper.blockReason");
+		
+		mbh.closeHandler(session);
+		
+		return list;
 	}
 	
 	//회원 차단

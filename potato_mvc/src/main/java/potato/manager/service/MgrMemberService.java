@@ -65,20 +65,23 @@ public class MgrMemberService {
 	
 	public int lastPage(int totalPages) {
 		int lastPage=0;
-		lastPage=(int)Math.ceil((double)totalPages/6); //게시물 6개씩 보여주기
+		lastPage=(int)Math.ceil((double)totalPages/10); //10개씩 보여주기
 
 		return lastPage;
 	}
 	
 	public int startNum(int currentPage) {
 		int startNum=0;
-		startNum=currentPage-(currentPage-1)%5;
+		startNum=currentPage-(currentPage-1)%3;
 		
 		return startNum;
 	}
 	
 	public int isLast(int startNum, int lastPage) {
-		
-		return 0;
+		int isLast = 2; // 3페이직 씩 0,1,2
+		if (startNum + 3 > lastPage) {
+			isLast = lastPage - startNum;
+		}
+		return isLast;
 	}
 }

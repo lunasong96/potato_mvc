@@ -4,7 +4,6 @@ import java.util.List;
 
 import potato.domain.DetailedDomain;
 import potato.domain.RestAreaListDomain;
-import potato.manager.vo.MgrMemberVO;
 import potato.vo.ListMapPinVO;
 import potato.vo.SearchFlagVO;
 

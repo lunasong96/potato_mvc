@@ -110,9 +110,8 @@ function tableChange(){
 			
 			<div class="table_wrap">
 				<div id="t1" style="display: block"><!-- 초기로딩시 보임 -->
-				<!-- 전체사용자 클릭 시 -->
 				<table class="table1">
-				<c:when test="${ memberType eq 1 }">
+				<!-- 전체사용자 클릭 시 -->
 				<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>생년월일</th><th>차단</th></tr>
 				<c:forEach var="member" items="${ memberList }">
 				<tr>
@@ -120,35 +119,30 @@ function tableChange(){
 				<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
 				</tr>
 				</c:forEach>
-				</c:when>
 				</table>
 				</div>
 				
 				<div id="t2" style="display: none"> <!-- 처음 로딩시 숨김 상태 -->
 				<!-- 탈퇴 회원 클릭 시 -->
 				<table class="table2">
-				<c:when test="${ memberType eq 2 }">
 				<tr><th>아이디명</th><th>별명</th><th>가입날짜</th><th>탈퇴날짜</th></tr>
 				<c:forEach var="quit" items="${memberList}">
 				<tr><td>${quit.id }</td><td>${quit.nick}</td><td>${quit.join_date}</td><td>${quit.quit_date}</td></tr>
 				</c:forEach>
 				<!-- <tr><td>purplepotato</td><td>감자머리</td><td>2022-06-17</td><td>2022-11-28</td></tr> -->
-				</c:when>
 				</table>
 				</div>
 				
 				<div id="t3" style="display: none"> <!-- 처음 로딩시 숨김상태 -->
 				<!-- 차단 회원 클릭 시 -->
 				<table class="table3">
-				<c:when test="${ memberType eq 3 }">
 				<tr><th>아이디명</th><th>별명</th><th>차단사유</th><th>차단해제</th></tr>
 				<c:forEach var="block" items="${memberList}">
-				<tr><td>${block.id }</td><td>${block.nick}</td><td>${ block.reason }</td>
+				<tr><td>${block.id }</td><td>${block.nick}</td><td>리뷰와 상관없는 내용 도배</td>
 				<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr>
 				</c:forEach>
-				<!-- <tr><td>potato</td><td>감자돌이</td><td>개인정보 유출 위험</td>
-				<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr> -->
-				</c:when>
+				<tr><td>potato</td><td>감자돌이</td><td>개인정보 유출 위험</td>
+				<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr>
 				</table>
 				</div>
 			
