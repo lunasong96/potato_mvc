@@ -211,7 +211,7 @@ $(document).on("click",".popup-btn",function(){
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
 </form>
 <!-- 휴게소 상세 팝업 열기 -->
-<form id="openPopup" method="get" action="manager_restdetailPopup.do" target="_blank">
+<form id="openPopup" method="post" action="manager_restdetailPopup.do" target="_blank">
 	<input type="hidden" id="restarea_idx" name="restarea_idx"/>
 </form>
 </body>

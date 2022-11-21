@@ -32,7 +32,7 @@ $(function() {
     
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(${ detail.lat }, ${detail.lng }), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 
@@ -89,37 +89,33 @@ $(function() {
 	<div class="slide-wrap">
 		<div class="swiper mySwiper">
 			<div class="swiper-wrapper">
+				<c:forEach var="food" items="${ foodList }">
 				<div class="swiper-slide">
-					<img src="css/images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
+					<img src="css/images/${ food.img }" alt="휴게소음식사진" class="foodimg">
 					<div class="food-detailed-wrap">
-						<span class="food-name">누구나 돌솥 비빔밥</span>
-						<span class="food-price">8900원</span>
-						<p class="food-feature">2015년 한국도로공사 휴게소 대표메뉴 평가에서 전국 1위를 수상한 EX푸드</p>
-						<p class="food-ingredient">무생체, 표고버섯, 콩나물, 고사리, 단배추, 참나물, 계란, 김치, 깍두기</p>
+						<span class="food-name"><c:out value="${ food.name }"/></span>
+						<span class="food-price"><c:out value="${ food.price }"/></span>
+						<p class="food-feature"><c:out value="${ food.contents }"/></p>
+						<p class="food-ingredient"><c:out value="${ food.ingredient }"/></p>
 					</div>
+					<c:if test="${ food.main_chk eq 'Y' }">
 					<p class="slide-img-title">
 						대표
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-						  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 						</svg>
 					</p>
-				</div>
-				
-				<div class="swiper-slide">
-					<img src="css/images/곡성.jpg" alt="휴게소음식사진" class="foodimg">
-					<div class="food-detailed-wrap">
-						<span class="food-name">누구나 돌솥 비빔밥</span>
-						<span class="food-price">8900원</span>
-						<p class="food-feature">2015년 한국도로공사 휴게소 대표메뉴 평가에서 전국 1위를 수상한 EX푸드</p>
-						<p class="food-ingredient">무생체, 표고버섯, 콩나물, 고사리, 단배추, 참나물, 계란, 김치, 깍두기</p>
-					</div>
+					</c:if>
+					<c:if test="${ food.rec_chk eq 'Y' }">
 					<p class="slide-img-title">
-						대표
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-						  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+						추천
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+							<path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
 						</svg>
-					</p>
+					</p> 
+					</c:if>
 				</div>
+				</c:forEach>
 			</div>
 	    </div>
 		<div class="swiper-button-prev"></div>

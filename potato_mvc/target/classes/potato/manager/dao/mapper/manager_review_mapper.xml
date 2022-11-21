@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="potato.manager.review">
 	
-	<select id="selectReview" resultType="potato.manager.domain.ReviewDomain" parameterType="potato.manager.vo.SearchReviewVO" >
+	<select id="selectReview" parameterType="potato.manager.vo.SearchReviewVO" resultType="potato.manager.domain.ReviewDomain">
 		select re.review_idx, re.restarea_idx, ra.name, re.contents, re.rating, re.id, re.post_date, (select count(ID_REPORTER) from report where REVIEW_IDX = re.REVIEW_IDX and ID_WRITER=re.ID and RESTAREA_IDX = re.RESTAREA_IDX  ) report_cnt
 		from review re, restarea ra
 		
@@ -35,7 +35,7 @@
 		fetch next 10 rows only
 	</select>
 	
-	<select id="selectTotalReview" resultType="int" parameterType="potato.manager.vo.SearchReviewVO">
+	<select id="selectTotalReview" parameterType="potato.manager.vo.SearchReviewVO" resultType="int">
 		select count(*) cnt
 		from review re, restarea ra
 		

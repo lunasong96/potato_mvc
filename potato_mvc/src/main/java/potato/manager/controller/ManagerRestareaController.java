@@ -48,10 +48,10 @@ public class ManagerRestareaController {
 		return url;
 	}
 	
-	@RequestMapping(value="manager_restdetailPopup.do",method=GET)
+	@RequestMapping(value="manager_restdetailPopup.do",method=POST)
 	public String restDetailPopup(int restarea_idx, Model model) {
 		model.addAttribute("detail", mrs.searchRestDetail(restarea_idx));
-		model.addAttribute("food", mrs.searchRestFood(restarea_idx));
+		model.addAttribute("foodList", mrs.searchRestFood(restarea_idx));
 		return "manager/rest_management/jsp/rest_popup";
 	}
 	
