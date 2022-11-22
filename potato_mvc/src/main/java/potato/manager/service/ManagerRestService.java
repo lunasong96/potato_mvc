@@ -90,8 +90,8 @@ public class ManagerRestService {
 	}
 	
 	public int addFood(List<FoodVO> list) {
-		
-		return 0;
+		int cnt = mrDAO.insertFood(list);
+		return cnt;
 	}
 	
 	public int addAmenity(List<AmenityVO> list) {

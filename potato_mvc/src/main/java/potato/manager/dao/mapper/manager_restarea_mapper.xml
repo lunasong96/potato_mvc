@@ -137,6 +137,14 @@
  		where img=#{img} and name=#{name}
  	</select>
  	
+ 	<insert id="insertFood" parameterType="java.util.List">
+ 		insert all
+ 		<foreach collection="list" item="fVO">
+		into RESTAREA_FOOD(RESTAREA_IDX, FOOD_IDX, MAIN_CHK, REC_CHK, IMG, NAME, PRICE, CONTENTS, INGREDIENT)
+		values(#{fVO.restarea_idx},#{fVO.food_idx},#{fVO.main_chk},#{fVO.rec_chk},#{fVO.img},#{fVO.name},#{fVO.price},#{fVO.contents},#{fVO.ingredient})
+		</foreach>
+		select * from dual
+ 	</insert>
  	
  	
  	

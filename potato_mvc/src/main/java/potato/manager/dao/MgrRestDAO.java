@@ -60,7 +60,7 @@ public class MgrRestDAO {
 		return list;
 	}
 	
-	//
+	//도가져오기
 	public List<DoDomain> selectDo() {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -81,6 +81,7 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
+	//추가된 휴게소 인덱스 반환
 	public int selectNewIdx(RestVO rVO) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -90,8 +91,14 @@ public class MgrRestDAO {
 	}
 	
 	public int insertFood(List<FoodVO> list) {
-		
-		return 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.insert("potato.manager.rest.insertFood",list);
+		if(cnt == list.size()) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
 	}
 	
 	public int insertAmenity(List<AmenityVO> list) {

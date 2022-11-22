@@ -59,6 +59,7 @@ public class ManagerRestareaController {
 		return url;
 	}
 	
+	
 	@RequestMapping(value="manager_restdetailPopup.do",method=POST)
 	public String restDetailPopup(int restarea_idx, Model model) {
 		model.addAttribute("detail", mrs.searchRestDetail(restarea_idx));
@@ -108,9 +109,30 @@ public class ManagerRestareaController {
 			//휴게소테이블에 추가성공시 음식, 시설테이블에 추가
 			if(restResultCnt == 1) {
 				int idx = mrs.searchNewIdx(rVO); // 추가된 인덱스반환
-				List<FoodVO> list = new ArrayList<FoodVO>();
-				
-				
+				List<FoodVO> foodList = new ArrayList<FoodVO>();
+				FoodVO fVO = null;
+				for(int i =0; i<mr.getParameterValues("foodName").length; i ++) {
+					fVO = new FoodVO();
+					fVO.setRestarea_idx(idx);
+					fVO.setFood_idx(i+1);
+					fVO.setImg(mr.getFilesystemName("foodFile"+i));
+					fVO.setName(mr.getParameterValues("foodName")[i]);
+					fVO.setPrice(parseInt(mr.getParameterValues("foodPrice")[i]));
+					fVO.setContents(mr.getParameterValues("foodConts")[i]);
+					fVO.setIngredient(mr.getParameterValues("foodIng")[i]);
+					if(mr.getParameter("radio"+i).equals("main")) {
+						fVO.setMain_chk("Y");
+						fVO.setRec_chk("N");
+					} else if(mr.getParameter("radio"+i).equals("good")) {
+						fVO.setMain_chk("N");
+						fVO.setRec_chk("Y");
+					} else {
+						fVO.setMain_chk("N");
+						fVO.setRec_chk("N");
+					}
+					foodList.add(fVO);
+				}//end for
+				int cnt = mrs.addFood(foodList);
 			}
 			
 		} catch(IOException ie) {

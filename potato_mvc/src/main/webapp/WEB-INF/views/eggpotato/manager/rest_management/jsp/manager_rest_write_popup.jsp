@@ -30,26 +30,26 @@ $(function(){
 	
 	//사진올리기에 이름다르게명시
 	$(".fileup2").each(function(i,file){
-		$(this).attr("name","foodFile"+(i+1));
+		$(this).attr("name","foodFile"+i);
 	});
 	
 	//라디오 이름다르게 명시
 	$(".radioSpan").each(function(i,span){
-		$(span).children().next().attr("name","radio"+(i+1));
-		$(span).children().next().next().next().attr("name","radio"+(i+1));
-		$(span).children().next().next().next().next().next().attr("name","radio"+(i+1));
+		$(span).children().next().attr("name","radio"+i);
+		$(span).children().next().next().next().attr("name","radio"+i);
+		$(span).children().next().next().next().next().next().attr("name","radio"+i);
 	});
 	
 	 
 });//ready
 
-//이미지선택시
+//음식이미지선택시
 $(document).on("change",".fileup2",function(){
 	previewFoodFile(this,$(this));
 }); 
 
 
-//프로필사진 등록 미리보기
+//프로필사진 등록 미리보기 & 확장자 유효성
 function previewFile(input) {
 	if (input.files && input.files[0]) {
 	   var reader = new FileReader();
@@ -58,7 +58,7 @@ function previewFile(input) {
 	   }
 	   reader.readAsDataURL(input.files[0]);
 	} 
-	 //프로필사진 확장자제한
+	
     if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
 		alert('이미지 파일만 업로드 가능합니다.');
 		$("#restProfile").attr("src", "http://localhost/potato/css/images/noImg.png");
@@ -67,7 +67,7 @@ function previewFile(input) {
 	}
 }
 
-//음식사진 등록 미리보기
+//음식사진 등록 미리보기 & 확장자 유효성
 function previewFoodFile(input,obj) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -76,7 +76,7 @@ function previewFoodFile(input,obj) {
         }
         reader.readAsDataURL(input.files[0]);
     } 
-    //프로필사진 확장자제한
+   
 	if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
 	     alert('이미지 파일만 업로드 가능합니다.');
 	     obj.parent().next().children().children().attr("src", "http://localhost/potato/css/images/noImg.png");
@@ -86,17 +86,13 @@ function previewFoodFile(input,obj) {
 }
 
 
-
-
-
-
-
-
 //유효성 검증
 function chkNull(){
 	
+	//////////////////////////////////휴게소관련 유효성//////////////////////////////////////
+	
  	//휴게소명
-	if($("#restName").val().trim().length < 1) {
+ 	if($("#restName").val().trim().length < 1) {
 		alert("휴게소명은 필수입력입니다.");
 		$("#restName").focus();
 		return;
@@ -137,10 +133,89 @@ function chkNull(){
 	
 	//전화번호 여부
 	if($("#tel").val().trim() == "") {
-		alert("전화번호는 필수입력입니다.");
+		alert("전화번호는 필수입력입니다."); 
 		$("#tel").focus()
 		return;
+	}  
+	
+	
+	/////////////////////////////////////음식관련 유효성////////////////////////////////////////
+	/////////////////////////each함수 내부에서 return을 해봐야 결국 다음요소를 실행한다, 외부에서 리턴하게만들어준다///////////////////////////
+	
+  	//음식이미지
+ 	var foodImgFlag=false;
+ 	$(".fileup2").each(function(i,img){
+		var $img = $(img);
+		if($img.val().indexOf("fakepath") == -1){
+			foodImgFlag=true;
+		}
+	});
+	if(foodImgFlag){
+		alert("음식이미지는 필수입니다.");
+		return;
 	}
+	
+ 	//음식이름
+ 	var foodNameFlag = false;
+	$('[name="foodName"]').each(function(i,name){
+		if($(name).val().trim() == "") {
+			foodNameFlag = true;
+			$(name).focus();
+		}
+	}); 
+	if(foodNameFlag){
+		alert("음식이름을 입력해주세요");
+		return;
+	} 
+	
+	//음식가격
+	var foodPriceFlag = false;
+	$('[name="foodPrice"]').each(function(i,price){
+		var $price = $(price);
+		var testPrice= /^[0-9]+$/;
+		if($price.val().trim() == "" || !testPrice.test($price.val().trim()) ) {
+			foodPriceFlag = true;
+			$price.focus();
+		}
+	});   
+	if(foodPriceFlag) {
+		alert("가격을 숫자형태로 입력해 주세요");
+		return;
+	}
+	
+	//음식설명
+	var foodContsFlag = false;
+	$(".conts").each(function(i,conts){
+		var $conts = $(conts);
+		if($conts.val().trim() == "") {
+			foodContsFlag = true;
+			$conts.focus();
+		} else {
+			$conts.next().val($conts.val().trim());
+		}
+	}); 
+	if(foodContsFlag) {
+		alert("음식설명을 입력해주세요");
+		return;
+	} 
+	
+	
+	//음식재료
+	var foodIngsFlag = false;
+	$(".ings").each(function(i,ings){
+		var $ings = $(ings);
+		if($ings.val().trim() == "") {
+			foodIngsFlag = true;
+			$ings.focus();
+		} else {
+			$ings.next().val($ings.val().trim());
+		}
+	});
+	if(foodIngsFlag){
+		alert("음식재료를 입력해주세요");
+		return;
+	}
+	
 	
 	$("#insertFrm").submit();
 }
@@ -151,7 +226,6 @@ const autoHyphen2 = (target) => {
 	   .replace(/[^0-9]/g, '')
 	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 }
-
 
 </script>
 </head>
@@ -204,14 +278,14 @@ const autoHyphen2 = (target) => {
 							<span>
 								<label>설명 : </label>
 							</span>
-							<textarea placeholder="음식설명을 기입해주세요."></textarea>
+							<textarea placeholder="음식설명을 기입해주세요." class="conts"></textarea>
 							<input type="hidden" name="foodConts">
 						</span>
 						<span>
 							<span>
 								<label>재료 : </label>
 							</span>
-							<textarea placeholder="재료를 기입해주세요."></textarea>
+							<textarea placeholder="재료를 기입해주세요." class="ings"></textarea>
 							<input type="hidden" name="foodIng">
 						</span>
 						<span class="radioSpan">
@@ -247,14 +321,14 @@ const autoHyphen2 = (target) => {
 							<span>
 								<label>설명 : </label>
 							</span>
-							<textarea placeholder="음식설명을 기입해주세요."></textarea>
+							<textarea placeholder="음식설명을 기입해주세요." class="conts"></textarea>
 							<input type="hidden" name="foodConts">
 						</span>
 						<span>
 							<span>
 								<label>재료 : </label>
 							</span>
-							<textarea placeholder="재료를 기입해주세요."></textarea>
+							<textarea placeholder="재료를 기입해주세요." class="ings"></textarea>
 							<input type="hidden" name="foodIng">
 						</span>
 						<span class="radioSpan">
