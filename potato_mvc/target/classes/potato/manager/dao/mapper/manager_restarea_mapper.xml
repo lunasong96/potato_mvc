@@ -146,6 +146,22 @@
 		select * from dual
  	</insert>
  	
+ 	<insert id="insertAmt" parameterType="potato.manager.vo.AmenityVO">
+ 		insert all
+ 		<if test="restIcons != null">
+ 		<foreach collection="restIcons" item="restArr">
+		into RESTAREA_AMENITY(RESTAREA_IDX, AMENITY_TYPE, ICON)
+		values(#{restarea_idx},'A',#{restArr})
+		</foreach>
+		</if>
+		<if test="gasIcons != null">
+		<foreach collection="gasIcons" item="gasArr">
+		into RESTAREA_AMENITY(RESTAREA_IDX, AMENITY_TYPE, ICON)
+		values(#{restarea_idx},'B',#{gasArr})
+		</foreach>
+		</if>
+		select * from dual
+ 	</insert>
  	
  	
  	

@@ -22,6 +22,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import potato.manager.service.ManagerRestService;
+import potato.manager.vo.AmenityVO;
 import potato.manager.vo.FoodVO;
 import potato.manager.vo.RestVO;
 import potato.manager.vo.SearchRestVO;
@@ -109,6 +110,8 @@ public class ManagerRestareaController {
 			//휴게소테이블에 추가성공시 음식, 시설테이블에 추가
 			if(restResultCnt == 1) {
 				int idx = mrs.searchNewIdx(rVO); // 추가된 인덱스반환
+				
+				//음식 테이블용 파라메터
 				List<FoodVO> foodList = new ArrayList<FoodVO>();
 				FoodVO fVO = null;
 				for(int i =0; i<mr.getParameterValues("foodName").length; i ++) {
@@ -132,7 +135,23 @@ public class ManagerRestareaController {
 					}
 					foodList.add(fVO);
 				}//end for
-				int cnt = mrs.addFood(foodList);
+				mrs.addFood(foodList);
+				
+				//휴게소 테이블용 파라메터
+				AmenityVO amVO = new AmenityVO();
+				amVO.setRestarea_idx(idx);
+				if(mr.getParameterValues("restIcons") != null) {
+					amVO.setRestIcons(mr.getParameterValues("restIcons"));
+				}
+				
+				if(mr.getParameterValues("gasIcons") != null) {
+					amVO.setGasIcons(mr.getParameterValues("gasIcons"));
+				}
+				
+				if(mr.getParameterValues("restIcons") != null || mr.getParameterValues("gasIcons") != null) {
+					mrs.addAmenity(amVO);
+				}
+				request.setAttribute("result", "success");
 			}
 			
 		} catch(IOException ie) {

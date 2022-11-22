@@ -16,7 +16,54 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+<c:if test="${ requestScope.result eq 'success' }">
+	alert("휴게소가 추가되었습니다!");
+	self.close();
+</c:if>
+
+
 $(function(){
+	
+	//추가버튼 누를시 
+	var foodCnt = 3;
+	var contents = "<div class='food-info'><span><input type='button' class='round-blue-btn' value='사진첨부' /><input type='file' class='fileup2'/></span>";
+	    contents += "<div class='food-detail'><div class='food-img-wrap'><img src='http://localhost/potato/css/images/noImg.png'></div><div class='food-content'>";
+	    contents +="<span><label>이름 : </label><input type='text' name='foodName' placeholder='음식명을 기입해주세요.'/></span><span><label>가격 : </label><input type='text' name='foodPrice' maxlength='6' placeholder='가격을 기입해주세요.'/></span>";
+	    contents +="<span><span><label>설명 : </label></span><textarea placeholder='음식설명을 기입해주세요.' class='conts'></textarea><input type='hidden' name='foodConts'></span>";
+	    contents +="<span><span><label>재료 : </label></span><textarea placeholder='재료를 기입해주세요.' class='ings'></textarea><input type='hidden' name='foodIng'></span>";
+	    contents +="<span class='radioSpan'><label>대표메뉴</label><input type='radio' value='main'/><label>추천메뉴</label><input type='radio' value='good'/><label>선택안함</label><input type='radio' value='soso' checked='checked'/></span></div></div></div>";
+	$(".plus-btn").click(function(){
+		if(foodCnt < 7) {
+			++foodCnt;
+			$(".appendBtn").before(contents);
+			
+			//생성된 후에도 순서정렬
+			$(".radioSpan").each(function(i,span){
+				$(span).children().next().attr("name","radio"+i);
+				$(span).children().next().next().next().attr("name","radio"+i);
+				$(span).children().next().next().next().next().next().attr("name","radio"+i);
+			});
+			
+			$(".fileup2").each(function(i,file){
+				$(this).attr("name","foodFile"+i);
+			});
+			
+		} else {
+			alert("음식은 8개까지만 입력가능합니다.");
+		}
+	});
+	
+	$(".minus-btn").click(function(){
+		if(foodCnt > 3) {
+			$("[name='foodFile"+foodCnt+"']").parent().parent().remove();
+			--foodCnt;
+		} else {
+			alert("음식은 기본 4개이상 있어야합니다");
+		}
+	})
+	
+	
+	
 
 	//사진등록 버튼 클릭했을 때
 	$("#uploadBtn").on("change", function(){
@@ -40,8 +87,11 @@ $(function(){
 		$(span).children().next().next().next().next().next().attr("name","radio"+i);
 	});
 	
+	
 	 
 });//ready
+
+//////////////////////////////이미지관련 유효성///////////////////////////////////////////////////
 
 //음식이미지선택시
 $(document).on("change",".fileup2",function(){
@@ -85,8 +135,10 @@ function previewFoodFile(input,obj) {
 	}
 }
 
+////////////////////////////////////////// 이미지 유효성 끝////////////////////////////////////////////////////
 
-//유효성 검증
+
+
 function chkNull(){
 	
 	//////////////////////////////////휴게소관련 유효성//////////////////////////////////////
@@ -272,7 +324,7 @@ const autoHyphen2 = (target) => {
 						</span>
 						<span>
 							<label>가격 : </label>
-							<input type="text" name="foodPrice" placeholder="가격을 기입해주세요."/>
+							<input type="text" name="foodPrice" maxlength="6" placeholder="가격을 기입해주세요."/>
 						</span>
 						<span>
 							<span>
@@ -315,7 +367,93 @@ const autoHyphen2 = (target) => {
 						</span>
 						<span>
 							<label>가격 : </label>
-							<input type="text" name="foodPrice" placeholder="가격을 기입해주세요."/>
+							<input type="text" name="foodPrice" maxlength="6" placeholder="가격을 기입해주세요."/>
+						</span>
+						<span>
+							<span>
+								<label>설명 : </label>
+							</span>
+							<textarea placeholder="음식설명을 기입해주세요." class="conts"></textarea>
+							<input type="hidden" name="foodConts">
+						</span>
+						<span>
+							<span>
+								<label>재료 : </label>
+							</span>
+							<textarea placeholder="재료를 기입해주세요." class="ings"></textarea>
+							<input type="hidden" name="foodIng">
+						</span>
+						<span class="radioSpan">
+							<label>대표메뉴</label>
+							<input type="radio" value="main"/>
+							<label>추천메뉴</label>
+							<input type="radio" value="good"/>
+							<label>선택안함</label>
+							<input type="radio" value="soso" checked="checked"/>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="food-info">
+				<span>
+					<input type="button" class="round-blue-btn" value="사진첨부" />
+					<input type="file" class="fileup2"/>
+				</span>
+				<div class="food-detail">
+					<div class="food-img-wrap">
+						<img src="http://localhost/potato/css/images/noImg.png">
+					</div>
+					<div class="food-content">
+						<span>
+							<label>이름 : </label>
+							<input type="text" name="foodName" placeholder="음식명을 기입해주세요."/>
+						</span>
+						<span>
+							<label>가격 : </label>
+							<input type="text" name="foodPrice" maxlength="6" placeholder="가격을 기입해주세요."/>
+						</span>
+						<span>
+							<span>
+								<label>설명 : </label>
+							</span>
+							<textarea placeholder="음식설명을 기입해주세요." class="conts"></textarea>
+							<input type="hidden" name="foodConts">
+						</span>
+						<span>
+							<span>
+								<label>재료 : </label>
+							</span>
+							<textarea placeholder="재료를 기입해주세요." class="ings"></textarea>
+							<input type="hidden" name="foodIng">
+						</span>
+						<span class="radioSpan">
+							<label>대표메뉴</label>
+							<input type="radio" value="main"/>
+							<label>추천메뉴</label>
+							<input type="radio" value="good"/>
+							<label>선택안함</label>
+							<input type="radio" value="soso" checked="checked"/>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="food-info">
+				<span>
+					<input type="button" class="round-blue-btn" value="사진첨부" />
+					<input type="file" class="fileup2"/>
+				</span>
+				<div class="food-detail">
+					<div class="food-img-wrap">
+						<img src="http://localhost/potato/css/images/noImg.png">
+					</div>
+					<div class="food-content">
+						<span>
+							<label>이름 : </label>
+							<input type="text" name="foodName" placeholder="음식명을 기입해주세요."/>
+						</span>
+						<span>
+							<label>가격 : </label>
+							<input type="text" name="foodPrice" maxlength="6" placeholder="가격을 기입해주세요."/>
 						</span>
 						<span>
 							<span>
@@ -390,35 +528,35 @@ const autoHyphen2 = (target) => {
 						<div class="icon-sector">
 							<span>
 								<img src="css/images/sleep.png" ><span>수면실</span>
-								<input type="checkbox" name="restIcons" value=""/>
+								<input type="checkbox" name="restIcons" value="sleep.png"/>
 							</span>
 							<span>
 								<img src="css/images/shower.png" ><span>샤워실</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="shower.png"/>
 							</span>
 							<span>
 								<img src="css/images/washing.png" ><span>세탁실</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="washing.png"/>
 							</span>
 							<span>
 								<img src="css/images/rest.png" ><span>쉼터</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="rest.png"/>
 							</span>
 							<span>
 								<img src="css/images/barber.png" ><span>이발소</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="barber.png"/>
 							</span>
 							<span>
 								<img src="css/images/baby.png" ><span>수유실</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="baby.png"/>
 							</span>
 							<span>
 								<img src="css/images/pharmacy.png" ><span>약국</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="pharmacy.png"/>
 							</span>
 							<span>
 								<img src="css/images/market.png" ><span>농산물 판매</span>
-								<input type="checkbox" name="restIcons"/>
+								<input type="checkbox" name="restIcons" value="market.png"/>
 							</span>
 						</div>
 					</div>
@@ -429,35 +567,35 @@ const autoHyphen2 = (target) => {
 						<div class="icon-sector">
 							<span>
 								<img src="css/images/sleep.png" ><span>수면실</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="sleep.png"/>
 							</span>
 							<span>
 								<img src="css/images/shower.png" ><span>샤워실</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="shower.png"/>
 							</span>
 							<span>
 								<img src="css/images/washing.png" ><span>세탁실</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="washing.png"/>
 							</span>
 							<span>
 								<img src="css/images/rest.png" ><span>쉼터</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="rest.png"/>
 							</span>
 							<span>
 								<img src="css/images/barber.png" ><span>이발소</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="barber.png"/>
 							</span>
 							<span>
 								<img src="css/images/baby.png" ><span>수유실</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="baby.png"/>
 							</span>
 							<span>
 								<img src="css/images/pharmacy.png" ><span>약국</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="pharmacy.png"/>
 							</span>
 							<span>
 								<img src="css/images/market.png" ><span>농산물 판매</span>
-								<input type="checkbox" name="gasIcons"/>
+								<input type="checkbox" name="gasIcons" value="market.png"/>
 							</span>
 						</div>
 					</div>

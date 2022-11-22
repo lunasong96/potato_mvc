@@ -101,9 +101,13 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
-	public int insertAmenity(List<AmenityVO> list) {
-		
-		return 0;
+	public int insertAmenity(AmenityVO amVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.insert("potato.manager.rest.insertAmt",amVO);
+		ss.commit();
+		mbh.closeHandler(ss);
+		return cnt;
 	}
 	
 	

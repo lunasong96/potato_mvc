@@ -94,9 +94,9 @@ public class ManagerRestService {
 		return cnt;
 	}
 	
-	public int addAmenity(List<AmenityVO> list) {
-		
-		return 0;
+	public int addAmenity(AmenityVO amVO) {
+		int cnt = mrDAO.insertAmenity(amVO);
+		return cnt;
 	}
 	
 	
