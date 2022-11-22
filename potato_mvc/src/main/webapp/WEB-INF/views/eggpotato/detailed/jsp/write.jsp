@@ -16,6 +16,13 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+$(function() {
+	
+	//사진파일클릭
+	$("#filebtn").on("change", uploadFileImg);
+	
+})
+
 function starRate(rate) {
  	switch(rate) {
 		case 5: $(".rate-txt").addClass("rate-add"); $(".rate-txt").text("최고에요!"); break;
@@ -26,9 +33,75 @@ function starRate(rate) {
 	} 
 }
 
+var file_Arr=[];
+
+function uploadFileImg(e) {
+	
+	var files = e.target.files; //이벤트가 일어난 대상=input file (유사배열)
+	var fileArr= Array.prototype.slice.call(files); //배열작업
+	
+	var index=0; //고유인덱스 부여
+	fileArr.forEach(function(f) {
+		if(!f.type.match("image/*")) { // 확장명 검사
+			alert("이미지 파일을 선택해주세요.");
+			return;
+		}//end if 
+		
+		file_Arr.push(f); //배열에 담기
+		
+		var previewAdd=new FileReader(); //파일 데이터 읽기
+		previewAdd.onload=function(e) {
+			
+			
+			var preimg=
+				"<div class='review-img-wrap' id='riw-"+index+"'><img src='"+ e.target.result +"' class='review-img' alt='리뷰사진'>"+
+				"<a href='javascript:deleteImage("+index+");' class='img-a'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-x-square-fill' viewBox='0 0 16 16'>"+
+			  	"<path d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z'/></svg></a></div>"
+			$(preimg).appendTo(".photo-preview-wrap");
+			index++;	 
+			
+			if($(".review-img-wrap").length > 6 ) {
+				alert("이미지는 6개까지만 보여줄 수 있습니다.");	
+				$(".review-img-wrap").last().remove();
+				file_Arr.splice(index, 1);
+				return;
+			}
+		}
+		previewAdd.readAsDataURL(f); //데이터 url만들기 인코딩
+		
+	})
+		console.log(files);
+		console.log(fileArr);
+		console.log(file_Arr[0]);
+}
+
 function okReview() {
+	
+	//별점 선택
+	if($("input[name=ratingRadio]:checked").val()==undefined){
+		alert("별점을 선택해주세요.");
+		return;
+	}
+	 
+	//내용 입력
+	if($(".review-txtarea").val().trim()==""){
+		alert("휴게소가 어떠셨나요?");
+		$(".review-txtarea").focus();
+		return;
+	}
+	
 	location.href="review_write.do?restarea_idx=${param.restarea_idx }";
 }
+
+function deleteImage(index) {
+	console.log(index);
+	file_Arr.splice(index, 1); //index에 해당하는 배열[index] 삭제
+	
+	var delImage="#riw-"+index;
+	console.log(delImage);
+	$(delImage).remove(); //선택 이미지 삭제
+}
+
 </script>
 </head>
 <body>
@@ -92,7 +165,7 @@ function okReview() {
 				<p class="wb-text">여기서 보여지는 이미지의 크기는 실제 리뷰에서 보여지는 이미지 크기와 동일합니다.</p>
 				<div class="wbm-wrap">
 					<div class="photo-add-wrap">
-						<input type="file" id="filebtn" class="file-class">
+						<input type="file" id="filebtn" class="file-class" multiple="multiple" accept="image/*">
 						<label for="filebtn" class="file-add">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
 							  <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -101,7 +174,7 @@ function okReview() {
 						</label>
 					</div>
 					<div class="photo-preview-wrap">
-						<div class="review-img-wrap">
+						<!-- <div class="review-img-wrap">
 							<img src="css/images/속리산.jpg" class="review-img" alt="리뷰사진">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
 							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
@@ -136,7 +209,7 @@ function okReview() {
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
 							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
 							</svg>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
