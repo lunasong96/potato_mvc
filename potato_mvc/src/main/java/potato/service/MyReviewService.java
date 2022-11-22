@@ -19,7 +19,7 @@ public class MyReviewService {
 	public List<MyReviewDomain> searchMyRevAll(MyReviewVO mrVO){
 		List<MyReviewDomain> list = mrDAO.selMyRevAll(mrVO);
 		return list;
-	}//searchOtherRevAll
+	}
 	
 	
 }//class

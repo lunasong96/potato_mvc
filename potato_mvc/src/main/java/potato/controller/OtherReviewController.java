@@ -21,10 +21,13 @@ public class OtherReviewController {
 	
 	//타사용자리뷰조회
 	@RequestMapping(value="other_review.do", method= {POST,GET})
-	public String otherReviewMove(String otherPId, HttpSession session, OtherReviewVO orVO, Model model) {
+	public String otherReviewMove(HttpSession session, OtherReviewVO orVO, Model model) {
+		//otherPid : 클릭했을 때 입력되는 아이디
+		model.addAttribute("img",ors.searchOtherImg(orVO));
+		model.addAttribute("nick",ors.searchOtherNick(orVO));
+		model.addAttribute("rCnt",ors.searchOtherRev(orVO));
+		model.addAttribute("rAll",ors.searchOtherRevAll(orVO));
 		
-		session.setAttribute("id", "sotteok");
-		model.addAttribute("revAll",ors.searchOtherRevAll(orVO));
 		
 		return  "other_profiles/jsp/other_user_profiles";
 	}//otherReviewMove

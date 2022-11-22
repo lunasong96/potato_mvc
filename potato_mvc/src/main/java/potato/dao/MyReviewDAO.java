@@ -24,6 +24,6 @@ public class MyReviewDAO {
 		list = ss.selectOne("potato.myReview.selMyRevAll", mrVO);
 		mbh.closeHandler(ss);
 		return list;		
-	}//selMyRevAll
+	}
 
 }

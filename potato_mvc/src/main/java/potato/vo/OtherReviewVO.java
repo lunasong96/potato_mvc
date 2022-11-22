@@ -1,7 +1,7 @@
 package potato.vo;
 
 public class OtherReviewVO {
-	private String img, id, otherPId;
+	private String img, id, otherPid;
 	private int dateFlag, restarea_idx, review_idx, dateOrderFlag=1, pageFlag=1, reportOrderFlag;
 	public String getImg() {
 		return img;
@@ -14,6 +14,12 @@ public class OtherReviewVO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getOtherPid() {
+		return otherPid;
+	}
+	public void setOtherPid(String otherPid) {
+		this.otherPid = otherPid;
 	}
 	public int getDateFlag() {
 		return dateFlag;
@@ -51,18 +57,12 @@ public class OtherReviewVO {
 	public void setReportOrderFlag(int reportOrderFlag) {
 		this.reportOrderFlag = reportOrderFlag;
 	}
-	public String getOtherPId() {
-		return otherPId;
-	}
-	public void setOtherPId(String otherPId) {
-		this.otherPId = otherPId;
-	}
+	
 	@Override
 	public String toString() {
-		return "OtherReviewVO [img=" + img + ", id=" + id + ", otherPId=" + otherPId + ", dateFlag=" + dateFlag
+		return "OtherReviewVO [img=" + img + ", id=" + id + ", otherPid=" + otherPid + ", dateFlag=" + dateFlag
 				+ ", restarea_idx=" + restarea_idx + ", review_idx=" + review_idx + ", dateOrderFlag=" + dateOrderFlag
 				+ ", pageFlag=" + pageFlag + ", reportOrderFlag=" + reportOrderFlag + "]";
 	}
-
 	
 }//class

@@ -12,7 +12,7 @@
 	from   review_img ri, review r, liked l, member m, restarea res
 	where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
 			and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=r.restarea_idx
-			and m.id(+)=r.id) and r.id=${id}
+			and m.id(+)=r.id) and r.id='${id}'
 	group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img ,res.name
 	order by post_date desc, review_idx desc
 	offset (#{pageFlag}-1)*3 rows

@@ -7,12 +7,43 @@ import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
 import potato.domain.OtherReviewDomain;
-import potato.manager.domain.ReviewDomain;
 import potato.vo.OtherReviewVO;
 
 @Component
 public class OtherReviewDAO {
-
+	
+	public String selOtherImg(OtherReviewVO orVO) {
+		String otherImg = null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		otherImg = ss.selectOne("potato.otherReview.selOtherImg", orVO);
+		mbh.closeHandler(ss);
+		return otherImg;
+	}//selOtherImg
+	
+	public String selOtherNick(OtherReviewVO orVO) {
+		String otherNick = null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		otherNick = ss.selectOne("potato.otherReview.selOtherNick", orVO);
+		mbh.closeHandler(ss);
+		return otherNick;
+	}//selOtherNick
+	
+	/**
+	 * ¸®ºä¼ö
+	 * @param orVO
+	 * @return
+	 */
+	public int selOtherRev(OtherReviewVO orVO) {
+		int otherRev = 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		otherRev = ss.selectOne("potato.otherReview.selOtherRev", orVO);
+		mbh.closeHandler(ss);
+		return otherRev;
+	}//selTotalRev
+	
 	/**
 	 * ¸®ºäÁ¶È¸
 	 * @param orVO
@@ -26,21 +57,6 @@ public class OtherReviewDAO {
 		mbh.closeHandler(ss);
 		return list;
 	}//selOtherRevAll   
-	
-	/**
-	 * ¸®ºä¼ö
-	 * @param id
-	 * @return
-	 */
-	public int selOtherRevCnt(String id) {
-		int otherRevCnt = 0;
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getHandler();
-		otherRevCnt = ss.selectOne("potato.otherReview.selOtherRevCnt", id);
-		mbh.closeHandler(ss);
-		return otherRevCnt;
-	}//selOtherRevCnt
-	
 	
 
 }//class

@@ -4,10 +4,9 @@ import java.sql.Date;
 import java.util.Arrays;
 
 public class OtherReviewDomain {
-	private String nick, contents, id, profilImg, name;
-	private String[] revimg;
-	private int restarea_idx, review_idx, rating, like_cnt;
-	private Date postDate;
+	private String nick, contents, id, img, name, foodimg;
+	private int restarea_idx, review_idx, rating, liked;
+	private Date post_date;
 	public String getNick() {
 		return nick;
 	}
@@ -26,11 +25,11 @@ public class OtherReviewDomain {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getProfilImg() {
-		return profilImg;
+	public String getImg() {
+		return img;
 	}
-	public void setProfilImg(String profilImg) {
-		this.profilImg = profilImg;
+	public void setImg(String img) {
+		this.img = img;
 	}
 	public String getName() {
 		return name;
@@ -38,11 +37,11 @@ public class OtherReviewDomain {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String[] getRevimg() {
-		return revimg;
+	public String getFoodimg() {
+		return foodimg;
 	}
-	public void setRevimg(String[] revimg) {
-		this.revimg = revimg;
+	public void setFoodimg(String foodimg) {
+		this.foodimg = foodimg;
 	}
 	public int getRestarea_idx() {
 		return restarea_idx;
@@ -62,25 +61,24 @@ public class OtherReviewDomain {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public int getLike_cnt() {
-		return like_cnt;
+	public int getLiked() {
+		return liked;
 	}
-	public void setLike_cnt(int like_cnt) {
-		this.like_cnt = like_cnt;
+	public void setLiked(int liked) {
+		this.liked = liked;
 	}
-	public Date getPostDate() {
-		return postDate;
+	public Date getPost_date() {
+		return post_date;
 	}
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
+	public void setPost_date(Date post_date) {
+		this.post_date = post_date;
 	}
-	
 	@Override
 	public String toString() {
-		return "OtherReviewDomain [nick=" + nick + ", contents=" + contents + ", id=" + id + ", profilImg=" + profilImg
-				+ ", name=" + name + ", revimg=" + Arrays.toString(revimg) + ", restarea_idx=" + restarea_idx
-				+ ", review_idx=" + review_idx + ", rating=" + rating + ", like_cnt=" + like_cnt + ", postDate="
-				+ postDate + "]";
+		return "OtherReviewDomain [nick=" + nick + ", contents=" + contents + ", id=" + id + ", img=" + img + ", name="
+				+ name + ", foodimg=" + foodimg + ", restarea_idx=" + restarea_idx + ", review_idx=" + review_idx
+				+ ", rating=" + rating + ", liked=" + liked + ", post_date=" + post_date + "]";
 	}
+
 	
 }
