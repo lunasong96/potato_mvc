@@ -81,15 +81,16 @@ function slider() {
 
 <!-- container -->
 <div class="container">
-	<%-- 마이페이지용 --%>
-<div class="like_wrap">
+<div class="main">
+<!-- 건들ㄴ -->
+<!-- 왼 : 네비바  -->
 <div class="wrap-navi">
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
 					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
-				<div class="nickname">감자킴</div>
+				<div class="nickname">닉니임</div>
 			</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
@@ -97,13 +98,10 @@ function slider() {
 			<a class="navi-link" href="my_review.do">내가 쓴 리뷰</a>
 			<a class="navi-link" href="like_review.do">좋아요한 리뷰</a>
 			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
-		</div><!-- navi -->
-</div><!-- wrap-navi -->
-<%-- 네비바 끝 --%>
-<!-- 리뷰 -->
-
-
-
+		</div>
+</div>
+<!-- 오 : 리뷰+페이징  -->
+<div class="review">
 <!-- 리뷰 -->
 <div class="review-wrap">
 		<div class="review-exist">
@@ -321,7 +319,6 @@ function slider() {
 		</div>
 	</div>
 <!-- 리뷰 -->
-
 <!-- 페이지 -->
 <div class="page">
 	<a href="#void" class="page-num">&nbsp;&lt;&nbsp;</a>
@@ -332,10 +329,9 @@ function slider() {
 </div>
 
 </div>
-
+<!-- 건들ㄴ -->
 </div>
-
-</div><!-- container 삭제 시 죽음 뿐.... -->
+</div>
 <!-- container end -->
 
 <!-- footer -->

@@ -1,49 +1,15 @@
 @charset "UTF-8";
 
-
-.title{
-	width:1150px;
-	margin:0px auto; 
-	font-size: 33px;
-	font-weight: bold;
+.container {
+	background: #fff !important;
 }
 
-.imgAlign{
-	margin-top:20px;
-	display: flex;
-}
-.heart-icon-wrap, .report-icon, .edit-icon, .delete-icon {
-	display: flex;
-    align-items: center;
-    margin-right: 15px;
+.main{
+	display:flex;
 }
 
-
-.heart-icon{
-	display: flex;
-	margin-right:5px; 
-	
-}
-.heart-btn{
-	background-color: transparent;
-	color: #333333;
-	display: flex;
-	margin-right: 5px;
-	align-items: center;
-}
-
-@keyframes heart {
-	0% {transform: scale(1.2);}
-	10% {transform: scale(0.9);}
-	20% {transform: scale(1.2);}
-	30% {transform: scale(0.9);}
-	40% {transform: scale(1.2);}
-	50% {transform: scale(0.9);}
-	60% {transform: scale(1.2);}
-	70% {transform: scale(0.9);}
-	80% {transform: scale(1.2);}
-	90% {transform: scale(0.9);}
-	100% {transform: scale(1.2);}
+.review{
+	width:1650px;
 }
 
 /* 리뷰 */
@@ -110,7 +76,7 @@
 .review-wrap {
 	width: 1300px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 120px;
 }
 
 .review-txt > div > span:last-child {
@@ -211,7 +177,6 @@
 	display: flex;
 }
 
-
 .heart-icon-wrap, .report-icon, .edit-icon, .delete-icon {
 	display: flex;
     align-items: center;
@@ -235,10 +200,6 @@
 	animation-iteration-count: infinite;
 }
 
-.hb-fill {
-	color: red;
-}
-
 @keyframes heart {
 	0% {transform: scale(1.2);}
 	10% {transform: scale(0.9);}
@@ -253,7 +214,9 @@
 	100% {transform: scale(1.2);}
 }
 
-
+.hb-fill {
+	color: red;
+}
 
 .bi-bell-fill:hover {
 	animation-duration: 2s;
@@ -273,8 +236,6 @@
 	margin-right: 10px;
 }
 /* 리뷰 */
-
-
 
 /* 페이지 */
 .page{
@@ -296,28 +257,4 @@
     background-color: #C89E6C;
 
 }
-.like_wrap{
-	display: flex;
-	flex-direction: row;
-}
-.date {
-	font-size: 15px;
-	margin-right: 10px;
-}
-.etc-icon-wrap {
-	margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    width: 1200px;
-    margin-bottom: 10px;
-}
 
-.etc-icon {
-	display: flex;
-}
-
-.heart-icon-wrap > span, .report-icon > span, .edit-icon > span, .delete-icon > span {
-	font-size: 15px;
-}

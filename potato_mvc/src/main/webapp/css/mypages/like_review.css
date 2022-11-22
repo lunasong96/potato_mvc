@@ -1,53 +1,16 @@
 @charset "UTF-8";
 
-
-.title{
-	width:1150px;
-	margin:0px auto; 
-	font-size: 33px;
-	font-weight: bold;
+.container {
+	background: #fff !important;
 }
 
-.imgAlign{
-	margin-top:20px;
-	display: flex;
-}
-.heart-icon{
-	display: flex;
-	margin-right:5px; 
-	
-}
-.heart-btn{
-	background-color: transparent;
-	color: #333333;
-	display: flex;
-	margin-right: 5px;
-	align-items: center;
-}
-.heart-btn:hover {
-	animation-duration: 2s;
-	animation-name: heart;
-	animation-iteration-count: infinite;
+.main{
+	display:flex;
 }
 
-@keyframes heart {
-	0% {transform: scale(1.2);}
-	10% {transform: scale(0.9);}
-	20% {transform: scale(1.2);}
-	30% {transform: scale(0.9);}
-	40% {transform: scale(1.2);}
-	50% {transform: scale(0.9);}
-	60% {transform: scale(1.2);}
-	70% {transform: scale(0.9);}
-	80% {transform: scale(1.2);}
-	90% {transform: scale(0.9);}
-	100% {transform: scale(1.2);}
+.review{
+	width:1650px;
 }
-
-.hb-fill {
-	color: red;
-}
-
 
 /* 리뷰 */
 .star-rate {
@@ -113,7 +76,7 @@
 .review-wrap {
 	width: 1300px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 120px;
 }
 
 .review-txt > div > span:last-child {
@@ -274,8 +237,6 @@
 }
 /* 리뷰 */
 
-
-
 /* 페이지 */
 .page{
 	display: flex;
@@ -296,7 +257,4 @@
     background-color: #C89E6C;
 
 }
-.like_wrap{
-	display: flex;
-	flex-direction: row;
-}
+

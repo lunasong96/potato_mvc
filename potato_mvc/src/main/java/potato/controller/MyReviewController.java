@@ -21,6 +21,8 @@ public class MyReviewController {
 	//사용자리뷰조회
 	@RequestMapping(value = "my_review.do", method = {GET,POST})
 	public String myReviewMove(HttpSession session, MyReviewVO mrVO, Model model) {
+		model.addAttribute("img",mrs.searchMyImg(mrVO));
+		model.addAttribute("nick",mrs.searchMyNick(mrVO));
 		model.addAttribute("rAll",mrs.searchMyRevAll(mrVO));
 		return "mypages/jsp/my_review";
 	}//myReviewMove

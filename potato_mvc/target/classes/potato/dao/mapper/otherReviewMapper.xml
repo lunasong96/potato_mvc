@@ -34,7 +34,7 @@
 	group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img ,res.name
 	order by post_date desc, review_idx desc
 	offset (#{pageFlag}-1)*3 rows
-	fetch next 3 rows only
+	fetch next 1 rows only
 	</select>
 
 	
