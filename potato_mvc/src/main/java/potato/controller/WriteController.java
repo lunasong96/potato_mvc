@@ -1,6 +1,7 @@
 package potato.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,15 +15,15 @@ import potato.vo.WriteReviewVO;
 public class WriteController {
 
 	//리뷰작성완료
-	@RequestMapping(value = "review_write.do", method=GET)
+	@RequestMapping(value = "review_write.do", method={GET,POST})
 	public String reviewWrite(HttpSession session, HttpServletRequest request, WriteReviewVO wrVO) {
-		return "detailed/jsp/user_detailed";
+		return "forward:user_detailed.do";
 	}
 	
 	//리뷰 수정 작성완료
-	@RequestMapping(value = "re_review_write.do", method=GET)
+	@RequestMapping(value = "re_review_write.do", method={GET,POST})
 	public String reReviewWrite(HttpSession session, HttpServletRequest request, WriteReviewVO wrVO) {
-		return "detailed/jsp/user_detailed";
+		return "forward:user_detailed.do";
 	}
 	
 }

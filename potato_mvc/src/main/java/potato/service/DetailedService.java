@@ -86,7 +86,9 @@ public class DetailedService {
 	//<휴게소 리뷰>
 	//리뷰 작성창 이동
 	public DetailedReviewDomain moveReviewWrite(int restarea_idx) {
-		return null;
+		DetailedReviewDomain drd=null;
+		drd=dDAO.selectReviewWrite(restarea_idx);
+		return drd;
 	}
 	
 	//리뷰 수정창 이동
@@ -146,13 +148,8 @@ public class DetailedService {
 
 	//페이징 마지막 페이지
 	public int getLastPageNum(int total) {
-		int lastPage = (int) Math.ceil((double) total / 1);
+		int lastPage = (int) Math.ceil((double) total / 5);
 		return lastPage;
-	}
-	
-	//리뷰 좋아요 total
-	public int getLikeTotal(DetailedLikeVO dlVO) {
-		return 0;
 	}
 	
 	//리뷰 좋아요 추가
@@ -170,8 +167,10 @@ public class DetailedService {
 	}
 	
 	//리뷰 삭제
-	public int getReviewDel(DetailedReviewVO drVO) {
-		return 0;
+	public String getReviewDel(DetailedReviewVO drVO) {
+		String reviewDel=null;
+		reviewDel=dDAO.deleteReviewDel(drVO);
+		return reviewDel;
 	}
 	
 	//<신고창>

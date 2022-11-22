@@ -135,7 +135,16 @@ public class DetailedDAO {
 	//<휴게소 리뷰>
 	//리뷰 작성창 이동
 	public DetailedReviewDomain selectReviewWrite(int restarea_idx) {
-		return null;
+		DetailedReviewDomain drd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		drd=ss.selectOne("potato.detailedMapper.selReviewWrite",restarea_idx);
+		
+		mbh.closeHandler(ss);
+		
+		return drd;
 	}
 	
 	//리뷰 수정창 이동
@@ -185,11 +194,6 @@ public class DetailedDAO {
 		return drd;
 	}
 	
-	//타사용자 프로필 이동
-	public DetailedReviewDomain selectOtherProfile(String id) {
-		return null;
-	}
-	
 	//리뷰 좋아요 여부
 	public int selectLikeChk(DetailedBookmarkVO dbVO) {
 		int LikeChk=0;
@@ -233,8 +237,17 @@ public class DetailedDAO {
 	}
 	
 	//리뷰 삭제
-	public int deleteReviewDel(DetailedReviewVO drVO) {
-		return 0;
+	public String deleteReviewDel(DetailedReviewVO drVO) {
+		String reviewDel=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		reviewDel=ss.selectOne("potato.detailedMapper.delReviewDel",drVO);
+		
+		mbh.closeHandler(ss);
+		
+		return reviewDel;
 	}
 	
 	//<신고창>

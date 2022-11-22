@@ -12,14 +12,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-$(function() {
 	
-	if(${rpc}==1) {
-		alert("이미 접수된 신고입니다.")
-	}
-
-})
-	
+if(${rpc}==1) {
+	alert("신고가 접수되었습니다.");
+	self.close();
+}
 
 function report() {
     var rridx= $("[name='report-radio']:checked").val();
@@ -27,11 +24,12 @@ function report() {
        alert("차단사유를 선택해주세요.");
     }else{
        $("#report_idx").val(rridx);
-       $("#reportFrm").submit();  
-       alert("신고가 접수되었습니다.");
-       /* self.close(); */
-    }
- }
+       $("#id_reporter").val("${param.id}");
+       $("#review_idx").val(${param.review_idx});
+       $("#restarea_idx").val(${param.restarea_idx});
+       $("#reportFrm").submit();
+ 	}
+}
 </script>
 
 </head>
@@ -59,12 +57,13 @@ function report() {
 	</div>
 </div>
 
-<form method="post" id="reportFrm" action="ajax_detailed_report.do">
+<form method="get" id="reportFrm" action="detailed_report.do">
 	<input type="hidden" id="id_reporter" name="id_reporter" value="${param.id }"/>
 	<input type="hidden" id="id_writer" name="id_writer" value="${param.id_writer }"/>
 	<input type="hidden" id="report_idx" name="report_idx" value="${param.report_idx }"/>
 	<input type="hidden" name="review_idx" id="review_idx" value="${param.review_idx}">
 	<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx}">
+	<input type="hidden" name="rpc" id="rpc" value="${param.rpc}">
 </form>
 
 </body>

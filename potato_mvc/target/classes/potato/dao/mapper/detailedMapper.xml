@@ -103,8 +103,8 @@ order by post_date desc, review_idx desc
 <if test="dateFlag eq 2">
 order by post_date, review_idx
 </if>
-offset 0 rows
-fetch next #{addFlag}*1+1 rows only
+offset #{addFlag}*5+0 rows
+fetch next 5 rows only
 </select>
 
 <!-- 좋아요 여부 -->

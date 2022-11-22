@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DetailedReviewDomain {
 
-	private String id, contents, nick, img;
+	private String id, contents, nick, img, name;
 	private String foodimg, idclick;
 	private int review_idx, rating, likeTotal, liked, lcnt;
 	private Date post_date;
@@ -33,6 +33,12 @@ public class DetailedReviewDomain {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getFoodimg() {
 		return foodimg;
@@ -85,10 +91,9 @@ public class DetailedReviewDomain {
 	@Override
 	public String toString() {
 		return "DetailedReviewDomain [id=" + id + ", contents=" + contents + ", nick=" + nick + ", img=" + img
-				+ ", foodimg=" + foodimg + ", idclick=" + idclick + ", review_idx=" + review_idx + ", rating=" + rating
-				+ ", likeTotal=" + likeTotal + ", liked=" + liked + ", lcnt=" + lcnt + ", post_date=" + post_date + "]";
+				+ ", name=" + name + ", foodimg=" + foodimg + ", idclick=" + idclick + ", review_idx=" + review_idx
+				+ ", rating=" + rating + ", likeTotal=" + likeTotal + ", liked=" + liked + ", lcnt=" + lcnt
+				+ ", post_date=" + post_date + "]";
 	}
 
-	
-	
 }

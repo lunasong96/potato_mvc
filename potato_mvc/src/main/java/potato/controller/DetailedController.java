@@ -25,7 +25,7 @@ public class DetailedController {
 	private DetailedService ds;
 
 	//绒霸家 惑技芒 立加
-	@RequestMapping(value = "user_detailed.do", method=GET)
+	@RequestMapping(value = "user_detailed.do", method={GET,POST})
 	public String userDetailedMove(int restarea_idx, Model model, HttpSession session, HttpServletRequest request) {
 		
 		model.addAttribute("rd", ds.getRestDetailed(restarea_idx));
@@ -81,6 +81,7 @@ public class DetailedController {
 	//府轰累己芒 立加
 	@RequestMapping(value = "write.do", method=GET)
 	public String writePageMove(HttpSession session, int restarea_idx, Model model) {
+		model.addAttribute("mrw", ds.moveReviewWrite(restarea_idx));
 		return "detailed/jsp/write";
 	}
 	
@@ -128,17 +129,25 @@ public class DetailedController {
 	}
 	
 	//府轰 脚绊 立荐
-	@ResponseBody
-	@RequestMapping(value = "ajax_detailed_report.do", method= {GET,POST})
-	public String setReport(DetailedReportVO drVO) {
+	@RequestMapping(value = "detailed_report.do", method= {GET,POST})
+	public String setReport(HttpServletRequest request, DetailedReportVO drVO, Model model) {
 		ds.setReportPopup(drVO);
-		return "redirect:detailed/jsp/user_detailed.do";
+		
+		drVO.setId_reporter(request.getParameter("id_reporter"));
+		drVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
+		drVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
+		
+		model.addAttribute("rpc", ds.setReportPopupChk(drVO));
+		
+		return "detailed/jsp/report_review_popup";
 	}
 	
-	//府轰 昏力
-	@RequestMapping(value = "detailed_review_delete.do", method=GET)
-	public String deleteReview(HttpSession session, String id_writer, Model model) {
-		return "detailed/jsp/user_detailed";
+	////府轰 昏力
+	@ResponseBody
+	@RequestMapping(value = "detailed_review_delete.do", method= {GET,POST})
+	public String deleteReview(DetailedReviewVO drVO) {
+		String jsonObj=ds.getReviewDel(drVO);
+		return jsonObj;
 	}
 	
 	

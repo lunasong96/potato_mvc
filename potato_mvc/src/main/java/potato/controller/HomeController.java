@@ -1,6 +1,7 @@
 package potato.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +19,7 @@ public class HomeController {
 	private HomeServiece hs;
 
 	//메인화면 접속
-	@RequestMapping(value = "user_mainhome.do", method=GET)
+	@RequestMapping(value = "user_mainhome.do", method={GET,POST})
 	public String userHomeMove(HttpServletRequest request, Model model) {
 		
 		//방문자 ip 얻기
