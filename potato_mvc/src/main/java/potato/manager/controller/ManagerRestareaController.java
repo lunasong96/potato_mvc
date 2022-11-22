@@ -7,6 +7,8 @@ import static java.lang.Double.parseDouble;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import potato.manager.service.ManagerRestService;
+import potato.manager.vo.FoodVO;
 import potato.manager.vo.RestVO;
 import potato.manager.vo.SearchRestVO;
 
@@ -105,6 +108,8 @@ public class ManagerRestareaController {
 			//휴게소테이블에 추가성공시 음식, 시설테이블에 추가
 			if(restResultCnt == 1) {
 				int idx = mrs.searchNewIdx(rVO); // 추가된 인덱스반환
+				List<FoodVO> list = new ArrayList<FoodVO>();
+				
 				
 			}
 			

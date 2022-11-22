@@ -33,29 +33,64 @@ $(function(){
 		$(this).attr("name","foodFile"+(i+1));
 	});
 	
-	/* $("[type='radio']").each(function(i,radio)) {
-		$
-	} */
+	//라디오 이름다르게 명시
+	$(".radioSpan").each(function(i,span){
+		$(span).children().next().attr("name","radio"+(i+1));
+		$(span).children().next().next().next().attr("name","radio"+(i+1));
+		$(span).children().next().next().next().next().next().attr("name","radio"+(i+1));
+	});
 	
-});
+	 
+});//ready
+
+//이미지선택시
+$(document).on("change",".fileup2",function(){
+	previewFoodFile(this,$(this));
+}); 
+
 
 //프로필사진 등록 미리보기
 function previewFile(input) {
+	if (input.files && input.files[0]) {
+	   var reader = new FileReader();
+	   reader.onload = function (e) {
+	   $("#restProfile").attr('src', e.target.result);
+	   }
+	   reader.readAsDataURL(input.files[0]);
+	} 
+	 //프로필사진 확장자제한
+    if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
+		alert('이미지 파일만 업로드 가능합니다.');
+		$("#restProfile").attr("src", "http://localhost/potato/css/images/noImg.png");
+		input.value = ''; 
+		input.focus(); 
+	}
+}
+
+//음식사진 등록 미리보기
+function previewFoodFile(input,obj) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-        $("#restProfile").attr('src', e.target.result);
+        obj.parent().next().children().children().attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
-    }
-      //프로필사진 확장자제한
+    } 
+    //프로필사진 확장자제한
 	if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
-	        alert('이미지 파일만 업로드 가능합니다.');
-	        $("#restProfile").attr("src", "http://localhost/potato/css/images/basic_rest.jpg");
-	        input.value = ''; 
-	        input.focus(); 
+	     alert('이미지 파일만 업로드 가능합니다.');
+	     obj.parent().next().children().children().attr("src", "http://localhost/potato/css/images/noImg.png");
+	     input.value = ''; 
+	     input.focus();
 	}
 }
+
+
+
+
+
+
+
 
 //유효성 검증
 function chkNull(){
@@ -130,7 +165,7 @@ const autoHyphen2 = (target) => {
 				<input type="text" id="restName" name="restName" placeholder="휴게소명을 기입하세요."/> 
 			</div>
 			<div class="tumbnail">
-				<img src="http://localhost/potato/css/images/basic_rest.jpg" id="restProfile">
+				<img src="http://localhost/potato/css/images/noImg.png" id="restProfile">
 				<div class="tumbnail-btn-wrap">
 					<span>썸네일</span>
 					<div>
@@ -154,7 +189,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="">
+						<img src="http://localhost/potato/css/images/noImg.png"  >
 					</div>
 					<div class="food-content">
 						<span>
@@ -179,13 +214,13 @@ const autoHyphen2 = (target) => {
 							<textarea placeholder="재료를 기입해주세요."></textarea>
 							<input type="hidden" name="foodIng">
 						</span>
-						<span>
+						<span class="radioSpan">
 							<label>대표메뉴</label>
-							<input type="radio" checked="checked" value="main" />
+							<input type="radio"  value="main" onclick="return(false)" checked="checked"/>
 							<label>추천메뉴</label>
-							<input type="radio"  value="good" />
+							<input type="radio"  value="good" onclick="return(false)"/>
 							<label>선택안함</label>
-							<input type="radio"  value="soso" />
+							<input type="radio"  value="soso" onclick="return(false)"/>
 						</span>
 					</div>
 				</div>
@@ -197,7 +232,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="">
+						<img src="http://localhost/potato/css/images/noImg.png">
 					</div>
 					<div class="food-content">
 						<span>
@@ -222,13 +257,13 @@ const autoHyphen2 = (target) => {
 							<textarea placeholder="재료를 기입해주세요."></textarea>
 							<input type="hidden" name="foodIng">
 						</span>
-						<span>
+						<span class="radioSpan">
 							<label>대표메뉴</label>
-							<input type="radio" />
+							<input type="radio" value="main"/>
 							<label>추천메뉴</label>
-							<input type="radio" />
+							<input type="radio" value="good"/>
 							<label>선택안함</label>
-							<input type="radio"  checked="checked"/>
+							<input type="radio" value="soso" checked="checked"/>
 						</span>
 					</div>
 				</div>
