@@ -12,7 +12,30 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$("#loginBtn").click(function(){
+		//null 검사
+		chkNull();
+	});//click
+});//ready
 
+//null 검사
+function chkNull(){
+	if( $("#manager_id").val().trim() == "" ){
+		alert("아이디를 입력하세요");
+		$("#manager_id").val("");
+		$("#manager_id").focus();
+		return;
+	}//end if
+	if( $("#pass").val().trim() == "" ){
+		alert("비밀번호를 입력하세요");
+		$("#pass").val("");
+		$("#pass").focus();
+		return;
+	}//end if
+	
+	$("#loginFrm").submit();
+}//chkNull
 </script>
 
 </head>
@@ -29,9 +52,11 @@
 			<div class="login-top">관리자 로그인</div>
 			<!-- main -->
 			<div class="login-main">
-				<input type="text" placeholder="아이디" class="id"><br/>
-				<input type="password" placeholder="비밀번호" class="pass"><br/>
+				<form method="post" action="managerlogin.do"  id="loginFrm">
+				<input type="text" placeholder="아이디" class="id" id="manager_id" name="manager_id"><br/>
+				<input type="password" placeholder="비밀번호" class="pass" id="pass" name="pass"><br/>
 				<input type="button" value="로그인" class="loginBtn">
+				</form>
 			</div>
 			<!-- //main -->
 		</div>

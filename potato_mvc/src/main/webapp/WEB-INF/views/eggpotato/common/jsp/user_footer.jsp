@@ -40,6 +40,9 @@
 .footer-left-content {
     color: #666666;
 }
+a {
+color : #333333;
+}
 
 /* footer css end */
 </style>
@@ -55,6 +58,7 @@
             주소 : 서울특별시 강남구 테헤란로 132(역삼동) 한독약품 빌딩 8층 쌍용교육센터 4강의실 <br>
             전화 : 02-3482-4632-5 <br>
             메일 : eggpotato@eggpotato.co.kr
+            <a href="managerlogin_page.do">관리자로그인</a>
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,10 @@ import potato.service.UserService;
 import potato.vo.ForgotIdVO;
 import potato.vo.ForgotPwVO;
 import potato.vo.LoginVO;
+import potato.vo.ManagerLoginVO;
 import potato.vo.UserInfoVO;
 
-@SessionAttributes({"id","nick", "img"})
+//@SessionAttributes({"id","nick", "img"})
 @Controller
 @Component
 public class UserController {
@@ -35,24 +37,39 @@ public class UserController {
 	}//loginPage
 	@RequestMapping(value = "/managerlogin_page.do", method = GET)
 	public String managerloginPage() {
-		return "manager/home/jsp/login";
+		return "manager/home/jsp/manager_login";
 	}//loginPage
 	
 	@RequestMapping(value = "/login.do", method = POST)
-	public String login(Model model, LoginVO lVO) {
+	public String login(LoginVO lVO, HttpSession ss) {
 		String url="redirect:user_mainhome.do";
 		UserDomain ud = null;
 		ud=us.searchMember(lVO);
-		model.addAttribute("id", ud.getId());
-		model.addAttribute("nick", ud.getNick());
-		model.addAttribute("img", ud.getImg());
+		ss.setAttribute("id", ud.getId());
+		ss.setAttribute("nick", ud.getNick());
+		ss.setAttribute("img", ud.getImg());
+		return url;
+	}//login
+	
+	@RequestMapping(value = "/managerlogin.do", method = POST)
+	public String managerlogin(ManagerLoginVO mlVO, HttpSession ss) {
+		String url="";
+		boolean flag=us.searchManager(mlVO);
+		System.out.println(flag);
+		if( flag ) {
+			ss.setAttribute("manager_id", mlVO.getManager_id());
+			url="redirect:../potato/manager/controller/mgr_home.do";
+		} else {
+			url="manager/home/jsp/manager_login";
+		}
 		return url;
 	}//login
 	
 	@RequestMapping(value = "logout.do", method = GET)
-	public String logout( SessionStatus ss) {
+	public String logout( SessionStatus ss, HttpSession session) {
 		String url="redirect:user_mainhome.do";
 		ss.setComplete();
+		session.invalidate();
 		return url;
 	}//logout
 	

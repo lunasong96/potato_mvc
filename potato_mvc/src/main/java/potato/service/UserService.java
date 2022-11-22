@@ -39,6 +39,7 @@ public class UserService {
 	 */
 	public boolean searchManager(ManagerLoginVO mlVO) {
 		boolean flag=false;
+		flag=uDAO.selectManager(mlVO);
 		return flag;
 	}
 	
