@@ -42,11 +42,11 @@
 	where id=#{id}
 </select> 
 
-<!-- 차단팝업창에 차단사유 불러오기 -->
+<!-- 차단팝업창 불러오기 -->
 <select id="blockReason" resultType="potato.manager.domain.MgrBlockReasonDomain">
 	select block_idx,reason
 	from block_reason
-</select>
+</select> 
 
 <!-- 회원 차단 -->
 <insert id="blockMember" parameterType="potato.manager.vo.ManagerBlockVO">

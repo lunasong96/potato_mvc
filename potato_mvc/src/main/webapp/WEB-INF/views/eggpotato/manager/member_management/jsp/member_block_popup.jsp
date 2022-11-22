@@ -26,7 +26,7 @@ $("#blockBtn").click(function(){
 		<span>회원 차단하기</span>
 	</div>
 	<div class="middle">
-		<p>차단대상자: <span>${ blockId }</span></p>
+		<p>차단대상자: <span>${ id }</span></p>
 		<div class="radio-wrap">
 			<c:forEach var="block" items="${ reasonList }">
 			<div class="rr-wrap">

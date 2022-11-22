@@ -51,19 +51,18 @@ public class MgrMemberService {
 	}
 	
 	//회원 차단하기(차단회원 목록에 추가)
-	public int addBlock(ManagerBlockVO mbVO) {
-		int cnt=mmDAO.insertBlock(mbVO);
-		
-		return cnt;
+	public void addBlock(ManagerBlockVO mbVO) {
+		mmDAO.insertBlock(mbVO);
 	}
 	
 	//차단 해제
 	public int removeBlock(String id) {
+		int cnt=mmDAO.deleteBlock(id);
 		
-		return 0;
+		return cnt;
 	}
 	
-	//페이징
+	////////////////////////페이징////////////////////
 	public int searchTotalPages(MgrMemberVO mmVO) {
 		int cnt=mmDAO.selectTotalPages(mmVO);
 		

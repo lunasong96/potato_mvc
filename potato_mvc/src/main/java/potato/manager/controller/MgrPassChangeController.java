@@ -28,7 +28,7 @@ public class MgrPassChangeController {
 	}
 	
 	//비번 변경 처리
-	@RequestMapping(value="/mgrPassChangeProcess.do",method=GET)
+	@RequestMapping(value="/mgrPassChangeProcess.do",method=POST)
 	public String passChangeProcess(MgrPassChangeVO mpcVO, Model model) {
 		
 		

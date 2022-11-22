@@ -26,8 +26,13 @@ $(function(){
 	$("#id").val($("#idSearch").val());
 	$("#memberFrm").submit();
 	});
+	
+	//차단 버튼 클릭
+	$("#blockBtn").click(function(){
+		$("#blockFrm").submit();
+	});
 		
-	//차단 해제 버튼 클릭 시
+	//차단 해제 버튼 클릭
 	$("#unblockBtn").click(function(){
 	    if (!confirm("해당 회원을 차단 해제하겠습니까?")) {
 	        // 취소(아니오) 버튼 클릭 시 이벤트
@@ -55,10 +60,9 @@ function tableChange(){
 				"width=539,height=474,top=203,left=1336")
 	}
 	//차단 버튼 클릭시 팝업창 보여주기
-	function showPopup(memberId){
-		window.open("mgr_memberBlockPopup.do?memberId"+memberId,"member_block_popup",
+	function showPopup(blockId){
+		window.open("mgr_memberBlockPopup.do?memberId"+blockId,"member_block_popup",
 				"width=539,height=474,top=203,left=1336")
-				alert(memberId);
 	}
 </script>
 </head>
@@ -111,8 +115,8 @@ function tableChange(){
 					</c:if>
 					<c:forEach var="member" items="${ memberList }">
 					<tr>
-					<td><a href="javascript:infoPopup('${member.id}')" style="color:black">${member.id}</a></td><td>${member.nick}</td><td>${member.birth}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/> </td>
-					<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup()"></td>
+					<td><a href="javascript:infoPopup('${member.id}')" style="color:black">${member.id}</a></td><td>${member.nick}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/></td><td>${member.birth}</td>
+					<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup('${member.id}')"></td>
 					</tr>
 				</c:forEach>
 				</c:when>
@@ -184,7 +188,7 @@ function tableChange(){
 </form>
 
 <!-- 회원 차단 팝업창 불러오기 -->
-<form id="infoFrm" action="mgr_memberBlockPopup.do" method="post">
+<form id="blockFrm" action="mgr_memberBlockPopup.do" method="post">
 	<input type="hidden" id="blockId" name="id">
 </form>
 </body>

@@ -28,7 +28,6 @@ public class MgrMemberController {
 	@RequestMapping(value="/mgr_memberManagement.do",method= {GET,POST})
 	public String memberList(String memberCat, MgrMemberVO mmVO,Model model, HttpSession session) {
 		
-		System.out.println( "------"+ mmVO);
 		//페이징 변수
 //		int totalPages = mms.searchTotalPages(mmVO);
 //		int lastPage = mms.lastPage(totalPages);
@@ -47,9 +46,9 @@ public class MgrMemberController {
 		
 		model.addAttribute("memberType",memberType);
 		
-		List<MgrMemberDomain> list=null;
+		List<MgrMemberDomain> list=mms.searchMember(mmVO,memberCat,session);
 		
-		model.addAttribute("memberList", list=mms.searchMember(mmVO,memberCat,session));
+		model.addAttribute("memberList", list);
 
 		return "manager/member_management/jsp/member_management";
 	}//memberList
@@ -57,6 +56,7 @@ public class MgrMemberController {
 	//회원 상세정보 팝업창 띄우기
 	@RequestMapping(value="/mgr_memberInfoPopup.do",method=GET)
 	public String memberInfoPopup(String memberId, Model model) {
+		System.out.println("---------상세창 : "+memberId);
 		model.addAttribute("memberData",mms.searchMemberInfo(memberId));
 		
 		return "manager/member_management/jsp/member_info_popup";
@@ -66,21 +66,25 @@ public class MgrMemberController {
 	@RequestMapping(value="/mgr_memberBlockPopup.do",method=GET)
 	public String memberBlockPopup(String id, Model model) {
 		model.addAttribute("reasonList",mms.searchReason());
-		model.addAttribute("blockId",id);
+		model.addAttribute("id",id);
+		System.out.println("---------------차단 아이디 : "+id);
 		return "manager/member_management/jsp/member_block_popup";
 	}//memberInfoPopup
 	
 	//회원 차단
 	@RequestMapping(value="/mgr_block.do",method=GET)
-	public String block(ManagerBlockVO mbVO) {
+	public String block(ManagerBlockVO mbVO,Model model) {
+		mms.addBlock(mbVO);
 		
-		return "";
+		return "forward:mgr_memberManagement.do";
 	}
 	
 	//차단 해제
 	@RequestMapping(value="/mgr_unblock.do",method=POST)
-	public String unblock(String id) {
+	public String unblock(String id,Model model) {
+		int unblockCnt=mms.removeBlock(id);
+		model.addAttribute("unblockCnt",unblockCnt);
 		
-		return "";
+		return "forward:mgr_memberManagement.do";
 	}
 }//class

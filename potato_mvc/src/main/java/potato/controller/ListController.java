@@ -5,10 +5,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import potato.service.ListService;
 import potato.vo.SearchFlagVO;
 
 @Controller
 public class ListController {
+	
+	@Autowired(required = false)
+	private ListService ls;
 	//Çì´õ
 	@RequestMapping(value="/header.do",method=GET)
 	public String userHeader() {
