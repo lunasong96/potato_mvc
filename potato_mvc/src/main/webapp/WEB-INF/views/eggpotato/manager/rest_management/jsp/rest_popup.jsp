@@ -20,6 +20,13 @@
 <script type="text/javascript">
 $(function() {
 	
+	$(".modi-btn").click(function(){
+		$("#restarea_idx").val($(".modi-btn").val());
+		open("","write_popup","width=950,height=900,top=311,left=560");
+		$("#modifyFrm").submit();
+		//브라우져닫기추가
+	});
+	
 	// 음식 사진 슬라이드
     var swiper = new Swiper(".mySwiper", {
     	loop: 1,
@@ -30,6 +37,7 @@ $(function() {
         },
     });
     
+	//////////////////////////////지도API///////////////////////////////////////
     var markerPosition  = new kakao.maps.LatLng(${detail.lat}, ${detail.lng}); 
 
     // 이미지 지도에 표시할 마커입니다
@@ -48,25 +56,8 @@ $(function() {
 
 	// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
 	var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption); 
-   
-	
-	
-	$(".bookmark-icon-btn").click(function() {
-		$(".bookmark-icon-btn").toggleClass("bibtn-add");
-		$(".bi-bookmark ").toggleClass("bb-add");
-	})
-	
-	$(".report-btn").click(function() {
-		window.open("report_review_popup.jsp","popup_report",
-		"width=520,height=470,top=203,left=1336");
-	})
-	
-})
-
-	//하트아이콘
-	$(document).on("click", ".heart-btn", function() {
-		$(this).toggleClass("hb-fill");
-	})
+    //////////////////////////////지도API///////////////////////////////////////
+});//ready
 </script>
 </head>
 <body>
@@ -224,15 +215,16 @@ $(function() {
 		</table>
 	</div>
 	<div class="btns">
-		<button type="button" class="modi-btn">수정</button>
-		<button type="button" class="del-btn">삭제</button>
+		<button type="button" class="modi-btn" value="${detail.restarea_idx}">수정</button>
+		<!-- <button type="button" class="del-btn">삭제</button> -->
 	</div>
 	
 </div>
 <!-- container end -->
 
-
-
 </div>
+<form id="modifyFrm" method="post" action="manager_rest_modifyPopup.do" target="write_popup">
+<input type="hidden" id="restarea_idx" name="restarea_idx">
+</form>
 </body>
 </html>

@@ -30,7 +30,7 @@ $(function() {
 			$("#id").val(arr[1]);
 			$("#rsIdx").val(arr[2]);
 			$("#delFrm").submit();
-			<c:if test="${ oneDelCnt eq 1 }"> //메뉴바 연결하고 테스트
+			<c:if test="${ oneDelCnt eq 1 }"> 
 			alert(" 1개의 리뷰가 삭제되었습니다.");
 			</c:if>
 		}

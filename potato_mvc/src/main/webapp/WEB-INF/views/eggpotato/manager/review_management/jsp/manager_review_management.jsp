@@ -29,8 +29,8 @@ self.close();
 $(function(){
 	//검색어 입력시
 	$("#searchBtn").click(function(){
-		if($("#searchBox").val().trim() == "") {
-			alert("검색어를 입력하세요!");
+		if($("#searchBox").val().trim().length < 2) {
+			alert("검색어를 2자 이상 입력하세요!");
 			return;
 		}
 		 $("#keyword").val($("#searchBox").val());

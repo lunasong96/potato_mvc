@@ -18,6 +18,11 @@ import potato.manager.vo.SearchRestVO;
 @Component
 public class MgrRestDAO {
 	
+	/**
+	 * 휴게소가져오기
+	 * @param srVO
+	 * @return
+	 */
 	public List<RestDomain> selectRest(SearchRestVO srVO) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -26,6 +31,10 @@ public class MgrRestDAO {
 		return list;
 	}
 	
+	/**
+	 * 노선가져오기
+	 * @return
+	 */
 	public List<LineDomain> selectLine() {
 		List<LineDomain> list = null;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
@@ -35,6 +44,11 @@ public class MgrRestDAO {
 		return list;
 	}
 	
+	/**
+	 * 휴게소 수 가져오기
+	 * @param srVO
+	 * @return
+	 */
 	public int selectTotalRest(SearchRestVO srVO) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -43,6 +57,11 @@ public class MgrRestDAO {
 		return totalReview;
 	}
 	
+	/**
+	 * 휴게소 상세창
+	 * @param restarea_idx
+	 * @return
+	 */
 	public RestDomain selectRestDetail(int restarea_idx) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -90,6 +109,7 @@ public class MgrRestDAO {
 		return idx;
 	}
 	
+	//휴게소음식 추가
 	public int insertFood(List<FoodVO> list) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -101,6 +121,7 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
+	//휴게소 편의시설추가
 	public int insertAmenity(AmenityVO amVO) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();

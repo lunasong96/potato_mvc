@@ -89,11 +89,13 @@ public class ManagerRestService {
 		return idx;
 	}
 	
+	//휴게소 음식추가하기
 	public int addFood(List<FoodVO> list) {
 		int cnt = mrDAO.insertFood(list);
 		return cnt;
 	}
 	
+	//휴게소 편의시설추가하기
 	public int addAmenity(AmenityVO amVO) {
 		int cnt = mrDAO.insertAmenity(amVO);
 		return cnt;

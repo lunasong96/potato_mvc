@@ -19,12 +19,13 @@ public class ManagerReviewService {
 	@Autowired(required = false)
 	private MgrReviewDAO mrDAO;
 
+	//게시물 불러오기
 	public List<ReviewDomain> searchReview(SearchReviewVO srVO) {
 		List<ReviewDomain> list = mrDAO.selectReview(srVO);
 		return list;
 	}
 
-	// 전체 게시물수
+	//전체 게시물수
 	public int searchTotalReview(SearchReviewVO srVO) {
 		int cnt = mrDAO.selectTotalReview(srVO);
 		return cnt;
@@ -51,7 +52,7 @@ public class ManagerReviewService {
 		return isLast;
 	}
 
-	//ajax
+	//ajax 검색어
 	public String searchKeywordList(String keyword) {
 		if(keyword == null) {
 			keyword ="";
@@ -90,7 +91,7 @@ public class ManagerReviewService {
 		return cnt;
 	}
 	
-	//리뷰상세
+	//리뷰상세창
 	public ReviewDomain searchReviewDetail(ReviewVO rVO) {
 		ReviewDomain rd = mrDAO.selectReviewDetail(rVO);
 		return rd;

@@ -29,10 +29,17 @@ import potato.manager.vo.SearchRestVO;
 
 @Controller
 public class ManagerRestareaController {
+	
 	@Autowired(required = false)
 	private ManagerRestService mrs;
 	
-	
+	/**
+	 * 관리자 휴게소를 보여주는 컨트롤러
+	 * @param srVO
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value="manager_restarea.do",method= {GET, POST})
 	public String restMain(SearchRestVO srVO, Model model, HttpSession session) {
 		String url="manager/rest_management/jsp/manager_rest_management";
@@ -61,6 +68,12 @@ public class ManagerRestareaController {
 	}
 	
 	
+	/**
+	 * 휴게소의 상세창을 보여주는 컨트롤러
+	 * @param restarea_idx
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="manager_restdetailPopup.do",method=POST)
 	public String restDetailPopup(int restarea_idx, Model model) {
 		model.addAttribute("detail", mrs.searchRestDetail(restarea_idx));
@@ -68,6 +81,11 @@ public class ManagerRestareaController {
 		return "manager/rest_management/jsp/rest_popup";
 	}
 	
+	/**
+	 * 휴게소 추가창을 보여주는 컨트롤러
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="manager_writePopup.do", method=GET)
 	public String openWriteRest(Model model) {
 		model.addAttribute("lineList", mrs.searchLine());
@@ -75,8 +93,14 @@ public class ManagerRestareaController {
 		return "manager/rest_management/jsp/manager_rest_write_popup";
 	}
 	
+	/**
+	 * 휴게소를 추가하는 컨트롤러
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="manager_rest_add.do", method=POST)
 	public String newRest(HttpServletRequest request) {
+		//이미지저장공간과 크기 설정
 		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
 		int maxSize=1024*1024*20;
 		try {
@@ -104,17 +128,17 @@ public class ManagerRestareaController {
 				rVO.setCargolounge_chk("N");
 			}
 			
-			//휴게소 테이블 성공여부확인
+			//휴게소 테이블 성공여부확인, 1이 나와야 성공
 			int restResultCnt = mrs.addRest(rVO);
 			
 			//휴게소테이블에 추가성공시 음식, 시설테이블에 추가
 			if(restResultCnt == 1) {
-				int idx = mrs.searchNewIdx(rVO); // 추가된 인덱스반환
+				int idx = mrs.searchNewIdx(rVO); // 추가된 휴게소 인덱스반환를 반환하여 사용
 				
 				//음식 테이블용 파라메터
 				List<FoodVO> foodList = new ArrayList<FoodVO>();
 				FoodVO fVO = null;
-				for(int i =0; i<mr.getParameterValues("foodName").length; i ++) {
+				for(int i =0; i<mr.getParameterValues("foodName").length; i++) {
 					fVO = new FoodVO();
 					fVO.setRestarea_idx(idx);
 					fVO.setFood_idx(i+1);
@@ -135,11 +159,16 @@ public class ManagerRestareaController {
 					}
 					foodList.add(fVO);
 				}//end for
+				
+				//음식추가
 				mrs.addFood(foodList);
+				
 				
 				//휴게소 테이블용 파라메터
 				AmenityVO amVO = new AmenityVO();
 				amVO.setRestarea_idx(idx);
+				
+				//체크박스가 선택되지않았을 경우에 대한 유효성검증
 				if(mr.getParameterValues("restIcons") != null) {
 					amVO.setRestIcons(mr.getParameterValues("restIcons"));
 				}
@@ -148,23 +177,24 @@ public class ManagerRestareaController {
 					amVO.setGasIcons(mr.getParameterValues("gasIcons"));
 				}
 				
+				//두개 모두 하나도 체크되지 않았다면 insert할 필요가 없다.
 				if(mr.getParameterValues("restIcons") != null || mr.getParameterValues("gasIcons") != null) {
 					mrs.addAmenity(amVO);
 				}
+				
+				//성공 시 view로 값을 전달해 창닫기
 				request.setAttribute("result", "success");
 			}
 			
 		} catch(IOException ie) {
 			ie.printStackTrace();
 		}
-		
-		
 		return "manager/rest_management/jsp/manager_rest_write_popup";
 	}
 	
 	
-	@RequestMapping(value="manager_rest_modifyPopup.do",method=GET)
-	public String restModifyPopup() {//매개값으로 int 휴개소 인덱스랑 model추가
+	@RequestMapping(value="manager_rest_modifyPopup.do",method=POST)
+	public String restModifyPopup(int restarea_idx, Model model) {//매개값으로 int 휴개소 인덱스랑 model추가
 		
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
 	}
