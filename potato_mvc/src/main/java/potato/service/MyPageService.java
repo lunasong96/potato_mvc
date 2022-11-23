@@ -54,6 +54,8 @@ public class MyPageService {
 	}//updateInfo
 	
 	//비밀번호 수정 처리
+	//정보 수정이기 때문에 forward보다는 redirect로 처리해주는 것이 좋다.
+	
 	public int modifyPw(MyPagePwEditVO peVO) {
 		int updateCnt=0;
 		updateCnt=mDAO.updatePw(peVO);

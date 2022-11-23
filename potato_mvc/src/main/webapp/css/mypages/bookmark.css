@@ -65,3 +65,18 @@
 	width: 400px;
 	font-size: 20px;
 }
+.empty{
+	display:flex;
+	flex-direction:column;
+	justify-content:space-evenly;
+	width: 800px;
+	height: 300px;
+	align-items: center;
+	font-size: 23px;
+	font-weight: bold;
+	background-color: transparent;
+	
+}
+.bi bi-emoji-smile{
+	margin: 0px auto;
+}

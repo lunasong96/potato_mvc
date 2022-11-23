@@ -30,7 +30,6 @@ public class MyPageController {
 	public String myPageIn(HttpSession session,String pass, LoginVO LVO) {
 		String url="mypages/jsp/mypage_in";
 	
-	
 		  if(session.getAttribute("id")==null) {
 			url="forward:user_mainhome.do"; }
 			 System.out.println("------마이페이지에 진입 : id is--------"+(String)session.getAttribute("id"));
@@ -54,9 +53,10 @@ public class MyPageController {
 	}//chkIdPass
 	
 	//내 정보 수정 폼
+	//정보 수정페이지를 불러오는 메소드와 회원정보 수정을 처리해주는 메소드 두개로 만든다.
+	//정보 수정이기 때문에 forward보다는 redirect로 처리하는 것이 좋다.
 	@RequestMapping(value="my_info_edit.do",method = GET)
-	public String myInfoEdit(HttpSession session, Model model ) {
-		
+	public String myInfoEdit(HttpSession session, Model model) {
 		model.addAttribute("MyInfoList", mps.searchInfo((String)session.getAttribute("id")));
 //		System.out.println(mps.searchInfo((String)session.getAttribute("id"))+"findMe");//확인용
 		System.out.println("------내 정보 수정 폼 : id is--------"+(String)session.getAttribute("id"));

@@ -14,8 +14,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$(".edit_btn").click(function() {
-		//확장자 jpg, jpeg, png,gif만 가능요 ㅎ
+	$("#imgBtn").click(function() {
+		//확장자 jpg, jpeg, png,gif만 가능
 		var fileName=$("upfile").val();
 		var blockExt="jpg,jpeg,png,gif".split(",");
 		var flag=false;
@@ -36,6 +36,7 @@ $(function() {
 			alert("이미지 파일만 업로드 가능");
 			return;
 		}//end if
+		$(".edit_btn")
 		$("#MyInfoEditFrm").submit();
 		confirm("성공적으로 수정되었습니다.")
 	});//click
@@ -76,6 +77,7 @@ $(function() {
 
 <!-- 내 정보 수정 -->
 <div class="info_edit">
+	<c:if test ="${session!=null }"> <!-- 세션이 null이 아닐 때 -->
 	<div class="title">내 정보 수정</div>
 	<form action="my_info_edit_process.do" method="post" id="MyInfoEditFrm">
 		<c:forEach var="mil" items="${ MyInfoList }">
@@ -88,7 +90,7 @@ $(function() {
 				<div class="profile_img">
 					<img src="http://localhost/potato/css/images/${mil.img }"  id="img" name="img" class="profileImg" style="margin: 5px 30px; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
 				<div class="upload-button">
-					<input type="button" value="사진 등록" class="img_btn">
+					<input type="button" value="사진 등록" class="img_btn" id="imgBtn">
 					<input type="file" name="upfile" id="upfile"/>
 					<input type="button" value="삭제" class="img_del_btn">
 				</div><!-- upoad-button -->
@@ -125,8 +127,15 @@ $(function() {
 		</tr>
 	</table>
 		</c:forEach>
-</form>
 	<button class="edit_btn">확인</button>
+</form>
+</c:if>
+<c:if test="${ss==null }"><!-- 디자인 수정예정 -->
+	<div class="session_empty ">
+	로그인 후 사용해 주세요
+	<button type="button" onclick="location.href='login_page.do'" class="move_login">로그인 하기</button>
+	</div>
+</c:if>
 
 
 </div><!-- info_edit -->
