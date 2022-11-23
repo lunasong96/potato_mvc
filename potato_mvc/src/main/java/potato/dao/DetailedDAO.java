@@ -11,10 +11,12 @@ import potato.domain.DetailedDomain;
 import potato.domain.DetailedFoodDomain;
 import potato.domain.DetailedReportDomain;
 import potato.domain.DetailedReviewDomain;
+import potato.domain.WriteReviewDomain;
 import potato.vo.DetailedBookmarkVO;
 import potato.vo.DetailedLikeVO;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
+import potato.vo.WriteReviewImgVO;
 
 @Component
 public class DetailedDAO {
@@ -151,7 +153,30 @@ public class DetailedDAO {
 	
 	//리뷰 수정창 이동
 	public DetailedReviewDomain selectReReviewWrite(DetailedReviewVO drVO) {
-		return null;
+		DetailedReviewDomain drd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		drd=ss.selectOne("potato.detailedMapper.selReReviewWrite",drVO);
+		
+		mbh.closeHandler(ss);
+		
+		return drd;
+	}
+	
+	//리뷰 수정 이미지 불러오기
+	public List<WriteReviewDomain> selectReReviewImg(DetailedReviewVO drVO) {
+		List<WriteReviewDomain> wrd=null;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		wrd=ss.selectList("potato.detailedMapper.selReReviewImg",drVO);
+		
+		mbh.closeHandler(ss);
+		
+		return wrd;
 	}
 	
 	//리뷰 총 total

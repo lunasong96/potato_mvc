@@ -15,10 +15,12 @@ import potato.domain.DetailedDomain;
 import potato.domain.DetailedFoodDomain;
 import potato.domain.DetailedReportDomain;
 import potato.domain.DetailedReviewDomain;
+import potato.domain.WriteReviewDomain;
 import potato.vo.DetailedBookmarkVO;
 import potato.vo.DetailedLikeVO;
 import potato.vo.DetailedReportVO;
 import potato.vo.DetailedReviewVO;
+import potato.vo.WriteReviewImgVO;
 
 @Component
 public class DetailedService {
@@ -93,7 +95,16 @@ public class DetailedService {
 	
 	//¸®ºä ¼öÁ¤Ã¢ ÀÌµ¿
 	public DetailedReviewDomain moveReReviewWrite(DetailedReviewVO drVO) {
-		return null;
+		DetailedReviewDomain drd=null;
+		drd=dDAO.selectReReviewWrite(drVO);
+		return drd;
+	}
+	
+	//¸®ºä ÀÌ¹ÌÁö ºÒ·¯¿À±â
+	public List<WriteReviewDomain> moveReReviewImg(DetailedReviewVO drVO) {
+		List<WriteReviewDomain> wrd=null;
+		wrd=dDAO.selectReReviewImg(drVO);
+		return wrd;
 	}
 	
 	//¸®ºä ÃÑ total

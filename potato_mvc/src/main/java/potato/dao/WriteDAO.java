@@ -51,12 +51,30 @@ public class WriteDAO {
 	
 	//수정 리뷰 등록
 	public int updateReReview(WriteReviewVO wrVO) {
-		return 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		
+		int cnt = ss.insert("potato.writeMapper.upReReview",wrVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		
+		mbh.closeHandler(ss);
+		return cnt;
 	}
 	
 	//이미지 삭제 
-	public int deleteReReviewImg(WriteReviewImgVO wrVO) {
-		return 0;
+	public int deleteReReviewImg(WriteReviewVO wrVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		
+		int cnt = ss.insert("potato.writeMapper.delReReviewImg",wrVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		
+		mbh.closeHandler(ss);
+		return cnt;
 	}
 
 }

@@ -72,6 +72,14 @@
 	where rest.restarea_idx=r.restarea_idx and r.restarea_idx=#{restarea_idx} and review_idx=#{review_idx}
 </select>
 
+<!-- 리뷰 수정창 이미지 불러오기 -->
+<select id="selReReviewImg" resultType="potato.domain.WriteReviewDomain" parameterType="potato.vo.DetailedReviewVO">
+	select img_idx, img
+	from review_img
+	where restarea_idx=#{restarea_idx} and review_idx=#{review_idx}
+	order by img_idx
+</select>
+
 <!-- 리뷰 총 total -->
 <select id="selReviewTotal" resultType="int" parameterType="int">
 	select count(*) rtotal

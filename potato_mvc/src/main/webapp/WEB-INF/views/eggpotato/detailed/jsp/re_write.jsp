@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-  
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +15,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+var file_Arr=[];
+var index=0;
+
 $(function() {
 	
 	//사진파일클릭
@@ -32,9 +34,6 @@ function starRate(rate) {
 		case 1: $(".rate-txt").addClass("rate-add"); $(".rate-txt").text("별로에요!"); break;
 	} 
 }
-
-var file_Arr=[];
-var index=0;
 
 function uploadFileImg(e) {
 	
@@ -103,6 +102,7 @@ function deleteImage(index) {
 	
 	var delImage="#riw-"+index;
 	$(delImage).remove(); //선택 이미지 삭제
+	console.log(file_Arr);
 }
 
 function okReview() {
@@ -124,6 +124,8 @@ function okReview() {
 	}
 	
 	var comTxt=$(".review-txtarea").val().replace(/(?:\r\n|\r|\n)/g, "<br>");
+	
+	/* alert(comTxt); */
 	$("#contents").val(comTxt);
 	
 	for(var i=0; i<file_Arr.length; i++) {
@@ -161,31 +163,31 @@ function okReview() {
 		<div class="write-box">
 			<div class="wb-top">
 				<div class="rate-wrap">
-				  <input name="ratingBtn" type="radio" id="st1" value="5" onclick="starRate(5)"/>
+				  <input name="ratingBtn" type="radio" id="st1" value="5" onclick="starRate(5)" ${mrw.rating eq 5 ? 'checked="checked"':''}/>
 				  <label for="st1">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>
 				  </label>
-				  <input name="ratingBtn" type="radio" id="st2" value="4" onclick="starRate(4)"/>
+				  <input name="ratingBtn" type="radio" id="st2" value="4" onclick="starRate(4)" ${mrw.rating eq 4 ? 'checked="checked"':''}/>
 				  <label for="st2">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>			  
 				  </label>
-				  <input name="ratingBtn" type="radio" id="st3" value="3" onclick="starRate(3)"/>
+				  <input name="ratingBtn" type="radio" id="st3" value="3" onclick="starRate(3)" ${mrw.rating eq 3 ? 'checked="checked"':''}/>
 				  <label for="st3">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>
 				  </label>
-				  <input name="ratingBtn" type="radio" id="st4" value="2" onclick="starRate(2)"/>
+				  <input name="ratingBtn" type="radio" id="st4" value="2" onclick="starRate(2)" ${mrw.rating eq 2 ? 'checked="checked"':''}/>
 				  <label for="st4">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>
 				  </label>
-				  <input name="ratingBtn" type="radio" id="st5" value="1" onclick="starRate(1)"/>
+				  <input name="ratingBtn" type="radio" id="st5" value="1" onclick="starRate(1)" ${mrw.rating eq 1 ? 'checked="checked"':''}/>
 				  <label for="st5">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
@@ -209,15 +211,33 @@ function okReview() {
 							</svg>
 						</label>
 					</div>
-					<div class="photo-preview-wrap"></div>
+					<div class="photo-preview-wrap">
+						<c:forEach var="reImg" items="${mri }" varStatus="mri">
+							<div class="review-img-wrap" id="riw-${mri.index }">
+									<img src="css/images/${reImg.img}" class="review-img" alt="리뷰사진">
+									<a href="javascript:deleteImage(${mri.index });" class="img-a">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+										  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+										</svg>
+									</a>
+							</div>
+							<script type="text/javascript">
+								file_Arr.push({name:"${reImg.img}"});
+							</script>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
-			
+			<%
+		   				pageContext.setAttribute("crcn", "\r\n");
+		   				pageContext.setAttribute("br", "<br>");
+		   	%>
 			<div class="wb-bottom">
-				<textarea rows="15" class="review-txtarea" placeholder="휴게소가 어떠셨나요?"></textarea>
+				<textarea rows="15" class="review-txtarea" placeholder="휴게소가 어떠셨나요?"><c:out value="${fn:replace(mrw.contents,br,crcn) }" escapeXml="false"/></textarea>
 			</div>
-			<form id="writeAllFrm" method="post" action="review_write.do">
+			<form id="writeAllFrm" method="post" action="re_review_write.do">
 				<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx }"/>
+				<input type="hidden" name="review_idx" id="review_idx" value="${param.review_idx }"/>
 				<input type="hidden" name="id" id="id" value="${id }"/>
 				<input type="hidden" name="rating" id="rating" value="${param.rating }"/>
 				<input type="hidden" name="contents" id="contents" value="${param.contents }"/>

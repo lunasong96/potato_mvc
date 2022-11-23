@@ -35,12 +35,14 @@ public class WriteService {
 	
 	//수정 리뷰 등록
 	public int setReReview(WriteReviewVO wrVO) {
-		return 0;
+		int idx = wDAO.updateReReview(wrVO);
+		return idx;
 	}
 	
 	//이미지 삭제 
-	public int delReReviewImg(WriteReviewImgVO wrVO) {
-		return 0;
+	public int delReReviewImg(WriteReviewVO wrVO) {
+		int cnt = wDAO.deleteReReviewImg(wrVO);
+		return cnt;
 	}
 	
 }

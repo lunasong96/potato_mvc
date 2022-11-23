@@ -85,9 +85,11 @@ public class DetailedController {
 	}
 	
 	//리뷰수정창 접속
-	@RequestMapping(value = "rewrite.do", method=GET)
+	@RequestMapping(value = "rewrite.do", method= {GET,POST})
 	public String rewritePageMove(HttpSession session, DetailedReviewVO drVO, Model model) {
-		return "detailed/jsp/rewrite";
+		model.addAttribute("mrw", ds.moveReReviewWrite(drVO));
+		model.addAttribute("mri", ds.moveReReviewImg(drVO));
+		return "detailed/jsp/re_write";
 	}
 	
 	//휴게소 리뷰 + 버튼 페이징 (비동기)

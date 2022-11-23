@@ -28,15 +28,9 @@ public class WriteController {
 	private WriteService ws;
 
 	//리뷰작성완료
-	@RequestMapping(value = "review_write.do", method={GET,POST})
+	@RequestMapping(value = "review_write.do", method=POST)
 	public String reviewWrite(HttpServletRequest request) {
 		int restarea_idx=Integer.parseInt(request.getParameter("restarea_idx"));
-		
-		System.out.println("find me: "+request.getParameter("restarea_idx"));
-		System.out.println("find me: "+request.getParameter("id"));
-		System.out.println("find me: "+request.getParameter("rating"));
-		System.out.println("find me: "+request.getParameter("contents"));
-		System.out.println("find me: "+request.getParameter("imglen"));
 		
 		int len=Integer.parseInt(request.getParameter("imglen"));
 		
@@ -49,8 +43,6 @@ public class WriteController {
 		ws.setReview(wrVO);
 		
 		int reviewIdx=ws.searchNewIdx(restarea_idx);
-		System.out.println("find me: "+reviewIdx);
-		
 		
 		WriteReviewImgVO wriVO=new WriteReviewImgVO();
 		
@@ -71,7 +63,7 @@ public class WriteController {
 	
 	//이미지 업로드 구현 (비동기)
 	@ResponseBody
-	@RequestMapping(value = "ajax_img_upload.do", method= {GET,POST})
+	@RequestMapping(value = "ajax_img_upload.do", method=POST)
 	public void enterLike(HttpServletRequest request) {
 		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
 		int maxSize=1024*1024*20;
@@ -84,8 +76,37 @@ public class WriteController {
 	
 	//리뷰 수정 작성완료
 	@RequestMapping(value = "re_review_write.do", method={GET,POST})
-	public String reReviewWrite(HttpSession session, HttpServletRequest request, WriteReviewVO wrVO) {
-		return "detailed/jsp/user_detailed";
+	public String reReviewWrite(HttpServletRequest request) {
+		int restarea_idx=Integer.parseInt(request.getParameter("restarea_idx"));
+		
+		int len=Integer.parseInt(request.getParameter("imglen"));
+		
+		WriteReviewVO wrVO=new WriteReviewVO();
+		wrVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
+		wrVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
+		wrVO.setId(request.getParameter("id"));
+		wrVO.setRating(Integer.parseInt(request.getParameter("rating")));
+		wrVO.setContents(request.getParameter("contents"));
+		
+		ws.setReReview(wrVO);
+		
+		ws.delReReviewImg(wrVO);
+		
+		WriteReviewImgVO wriVO=new WriteReviewImgVO();
+		
+		if (len!=0) {
+			for(int i=0; i<len; i++) {
+				System.out.println("find me: "+request.getParameter("img-"+i));
+				wriVO.setId(request.getParameter("id"));
+				wriVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
+				wriVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
+				wriVO.setImg_idx(i+1);
+				wriVO.setImg(request.getParameter("img-"+i));
+				ws.setReviewImg(wriVO);
+			}
+		}
+		
+		return "redirect:user_detailed.do?restarea_idx="+restarea_idx;
 	}
 	
 }
