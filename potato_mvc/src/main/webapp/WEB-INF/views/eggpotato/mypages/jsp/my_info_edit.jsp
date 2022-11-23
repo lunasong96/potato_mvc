@@ -15,8 +15,31 @@
 <script type="text/javascript">
 $(function() {
 	$(".edit_btn").click(function() {
+		//확장자 jpg, jpeg, png,gif만 가능요 ㅎ
+		var fileName=$("upfile").val();
+		var blockExt="jpg,jpeg,png,gif".split(",");
+		var flag=false;
+		
+		if(fileName==""){
+			alert("업로드할 파일을 선택해주세요");
+			return;
+		}//end if
+		
+		var fileExt=fileName.substring(fileName.lastIndexOf(".")+1);
+		for(var i=0; i<blockExt.length; i++){
+			if(blockExt[i]==fileExt){
+				flag=true;
+			}//end if
+		}//end for
+		
+		if(!flag){
+			alert("이미지 파일만 업로드 가능");
+			return;
+		}//end if
+		$("#MyInfoEditFrm").submit();
 		confirm("성공적으로 수정되었습니다.")
 	});//click
+
 	
 });//ready
 </script>
@@ -36,7 +59,7 @@ $(function() {
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
-					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://localhost/potato/css/images/${ img }"  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
 				<div class="nickname"><c:out value="${ nick }"/></div>
 			</div>			
@@ -54,6 +77,8 @@ $(function() {
 <!-- 내 정보 수정 -->
 <div class="info_edit">
 	<div class="title">내 정보 수정</div>
+	<form action="my_info_edit_process.do" method="post" id="MyInfoEditFrm">
+		<c:forEach var="mil" items="${ MyInfoList }">
 	<table>
 		<tr>
 			<th scope="row">
@@ -61,7 +86,7 @@ $(function() {
 			</th>
 			<td>
 				<div class="profile_img">
-					<img src=""  id="profileImg" name="profileImg" class="profileImg" style="margin: 5px 30px; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://localhost/potato/css/images/${mil.img }"  id="img" name="img" class="profileImg" style="margin: 5px 30px; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
 				<div class="upload-button">
 					<input type="button" value="사진 등록" class="img_btn">
 					<input type="file" name="upfile" id="upfile"/>
@@ -70,7 +95,6 @@ $(function() {
 				</div>
 			</td>
 		</tr>
-		<c:forEach var="mil" items="${ MyInfoList }">
 		<tr>
 			<th><label>성명</label></th>
 			<td><input type="text" value="<c:out value="${ mil.name }"/>" id="name" readonly="readonly"></td>
@@ -99,9 +123,9 @@ $(function() {
 			<th><label>이메일</label></th>
 			<td><input type="text"  value="<c:out value="${ mil.email }"/>" name="email" id="email" maxlength="100"></td>
 		</tr>
-		</c:forEach>
 	</table>
-	
+		</c:forEach>
+</form>
 	<button class="edit_btn">확인</button>
 
 

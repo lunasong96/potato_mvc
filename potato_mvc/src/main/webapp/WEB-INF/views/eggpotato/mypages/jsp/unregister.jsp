@@ -15,7 +15,15 @@
 <script type="text/javascript">
 $(function() {
 	$(".unregister_btn").click(function() {
-		confirm("회원탈퇴가 완료되었습니다.")
+			if($("#pass").val().trim()==""){
+				alert("비밀번호를 입력해주세요.")
+				$("#pass").focus();
+				$("#pass").val("");
+				return;
+			}
+			if($("#pass").val()==("#pass")){
+			$("#unregeisterFrm").submit();
+			}
 	});//click
 });//ready
 </script>
@@ -35,9 +43,9 @@ $(function() {
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
-					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://localhost/potato/css/images/${ img }"   id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
-				<div class="nickname">감자킴</div>
+				<div class="nickname"><c:out value="${ nick }"/> </div>
 			</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
@@ -47,6 +55,7 @@ $(function() {
 			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
 		</div><!-- navi -->
 <%-- 네비바 끝 --%>
+<form action="unregister_process.do" method="post" id="unregeisterFrm">
 	<div class="unregister_wrap">
 	<div class="unregister_img">
 		<img src="css/images/unregister.png">
@@ -61,14 +70,13 @@ $(function() {
 	<div class="pw_chk">
 		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#C89E6C" class="bi bi-lock-fill" viewBox="0 0 16 16">
   		<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-		<input type="password" placeholder="비밀번호를 입력해주세요." class="pw" size="30">
+		<input type="password" name="pass" placeholder="비밀번호를 입력해주세요." class="pw" size="30">
 	</div>
-	
 	
 		<button type="button" class="unregister_btn">회원 탈퇴</button>
 	
-	
 	</div><!-- unregister_wrap -->
+</form>
 </div><!-- wrap-navi -->
 
 </div><!-- container --><!-- 삭제하면 안돼~~ -->

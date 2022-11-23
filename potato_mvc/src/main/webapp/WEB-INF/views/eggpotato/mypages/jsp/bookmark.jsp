@@ -46,7 +46,7 @@ function removeBookmark( restarea_idx){
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
-					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://localhost/potato/css/images/${ img }"   id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
 				<div class="nickname"><c:out value="${ nick }"/> </div>
 			</div>			
@@ -74,7 +74,7 @@ function removeBookmark( restarea_idx){
 			</div>profileImg
 		</div>profile -->
 	<div class="listWrap">
-<form id="delBookmarkFrm" method="get" action="delBookmark.do" >
+<form id="delBookmarkFrm" method="post" action="delBookmark.do" >
 <input type="hidden" value="${id }" name="id">
 			<input type="hidden" id="restarea_idx" name="restarea_idx">
 <c:forEach var="b" items="${bookmarklist}">

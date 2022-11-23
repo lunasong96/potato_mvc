@@ -15,12 +15,24 @@
 $(function() {
 	$(".pw_chk_btn").click(function() {
 		chkNull();
-		confirm("확인되었습니다");
 	});//click
 	
 });//ready
 function chkNull() {
-	$("#InFrm").submit();
+	if($("#passChk").val().trim() == ""){
+		$("#passChk").focus();
+		$("#passChk").val("");
+		
+		return ;
+	}
+	
+	alert($("#passChk").val()); 
+/* if($("#pass").val()==$("#passChk").val()){  */
+		$("#InFrm").submit();
+		alert("확인되었습니다");
+/* }else{  */
+	/* alert("비밀번호를 확인해주세요");  */
+	/*  }  */
 }
 </script>
 
@@ -49,10 +61,11 @@ function chkNull() {
 </div>
 
 <!-- 비밀번호 입력-확인 -->
-<form id="InFrm" action="chkIdPass.do" method="get" >
+<form id="InFrm" action="chkIdPass.do" method="post" >
 <div class="pw_chk">
-	<input type="hidden" name="id"  id="id" value="<c:out value='${ sessionScope.id }'/>">
-	<input type="password" name="pass" id="pass" placeholder="비밀번호 입력" size="30" class="pw">
+	<input type="hidden" name="id"  id="id" value="${ sessionScope.id }"/>
+	<%-- <input type="hidden" name="pass"  id="pass" value="${ pass }"/> --%>
+	<input type="password" name="pass" id="passChk" placeholder="비밀번호 입력" size="30" class="pw">
 	<input type="button" value="확인" class="pw_chk_btn" >
 </div>
 </form>
