@@ -26,7 +26,7 @@ public class DetailedController {
 
 	//绒霸家 惑技芒 立加
 	@RequestMapping(value = "user_detailed.do", method={GET,POST})
-	public String userDetailedMove(int restarea_idx, Model model, HttpSession session, HttpServletRequest request) {
+	public String userDetailedMove(Integer restarea_idx, Model model, HttpSession session, HttpServletRequest request) {
 		
 		model.addAttribute("rd", ds.getRestDetailed(restarea_idx));
 		model.addAttribute("bt", ds.getBookmarkTotal(restarea_idx));
@@ -45,7 +45,6 @@ public class DetailedController {
 		if(id!=null) {
 			dbVO.setId(id);
 			dbVO.setRestarea_idx(restarea_idx);
-			System.out.println("find me"+dbVO);
 			model.addAttribute("bc", ds.getBookmarkChk(dbVO));
 		}else {
 			model.addAttribute("bc", 0);

@@ -28,7 +28,7 @@ public class DetailedService {
 	
 	//<휴게소 상세창>
 	//휴게소 상세창 정보 불러오기
-	public DetailedDomain getRestDetailed(int restarea_idx) {
+	public DetailedDomain getRestDetailed(Integer restarea_idx) {
 		DetailedDomain dd=null;
 		dd=dDAO.selectRestDetailed(restarea_idx);
 		return dd;

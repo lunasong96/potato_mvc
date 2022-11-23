@@ -10,11 +10,11 @@ insert into review(review_idx, id, restarea_idx, rating, contents)
 values ((select nvl(max(review_idx),0)+1 from review where restarea_idx=#{restarea_idx}), #{id}, #{restarea_idx}, #{rating}, #{contents})
 </insert>
 
-<!-- 리뷰이미지등록  -->
-<insert id="insReviewImg" parameterType="potato.vo.WriteReviewImgVO">
-insert into review_img(review_idx, id, restarea_idx, img_idx, img)
-values (#{review_idx}, #{id}, #{restarea_idx}, (select nvl(max(img_idx),0)+1 from review_img where restarea_idx=#{restarea_idx} and review_idx=#{review_idx}), #{img})
-</insert>
+<select id="selNewReview" parameterType="int" resultType="int">
+select max(review_idx) review_idx
+from review
+where restarea_idx=#{restarea_idx}
+</select>
 
 <!-- 리뷰수정등록 -->
 <update id="upReReview" parameterType="potato.vo.WriteReviewVO">
@@ -29,10 +29,16 @@ delete from review_img
 where review_idx=#{review_idx} and restarea_idx=#{restarea_idx}
 </delete>
 
-<!-- 리뷰 수정 이미지 등록 -->
+<!-- 리뷰 이미지 등록 -->
+<!-- <insert id="upReReviewImg" parameterType="java.util.List">
+	<foreach collection="list" item="wriVO">
+		insert into review_img(review_idx, id, restarea_idx, img_idx, img)
+		values (#{review_idx}, #{id}, #{restarea_idx}, ${img_idx} , #{img})
+	</foreach>
+</insert> -->
 <insert id="upReReviewImg" parameterType="potato.vo.WriteReviewImgVO">
 insert into review_img(review_idx, id, restarea_idx, img_idx, img)
-values (#{review_idx}, #{id}, #{restarea_idx}, (select nvl(max(img_idx),0)+1 from review_img where restarea_idx=#{restarea_idx} and review_idx=#{review_idx}), #{img})
+values (#{review_idx}, #{id}, #{restarea_idx}, ${img_idx} , #{img})
 </insert>
 
 </mapper>

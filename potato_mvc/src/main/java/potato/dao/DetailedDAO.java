@@ -21,7 +21,7 @@ public class DetailedDAO {
 	
 	//<휴게소 상세창>
 	//휴게소 상세창 정보 불러오기
-	public DetailedDomain selectRestDetailed(int restarea_idx) {
+	public DetailedDomain selectRestDetailed(Integer restarea_idx) {
 		DetailedDomain dd=null;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
@@ -70,6 +70,7 @@ public class DetailedDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		bookmarkAdd=ss.selectOne("potato.detailedMapper.insBookmarkAdd",dbVO);
+		ss.commit();
 		
 		mbh.closeHandler(ss);
 		
@@ -84,6 +85,7 @@ public class DetailedDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		bookmarkDel=ss.selectOne("potato.detailedMapper.delBookmarkDel",dbVO);
+		ss.commit();
 		
 		mbh.closeHandler(ss);
 		
@@ -216,6 +218,7 @@ public class DetailedDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		likeAdd=ss.selectOne("potato.detailedMapper.insLikeAdd",dlVO);
+		ss.commit();
 		
 		mbh.closeHandler(ss);
 		
@@ -230,6 +233,7 @@ public class DetailedDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		likeDel=ss.selectOne("potato.detailedMapper.delLikeDel",dlVO);
+		ss.commit();
 		
 		mbh.closeHandler(ss);
 		
@@ -244,6 +248,7 @@ public class DetailedDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		reviewDel=ss.selectOne("potato.detailedMapper.delReviewDel",drVO);
+		ss.commit();
 		
 		mbh.closeHandler(ss);
 		
@@ -273,6 +278,7 @@ public class DetailedDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		insertPeport=ss.selectOne("potato.detailedMapper.insReportPopup",drVO);
+		ss.commit();
 		
 		mbh.closeHandler(ss);
 		

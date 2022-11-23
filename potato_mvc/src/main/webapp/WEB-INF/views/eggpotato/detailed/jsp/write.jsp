@@ -34,13 +34,14 @@ function starRate(rate) {
 }
 
 var file_Arr=[];
+var index=0;
 
 function uploadFileImg(e) {
 	
-	var files = e.target.files; //이벤트가 일어난 대상=input file (유사배열)
-	var fileArr= Array.prototype.slice.call(files); //배열작업
+	var files = e.target.files; //이벤트가 일어난 대상=input file
+	var fileArr= Array.prototype.slice.call(files);
 	
-	var index=0; //고유인덱스 부여
+	 //고유인덱스 부여
 	fileArr.forEach(function(f) {
 		if(!f.type.match("image/*")) { // 확장명 검사
 			alert("이미지 파일을 선택해주세요.");
@@ -52,9 +53,8 @@ function uploadFileImg(e) {
 		var previewAdd=new FileReader(); //파일 데이터 읽기
 		previewAdd.onload=function(e) {
 			
-			
 			var preimg=
-				"<div class='review-img-wrap' id='riw-"+index+"'><img src='"+ e.target.result +"' class='review-img' alt='리뷰사진'>"+
+				"<div class='review-img-wrap' id='riw-"+index+"'><img src='"+ e.target.result +"' data-file='"+ f.name +"' class='review-img' alt='리뷰사진'>"+
 				"<a href='javascript:deleteImage("+index+");' class='img-a'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-x-square-fill' viewBox='0 0 16 16'>"+
 			  	"<path d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z'/></svg></a></div>"
 			$(preimg).appendTo(".photo-preview-wrap");
@@ -62,26 +62,59 @@ function uploadFileImg(e) {
 			
 			if($(".review-img-wrap").length > 6 ) {
 				alert("이미지는 6개까지만 보여줄 수 있습니다.");	
-				$(".review-img-wrap").last().remove();
-				file_Arr.splice(index, 1);
+				$(".review-img-wrap").last().remove(); // 화면에서 초과된 이미지 자동 삭제
+				index--;
+				deleteImage(index); // 데이터에 초과된 이미지정보 자동 삭제
 				return;
 			}
+			
 		}
 		previewAdd.readAsDataURL(f); //데이터 url만들기 인코딩
 		
 	})
-		console.log(files);
+	
+	var formData = new FormData(document.getElementById("writeFrm"));
+			
+			$.ajax({
+				type:"post",
+				enctype: "multipart/form-data",
+				url:"ajax_img_upload.do",
+				data: formData,
+				processData: false,
+				contentType: false,
+				error: function(xhr) {
+					alert(xhr.responseText),
+					alert(xhr.statusText),
+					console.log(xhr.status);
+					alert("에러")
+				},
+				success: function(data) {
+					/* console.log("성공"); */
+				}
+			
+			})
+		/* console.log(files);
 		console.log(fileArr);
-		console.log(file_Arr[0]);
+		console.log(file_Arr); */
+}
+
+function deleteImage(index) {
+	file_Arr.splice(index, 1); //index에 해당하는 배열[index] 삭제
+	
+	var delImage="#riw-"+index;
+	$(delImage).remove(); //선택 이미지 삭제
 }
 
 function okReview() {
 	
 	//별점 선택
-	if($("input[name=ratingRadio]:checked").val()==undefined){
+	if($("input[name=ratingBtn]:checked").val()==undefined){
 		alert("별점을 선택해주세요.");
 		return;
 	}
+	
+	var $rating=$('input:radio[name="ratingBtn"]:checked').val();
+	$("#rating").val($rating);
 	 
 	//내용 입력
 	if($(".review-txtarea").val().trim()==""){
@@ -90,16 +123,17 @@ function okReview() {
 		return;
 	}
 	
-	location.href="review_write.do?restarea_idx=${param.restarea_idx }";
-}
-
-function deleteImage(index) {
-	console.log(index);
-	file_Arr.splice(index, 1); //index에 해당하는 배열[index] 삭제
+	var comTxt=$(".review-txtarea").val().replace(/(?:\r\n|\r|\n)/g, "<br>");
+	$("#contents").val(comTxt);
 	
-	var delImage="#riw-"+index;
-	console.log(delImage);
-	$(delImage).remove(); //선택 이미지 삭제
+	for(var i=0; i<file_Arr.length; i++) {
+		var imghidden="<input type='hidden' name='img-"+i+"' value='"+file_Arr[i].name+"'>";
+		$(imghidden).appendTo("#writeAllFrm");
+	}
+	
+	$("#imglen").val(file_Arr.length);
+	
+	$("#writeAllFrm").submit();
 }
 
 </script>
@@ -127,31 +161,31 @@ function deleteImage(index) {
 		<div class="write-box">
 			<div class="wb-top">
 				<div class="rate-wrap">
-				  <input name="ratingRadio" type="radio" id="st1" value="5" onclick="starRate(5)"/>
+				  <input name="ratingBtn" type="radio" id="st1" value="5" onclick="starRate(5)"/>
 				  <label for="st1">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>
 				  </label>
-				  <input name="ratingRadio" type="radio" id="st2" value="4" onclick="starRate(4)"/>
+				  <input name="ratingBtn" type="radio" id="st2" value="4" onclick="starRate(4)"/>
 				  <label for="st2">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>			  
 				  </label>
-				  <input name="ratingRadio" type="radio" id="st3" value="3" onclick="starRate(3)"/>
+				  <input name="ratingBtn" type="radio" id="st3" value="3" onclick="starRate(3)"/>
 				  <label for="st3">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>
 				  </label>
-				  <input name="ratingRadio" type="radio" id="st4" value="2" onclick="starRate(2)"/>
+				  <input name="ratingBtn" type="radio" id="st4" value="2" onclick="starRate(2)"/>
 				  <label for="st4">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>
 				  </label>
-				  <input name="ratingRadio" type="radio" id="st5" value="1" onclick="starRate(1)"/>
+				  <input name="ratingBtn" type="radio" id="st5" value="1" onclick="starRate(1)"/>
 				  <label for="st5">
 				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 					  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
@@ -165,7 +199,9 @@ function deleteImage(index) {
 				<p class="wb-text">여기서 보여지는 이미지의 크기는 실제 리뷰에서 보여지는 이미지 크기와 동일합니다.</p>
 				<div class="wbm-wrap">
 					<div class="photo-add-wrap">
-						<input type="file" id="filebtn" class="file-class" multiple="multiple" accept="image/*">
+						<form id="writeFrm" method="post" enctype="multipart/form-data">
+							<input type="file" name="img" id="filebtn" class="file-class" multiple="multiple" accept="image/*">
+						</form>
 						<label for="filebtn" class="file-add">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
 							  <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
@@ -173,51 +209,20 @@ function deleteImage(index) {
 							</svg>
 						</label>
 					</div>
-					<div class="photo-preview-wrap">
-						<!-- <div class="review-img-wrap">
-							<img src="css/images/속리산.jpg" class="review-img" alt="리뷰사진">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-							</svg>
-						</div>
-						<div class="review-img-wrap">
-							<img src="css/images/여주.jpg" class="review-img" alt="리뷰사진">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-							</svg>
-						</div>
-						<div class="review-img-wrap">
-							<img src="css/images/오수.jpg" class="review-img" alt="리뷰사진">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-							</svg>
-						</div>
-						<div class="review-img-wrap">
-							<img src="css/images/baby.png" class="review-img" alt="리뷰사진">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-							</svg>
-						</div>
-						<div class="review-img-wrap">
-							<img src="css/images/market.png" class="review-img" alt="리뷰사진">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-							</svg>
-						</div>
-						<div class="review-img-wrap">
-							<img src="css/images/속리산.jpg" class="review-img" alt="리뷰사진">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-							  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-							</svg>
-						</div> -->
-					</div>
+					<div class="photo-preview-wrap"></div>
 				</div>
 			</div>
 			
 			<div class="wb-bottom">
 				<textarea rows="15" class="review-txtarea" placeholder="휴게소가 어떠셨나요?"></textarea>
 			</div>
-			
+			<form id="writeAllFrm" method="post" action="review_write.do">
+				<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx }"/>
+				<input type="hidden" name="id" id="id" value="${id }"/>
+				<input type="hidden" name="rating" id="rating" value="${param.rating }"/>
+				<input type="hidden" name="contents" id="contents" value="${param.contents }"/>
+				<input type="hidden" name="imglen" id="imglen" value="${param.imglen }"/>
+			</form>
 		</div>
 		
 	</div>

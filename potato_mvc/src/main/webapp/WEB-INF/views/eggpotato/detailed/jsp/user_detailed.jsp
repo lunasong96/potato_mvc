@@ -51,7 +51,7 @@ $(function() {
 	// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
 	var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 	
-	if(${bc}==1) {
+	if("${bc}"==1) {
 		$(".bookmark-icon-btn").addClass("bibtn-add");
 		$(".bi-bookmark").addClass("bb-add");
 	}
@@ -183,7 +183,6 @@ function slider() {
 			var jsonStr=JSON.stringify(data);
 			var jsonParse=JSON.parse(jsonStr);
 			var review=jsonParse.review;
-			console.log(review);
 			
 			var $foodimg;
 			
@@ -385,7 +384,7 @@ function slider() {
 				},
 				success: function(data) {
 					hb.next().children().text(parseInt(hb.next().children().text()) - 1);
-					console.log("삭제성공");
+					/* console.log("삭제성공"); */
 				}
 			}) 
 					
@@ -406,7 +405,7 @@ function slider() {
 				},
 				success: function(data) {
 					hb.next().children().text(parseInt(hb.next().children().text()) + 1);
-					console.log("추가성공");
+					/* console.log("추가성공"); */
 				}
 			})
 			

@@ -5,7 +5,7 @@
 <mapper namespace="potato.detailedMapper">
 
 <!-- 휴게소 상세창 불러오기 -->
-<select id="selRestDetailed" resultType="potato.domain.DetailedDomain" parameterType="int">
+<select id="selRestDetailed" resultType="potato.domain.DetailedDomain" parameterType="Integer">
 	select name, lng, lat, tel, carwash_chk, repair_chk, cargolounge_chk, line, kr_do
 	from restarea r, line l, do d
 	where r.do_idx=d.do_idx and r.line_idx=l.line_idx and restarea_idx=#{restarea_idx}
