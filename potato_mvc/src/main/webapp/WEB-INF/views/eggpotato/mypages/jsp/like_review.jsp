@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,9 +90,9 @@ function slider() {
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
-					<img src=""  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+					<img src="css/images/${img}" id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
-				<div class="nickname">닉니임</div>
+				<div class="nickname"><c:out value="${nick}"/></div>
 			</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
@@ -104,31 +106,27 @@ function slider() {
 <div class="review">
 <!-- 리뷰 -->
 <div class="review-wrap">
+<c:forEach var="l" items="${ lAll }">
 		<div class="review-exist">
 		<div class="re-left">
-			<img src="css/images/cimg.png" alt="프로필사진">
+			<img src="css/images/${l.img}" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">
-			<div>
-			<a href="#void" style="text-decoration : none;font-size: 19px; color: white;
-						border: 0px solid; padding: 4px 20px 1px 20px;
-						background-color: #DCC1A0; border-radius: 7px;">
-			냠냠냠냠냐먀냐먀냠히호호 휴게소
-			</a>
-		</div>
-			<span>휴게소하면알감자</span>
+			<div style="margin-bottom: 10px;">
+				<span style="font-size: 19px;color: white;padding: 5px 10px;background-color: #DCC1A0;
+				border-radius: 7px;"><c:out value="${l.name}"/></span>
+			</div>	
+			<span><c:out value="${l.nick}"/></span>
 			<div class="star-rate">
 				<span class="star-blank"></span>
 				<div class="re-star-wrap">
-					<span class="star" style="width: 100%"></span>
+					<span class="star" style="width: ${l.rating*20}%"></span>
 				</div>
-				<span class="rate-txt">5</span>
+				<span class="rate-txt"><c:out value="${l.rating}"/></span>
 			</div>
 			<p class="re-txt">
-				휴게소 화장실도 깨끗하게 관리되어있고 <br>
-				알감자도 너무 맛있어요 <br>
-				라멘은 안팔아서 아쉬웠어요.
+				<c:out value="${l.contents}"/>
 			</p>
 			
 			<div class="re-slider">
@@ -163,7 +161,7 @@ function slider() {
 							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 							</svg>
 						</button>
-						<span>좋아요(1)</span>
+						<span><c:out value="좋아요(${l.liked})"/></span>
 					</div>
 					<div class="report-icon">
 						<button type="button" class="report-btn">
@@ -174,150 +172,11 @@ function slider() {
 						<span>신고</span>
 					</div>
 				</div>
-				<span class="date">2022.10.26</span>
+				<span class="date"><fmt:formatDate value="${l.post_date}" pattern="yyyy-MM-dd" /></span>
 			</div>
 		</div>
 	</div>
-	
-	<div class="review-exist">
-		<div class="re-left">
-			<img src="css/images/cimg.png" alt="프로필사진">
-		</div>
-		
-		<div class="re-right">
-			<div>
-			<a href="#void" style="text-decoration : none;font-size: 19px; color: white;
-						border: 0px solid; padding: 4px 20px 1px 20px;
-						background-color: #DCC1A0; border-radius: 7px;">
-			냠냠냠냠냐먀냐먀냠히호호 휴게소
-			</a>
-		</div>
-			<span>슬라이드테스트</span>
-			<div class="star-rate">
-				<span class="star-blank"></span>
-				<div class="re-star-wrap">
-					<span class="star" style="width: 80%"></span>
-				</div>
-				<span class="rate-txt">4</span>
-			</div>
-			<p class="re-txt">
-				슬라이드 여러개여도 개별로 인식
-			</p>
-			
-			<div class="re-slider">
-				<div class="swiper-button-prev re-swiper-button-prev"></div>
-			    <div class="swiper re-mySwiper">
-			    	<div class="swiper-wrapper re-swiper-wrapper">
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
- 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			    	</div>
-			    </div>
-				<div class="swiper-button-next re-swiper-button-next"></div>
-			</div>
-		
-			<div class="etc-icon-wrap">
-				<div class="etc-icon">
-					<div class="heart-icon-wrap">
-						<button type="button" class="heart-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-							</svg>
-						</button>
-						<span>좋아요(1)</span>
-					</div>
-					<div class="report-icon">
-						<button type="button" class="report-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-							  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-							</svg>
-						</button>
-						<span>신고</span>
-					</div>
-				</div>
-				<span class="date">2022.10.26</span>
-			</div>
-		</div>
-	</div>
-	
-	<div class="review-exist">
-		<div class="re-left">
-			<img src="css/images/cimg.png" alt="프로필사진">
-		</div>
-		
-		<div class="re-right">
-			<div>
-			<a href="#void" style="text-decoration : none;font-size: 19px; color: white;
-						border: 0px solid; padding: 4px 20px 1px 20px;
-						background-color: #DCC1A0; border-radius: 7px;">
-			냠냠냠냠냐먀냐먀냠히호호 휴게소
-			</a>
-		</div>
-			<span>사진4개이하테스트</span>
-			<div class="star-rate">
-				<span class="star-blank"></span>
-				<div class="re-star-wrap">
-					<span class="star" style="width: 80%"></span>
-				</div>
-				<span class="rate-txt">4</span>
-			</div>
-			<p class="re-txt">
-				첨부 사진이 4개 이하일 경우 슬라이드 X
-			</p>
-			
-			<div class="re-slider">
-				<div class="swiper-button-prev re-swiper-button-prev"></div>
-			    <div class="swiper re-mySwiper">
-			    	<div class="swiper-wrapper re-swiper-wrapper">
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
- 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			    	</div>
-			    </div>
-				<div class="swiper-button-next re-swiper-button-next"></div>
-			</div>
-		
-			<div class="etc-icon-wrap">
-				<div class="etc-icon">
-					<div class="heart-icon-wrap">
-						<button type="button" class="heart-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-							</svg>
-						</button>
-						<span>좋아요(1)</span>
-					</div>
-					<div class="report-icon">
-						<button type="button" class="report-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-							  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-							</svg>
-						</button>
-						<span>신고</span>
-					</div>
-				</div>
-				<span class="date">2022.10.26</span>
-			</div>
-		</div>
-	</div>
+</c:forEach>	
 <!-- 리뷰 -->
 <!-- 페이지 -->
 <div class="page">
@@ -328,6 +187,7 @@ function slider() {
 	<a href="#void" class="page-num">&nbsp;&gt;&nbsp;</a>
 </div>
 
+</div>
 </div>
 <!-- 건들ㄴ -->
 </div>

@@ -8,15 +8,15 @@
 	<select id="selMyImg" parameterType="potato.vo.MyReviewVO" resultType="String">
 	select img
 	from member
-	where id='${id}'
+	where id=#{id, jdbcType=VARCHAR}<!-- 방안1 -->
 	</select>
 <!-- 사용자프로필 -->
 	<select id="selMyNick" parameterType="potato.vo.MyReviewVO" resultType="String">
 	select nick
 	from member
-	where id='${id}'
+	where id='${id}'<!-- 방안2 -->
 	</select>
-<!-- 리뷰조회 -->
+<!-- My리뷰조회 -->
 	<select id="selMyRevAll" parameterType="potato.vo.MyReviewVO" resultType="potato.domain.MyReviewDomain">
 	select r.review_idx,res.name, r.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
 			regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1') idclick,
@@ -28,7 +28,27 @@
 	group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img ,res.name
 	order by post_date desc, review_idx desc
 	offset (#{pageFlag}-1)*3 rows
-	fetch next 1 rows only 
+	fetch next 3 rows only 
+	</select>
+<!-- Like리뷰조회 -->
+	<select id="selLikeRevAll" parameterType="potato.vo.MyReviewVO" resultType="potato.domain.MyReviewDomain">
+	select r.review_idx,res.name, r.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
+			regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1') idclick,
+			nvl(regexp_count(regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
+	from   review_img ri, review r, liked l, member m, restarea res
+	where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
+			and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=r.restarea_idx
+			and m.id(+)=r.id) and r.id='${id}'
+	group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img ,res.name
+	order by post_date desc, review_idx desc
+	offset (#{pageFlag}-1)*3 rows
+	fetch next 3 rows only 
+	</select>
+	<!-- 총리뷰수 -->
+	<select id="selTotalReview" parameterType="potato.vo.MyReviewVO" resultType="int">
+	select count(*) cnt
+	from review 
+	where id=#{id}
 	</select>
 
 	

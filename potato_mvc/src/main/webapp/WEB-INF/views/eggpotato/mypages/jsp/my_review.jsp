@@ -72,6 +72,11 @@ function slider() {
 	})
 }
 
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#reviewFrm").submit();
+}
 </script>
 
 </head>
@@ -106,40 +111,45 @@ function slider() {
 <!-- 오 : 리뷰+페이징  -->
 <div class="review">
 <!-- 리뷰 -->
+<c:forEach var="my" items="${mAll}">
 <div class="review-wrap">
 		<div class="review-exist">
 		<div class="re-left">
-			<img src="css/images/" alt="프로필사진">
+			<img src="css/images/${my.img}" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">
 		<!-- 휴게소명 시작-->
 		<div style="margin-bottom: 10px;">
 			<span style="font-size: 19px;color: white;padding: 5px 10px;background-color: #DCC1A0;
-			border-radius: 7px;">휴게소이름</span>
+			border-radius: 7px;"><c:out value="${my.name}"/></span>
 		</div>	
 		<!-- 휴게소명 끝-->
-			<span>닉</span>
+			<span><c:out value="${my.nick}"/></span>
 			<div class="star-rate">
 				<span class="star-blank"></span>
 				<div class="re-star-wrap">
-					<span class="star" style="width:${rev.rating*20}%"></span>
+					<span class="star" style="width:${my.rating*20}%"></span>
 				</div>
-				<span class="rate-txt"><c:out value="${rev.rating}"/></span>
+				<span class="rate-txt"><c:out value="${my.rating}"/></span>
 			</div>
 			<p class="re-txt">
-				<c:out value="${rev.contents}"/>
+				<c:out value="${my.contents}"/>
 			</p>
 			
 			<div class="re-slider">
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
-			    		<c:forEach var="rev" items="${revAll}">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/${rev.foodimg}" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
-			   			</c:forEach>
+ 			   			<div class="swiper-slide re-swiper-slide">
+			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
+			   			</div>
+			   			<div class="swiper-slide re-swiper-slide">
+			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
+			   			</div>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
@@ -153,7 +163,7 @@ function slider() {
 							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 							</svg>
 						</button>
-						<span><c:out value="좋아요(${rev.liked})"/></span>
+						<span><c:out value="좋아요(${my.liked})"/></span>
 					</div>
 					<div class="report-icon">
 						<button type="button" class="report-btn">
@@ -164,20 +174,28 @@ function slider() {
 						<span>신고</span>
 					</div>
 				</div>
-				<span class="date"><fmt:formatDate value="${rev.post_date}" pattern="yyyy-MM-dd" /></span>
+				<span class="date"><fmt:formatDate value="${my.post_date}" pattern="yyyy-MM-dd" /></span>
 			</div>
 		</div>
 	</div>
 </div>	
-<!-- 리뷰 -->
-<!-- 페이지 -->
-<div class="page">
-	<a href="#void" class="page-num">&nbsp;&lt;&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;1&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;2&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;3&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;&gt;&nbsp;</a>
-</div>
+</c:forEach>
+<!-- 페이징 -->
+	<div class="page">
+		<c:if test="${ not empty reviewList }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
 
 </div>
 <!-- 건들ㄴ -->
@@ -189,7 +207,12 @@ function slider() {
 <%@ include file="../../common/jsp/user_footer.jsp" %>
 <!-- footer end -->
 
-
 </div>
+
+<form id="reviewFrm" action="my_review.do" method="post">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
+</form>
+
+
 </body>
 </html>

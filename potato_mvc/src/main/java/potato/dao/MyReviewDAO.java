@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
 import potato.domain.MyReviewDomain;
+import potato.manager.vo.SearchReviewVO;
 import potato.vo.MyReviewVO;
 import potato.vo.OtherReviewVO;
 
 @Component
 public class MyReviewDAO {
-	
 	public String selMyImg(MyReviewVO mrVO) {
 		String myImg = null;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
@@ -31,18 +31,49 @@ public class MyReviewDAO {
 		return myNick;
 	}//selMyNick
 	
+	//My리뷰조회
 	/**
-	 * 리뷰조회
+	 * My
 	 * @param mrVO
 	 * @return
 	 */
 	public List<MyReviewDomain> selMyRevAll(MyReviewVO mrVO){
-		List<MyReviewDomain> list=null;
+		List<MyReviewDomain> mlist=null;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler(); 
-		list = ss.selectOne("potato.myReview.selMyRevAll", mrVO);
+		
+		System.out.println("-----mrVO DAO -"+ mrVO);
+		mlist = ss.selectList("potato.myReview.selMyRevAll", mrVO);
 		mbh.closeHandler(ss);
-		return list;		
+		return mlist;		
+	}
+	
+	//Like리뷰조회
+	/**
+	 * Like
+	 * @param mrVO
+	 * @return
+	 */
+	public List<MyReviewDomain> selLikeRevAll(MyReviewVO mrVO){
+		List<MyReviewDomain> llist=null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler(); 
+		llist = ss.selectList("potato.myReview.selLikeRevAll", mrVO);
+		mbh.closeHandler(ss);
+		return llist;		
+	}
+	
+	/**
+	 * 총 게시물 수를 구하기
+	 * @param srVO
+	 * @return
+	 */
+	public int selTotalReview(MyReviewVO mrVO) {
+		int cnt = 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		cnt = ss.selectOne("potato.myReview.selTotalReview", mrVO);
+		return cnt;
 	}
 
 }

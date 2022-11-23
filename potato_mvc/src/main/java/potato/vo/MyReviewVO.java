@@ -27,6 +27,7 @@ public class MyReviewVO {
 	public void setPageFlag(int pageFlag) {
 		this.pageFlag = pageFlag;
 	}
+	
 	@Override
 	public String toString() {
 		return "MyReviewVO [id=" + id + ", restarea_idx=" + restarea_idx + ", review_idx=" + review_idx + ", pageFlag="

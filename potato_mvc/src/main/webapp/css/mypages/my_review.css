@@ -10,6 +10,8 @@
 
 .review{
 	width:1650px;
+	margin-top: 80px;
+	
 }
 
 /* 리뷰 */
@@ -76,7 +78,7 @@
 .review-wrap {
 	width: 1300px;
     margin: 0 auto;
-    margin-top: 120px;
+    margin-top: 70px;
 }
 
 .review-txt > div > span:last-child {
@@ -255,6 +257,13 @@
 .page-num:hover{
     color: #FFF;
     background-color: #C89E6C;
-
 }
 
+.page-num-click{
+	font-size: 16px;
+    color: #000;
+	background-color: #C89E6C;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 12px;
+}
