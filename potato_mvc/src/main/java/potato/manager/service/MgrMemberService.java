@@ -63,31 +63,35 @@ public class MgrMemberService {
 	}
 	
 	////////////////////////페이징////////////////////
+	//전체 페이지수
 	public int searchTotalPages(MgrMemberVO mmVO) {
 		int cnt=mmDAO.selectTotalPages(mmVO);
 		
 		return cnt;
 	}
 	
+	//마지막 페이지 번호
 	public int lastPage(int totalPages) {
-		int lastPage=0;
-		lastPage=(int)Math.ceil((double)totalPages/10); //10개씩 보여주기
+		int lastPage=(int)Math.ceil((double)totalPages/10); //10개씩 보여주기
 
 		return lastPage;
 	}
 	
+	//현재페이지의 시작 번호
 	public int startNum(int currentPage) {
-		int startNum=0;
-		startNum=currentPage-(currentPage-1) % 3;
+		int startNum=currentPage-(currentPage-1) % 3; //3페이지씩 보여줌
 		
 		return startNum;
 	}
 	
+	// 한 페이지당 보여줄 페이지 수, 마지막 페이지보다 적다면 다시 계산
 	public int isLast(int startNum, int lastPage) {
 		int isLast = 2; // 3페이직 씩 0,1,2
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
+		System.out.println(startNum+" "+ lastPage +" "+ isLast);
+		
 		return isLast;
 	}
 }

@@ -16,7 +16,7 @@ public class ListController {
 	
 	@Autowired(required = false)
 	private ListService ls;
-	//헤더
+	//헤더(검색,연관검색어)
 	@RequestMapping(value="/header.do",method=GET)
 	public String userHeader() {
 		
@@ -26,7 +26,6 @@ public class ListController {
 	//전체 휴게소 목록
 	@RequestMapping(value="/allList.do", method=GET)
 	public String allRestAreaList(SearchFlagVO sfVO, Model model) {
-		
 		return "list/jsp/list_view_all";
 	}//allRestAreaList
 	

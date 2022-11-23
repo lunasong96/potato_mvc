@@ -54,16 +54,22 @@ function tableChange(){
 	$("#memberFrm").submit();
 }//tableChange
 	
-	//사용자 아이디 클릭시 상세 정보 팝업창 보여주기
-	function infoPopup(userId){
-		window.open("mgr_memberInfoPopup.do?memberId="+userId,"member_detail_info_popup",
+//사용자 아이디 클릭시 상세 정보 팝업창 보여주기
+function infoPopup(userId){
+	window.open("mgr_memberInfoPopup.do?memberId="+userId,"member_detail_info_popup",
 				"width=539,height=474,top=203,left=1336")
-	}
-	//차단 버튼 클릭시 팝업창 보여주기
-	function showPopup(blockId){
-		window.open("mgr_memberBlockPopup.do?memberId"+blockId,"member_block_popup",
+}
+//차단 버튼 클릭시 팝업창 보여주기
+function showPopup(blockId, nick){
+	window.open("mgr_memberBlockPopup.do?blockId="+blockId+"&nick="+nick,"member_block_popup",
 				"width=539,height=474,top=203,left=1336")
-	}
+}
+
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#memberFrm").submit();
+}
 </script>
 </head>
 <body>
@@ -116,7 +122,7 @@ function tableChange(){
 					<c:forEach var="member" items="${ memberList }">
 					<tr>
 					<td><a href="javascript:infoPopup('${member.id}')" style="color:black">${member.id}</a></td><td>${member.nick}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/></td><td>${member.birth}</td>
-					<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup('${member.id}')"></td>
+					<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup('${member.id}','${member.nick}')"></td>
 					</tr>
 				</c:forEach>
 				</c:when>
@@ -156,14 +162,22 @@ function tableChange(){
 		</div><!-- 본문 끝 -->
 
 <!-- 페이지 -->
-		<div class="page">
-			<a href="#void" class="page-num">&nbsp;&lt;&nbsp;</a>
-			<a href="#void" class="page-num">&nbsp;1&nbsp;</a>
-			<a href="#void" class="page-num">&nbsp;2&nbsp;</a>
-			<a href="#void" class="page-num">&nbsp;3&nbsp;</a>
-			<a href="#void" class="page-num">&nbsp;&gt;&nbsp;</a>
+		
+<div class="page">
+				<c:if test="${ not empty memberList }">
+						<c:if test="${ startNum ne 1 }">
+							<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+							<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+						</c:if>
+						<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+							<a href="javascript:movePage(${ startNum+i })" ${ currentPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+						</c:forEach>
+						<c:if test="${ lastPage gt startNum+2 }">
+							<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+							<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+						</c:if>
+					</c:if>
 		</div>
-
 <!-- 건들지마세요 -->
 </div>
 <!-- container end -->
@@ -187,9 +201,5 @@ function tableChange(){
 	<input type="hidden" id="infoId" name="id">
 </form>
 
-<!-- 회원 차단 팝업창 불러오기 -->
-<form id="blockFrm" action="mgr_memberBlockPopup.do" method="post">
-	<input type="hidden" id="blockId" name="id">
-</form>
 </body>
 </html>

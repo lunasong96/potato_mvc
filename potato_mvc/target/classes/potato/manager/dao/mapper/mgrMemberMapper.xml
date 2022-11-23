@@ -11,6 +11,8 @@
 	<if test="id != null and id != ''">
        and id like '%'||#{id}||'%'
     </if> 
+    	offset (#{pageFlag}-1)*10 rows
+		fetch next 10 rows only
 </select>
 
 <!-- 탈퇴회원 목록 조회 -->
@@ -21,6 +23,8 @@
 	<if test="id != null and id != ''">
        and id like '%'||#{id}||'%'
     </if> 
+    	offset (#{pageFlag}-1)*10 rows
+		fetch next 10 rows only
 </select>
 
 <!-- 차단회원 목록 조회 -->
@@ -32,6 +36,8 @@
 	<if test="id != null and id != ''">
 		and mb.id like '%'||#{id}||'%'
 	</if>
+		offset (#{pageFlag}-1)*10 rows
+		fetch next 10 rows only
 </select>
 
 
@@ -61,6 +67,14 @@
 </delete>
 
 <!-- 페이징 -->
+<select id="selectTotalPages" parameterType="potato.manager.vo.MgrMemberVO" resultType="int">
+	select count(*) cnt
+	from member 
+	where 1=1
+	<if test="id != null and id != ''">
+       and id like '%'||#{id}||'%'
+    </if> 
+</select>
 
 
 </mapper>

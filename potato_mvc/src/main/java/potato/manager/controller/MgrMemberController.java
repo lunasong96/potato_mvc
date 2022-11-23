@@ -9,6 +9,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,25 +28,25 @@ public class MgrMemberController {
 	//회원목록 조회
 	@RequestMapping(value="/mgr_memberManagement.do",method= {GET,POST})
 	public String memberList(String memberCat, MgrMemberVO mmVO,Model model, HttpSession session) {
-		
-		//페이징 변수
-//		int totalPages = mms.searchTotalPages(mmVO);
-//		int lastPage = mms.lastPage(totalPages);
-//		int currentPage = mmVO.getPageFlag();
-//		int startNum = mms.startNum(currentPage);
-//		int isLast = mms.isLast(lastPage, startNum);
-//		
 		//멤버 타입
 		int memberType=mmVO.getMemberType();
-		
-//		//view로 전송
-//		model.addAttribute("lastPage", lastPage);
-//		model.addAttribute("startNum", startNum);
-//		model.addAttribute("isLast", isLast);
-//		model.addAttribute("currentPage", currentPage);
-		
 		model.addAttribute("memberType",memberType);
+
+		//페이징 변수
+		int totalPages = mms.searchTotalPages(mmVO);
+		int lastPage = mms.lastPage(totalPages);
+		int currentPage = mmVO.getPageFlag();
+		int startNum = mms.startNum(currentPage);
+		int isLast = mms.isLast(startNum,lastPage);
 		
+		
+		//view로 전송
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startNum", startNum);
+		model.addAttribute("isLast", isLast);
+		model.addAttribute("currentPage", currentPage);
+		
+		//회원 목록
 		List<MgrMemberDomain> list=mms.searchMember(mmVO,memberCat,session);
 		
 		model.addAttribute("memberList", list);
@@ -66,16 +67,19 @@ public class MgrMemberController {
 	@RequestMapping(value="/mgr_memberBlockPopup.do",method=GET)
 	public String memberBlockPopup(String id, Model model) {
 		model.addAttribute("reasonList",mms.searchReason());
-		model.addAttribute("id",id);
 		System.out.println("---------------차단 아이디 : "+id);
 		return "manager/member_management/jsp/member_block_popup";
 	}//memberInfoPopup
 	
 	//회원 차단
-	@RequestMapping(value="/mgr_block.do",method=GET)
-	public String block(ManagerBlockVO mbVO,Model model) {
-		mms.addBlock(mbVO);
+	@RequestMapping(value="/mgr_block.do",method={GET,POST})
+	public String block(HttpServletRequest request,ManagerBlockVO mbVO,Model model) {
 		
+		mbVO.setId(request.getParameter("id"));
+		mbVO.setBlock_idx(Integer.parseInt(request.getParameter("block_idx")));
+		if(mbVO.getBlock_idx() != 0) {
+		mms.addBlock(mbVO);
+		}
 		return "forward:mgr_memberManagement.do";
 	}
 	

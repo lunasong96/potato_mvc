@@ -13,6 +13,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $("#blockBtn").click(function(){
+	var idx= $("[name='report-radio']:checked").val();
+	if(idx==null){
+		alert("차단 사유를 선택하세요.");
+	};
 	$("#blockFrm").submit();
 	self.close();
 });
@@ -25,12 +29,15 @@ $("#blockBtn").click(function(){
 		<img src="css/images/report.png" class="report-icon">
 		<span>회원 차단하기</span>
 	</div>
-	<div class="middle">
-		<p>차단대상자: <span>${ id }</span></p>
+<form id="blockFrm" action="mgr_block.do" method="post">
+	<div class="middle"><!-- 차단하기 -->
+	<input type="hidden" id="blockId" name="id" value="${param.blockId }">
+	<input type="hidden" id="blockIdx" name="block_idx">
+		<p>차단대상자: <span>${ param.nick }( ${ param.blockId } )</span></p>
 		<div class="radio-wrap">
 			<c:forEach var="block" items="${ reasonList }">
 			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">${block.reason }
+				<input type="radio" name="report-radio" class="rr" value="${block.block_idx }">${block.reason }
 			</div>
 			</c:forEach>
 
@@ -42,12 +49,9 @@ $("#blockBtn").click(function(){
 	<div class="bottom">
 		<button type="button" class="report-btn" id="blockBtn" name="blockBtn">차단하기</button>
 	</div>
+</form>
 </div>
 
-<!-- 차단하기 -->
-<form id="blockFrm" action="mgr_block.do" method="post">
-	<input type="hidden" id="blockId" name="id">
-	<input type="hidden" id="blockIdx" name="block_idx">
-</form>
+
 </body>
 </html>

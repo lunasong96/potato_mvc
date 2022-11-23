@@ -9,6 +9,7 @@ import potato.manager.vo.MgrPassChangeVO;
 @Component
 public class MgrPassChangeDAO {
 	
+	//비밀번호 변경
 	public int updatePassword(MgrPassChangeVO mpcVO) {
 		int cnt=0;
 		MyBatisHandler mbh=MyBatisHandler.getInstance();

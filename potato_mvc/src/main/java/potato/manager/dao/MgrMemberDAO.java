@@ -89,13 +89,10 @@ public class MgrMemberDAO {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession session=mbh.getHandler();
 		
-		int cnt = session.insert("potato.manager.mgrMemberMapper.blockMember",mbVO);
-		if(cnt!=0) {
-			session.commit();
-			System.out.println("회원 차단 성공");
-		}else {
-			System.out.println("회원 차단 실패");
-		}
+		session.insert("potato.manager.mgrMemberMapper.blockMember",mbVO);
+		session.commit();
+		
+		mbh.closeHandler(session);
 	}
 	
 	//차단 해제
@@ -110,12 +107,19 @@ public class MgrMemberDAO {
 		}else {
 			System.out.println("차단 해제 실패");
 		}
+		
+		mbh.closeHandler(session);
 		return cnt;
 	}
 	
-	//페이징
+	//페이징(총 게시물 수)
 	public int selectTotalPages(MgrMemberVO mmVO) {
+		int cnt=0;
 		
-		return 0;
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		cnt=session.selectOne("potato.manager.mgrMemberMapper.selectTotalPages",mmVO);
+		
+		return cnt;
 	}
 }
