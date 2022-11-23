@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .container {
-	background: #fff !important;
+	background: #fdf7ef;
 }
 
 .main{
@@ -10,8 +10,6 @@
 
 .review{
 	width:1650px;
-	margin-top: 80px;
-	
 }
 
 /* 리뷰 */
@@ -78,7 +76,7 @@
 .review-wrap {
 	width: 1300px;
     margin: 0 auto;
-    margin-top: 70px;
+    margin-top: 120px;
 }
 
 .review-txt > div > span:last-child {
@@ -257,6 +255,7 @@
 .page-num:hover{
     color: #FFF;
     background-color: #C89E6C;
+
 }
 
 .page-num-click{

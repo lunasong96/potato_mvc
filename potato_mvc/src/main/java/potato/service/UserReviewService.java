@@ -5,45 +5,77 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import potato.dao.MyReviewDAO;
+import potato.dao.UserReviewDAO;
 import potato.domain.MyReviewDomain;
-import potato.manager.vo.SearchReviewVO;
+import potato.domain.OtherReviewDomain;
 import potato.vo.MyReviewVO;
 import potato.vo.OtherReviewVO;
 
 @Component
-public class MyReviewService {
+public class UserReviewService {
 	
 	@Autowired(required = false)
-	private MyReviewDAO mrDAO;
+	private UserReviewDAO urDAO;
+///////////////////타사용자리뷰조회////////////////////
+	
+	//사용자이미지
+	public String searchOtherImg(OtherReviewVO orVO){
+		String  img = urDAO.selOtherImg(orVO);
+		return img;
+	}
+	
+	//사용자닉
+	public String searchOtherNick(OtherReviewVO orVO){
+		String  nick = urDAO.selOtherNick(orVO);
+		return nick;
+	}
+	
+	//리뷰조회
+	public List<OtherReviewDomain> searchOtherRevAll(OtherReviewVO orVO){
+		List<OtherReviewDomain> list = urDAO.selOtherRevAll(orVO);
+		return list;
+	}
+	
+	//전체리뷰수
+	public int searchOtherRev(OtherReviewVO orVO) {
+		int otherRev=urDAO.selOtherRev(orVO);
+		return otherRev;
+	}//searchOtherRev
+	
+
+///////////////////사용자리뷰조회////////////////////	
 	
 	//사용자이미지
 	public String searchMyImg(MyReviewVO mrVO){
-		String  img = mrDAO.selMyImg(mrVO);
+		String  img = urDAO.selMyImg(mrVO);
 		return img;
 	}
 	
 	//사용자닉
 	public String searchMyNick(MyReviewVO mrVO){
-		String  nick = mrDAO.selMyNick(mrVO);
+		String  nick = urDAO.selMyNick(mrVO);
 		return nick;
 	}
 	
 	//My리뷰조회
 	public List<MyReviewDomain> searchMyRevAll(MyReviewVO mrVO){
-		List<MyReviewDomain> mlist = mrDAO.selMyRevAll(mrVO);
+		List<MyReviewDomain> mlist = urDAO.selMyRevAll(mrVO);
 		return mlist;
 	}
+
+///////////////////좋아요한리뷰조회////////////////////
 	
 	//Like리뷰조회
 	public List<MyReviewDomain> searchLikeRevAll(MyReviewVO mrVO){
-		List<MyReviewDomain> llist = mrDAO.selLikeRevAll(mrVO);
+		List<MyReviewDomain> llist = urDAO.selLikeRevAll(mrVO);
 		return llist;
 	}
+
+///////////////////페이징////////////////////		
 	
 	//전체 게시물수
 	public int searchTotalReview(MyReviewVO mrVO) {
-		int cnt = mrDAO.selTotalReview(mrVO);
+		int cnt = urDAO.selTotalReview(mrVO);
 		return cnt;
 	}
 

@@ -93,43 +93,41 @@ function movePage( page ) {
 <!-- 건들ㄴ -->
 <!-- 왼 : 네비바  -->
 <div class="wrap-navi">
-		<div class="navi">
-			<div class="profileWrap">
-				<div class="img">
-					<img src="css/images/${img}"  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
-				</div>
-				<div class="nickname"><c:out value="${nick}"/></div>
-			</div>			
+	<div class="navi">
+		<div class="profileWrap">
+			<div class="img">
+				<img src="css/images/${img}"  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+			</div>
+			<div class="nickname"><c:out value="${nick}"/></div>
+		</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
 			<a class="navi-link2" href="unregister.do">회원탈퇴</a>
 			<a class="navi-link" href="my_review.do">내가 쓴 리뷰</a>
 			<a class="navi-link" href="like_review.do">좋아요한 리뷰</a>
 			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
-		</div>
+	</div>
 </div>
 <!-- 오 : 리뷰+페이징  -->
 <div class="review">
 <!-- 리뷰 -->
-<c:forEach var="my" items="${mAll}">
 <div class="review-wrap">
+<c:forEach var="my" items="${ mAll }">
 		<div class="review-exist">
 		<div class="re-left">
 			<img src="css/images/${my.img}" alt="프로필사진">
 		</div>
 		
 		<div class="re-right">
-		<!-- 휴게소명 시작-->
-		<div style="margin-bottom: 10px;">
-			<span style="font-size: 19px;color: white;padding: 5px 10px;background-color: #DCC1A0;
-			border-radius: 7px;"><c:out value="${my.name}"/></span>
-		</div>	
-		<!-- 휴게소명 끝-->
+			<div style="margin-bottom: 10px;">
+				<span style="font-size: 19px;color: white;padding: 5px 10px;background-color: #DCC1A0;
+				border-radius: 7px;"><c:out value="${my.name}"/></span>
+			</div>	
 			<span><c:out value="${my.nick}"/></span>
 			<div class="star-rate">
 				<span class="star-blank"></span>
 				<div class="re-star-wrap">
-					<span class="star" style="width:${my.rating*20}%"></span>
+					<span class="star" style="width: ${my.rating*20}%"></span>
 				</div>
 				<span class="rate-txt"><c:out value="${my.rating}"/></span>
 			</div>
@@ -150,6 +148,12 @@ function movePage( page ) {
 			   			<div class="swiper-slide re-swiper-slide">
 			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
 			   			</div>
+			   			<div class="swiper-slide re-swiper-slide">
+			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
+			   			</div>
+			   			<div class="swiper-slide re-swiper-slide">
+			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
+			   			</div>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
@@ -165,21 +169,31 @@ function movePage( page ) {
 						</button>
 						<span><c:out value="좋아요(${my.liked})"/></span>
 					</div>
-					<div class="report-icon">
-						<button type="button" class="report-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-							  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+					<div class="edit-icon">
+						<a href="" class="edit-link">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+							  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+							</svg>
+						</a>
+						<span>수정</span>
+					</div>
+					<div class="delete-icon">
+						<button type="button" class="delete-btn">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+							  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
 							</svg>
 						</button>
-						<span>신고</span>
+						<span>삭제</span>
 					</div>
 				</div>
 				<span class="date"><fmt:formatDate value="${my.post_date}" pattern="yyyy-MM-dd" /></span>
 			</div>
+			
 		</div>
 	</div>
-</div>	
-</c:forEach>
+</c:forEach>	
+</div>
+<!-- 리뷰 -->
 <!-- 페이징 -->
 	<div class="page">
 		<c:if test="${ not empty reviewList }">
@@ -206,7 +220,6 @@ function movePage( page ) {
 <!-- footer -->
 <%@ include file="../../common/jsp/user_footer.jsp" %>
 <!-- footer end -->
-
 </div>
 
 <form id="reviewFrm" action="my_review.do" method="post">

@@ -70,29 +70,31 @@
 	</select>
 	<!-- 방문자현황(오늘,어제,총) -->
 	<select id="selectVisitorCnt" parameterType="int" resultType="int">
-	select count(*)
-	from visitor
+	 select count(visitdate) visitcnt
+ 	from (select ip, to_char(access_date,'yyyymmdd') visitdate  from visitor
+			group by ip, to_char(access_date,'yyyymmdd')
+			order by visitdate)  
 	<where>
 	<if test="visitFlag == 6">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-6,'yyyymmdd')
+	visitdate=to_char(sysdate-6,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 5">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-5,'yyyymmdd')
+	visitdate=to_char(sysdate-5,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 4">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-4,'yyyymmdd')
+	visitdate=to_char(sysdate-4,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 3">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-3,'yyyymmdd')
+	visitdate=to_char(sysdate-3,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 2">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-2,'yyyymmdd')
+	visitdate=to_char(sysdate-2,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 1">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate-1,'yyyymmdd')
+	visitdate=to_char(sysdate-1,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 0">
-	to_char(access_date,'yyyymmdd')=to_char(sysdate,'yyyymmdd')
+	visitdate=to_char(sysdate,'yyyymmdd')
 	</if>
 	<if test="visitFlag == 10">
 	1 = 1

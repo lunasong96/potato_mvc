@@ -2,9 +2,43 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="potato.myReview">
+<mapper namespace="potato.userReview">
 
+<!-- ///////////////////타사용자리뷰조회////////////////////	 -->
 <!-- 사용자프로필 -->
+	<select id="selOtherImg" parameterType="potato.vo.OtherReviewVO" resultType="String">
+	select img
+	from member
+	where id='${otherPid}'
+	</select>
+<!-- 사용자프로필 -->
+	<select id="selOtherNick" parameterType="potato.vo.OtherReviewVO" resultType="String">
+	select nick
+	from member
+	where id='${otherPid}'
+	</select>
+<!-- 리뷰수 -->
+	<select id="selOtherRev" parameterType="potato.vo.OtherReviewVO" resultType="int">
+	select count(*)
+	from review
+	where id='${otherPid}'
+	</select>
+<!-- 리뷰조회 -->
+	<select id="selOtherRevAll" parameterType="potato.vo.OtherReviewVO" resultType="potato.domain.OtherReviewDomain">
+	select r.review_idx,res.name, r.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
+			regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1') idclick,
+			nvl(regexp_count(regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
+	from   review_img ri, review r, liked l, member m, restarea res
+	where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
+			and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=r.restarea_idx
+			and m.id(+)=r.id) and r.id='${otherPid}'
+	group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img ,res.name
+	order by post_date desc, review_idx desc
+	offset (#{pageFlag}-1)*3 rows
+	fetch next 1 rows only
+	</select>
+<!-- ///////////////////사용자리뷰조회////////////////////	 -->
+	<!-- 사용자프로필 -->
 	<select id="selMyImg" parameterType="potato.vo.MyReviewVO" resultType="String">
 	select img
 	from member
@@ -30,6 +64,7 @@
 	offset (#{pageFlag}-1)*3 rows
 	fetch next 3 rows only 
 	</select>
+<!-- ///////////////////좋아요한리뷰조회//////////////////// -->
 <!-- Like리뷰조회 -->
 	<select id="selLikeRevAll" parameterType="potato.vo.MyReviewVO" resultType="potato.domain.MyReviewDomain">
 	select r.review_idx,res.name, r.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
@@ -44,12 +79,11 @@
 	offset (#{pageFlag}-1)*3 rows
 	fetch next 3 rows only 
 	</select>
+<!-- ///////////////////페이징//////////////////// -->	
 	<!-- 총리뷰수 -->
 	<select id="selTotalReview" parameterType="potato.vo.MyReviewVO" resultType="int">
 	select count(*) cnt
 	from review 
 	where id=#{id}
 	</select>
-
-	
 </mapper>

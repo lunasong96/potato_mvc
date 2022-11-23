@@ -17,26 +17,70 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+
 //하트아이콘
 $(document).on("click", ".heart-btn", function() {
-	$(this).toggleClass("hb-fill");
+	/* $(this).toggleClass("hb-fill"); */
+	
+	var likeClass=$(this).attr("class");
+	var $id=$(this).attr("value");
+	var $reviewidx=$(this).prev().attr("value");
+	var hb=$(this);
+	/* var $test=$(this).next().children().text(); */
+	
+	var jsonParam= { restarea_idx: ${param.restarea_idx},
+			id_clicker: "${id}",
+			review_idx: $reviewidx,
+			id_writer: $id };
+		
+	
+	if("${id}"=="") {
+		alert("로그인이 필요한 동작입니다.")
+	}else if(likeClass=="heart-btn hb-fill") { //즐겨찾기 취소
+		$(this).removeClass("hb-fill");
+	
+			$.ajax({
+			url:"ajax_detailed_likeDel.do",
+			data: jsonParam,
+			type: "post",
+			dataType: "text",
+			error: function(xhr) {
+				alert(xhr.responseText),
+				alert(xhr.statusText),
+				console.log(xhr.status);
+				alert("에러")
+			},
+			success: function(data) {
+				hb.next().children().text(parseInt(hb.next().children().text()) - 1);
+				console.log("삭제성공");
+			}
+		}) 
+				
+		
+	}else { //즐겨찾기 등록
+		$(this).addClass("hb-fill");
+		
+		 	$.ajax({
+			url:"ajax_detailed_likeAdd.do",
+			data:  jsonParam,
+			type: "post",
+			dataType: "text",
+			error: function(xhr) {
+				alert(xhr.responseText),
+				alert(xhr.statusText),
+				console.log(xhr.status);
+				alert("에러")
+			},
+			success: function(data) {
+				hb.next().children().text(parseInt(hb.next().children().text()) + 1);
+				console.log("추가성공");
+			}
+		})
+		
+	}
+	
+	
 })
-	$(function() {
-		
-		$(".bookmark-icon-btn").click(function() {
-			$(".bookmark-icon-btn").toggleClass("bibtn-add");
-			$(".bi-bookmark ").toggleClass("bb-add");
-		})
-		
-		$(".report-btn").click(function() {
-			window.open("reportPop.do","popup_report",
-			"width=520,height=470,top=203,left=1336");
-		})
-		
-		//리뷰 슬라이드 호출
-		slider();
-		
-	})//ready
 
 function slider() {
 	$(".re-mySwiper").each(function(index,element) {
@@ -87,20 +131,20 @@ function slider() {
 <!-- 건들ㄴ -->
 <!-- 왼 : 네비바  -->
 <div class="wrap-navi">
-		<div class="navi">
-			<div class="profileWrap">
-				<div class="img">
-					<img src="css/images/${img}" id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
-				</div>
-				<div class="nickname"><c:out value="${nick}"/></div>
-			</div>			
+	<div class="navi">
+		<div class="profileWrap">
+			<div class="img">
+				<img src="css/images/${img}" id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+			</div>
+			<div class="nickname"><c:out value="${nick}"/></div>
+		</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
 			<a class="navi-link2" href="unregister.do">회원탈퇴</a>
 			<a class="navi-link" href="my_review.do">내가 쓴 리뷰</a>
 			<a class="navi-link" href="like_review.do">좋아요한 리뷰</a>
 			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
-		</div>
+	</div>
 </div>
 <!-- 오 : 리뷰+페이징  -->
 <div class="review">
@@ -177,17 +221,24 @@ function slider() {
 		</div>
 	</div>
 </c:forEach>	
-<!-- 리뷰 -->
-<!-- 페이지 -->
-<div class="page">
-	<a href="#void" class="page-num">&nbsp;&lt;&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;1&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;2&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;3&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;&gt;&nbsp;</a>
 </div>
-
-</div>
+<!-- 페이징 -->
+	<div class="page">
+		<c:if test="${ not empty reviewList }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
+<!-- 페이징 -->
 </div>
 <!-- 건들ㄴ -->
 </div>
@@ -197,8 +248,7 @@ function slider() {
 <!-- footer -->
 <%@ include file="../../common/jsp/user_footer.jsp" %>
 <!-- footer end -->
-
-
 </div>
+
 </body>
 </html>
