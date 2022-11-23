@@ -48,7 +48,6 @@ function uploadFileImg(e) {
 			return;
 		}//end if 
 		
-		file_Arr.push(f); //배열에 담기
 		
 		var previewAdd=new FileReader(); //파일 데이터 읽기
 		previewAdd.onload=function(e) {
@@ -67,6 +66,8 @@ function uploadFileImg(e) {
 				deleteImage(index); // 데이터에 초과된 이미지정보 자동 삭제
 				return;
 			}
+			
+			file_Arr.push({name: f.name, num:index-1}); //배열에 담기
 			
 		}
 		previewAdd.readAsDataURL(f); //데이터 url만들기 인코딩
@@ -99,10 +100,15 @@ function uploadFileImg(e) {
 }
 
 function deleteImage(index) {
-	file_Arr.splice(index, 1); //index에 해당하는 배열[index] 삭제
+ 	for(var i=0; i<file_Arr.length; i++) { //num이 일치하는 배열을 찾아서 삭제
+		if(file_Arr[i].num==index) {
+			file_Arr.splice(i, 1); //index에 해당하는 배열[index] 삭제
+		}
+	}
 	
 	var delImage="#riw-"+index;
 	$(delImage).remove(); //선택 이미지 삭제
+	console.log(file_Arr);
 }
 
 function okReview() {

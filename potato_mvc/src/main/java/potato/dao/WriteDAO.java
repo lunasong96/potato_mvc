@@ -54,8 +54,8 @@ public class WriteDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		int cnt = ss.insert("potato.writeMapper.upReReview",wrVO);
-		if(cnt == 1) {
+		int cnt = ss.update("potato.writeMapper.upReReview",wrVO);
+		if(cnt != 0) {
 			ss.commit();
 		}
 		
@@ -68,11 +68,10 @@ public class WriteDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		int cnt = ss.insert("potato.writeMapper.delReReviewImg",wrVO);
-		if(cnt == 1) {
+		int cnt = ss.delete("potato.writeMapper.delReReviewImg",wrVO);
+		if(cnt != 0) {
 			ss.commit();
 		}
-		
 		mbh.closeHandler(ss);
 		return cnt;
 	}

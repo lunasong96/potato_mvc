@@ -82,6 +82,7 @@ public class WriteController {
 		int len=Integer.parseInt(request.getParameter("imglen"));
 		
 		WriteReviewVO wrVO=new WriteReviewVO();
+		
 		wrVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
 		wrVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
 		wrVO.setId(request.getParameter("id"));

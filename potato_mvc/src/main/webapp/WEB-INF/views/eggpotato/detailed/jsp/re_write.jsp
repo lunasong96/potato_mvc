@@ -17,8 +17,21 @@
 <script type="text/javascript">
 var file_Arr=[];
 var index=0;
+var tete;
 
 $(function() {
+	
+	<c:forEach var="reImg" items="${mri }">
+	var tete="<div class='review-img-wrap' id='riw-"+index+"'>"+
+			"<img src='css/images/${reImg.img}' class='review-img' alt='리뷰사진'>"+
+			"<a href='javascript:deleteImage("+index+");' class='img-a'>"+
+			"<svg xmlns='http://www.w3.org/2000/svg' width='1' height='16' fill='currentColor' class='bi bi-x-square-fill' viewBox='0 0 16 16'>"+
+			"<path d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z'/></svg></a></div>"
+	index++;
+	$(tete).appendTo(".photo-preview-wrap");
+	file_Arr.push({name:"${reImg.img}", num:index-1});
+	/* console.log(file_Arr) */
+	</c:forEach>
 	
 	//사진파일클릭
 	$("#filebtn").on("change", uploadFileImg);
@@ -47,8 +60,6 @@ function uploadFileImg(e) {
 			return;
 		}//end if 
 		
-		file_Arr.push(f); //배열에 담기
-		
 		var previewAdd=new FileReader(); //파일 데이터 읽기
 		previewAdd.onload=function(e) {
 			
@@ -67,7 +78,9 @@ function uploadFileImg(e) {
 				return;
 			}
 			
+			file_Arr.push({name: f.name, num:index-1}); //배열에 담기
 		}
+		
 		previewAdd.readAsDataURL(f); //데이터 url만들기 인코딩
 		
 	})
@@ -92,13 +105,18 @@ function uploadFileImg(e) {
 				}
 			
 			})
-		console.log(files);
+		/* console.log(files);
 		console.log(fileArr);
-		console.log(file_Arr);
+		console.log(file_Arr); */
 }
 
 function deleteImage(index) {
-	file_Arr.splice(index, 1); //index에 해당하는 배열[index] 삭제
+	
+ 	for(var i=0; i<file_Arr.length; i++) { //num이 일치하는 배열을 찾아서 삭제
+		if(file_Arr[i].num==index) {
+			file_Arr.splice(i, 1); //index에 해당하는 배열[index] 삭제
+		}
+	}
 	
 	var delImage="#riw-"+index;
 	$(delImage).remove(); //선택 이미지 삭제
@@ -212,19 +230,7 @@ function okReview() {
 						</label>
 					</div>
 					<div class="photo-preview-wrap">
-						<c:forEach var="reImg" items="${mri }" varStatus="mri">
-							<div class="review-img-wrap" id="riw-${mri.index }">
-									<img src="css/images/${reImg.img}" class="review-img" alt="리뷰사진">
-									<a href="javascript:deleteImage(${mri.index });" class="img-a">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
-										  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
-										</svg>
-									</a>
-							</div>
-							<script type="text/javascript">
-								file_Arr.push({name:"${reImg.img}"});
-							</script>
-						</c:forEach>
+						
 					</div>
 				</div>
 			</div>

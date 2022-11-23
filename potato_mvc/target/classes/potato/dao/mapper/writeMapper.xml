@@ -20,7 +20,7 @@ where restarea_idx=#{restarea_idx}
 <update id="upReReview" parameterType="potato.vo.WriteReviewVO">
 update review
 set rating=#{rating}, contents=#{contents}
-where restarea_idx=#{review_idx} and  review_idx=#{review_idx}
+where restarea_idx=#{restarea_idx} and  review_idx=#{review_idx}
 </update>
 
 <!-- 이미지 전부 삭제  -->
@@ -30,12 +30,6 @@ where review_idx=#{review_idx} and restarea_idx=#{restarea_idx}
 </delete>
 
 <!-- 리뷰 이미지 등록 -->
-<!-- <insert id="upReReviewImg" parameterType="java.util.List">
-	<foreach collection="list" item="wriVO">
-		insert into review_img(review_idx, id, restarea_idx, img_idx, img)
-		values (#{review_idx}, #{id}, #{restarea_idx}, ${img_idx} , #{img})
-	</foreach>
-</insert> -->
 <insert id="upReReviewImg" parameterType="potato.vo.WriteReviewImgVO">
 insert into review_img(review_idx, id, restarea_idx, img_idx, img)
 values (#{review_idx}, #{id}, #{restarea_idx}, ${img_idx} , #{img})
