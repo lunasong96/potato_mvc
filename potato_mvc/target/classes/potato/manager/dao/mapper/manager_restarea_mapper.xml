@@ -175,6 +175,25 @@
 		group by re.img
  	</select>
  	
+ 	<select id="selectModifyRest" parameterType="int" resultType="potato.manager.domain.RestDomain">
+		select RESTAREA_IDX, IMG, NAME, LNG, LAT, LINE_IDX, DO_IDX, TEL, CARWASH_CHK, REPAIR_CHK, CARGOLOUNGE_CHK,
+
+      	 (  select img
+ 			from( select RESTAREA_IDX,AMENITY_TYPE,listagg(icon,',') within group(order by ICON) img
+			      from restarea_amenity
+				  group by RESTAREA_IDX, AMENITY_TYPE   )
+   			where restarea_idx = #{idx} and AMENITY_TYPE='A' ) retAmImgs,
+
+		 (  select img
+            from( select RESTAREA_IDX,AMENITY_TYPE,listagg(icon,',') within group(order by ICON) img
+			      from restarea_amenity
+			      group by RESTAREA_IDX, AMENITY_TYPE   )
+            where restarea_idx = #{idx} and AMENITY_TYPE='B' ) gasAmImgs
+
+		from restarea
+		where restarea_idx = #{idx} 		
+ 	</select>
+ 	
  	
  	
  	

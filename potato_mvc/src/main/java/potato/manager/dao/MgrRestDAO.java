@@ -132,10 +132,13 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
-	
+	//수정휴게소정보
 	public RestDomain selectRestInfo(int restarea_idx) {
-		
-		return null;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		RestDomain rd = ss.selectOne("potato.manager.rest.selectModifyRest",restarea_idx );
+		mbh.closeHandler(ss);
+		return rd;
 	}
 		
 	public int updateRest(RestVO rVO) {
@@ -149,7 +152,7 @@ public class MgrRestDAO {
 		SqlSession ss = mbh.getHandler();
 		int cnt = ss.delete("potato.manager.rest.deleteRest", restarea_idx);
 		if(cnt == 1) {
-			ss.commit(); // 대상테이블에 대한 것만 인식하는지 on cacade도 인식하는 테스트
+			ss.commit(); 
 		}
 		mbh.closeHandler(ss);
 		return cnt;

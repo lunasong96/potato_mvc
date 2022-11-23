@@ -194,11 +194,22 @@ public class ManagerRestareaController {
 	}
 	
 	
+	/**
+	 * 수정창을 보여주는 컨트롤러
+	 * @param restarea_idx
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="manager_rest_modifyPopup.do",method=POST)
 	public String restModifyPopup(int restarea_idx, Model model) {
 		
+		model.addAttribute("lineList", mrs.searchLine());
+		model.addAttribute("doList", mrs.searchDo());
+		model.addAttribute("rest", mrs.searchRestInfo(restarea_idx));
+		
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
 	}
+	
 	
 	@RequestMapping(value="manager_rest_modify.do")
 	public String restModify(HttpServletRequest request) {
@@ -210,11 +221,11 @@ public class ManagerRestareaController {
 	public String delRest(int restarea_idx, Model model) {
 		DeleteImgDomain did = mrs.searchImg(restarea_idx);//이미지 먼저 불러놓고 도메인을 생성하고
 		int cnt = mrs.removeRest(restarea_idx);//테이블날리고 
-		if(cnt == 1) {
-			mrs.removeImg(did);
+		if(cnt == 1) {//테이블이 날아갔다면
+			mrs.removeImg(did);//이미지파일도 날린다.
 		}
 		model.addAttribute("success",cnt);
-		return "manager/rest_management/jsp/manager_restDelResult";//삭제되면 임의 공간으로 보내고 거기는 창닫기 기능만 추가한다.
+		return "manager/rest_management/jsp/manager_restDelResult";
 	}
 
 }

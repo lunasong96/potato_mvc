@@ -2,7 +2,7 @@ package potato.manager.domain;
 
 public class RestDomain {
 	private String name, tel, img, line, carwash_chk,repair_chk,cargolounge_chk,retAmImgs,gasAmImgs;
-	private int restarea_idx, bookmark_cnt;
+	private int restarea_idx, bookmark_cnt,line_idx,do_idx;
 	private double totalRating, lng, lat;
 	public String getName() {
 		return name;
@@ -70,6 +70,18 @@ public class RestDomain {
 	public void setBookmark_cnt(int bookmark_cnt) {
 		this.bookmark_cnt = bookmark_cnt;
 	}
+	public int getLine_idx() {
+		return line_idx;
+	}
+	public void setLine_idx(int line_idx) {
+		this.line_idx = line_idx;
+	}
+	public int getDo_idx() {
+		return do_idx;
+	}
+	public void setDo_idx(int do_idx) {
+		this.do_idx = do_idx;
+	}
 	public double getTotalRating() {
 		return totalRating;
 	}
@@ -88,13 +100,15 @@ public class RestDomain {
 	public void setLat(double lat) {
 		this.lat = lat;
 	}
-	
 	@Override
 	public String toString() {
 		return "RestDomain [name=" + name + ", tel=" + tel + ", img=" + img + ", line=" + line + ", carwash_chk="
 				+ carwash_chk + ", repair_chk=" + repair_chk + ", cargolounge_chk=" + cargolounge_chk + ", retAmImgs="
 				+ retAmImgs + ", gasAmImgs=" + gasAmImgs + ", restarea_idx=" + restarea_idx + ", bookmark_cnt="
-				+ bookmark_cnt + ", totalRating=" + totalRating + ", lng=" + lng + ", lat=" + lat + "]";
+				+ bookmark_cnt + ", line_idx=" + line_idx + ", do_idx=" + do_idx + ", totalRating=" + totalRating
+				+ ", lng=" + lng + ", lat=" + lat + "]";
 	}
+	
+	
 	
 }

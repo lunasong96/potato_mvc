@@ -103,10 +103,10 @@ public class ManagerRestService {
 		return cnt;
 	}
 	
-	
+	//수정휴게소정보
 	public RestDomain searchRestInfo(int restarea_idx) {
-		
-		return null;
+		RestDomain rd = mrDAO.selectRestInfo(restarea_idx);
+		return rd;
 	}
 		
 	public int modifyRest(RestVO rVO) {
@@ -114,16 +114,19 @@ public class ManagerRestService {
 		return 0;
 	}
 	
+	//휴게소삭제
 	public int removeRest(int restarea_idx) {
 		int cnt = mrDAO.deleteRest(restarea_idx);
 		return cnt;
 	}
 	
+	//삭제할 테이블의 인덱스를 얻어서 이미지 파일만 따로 호출
 	public DeleteImgDomain searchImg(int restarea_idx) {
 		DeleteImgDomain did= mrDAO.selectDelImg(restarea_idx);
 		return did;
 	}
 	
+	//이미지파일을 삭제를 처리하는 매서드
 	public void removeImg(DeleteImgDomain did) {
 		File imgFile =new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+did.getImg());
 		imgFile.delete();

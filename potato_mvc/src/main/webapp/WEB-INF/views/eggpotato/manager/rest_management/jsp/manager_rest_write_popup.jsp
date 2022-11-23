@@ -27,7 +27,7 @@ $(function(){
 	//추가버튼 누를시 
 	var foodCnt = 3;
 	var contents = "<div class='food-info'><span><input type='button' class='round-blue-btn' value='사진첨부' /><input type='file' class='fileup2'/></span>";
-	    contents += "<div class='food-detail'><div class='food-img-wrap'><img src='css/images/noImg.png'></div><div class='food-content'>";
+	    contents += "<div class='food-detail'><div class='food-img-wrap'><img src='css/images/noImg.png' onerror=\"this.src='css/images/noImg.png'\"></div><div class='food-content'>";
 	    contents +="<span><label>이름 : </label><input type='text' name='foodName' placeholder='음식명을 기입해주세요.'/></span><span><label>가격 : </label><input type='text' name='foodPrice' maxlength='6' placeholder='가격을 기입해주세요.'/></span>";
 	    contents +="<span><span><label>설명 : </label></span><textarea placeholder='음식설명을 기입해주세요.' class='conts'></textarea><input type='hidden' name='foodConts'></span>";
 	    contents +="<span><span><label>재료 : </label></span><textarea placeholder='재료를 기입해주세요.' class='ings'></textarea><input type='hidden' name='foodIng'></span>";
@@ -111,7 +111,6 @@ function previewFile(input) {
 	
     if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
 		alert('이미지 파일만 업로드 가능합니다.');
-		$("#restProfile").attr("src", "css/images/noImg.png");
 		input.value = ''; 
 		input.focus(); 
 	}
@@ -291,7 +290,7 @@ const autoHyphen2 = (target) => {
 				<input type="text" id="restName" name="restName" placeholder="휴게소명을 기입하세요."/> 
 			</div>
 			<div class="tumbnail">
-				<img src="http:css/images/noImg.png" id="restProfile">
+				<img src="http:css/images/noImg.png" id="restProfile" onerror="this.src='css/images/noImg.png'"/>
 				<div class="tumbnail-btn-wrap">
 					<span>썸네일</span>
 					<div>
@@ -315,7 +314,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="css/images/noImg.png"  >
+						<img src="css/images/noImg.png" onerror="this.src='css/images/noImg.png'"/>
 					</div>
 					<div class="food-content">
 						<span>
@@ -358,7 +357,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="css/images/noImg.png">
+						<img src="css/images/noImg.png" onerror="this.src='css/images/noImg.png'"/>
 					</div>
 					<div class="food-content">
 						<span>
@@ -401,7 +400,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="css/images/noImg.png">
+						<img src="css/images/noImg.png" onerror="this.src='css/images/noImg.png'"/>
 					</div>
 					<div class="food-content">
 						<span>
@@ -444,7 +443,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="http://localhost/potato/css/images/noImg.png">
+						<img src="http://localhost/potato/css/images/noImg.png" onerror="this.src='css/images/noImg.png'"/>
 					</div>
 					<div class="food-content">
 						<span>
