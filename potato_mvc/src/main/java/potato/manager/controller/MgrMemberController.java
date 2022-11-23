@@ -65,21 +65,26 @@ public class MgrMemberController {
 	
 	//회원 차단 팝업창 띄우기
 	@RequestMapping(value="/mgr_memberBlockPopup.do",method=GET)
-	public String memberBlockPopup(String id, Model model) {
+	public String memberBlockPopup(HttpServletRequest request,String id, Model model) {
+		id=request.getParameter("id");
 		model.addAttribute("reasonList",mms.searchReason());
-		System.out.println("---------------차단 아이디 : "+id);
+		model.addAttribute("blockId",id);
+		
 		return "manager/member_management/jsp/member_block_popup";
 	}//memberInfoPopup
 	
 	//회원 차단
 	@RequestMapping(value="/mgr_block.do",method={GET,POST})
 	public String block(HttpServletRequest request,ManagerBlockVO mbVO,Model model) {
-		
+		int cnt=mms.addBlock(mbVO);
 		mbVO.setId(request.getParameter("id"));
 		mbVO.setBlock_idx(Integer.parseInt(request.getParameter("block_idx")));
-		if(mbVO.getBlock_idx() != 0) {
-		mms.addBlock(mbVO);
-		}
+		/*
+		 * 이미 차단된 적 있을 때 어떻게 표현해야 되지..
+		 * if(mbVO.getBlock_idx() != 0) { mms.addBlock(mbVO); }
+		 */
+		
+		model.addAttribute("blockCnt",cnt);
 		return "forward:mgr_memberManagement.do";
 	}
 	

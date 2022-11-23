@@ -51,8 +51,10 @@ public class MgrMemberService {
 	}
 	
 	//회원 차단하기(차단회원 목록에 추가)
-	public void addBlock(ManagerBlockVO mbVO) {
-		mmDAO.insertBlock(mbVO);
+	public int addBlock(ManagerBlockVO mbVO) {
+		int cnt=mmDAO.insertBlock(mbVO);
+		
+		return cnt;
 	}
 	
 	//차단 해제

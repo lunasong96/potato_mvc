@@ -13,7 +13,7 @@ public class ManagerBlockVO {
 
 	public ManagerBlockVO(String id, int block_idx, Date block_date) {
 		this.id = id;
-		this.block_idx = block_idx+1;
+		this.block_idx = block_idx;
 		this.block_date = block_date;
 	}
 

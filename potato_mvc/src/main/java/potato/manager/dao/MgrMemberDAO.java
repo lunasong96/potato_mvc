@@ -85,14 +85,20 @@ public class MgrMemberDAO {
 	}
 	
 	//회원 차단
-	public void insertBlock(ManagerBlockVO mbVO) {
+	public int insertBlock(ManagerBlockVO mbVO) {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession session=mbh.getHandler();
 		
-		session.insert("potato.manager.mgrMemberMapper.blockMember",mbVO);
-		session.commit();
+		int cnt=session.insert("potato.manager.mgrMemberMapper.blockMember",mbVO);
+		if(cnt!=0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
 		
 		mbh.closeHandler(session);
+		
+		return cnt;
 	}
 	
 	//차단 해제
