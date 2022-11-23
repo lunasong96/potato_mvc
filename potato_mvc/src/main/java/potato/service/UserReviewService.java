@@ -7,42 +7,14 @@ import org.springframework.stereotype.Component;
 
 import potato.dao.UserReviewDAO;
 import potato.domain.MyReviewDomain;
-import potato.domain.OtherReviewDomain;
 import potato.vo.MyReviewVO;
-import potato.vo.OtherReviewVO;
 
 @Component
 public class UserReviewService {
 	
+	
 	@Autowired(required = false)
 	private UserReviewDAO urDAO;
-///////////////////타사용자리뷰조회////////////////////
-	
-	//사용자이미지
-	public String searchOtherImg(OtherReviewVO orVO){
-		String  img = urDAO.selOtherImg(orVO);
-		return img;
-	}
-	
-	//사용자닉
-	public String searchOtherNick(OtherReviewVO orVO){
-		String  nick = urDAO.selOtherNick(orVO);
-		return nick;
-	}
-	
-	//리뷰조회
-	public List<OtherReviewDomain> searchOtherRevAll(OtherReviewVO orVO){
-		List<OtherReviewDomain> list = urDAO.selOtherRevAll(orVO);
-		return list;
-	}
-	
-	//전체리뷰수
-	public int searchOtherRev(OtherReviewVO orVO) {
-		int otherRev=urDAO.selOtherRev(orVO);
-		return otherRev;
-	}//searchOtherRev
-	
-
 ///////////////////사용자리뷰조회////////////////////	
 	
 	//사용자이미지
@@ -101,5 +73,4 @@ public class UserReviewService {
 		
 		return isLast;
 	}
-	
 }//class

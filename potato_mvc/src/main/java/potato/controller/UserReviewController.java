@@ -1,7 +1,6 @@
 package potato.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
@@ -15,28 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import potato.domain.MyReviewDomain;
 import potato.service.UserReviewService;
 import potato.vo.MyReviewVO;
-import potato.vo.OtherReviewVO;
 
 @Controller
 public class UserReviewController {
 	
 	@Autowired(required = false)
 	private UserReviewService urs;
-///////////////////타사용자리뷰조회////////////////////
-	
-	//타사용자리뷰조회
-	@RequestMapping(value="other_review.do", method= {POST,GET})
-	public String otherReviewMove(HttpSession session, OtherReviewVO orVO, Model model) {
-		//otherPid : 클릭했을 때 입력되는 아이디
-		model.addAttribute("img",urs.searchOtherImg(orVO));
-		model.addAttribute("nick",urs.searchOtherNick(orVO));
-		model.addAttribute("rCnt",urs.searchOtherRev(orVO));
-		model.addAttribute("rAll",urs.searchOtherRevAll(orVO));
-		
-		
-		return  "other_profiles/jsp/other_user_profiles";
-	}//otherReviewMove
-
 ///////////////////사용자리뷰조회////////////////////
 	
 	//사용자리뷰조회
