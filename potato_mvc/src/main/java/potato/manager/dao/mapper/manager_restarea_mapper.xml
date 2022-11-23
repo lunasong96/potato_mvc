@@ -163,6 +163,18 @@
 		select * from dual
  	</insert>
  	
+ 	<delete id="deleteRest" parameterType="int">
+ 		delete from restarea
+		where restarea_idx = #{idx}
+ 	</delete>
+ 	
+ 	<select id="selectDeleteImg" parameterType="int" resultType="potato.manager.domain.DeleteImgDomain">
+ 		select re.img, listagg(rf.img,',')within group(order by rf.food_idx) foodimg
+		from restarea re, restarea_food rf
+		where  (rf.restarea_idx = re.restarea_idx)  and  re.restarea_idx = #{idx}
+		group by re.img
+ 	</select>
+ 	
  	
  	
  	

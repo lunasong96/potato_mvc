@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import potato.dao.config.MyBatisHandler;
+import potato.manager.domain.DeleteImgDomain;
 import potato.manager.domain.DoDomain;
 import potato.manager.domain.FoodDomain;
 import potato.manager.domain.LineDomain;
@@ -142,9 +143,25 @@ public class MgrRestDAO {
 		return 0;
 	}
 	
+	//휴게소 삭제
 	public int deleteRest(int restarea_idx) {
-		
-		return 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.delete("potato.manager.rest.deleteRest", restarea_idx);
+		if(cnt == 1) {
+			ss.commit(); // 대상테이블에 대한 것만 인식하는지 on cacade도 인식하는 테스트
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
+	//삭제할 휴게소관련 이미지 호출
+	public DeleteImgDomain selectDelImg(int restarea_idx) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		DeleteImgDomain did = ss.selectOne("potato.manager.rest.selectDeleteImg", restarea_idx);
+		mbh.closeHandler(ss);
+		return did;
 	}
 	
 	

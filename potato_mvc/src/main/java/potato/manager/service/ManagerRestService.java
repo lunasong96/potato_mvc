@@ -1,11 +1,13 @@
 package potato.manager.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import potato.manager.dao.MgrRestDAO;
+import potato.manager.domain.DeleteImgDomain;
 import potato.manager.domain.DoDomain;
 import potato.manager.domain.FoodDomain;
 import potato.manager.domain.LineDomain;
@@ -113,7 +115,25 @@ public class ManagerRestService {
 	}
 	
 	public int removeRest(int restarea_idx) {
+		int cnt = mrDAO.deleteRest(restarea_idx);
+		return cnt;
+	}
+	
+	public DeleteImgDomain searchImg(int restarea_idx) {
+		DeleteImgDomain did= mrDAO.selectDelImg(restarea_idx);
+		return did;
+	}
+	
+	public void removeImg(DeleteImgDomain did) {
+		File imgFile =new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+did.getImg());
+		imgFile.delete();
 		
-		return 0;
+		String[] foodImgs = did.getFoodImg().split(",");
+		
+		File foodImgFile = null;
+		for(String imgs : foodImgs) {
+			foodImgFile = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+imgs);
+			foodImgFile.delete();
+		}
 	}
 }

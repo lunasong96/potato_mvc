@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import potato.manager.domain.DeleteImgDomain;
 import potato.manager.service.ManagerRestService;
 import potato.manager.vo.AmenityVO;
 import potato.manager.vo.FoodVO;
@@ -194,7 +195,7 @@ public class ManagerRestareaController {
 	
 	
 	@RequestMapping(value="manager_rest_modifyPopup.do",method=POST)
-	public String restModifyPopup(int restarea_idx, Model model) {//매개값으로 int 휴개소 인덱스랑 model추가
+	public String restModifyPopup(int restarea_idx, Model model) {
 		
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
 	}
@@ -205,10 +206,15 @@ public class ManagerRestareaController {
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
 	}
 	
-	@RequestMapping(value="manager_removeRest.do",method=GET)
-	public String delRest(int restarea_idx) {
-		
-		return "manager/rest_management/jsp/rest_popup";
+	@RequestMapping(value="manager_removeRest.do",method=POST)
+	public String delRest(int restarea_idx, Model model) {
+		DeleteImgDomain did = mrs.searchImg(restarea_idx);//이미지 먼저 불러놓고 도메인을 생성하고
+		int cnt = mrs.removeRest(restarea_idx);//테이블날리고 
+		if(cnt == 1) {
+			mrs.removeImg(did);
+		}
+		model.addAttribute("success",cnt);
+		return "manager/rest_management/jsp/manager_restDelResult";//삭제되면 임의 공간으로 보내고 거기는 창닫기 기능만 추가한다.
 	}
 
 }

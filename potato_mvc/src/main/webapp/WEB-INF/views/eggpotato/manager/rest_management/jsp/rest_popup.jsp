@@ -20,11 +20,19 @@
 <script type="text/javascript">
 $(function() {
 	
+	//수정버튼 클릭시
 	$(".modi-btn").click(function(){
 		$("#restarea_idx").val($(".modi-btn").val());
 		open("","write_popup","width=950,height=900,top=311,left=560");
 		$("#modifyFrm").submit();
-		//브라우져닫기추가
+	});
+	
+	//삭제버튼 클릭시
+	$(".del-btn").click(function(){
+		if(confirm("정말로 삭제하시겠습니까?")) {
+			$("#rIdx").val($(".modi-btn").val());
+			$("#delFrm").submit();
+		}
 	});
 	
 	// 음식 사진 슬라이드
@@ -216,15 +224,21 @@ $(function() {
 	</div>
 	<div class="btns">
 		<button type="button" class="modi-btn" value="${detail.restarea_idx}">수정</button>
-		<!-- <button type="button" class="del-btn">삭제</button> -->
+		<button type="button" class="del-btn" value="${detail.restarea_idx}">삭제</button>
 	</div>
 	
 </div>
 <!-- container end -->
 
 </div>
+<!-- 수정창 이동 frm -->
 <form id="modifyFrm" method="post" action="manager_rest_modifyPopup.do" target="write_popup">
 <input type="hidden" id="restarea_idx" name="restarea_idx">
+</form>
+
+<!-- 삭제 프로세스 -->
+<form id="delFrm" method="post" action="manager_removeRest.do">
+<input type="hidden" id="rIdx" name="restarea_idx">
 </form>
 </body>
 </html>
