@@ -109,10 +109,31 @@ public class ManagerRestService {
 		return rd;
 	}
 		
+	//휴게소 수정
 	public int modifyRest(RestVO rVO) {
-		
-		return 0;
+		int cnt = mrDAO.updateRest(rVO);
+		return cnt;
 	}
+	
+	//휴게소 수정 이미지 호출
+	public String searchOldImg(int restarea_idx) {
+		String img = mrDAO.selectOldImg(restarea_idx);
+		return img;
+	}
+	
+	//휴게소 수정 이미지파일 삭제 
+	public void removeOldImg(String img) {
+		File imgFile =new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+img);
+		imgFile.delete();
+	}
+	
+	
+	//휴게소 수정시 기존 편의시설 삭제
+	public int removeOldAnt(int restarea_idx) {
+		int cnt = mrDAO.deleteOldAmt(restarea_idx);
+		return cnt;
+	}
+	
 	
 	//휴게소삭제
 	public int removeRest(int restarea_idx) {

@@ -16,6 +16,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+<c:if test="${ requestScope.result eq 'success' }">
+alert("휴게소가 수정되었습니다!");
+self.close();
+</c:if>
+
 $(function(){
 	
 	//사진등록 버튼 클릭했을 때
@@ -102,12 +107,7 @@ function chkNull(){
 		return;
 	}  
 	
-	
-	alert("통과");
-	
-	
-	
-	//$("#modiFrm").submit();
+	$("#modiFrm").submit();
 }
 
 </script>

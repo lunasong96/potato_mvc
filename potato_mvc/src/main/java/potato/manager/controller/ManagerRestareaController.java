@@ -105,7 +105,9 @@ public class ManagerRestareaController {
 		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
 		int maxSize=1024*1024*20;
 		try {
+			//이미지파일 추가
 			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
+			
 			RestVO rVO = new RestVO();
 			
 			//휴게소 테이블 입력 파라메터 처리
@@ -165,7 +167,7 @@ public class ManagerRestareaController {
 				mrs.addFood(foodList);
 				
 				
-				//휴게소 테이블용 파라메터
+				//휴게소 편의시설 테이블용 파라메터
 				AmenityVO amVO = new AmenityVO();
 				amVO.setRestarea_idx(idx);
 				
@@ -213,7 +215,74 @@ public class ManagerRestareaController {
 	
 	@RequestMapping(value="manager_rest_modify.do")
 	public String restModify(HttpServletRequest request) {
-		
+		//이미지저장공간과 크기 설정
+		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
+		int maxSize=1024*1024*20;
+		try {
+			//이미지파일 추가
+			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
+			RestVO rVO = new RestVO();
+			
+			//수정정보 입력 파라메터
+			rVO.setRestarea_idx(parseInt(mr.getParameter("restarea_idx")));
+			rVO.setName(mr.getParameter("restName"));
+			rVO.setImg(mr.getFilesystemName("upFile"));
+			rVO.setLat(parseDouble(mr.getParameter("lat")));
+			rVO.setLng(parseDouble(mr.getParameter("lng")));
+			rVO.setDo_idx(parseInt(mr.getParameter("doIdx")));
+			rVO.setLine_idx(parseInt(mr.getParameter("lineIdx")));
+			rVO.setTel(mr.getParameter("tel"));
+			rVO.setCarwash_chk(mr.getParameter("washChk"));
+			if(mr.getParameter("washChk") == null) {
+				rVO.setCarwash_chk("N");
+			}
+			rVO.setRepair_chk(mr.getParameter("repairChk"));
+			if(mr.getParameter("repairChk") == null) {
+				rVO.setRepair_chk("N");
+			}
+			rVO.setCargolounge_chk(mr.getParameter("cargoChk"));
+			if(mr.getParameter("cargoChk") == null) {
+				rVO.setCargolounge_chk("N");
+			}
+			
+			int idx = rVO.getRestarea_idx();
+			//수정되기전 이미지 미리저장
+			String img = mrs.searchOldImg(idx);
+			
+			//휴게소 테이블 업데이트 수행
+			int cnt = mrs.modifyRest(rVO);
+			
+			//휴게소 테이블이 업데이트 되었다면
+			if(cnt == 1) {
+				if(rVO.getImg() != null) { //이미지변동이 있다면 
+					mrs.removeOldImg(img); //과거 이미지삭제
+				}
+				
+				//편의시설관련
+				mrs.removeOldAnt(idx); // 기존 편의시설삭제
+				AmenityVO amVO = new AmenityVO(); // 변경 편의시설삽입을 위한 VO
+				amVO.setRestarea_idx(idx);
+				
+				//체크박스가 선택되지않았을 경우에 대한 유효성검증
+				if(mr.getParameterValues("restIcons") != null) {
+					amVO.setRestIcons(mr.getParameterValues("restIcons"));
+				}
+				
+				if(mr.getParameterValues("gasIcons") != null) {
+					amVO.setGasIcons(mr.getParameterValues("gasIcons"));
+				}
+				
+				//두개 모두 하나도 체크되지 않았다면 insert할 필요가 없다.
+				if(mr.getParameterValues("restIcons") != null || mr.getParameterValues("gasIcons") != null) {
+					mrs.addAmenity(amVO);//편의시설 테이블 업데이트
+				}
+				
+				request.setAttribute("result", "success");
+			}
+			
+		} catch(IOException ie) {
+			ie.printStackTrace();
+		}
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
 	}
 	

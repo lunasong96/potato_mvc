@@ -31,7 +31,7 @@ $(function(){
 	    contents +="<span><label>이름 : </label><input type='text' name='foodName' placeholder='음식명을 기입해주세요.'/></span><span><label>가격 : </label><input type='text' name='foodPrice' maxlength='6' placeholder='가격을 기입해주세요.'/></span>";
 	    contents +="<span><span><label>설명 : </label></span><textarea placeholder='음식설명을 기입해주세요.' class='conts'></textarea><input type='hidden' name='foodConts'></span>";
 	    contents +="<span><span><label>재료 : </label></span><textarea placeholder='재료를 기입해주세요.' class='ings'></textarea><input type='hidden' name='foodIng'></span>";
-	    contents +="<span class='radioSpan'><label>대표메뉴</label><input type='radio' value='main'/><label>추천메뉴</label><input type='radio' value='good'/><label>선택안함</label><input type='radio' value='soso' checked='checked'/></span></div></div></div>";
+	    contents +="<span class='radioSpan'><label>대표메뉴</label><input type='radio' value='main' onclick='return(false)'/><label>추천메뉴</label><input type='radio' value='good'/><label>선택안함</label><input type='radio' value='soso' checked='checked'/></span></div></div></div>";
 	$(".plus-btn").click(function(){
 		if(foodCnt < 7) {
 			++foodCnt;
@@ -39,9 +39,7 @@ $(function(){
 			
 			//생성된 후에도 순서정렬
 			$(".radioSpan").each(function(i,span){
-				$(span).children().next().attr("name","radio"+i);
-				$(span).children().next().next().next().attr("name","radio"+i);
-				$(span).children().next().next().next().next().next().attr("name","radio"+i);
+				$(span).children("input").attr("name","radio"+i);
 			});
 			
 			$(".fileup2").each(function(i,file){
@@ -82,9 +80,7 @@ $(function(){
 	
 	//라디오 이름다르게 명시
 	$(".radioSpan").each(function(i,span){
-		$(span).children().next().attr("name","radio"+i);
-		$(span).children().next().next().next().attr("name","radio"+i);
-		$(span).children().next().next().next().next().next().attr("name","radio"+i);
+		$(span).children("input").attr("name","radio"+i);
 	});
 	
 	
@@ -128,7 +124,7 @@ function previewFoodFile(input,obj) {
    
 	if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
 	     alert('이미지 파일만 업로드 가능합니다.');
-	     obj.parent().next().children().children().attr("src", "css/images/noImg.png");
+	     //obj.parent().next().children().children().attr("src", "css/images/noImg.png");
 	     input.value = ''; 
 	     input.focus();
 	}
@@ -267,6 +263,19 @@ function chkNull(){
 		return;
 	}
 	
+	//추천메뉴가 하나도 없을 시
+	var goodCnt = 0;
+	$("[value='good']").each(function(i,radio){
+		var $radio = $(radio);
+		if($radio.is(":checked")) {
+			++goodCnt;
+		}
+	});
+	if(goodCnt < 1) {
+		alert("추천메뉴는 1개이상 있어야합니다.");
+		return;
+	}
+	
 	
 	$("#insertFrm").submit();
 }
@@ -290,7 +299,7 @@ const autoHyphen2 = (target) => {
 				<input type="text" id="restName" name="restName" placeholder="휴게소명을 기입하세요."/> 
 			</div>
 			<div class="tumbnail">
-				<img src="http:css/images/noImg.png" id="restProfile" onerror="this.src='css/images/noImg.png'"/>
+				<img src="css/images/noImg.png" id="restProfile" onerror="this.src='css/images/noImg.png'"/>
 				<div class="tumbnail-btn-wrap">
 					<span>썸네일</span>
 					<div>
@@ -384,7 +393,7 @@ const autoHyphen2 = (target) => {
 						</span>
 						<span class="radioSpan">
 							<label>대표메뉴</label>
-							<input type="radio" value="main"/>
+							<input type="radio" value="main" onclick="return(false)"/>
 							<label>추천메뉴</label>
 							<input type="radio" value="good"/>
 							<label>선택안함</label>
@@ -427,7 +436,7 @@ const autoHyphen2 = (target) => {
 						</span>
 						<span class="radioSpan">
 							<label>대표메뉴</label>
-							<input type="radio" value="main"/>
+							<input type="radio" value="main" onclick="return(false)"/>
 							<label>추천메뉴</label>
 							<input type="radio" value="good"/>
 							<label>선택안함</label>
@@ -470,7 +479,7 @@ const autoHyphen2 = (target) => {
 						</span>
 						<span class="radioSpan">
 							<label>대표메뉴</label>
-							<input type="radio" value="main"/>
+							<input type="radio" value="main" onclick="return(false)"/>
 							<label>추천메뉴</label>
 							<input type="radio" value="good"/>
 							<label>선택안함</label>

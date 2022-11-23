@@ -141,10 +141,39 @@ public class MgrRestDAO {
 		return rd;
 	}
 		
+	//휴게소수정
 	public int updateRest(RestVO rVO) {
-		
-		return 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.update("potato.manager.rest.updateRest", rVO);
+		if( cnt > 0) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
 	}
+	
+	//삭제할 과거 휴게소 이미지 불러오기
+	public String selectOldImg(int restarea_idx) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		String img = ss.selectOne("potato.manager.rest.selectOldImg", restarea_idx);
+		mbh.closeHandler(ss);
+		return img;
+	}
+	
+	//휴게소 수정시 기존 편의시설 삭제
+	public int deleteOldAmt(int restarea_idx) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.delete("potato.manager.rest.deleteAmt", restarea_idx);
+		if(cnt > 0) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
 	
 	//휴게소 삭제
 	public int deleteRest(int restarea_idx) {

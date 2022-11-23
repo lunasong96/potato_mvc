@@ -194,6 +194,35 @@
 		where restarea_idx = #{idx} 		
  	</select>
  	
+ 	<update id="updateRest" parameterType="potato.manager.vo.RestVO">
+ 		update restarea
+ 		<set>
+ 		<if test="img != null">
+ 		img = #{img},
+ 		</if>
+ 		carwash_chk = #{carwash_chk},
+ 		repair_chk = #{repair_chk},
+ 		cargolounge_chk = #{cargolounge_chk},
+ 		name = #{name},
+ 		lat = #{lat},
+ 		lng = #{lng},
+ 		tel = #{tel},
+ 		line_idx = #{line_idx},
+ 		do_idx = #{do_idx}
+ 		</set>
+ 		where restarea_idx = #{restarea_idx} 
+ 	</update>
+ 	
+ 	<select id="selectOldImg" parameterType="int" resultType="String">
+ 		select img
+ 		from restarea
+ 		where restarea_idx = #{idx}
+ 	</select>
+ 	
+ 	<delete id="deleteAmt" parameterType="int">
+ 		delete from RESTAREA_AMENITY
+ 		where restarea_idx = #{idx}
+ 	</delete>
  	
  	
  	
