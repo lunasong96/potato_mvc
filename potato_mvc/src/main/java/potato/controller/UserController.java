@@ -6,13 +6,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import potato.domain.UserDomain;
@@ -58,7 +56,7 @@ public class UserController {
 		System.out.println(flag);
 		if( flag ) {
 			ss.setAttribute("manager_id", mlVO.getManager_id());
-			url="redirect:../potato/manager/controller/mgr_home.do";
+			url="redirect:mgr_home.do";
 		} else {
 			url="manager/home/jsp/manager_login";
 		}
@@ -103,8 +101,17 @@ public class UserController {
 	 * @param uiVO
 	 * @return
 	 */
-	@RequestMapping(value = "/signUp2.do", method = GET)
-	public String signUpPage2(Model model, UserInfoVO uiVO) {
+	@RequestMapping(value = "/signUp2.do", method = POST)
+	public String signUpPage2(HttpServletRequest request, HttpSession session, UserInfoVO uiVO) {
+		String year=request.getParameter("year");
+		String month=request.getParameter("month");
+		String day=request.getParameter("day");
+		String birth= year+"-"+month+"-"+day;
+		System.out.println("Hello= "+month);
+		System.out.println("Hello= "+birth);
+		uiVO.setBirth(birth);
+		session.setAttribute("uiVO", uiVO);
+		
 		return "login/jsp/join_img";
 	}
 	
@@ -115,7 +122,7 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/signUp3.do", method = GET)
+	@RequestMapping(value = "/signUp3.do", method = POST)
 	public String signUpPage3(HttpSession session, Model model, HttpServletRequest request) {
 		return "login/jsp/join_end";
 	}

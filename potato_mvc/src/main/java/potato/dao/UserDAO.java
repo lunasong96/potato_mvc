@@ -58,18 +58,15 @@ public class UserDAO {
 	 * @param mlVO
 	 * @return
 	 */
-	public boolean selectManager(ManagerLoginVO mlVO) {
-		boolean flag= false;
+	public String selectManager(ManagerLoginVO mlVO) {
 		String result="";
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		result = ss.selectOne(UserMapper+"selectManagerLogin", mlVO);
-		if( !(result == null || result.isEmpty()) ) {
-			flag=true;
-		}
+		
 		mbh.closeHandler(ss);
-		return flag;
+		return result;
 	}//selectManager
 	
 	/**

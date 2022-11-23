@@ -34,7 +34,7 @@ function chkNull(){
 		return;
 	}//end if
 	
-	$("#loginFrm").submit();
+	$("#managerloginFrm").submit();
 }//chkNull
 </script>
 
@@ -52,10 +52,10 @@ function chkNull(){
 			<div class="login-top">관리자 로그인</div>
 			<!-- main -->
 			<div class="login-main">
-				<form method="post" action="managerlogin.do"  id="loginFrm">
+				<form action="managerlogin.do" method="post" id="managerloginFrm">
 				<input type="text" placeholder="아이디" class="id" id="manager_id" name="manager_id"><br/>
 				<input type="password" placeholder="비밀번호" class="pass" id="pass" name="pass"><br/>
-				<input type="button" value="로그인" class="loginBtn">
+				<input type="button" value="로그인" class="loginBtn" id="loginBtn">
 				</form>
 			</div>
 			<!-- //main -->

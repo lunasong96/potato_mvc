@@ -39,7 +39,11 @@ public class UserService {
 	 */
 	public boolean searchManager(ManagerLoginVO mlVO) {
 		boolean flag=false;
-		flag=uDAO.selectManager(mlVO);
+		String result="";
+		result=uDAO.selectManager(mlVO);
+		if( result != null && !result.equals("") ) {
+			flag= true;
+		}
 		return flag;
 	}
 	
@@ -48,8 +52,14 @@ public class UserService {
 	 * @param uiVO
 	 * @return
 	 */
-	public String addMember(UserInfoVO uiVO) {
-		return null;
+	public boolean addMember(UserInfoVO uiVO) {
+		boolean flag=false;
+		int cnt = 0;
+		cnt=uDAO.insertMember(uiVO);
+		if( cnt != 0) {
+			flag=true;
+		}
+		return flag;
 	}
 	
 	/**
