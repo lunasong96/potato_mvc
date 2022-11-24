@@ -12,10 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	//사진등록 버튼 클릭했을 때
-	 $("#uploadBtn").on('change', function(){
-		 readURL(this);
-	});
+	
 	//사진등록 삭제버튼 클릭 시
 	 $("#deleteBtn").click(function() {
 		 deleteFile();
@@ -35,19 +32,17 @@ $(function() {
 		
 });//ready
 
-
-
 function readURL(input) {
-	 
+	 alert("이미지");
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();
 	    reader.onload = function(e) {
-	      document.getElementById("#preview").src = e.target.result;
+	      document.getElementById('preview').src = e.target.result;
 	    };
 	    reader.readAsDataURL(input.files[0]);
 	  } else {
 		  
-	    document.getElementById("#preview").src = "";
+	    document.getElementById('preview').src = "";
 	  }
 	  if(!/\.(jpeg|jpg|png|gif|bmp)$/i.test(input.value)){ 
 
@@ -58,26 +53,14 @@ function readURL(input) {
 	        input.focus(); 
 	        return;
 	    }
-}
+	}
 function deleteFile() {
- 	$("#preview").attr("src", "../../../../../css/images/basic.png");
+	alert("에러");
+ 	$("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
 }
 
 //null 검사
 function chkNull(){
-	if( $("#id").val().trim() == "" ){
-		alert("아이디를 입력하세요");
-		$("#id").val("");
-		$("#id").focus();
-		return;
-	}//end if
-	if( $("#pass").val().trim() == "" ){
-		alert("비밀번호를 입력하세요");
-		$("#pass").val("");
-		$("#pass").focus();
-		return;
-	}//end if
-	
 	$("#joinFrm").submit();
 }//chkNull
 </script>
@@ -99,11 +82,11 @@ function chkNull(){
 		</div>
 		<!-- main -->
 		<div class="main-container">
-			<form action="signUp3.do" method="post" id="joinFrm">
+			<form action="signUp3.do" method="post" id="joinFrm" enctype="multipart/form-data">
 			<h2 class="main-title">프로필 사진</h2><br/>
-			<img src="css/login/images/img1.png" class="main-profile" id="preview" name="preview"/><br/>
+			<img src="css/login/images/img1.png" class="main-profile" id="preview"/><br/>
 			<input type="button" value="사진등록" class="imgBtn" id="imgBtn">
-			<input type="file" name="upfile" id="uploadBtn" style="display: none;"/>
+			<input type="file" name="upfile" id="uploadBtn" onchange="readURL(this);"/>
 			<input type="button" value="삭제" class="imgBtn" id="deleteBtn">
 			<input type="button" value="가입하기" class="joinBtn" id="joinBtn">
 			</form>

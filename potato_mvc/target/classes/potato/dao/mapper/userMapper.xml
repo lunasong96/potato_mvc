@@ -16,7 +16,7 @@
 		where id= #{ id } and pass= #{ pass }
 	</select>
 	
-	<!-- 로그인 -->
+	<!-- 매니저 로그인 -->
 	<select id="selectManagerLogin" parameterType="mlVO"
 	resultType="String">
 		select manager_id
@@ -47,15 +47,15 @@
 	</update>
 	
 	<!-- 아이디 중복 확인 -->
-	<select id="selectDuplChkId" parameterType="String" resultType="String">
-		select id
+	<select id="selectDuplChkId" parameterType="String" resultType="int">
+		select COUNT(id)
 		from member
 		where id=#{ id }
 	</select>
 	
 	<!-- 닉네임 중복 확인 -->
-	<select id="selectDuplChkNick" parameterType="String" resultType="String">
-		select nick
+	<select id="selectDuplChkNick" parameterType="String" resultType="int">
+		select COUNT(nick)
 		from member
 		where nick= #{ nick }
 	</select>

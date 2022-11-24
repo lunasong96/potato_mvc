@@ -1,5 +1,7 @@
 package potato.service;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -67,8 +69,12 @@ public class UserService {
 	 * @param id
 	 * @return
 	 */
-	public  boolean searchDuplChkId(String id) {
-		return false;
+	public String searchDuplChkId(String id) {
+		int cnt =0;
+		cnt=uDAO.selectMDuplChkId(id);
+		JSONObject jsonObj=new JSONObject();
+		jsonObj.put("idCnt", cnt);
+		return jsonObj.toJSONString();
 	}
 	
 	/**
@@ -76,8 +82,12 @@ public class UserService {
 	 * @param nick
 	 * @return
 	 */
-	public  boolean searchDuplChkNick(String nick) {
-		return false;
+	public String searchDuplChkNick(String nick) {
+		int cnt =0;
+		cnt=uDAO.selectMDuplChkNick(nick);
+		JSONObject jsonObj=new JSONObject();
+		jsonObj.put("nickCnt", cnt);
+		return jsonObj.toJSONString();
 	}
 	
 	

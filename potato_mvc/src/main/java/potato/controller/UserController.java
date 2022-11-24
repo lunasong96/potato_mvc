@@ -3,6 +3,9 @@ package potato.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +14,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import potato.domain.UserDomain;
 import potato.service.UserService;
@@ -102,16 +110,13 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/signUp2.do", method = POST)
-	public String signUpPage2(HttpServletRequest request, HttpSession session, UserInfoVO uiVO) {
+	public String signUpPage2(HttpServletRequest request, Model model, UserInfoVO uiVO, HttpSession session) {
 		String year=request.getParameter("year");
 		String month=request.getParameter("month");
 		String day=request.getParameter("day");
 		String birth= year+"-"+month+"-"+day;
-		System.out.println("Hello= "+month);
-		System.out.println("Hello= "+birth);
 		uiVO.setBirth(birth);
 		session.setAttribute("uiVO", uiVO);
-		
 		return "login/jsp/join_img";
 	}
 	
@@ -123,26 +128,52 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/signUp3.do", method = POST)
-	public String signUpPage3(HttpSession session, Model model, HttpServletRequest request) {
-		return "login/jsp/join_end";
+	public String signUpPage3(HttpServletRequest request, Model model, HttpSession session, UserInfoVO uiVO, SessionStatus ss) {
+		File saveDir=new File("E:/dev/workspace_spring/spring_mvc/src/main/webapp/upload/");
+		int maxSize=1024*1024*20; //byte*kb*mb*gb;
+//		String responseURL="redirect:user_mainhome.do";
+		try {
+			uiVO=(UserInfoVO)session.getAttribute("uiVO");
+			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(), 
+					maxSize, "UTF-8", new DefaultFileRenamePolicy());
+			//3. 파라메터를 받기( VO에 넣어야 한다면 VO를 생성하여 값을 넣는다.
+			uiVO.setImg(mr.getFilesystemName("upfile"));
+			//JSP에서 입력값을 보여주기위해 model에 VO를 넣는다.
+			String rename=mr.getFilesystemName("upfile");
+			if( rename == null ) {
+				uiVO.setImg("basic.png");
+			}
+			us.addMember(uiVO);
+//			responseURL="redirect:user_mainhome.do";
+		} catch (IOException ie) {
+			ie.printStackTrace();
+		}
+		model.addAttribute("joinId", uiVO.getId());
+		ss.setComplete();
+		session.invalidate();
+		return "redirect:user_mainhome.do";
 	}
 	
 	/**
 	 * 아이디 중복확인
 	 * @return
 	 */
-	@RequestMapping("/duplChkId.do")
-	public String duplChkId() {
-		return "";
+	@ResponseBody
+	@RequestMapping(value = "/duplChkId.do", method = POST)
+	public String duplChkId(String id) {
+		String jsonObj = us.searchDuplChkId(id);
+		return jsonObj;
 	}
 	
 	/**
 	 * 닉네임 중복 확인
 	 * @return
 	 */
-	@RequestMapping("duplChkNick.do")
-	public String duplChkNick() {
-		return "";
+	@ResponseBody
+	@RequestMapping(value = "duplChkNick.do", method = POST)
+	public String duplChkNick(String nick) {
+		String jsonObj = us.searchDuplChkNick(nick);
+		return jsonObj;
 	}
 	
 	@RequestMapping(value = "/forgotId.do", method = GET)
@@ -155,8 +186,14 @@ public class UserController {
 		return "login/jsp/find_pass";
 	}
 	
-	@RequestMapping(value = "/forgotIdChk.do", method= POST) public String
-	forgotUserIdChk(ForgotIdVO fiVO, Model model) { 
+	/**
+	 * 아이디 찾기
+	 * @param fiVO
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/forgotIdChk.do", method= POST) 
+	public String forgotUserIdChk(ForgotIdVO fiVO, Model model) { 
 		String id="";
 		id=us.searchId(fiVO); 
 		model.addAttribute("id", id); 

@@ -74,15 +74,15 @@ public class UserDAO {
 	 * @param id
 	 * @return 
 	 */
-	public String selectMDuplChkId(String id) {
-		String result = "";
+	public int selectMDuplChkId(String id) {
+		int cnt =0;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		
-		result = ss.selectOne(UserMapper+"selectDuplChkId", id);
+		cnt = ss.selectOne(UserMapper+"selectDuplChkId", id);
 		mbh.closeHandler(ss);
-		return result;
+		return cnt;
 	}//selectMDuplChkId
 	
 	/**
@@ -90,15 +90,15 @@ public class UserDAO {
 	 * @param nick
 	 * @return 
 	 */
-	public String selectMDuplChkNick(String nick) {
-		String result ="";
+	public int selectMDuplChkNick(String nick) {
+		int cnt=0;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		
-		result = ss.selectOne(UserMapper+"selectDuplChkNick", nick);
+		cnt = ss.selectOne(UserMapper+"selectDuplChkNick", nick);
 		mbh.closeHandler(ss);
-		return result;
+		return cnt;
 	}//selectMDuplChkNick
 	
 	
