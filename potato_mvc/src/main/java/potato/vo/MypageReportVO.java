@@ -3,72 +3,67 @@ package potato.vo;
 import java.sql.Date;
 
 public class MypageReportVO {
-	private String id,nick,contents;
-	private int review_idx, restarea_idx, rating;
-	private Date post_date;
+
+	private String id_reporter, id_writer;
+	private int review_idx, restarea_idx, report_idx;
 	
 	public MypageReportVO() {
 		super();
 	}
-	
-	public MypageReportVO(String id, String nick, String contents, int review_idx, int restarea_idx, int rating,
-			Date post_date) {
+
+	public MypageReportVO(String id_reporter, String id_writer, int review_idx, int restarea_idx, int report_idx) {
 		super();
-		this.id = id;
-		this.nick = nick;
-		this.contents = contents;
+		this.id_reporter = id_reporter;
+		this.id_writer = id_writer;
 		this.review_idx = review_idx;
 		this.restarea_idx = restarea_idx;
-		this.rating = rating;
-		this.post_date = post_date;
+		this.report_idx = report_idx;
 	}
-	
-	public String getId() {
-		return id;
+
+	public String getId_reporter() {
+		return id_reporter;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setId_reporter(String id_reporter) {
+		this.id_reporter = id_reporter;
 	}
-	public String getNick() {
-		return nick;
+
+	public String getId_writer() {
+		return id_writer;
 	}
-	public void setNick(String nick) {
-		this.nick = nick;
+
+	public void setId_writer(String id_writer) {
+		this.id_writer = id_writer;
 	}
-	public String getContents() {
-		return contents;
-	}
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
+
 	public int getReview_idx() {
 		return review_idx;
 	}
+
 	public void setReview_idx(int review_idx) {
 		this.review_idx = review_idx;
 	}
+
 	public int getRestarea_idx() {
 		return restarea_idx;
 	}
+
 	public void setRestarea_idx(int restarea_idx) {
 		this.restarea_idx = restarea_idx;
 	}
-	public int getRating() {
-		return rating;
+
+	public int getReport_idx() {
+		return report_idx;
 	}
-	public void setRating(int rating) {
-		this.rating = rating;
+
+	public void setReport_idx(int report_idx) {
+		this.report_idx = report_idx;
 	}
-	public Date getPost_date() {
-		return post_date;
-	}
-	public void setPost_date(Date post_date) {
-		this.post_date = post_date;
-	}
+
 	@Override
 	public String toString() {
-		return "MypageReportVO [id=" + id + ", nick=" + nick + ", contents=" + contents + ", review_idx=" + review_idx
-				+ ", restarea_idx=" + restarea_idx + ", rating=" + rating + ", post_date=" + post_date + "]";
+		return "MypageReportVO [id_reporter=" + id_reporter + ", id_writer=" + id_writer + ", review_idx=" + review_idx
+				+ ", restarea_idx=" + restarea_idx + ", report_idx=" + report_idx + "]";
 	}
 	
 }

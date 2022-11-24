@@ -38,7 +38,7 @@ $(function() {
 	})
 	
 	$(".report-btn").click(function() {
-		window.open("reportReview.do","popup_report",
+		window.open("other_review_report.do","popup_report",
 		"width=520,height=470,top=203,left=1336");
 	})
 	
@@ -172,13 +172,21 @@ function slider() {
 <!-- 리뷰 -->
 
 <!-- 페이지 -->
-<div class="page">
-	<a href="#void" class="page-num">&nbsp;&lt;&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;1&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;2&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;3&nbsp;</a>
-	<a href="#void" class="page-num">&nbsp;&gt;&nbsp;</a>
-</div>
+	<div class="page">
+		<c:if test="${ not empty reviewList }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
 
 </div><!-- main -->
 <!-- 건들지마  -->

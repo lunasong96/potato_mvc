@@ -1,17 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사용자 신고</title>
 <link rel="shortcut icon"  href="css/images/logo.png"/>
 <link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/detailed/report_review_popup.css"/>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+	
+if(${orp}==1) {
+	alert("신고가 접수되었습니다.");
+	self.close();
+}
 
+function report() {
+    var rridx= $("[name='report-radio']:checked").val();
+    if(rridx==null){
+       alert("신고사유를 선택해주세요.");
+    }else{
+       $("#report_idx").val(rridx);
+       $("#id_reporter").val("${param.id}");
+       $("#review_idx").val(${param.review_idx});
+       $("#restarea_idx").val(${param.restarea_idx});
+       $("#reportFrm").submit();
+ 	}
+}
 </script>
 
 </head>
@@ -22,43 +40,31 @@
 		<span>리뷰 신고하기</span>
 	</div>
 	<div class="middle">
-		<p>신고대상자: <span>소떡소떡이지</span></p>
+		<p>신고대상자: <span>${param.nick}</span></p>
 		<div class="radio-wrap">
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">홍보/상업성
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">같은 내용 도배
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">욕설/인신공격
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">음란/선정성
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">불법정보
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">개인정보 노출
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">권리침해 신고
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">관련 없는 내용
-			</div>
-			<div class="rr-wrap">
-				<input type="radio" name="report-radio" class="rr">기타
-			</div>
+			<c:forEach var="rp" items="${rp }">
+				<div class="rr-wrap">
+					<input type="radio" name="report-radio" class="rr" value="${rp.report_idx}">${rp.reason}
+				</div>
+			</c:forEach>
 			<!-- 삭제 금지 -->
 			<div class="rr-wrap"></div>
 			<!-- 삭제금지 -->
 		</div>
 	</div>
 	<div class="bottom">
-		<button type="button" class="report-btn">신고하기</button>
+		<button type="button" class="report-btn" onclick="report()">신고하기</button>
 	</div>
 </div>
+
+<form method="get" id="reportFrm" action="detailed_report.do">
+	<input type="hidden" id="id_reporter" name="id_reporter" value="${param.id }"/>
+	<input type="hidden" id="id_writer" name="id_writer" value="${param.id_writer }"/>
+	<input type="hidden" id="report_idx" name="report_idx" value="${param.report_idx }"/>
+	<input type="hidden" name="review_idx" id="review_idx" value="${param.review_idx}">
+	<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx}">
+	<input type="hidden" name="rpc" id="rpc" value="${param.rpc}">
+</form>
+
 </body>
 </html>

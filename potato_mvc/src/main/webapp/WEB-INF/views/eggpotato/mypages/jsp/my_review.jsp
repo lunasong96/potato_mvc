@@ -222,10 +222,5 @@ function movePage( page ) {
 <!-- footer end -->
 </div>
 
-<form id="reviewFrm" action="my_review.do" method="post">
-	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
-</form>
-
-
 </body>
 </html>
