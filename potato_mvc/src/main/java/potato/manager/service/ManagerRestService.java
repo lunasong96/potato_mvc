@@ -121,13 +121,13 @@ public class ManagerRestService {
 		return cnt;
 	}
 	
-	//휴게소 수정 이미지 호출
+	//휴게소 수정전 이미지 호출
 	public String searchOldImg(int restarea_idx) {
 		String img = mrDAO.selectOldImg(restarea_idx);
 		return img;
 	}
 	
-	//휴게소 수정 이미지파일 삭제 
+	//휴게소 수정전, 음식 수정전 이미지파일 삭제 
 	public void removeOldImg(String img) {
 		File imgFile =new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+img);
 		imgFile.delete();
@@ -139,35 +139,61 @@ public class ManagerRestService {
 		return cnt;
 	}
 	
-	public int modifyFoodImgAJAX(HttpServletRequest request) {
-		
-		
-		
+	//음식사진 수정 및 추가에 대한 AJAX처리
+	public void modifyFoodImgAJAX(HttpServletRequest request) {
 		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
 		int maxSize=1024*1024*20;
 		int cnt = 0;
 		try {
 			//이미지파일 추가
 			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
-			
 			FoodVO fVO = new FoodVO();
 			
+			//ajax에서 넘어온 값 VO저장
 			fVO.setRestarea_idx(Integer.parseInt(mr.getParameter("restarea_idx")));
 			fVO.setFood_idx(Integer.parseInt(mr.getParameter("food_idx")));
 			fVO.setImg(mr.getFilesystemName("upFile"));
 			
+			//수정전 이미지를 불러와 삭제대기
 			String delImg = mrDAO.selectDelFoodImg(fVO);
 			
-			cnt = mrDAO.updateFoodImg(fVO);
-			
-			if(cnt == 1) {
-				removeOldImg(delImg);
+			//음식인덱스가 존재한다면
+			if(mrDAO.selectIsFoodIdx(fVO) > 0) {
+				cnt = mrDAO.updateFoodImg(fVO); //업데이트로 수정
+				if(cnt == 1) {
+					removeOldImg(delImg);//기존이미지파일은 삭제
+				}
+			} else { // 음식인덱스가 존재하지 않는다면
+				//인서트 실행
+				mrDAO.insertUpdatedFoodImg(fVO);
 			}
-			
 		}catch( IOException ie){	
 		  ie.printStackTrace();
 		}
+	}
+	
+	//수정페이지 음식테이블 레코드 삭제
+	public int removeFoodAJAX(FoodVO fVO) {
+		//삭제전 기존 이미지 불러오기
+		String delImg =  mrDAO.selectDelFoodImg(fVO);
+		
+		//음식테이블 레코드 삭제가 성공시
+		int cnt = mrDAO.deleteFood(fVO);
+		if(cnt == 1) {
+			removeOldImg(delImg); //해당 이미지 파일 삭제
+		}
 		return cnt;
+	}
+	
+	//수정페이지 음식정보 수정 및 추가에 대한 AJAX
+	public void modifyFoodInfoAJAX(FoodVO fVO) {
+		if(mrDAO.selectIsFoodIdx(fVO) > 0) {
+			//업데이트수행
+			mrDAO.updateFoodInfo(fVO);
+		} else {
+			//insert수행
+			mrDAO.insertUpdatedFoodInfo(fVO);
+		}
 	}
 	
 	//휴게소삭제
@@ -176,13 +202,13 @@ public class ManagerRestService {
 		return cnt;
 	}
 	
-	//삭제할 테이블의 인덱스를 얻어서 이미지 파일만 따로 호출
+	//휴게소 삭제시 삭제할 테이블의 인덱스를 얻어서 이미지 파일만 따로 호출
 	public DeleteImgDomain searchImg(int restarea_idx) {
 		DeleteImgDomain did= mrDAO.selectDelImg(restarea_idx);
 		return did;
 	}
 	
-	//이미지파일을 삭제를 처리하는 매서드
+	//휴게소 삭제 시 이미지파일을 삭제를 처리하는 매서드
 	public void removeImg(DeleteImgDomain did) {
 		removeOldImg(did.getImg());
 		

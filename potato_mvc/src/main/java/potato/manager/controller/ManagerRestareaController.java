@@ -216,7 +216,12 @@ public class ManagerRestareaController {
 	}
 	
 	
-	@RequestMapping(value="manager_rest_modify.do")
+	/**
+	 * 수정하는 컨트롤러
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="manager_rest_modify.do", method= {POST,GET})
 	public String restModify(HttpServletRequest request) {
 		//이미지저장공간과 크기 설정
 		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
@@ -281,25 +286,71 @@ public class ManagerRestareaController {
 				if(mr.getParameterValues("restIcons") != null || mr.getParameterValues("gasIcons") != null) {
 					mrs.addAmenity(amVO);//편의시설 테이블 업데이트
 				}
-				
 				request.setAttribute("result", "success");
 			}
 			
 		} catch(IOException ie) {
 			ie.printStackTrace();
 		}
-		return "manager/rest_management/jsp/manager_rest_modify_popup";
+		return "manager/rest_management/jsp/manager_restUpdateReust";
 	}
 	
+	/**
+	 * 음식이미지수정에 대한 ajax처리
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="ajax_foodImg_update.do", method= {POST,GET})
 	public String updateFoodImgAJAX(HttpServletRequest request) {
-		
 		mrs.modifyFoodImgAJAX(request);
-		
 		return "";
 	}
 	
+	/**
+	 * 휴게소 음식삭제에 대한 ajax처리
+	 * @param fVO
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="ajax_food_delete.do", method= {POST,GET})
+	public String deleteFoodAJAX(FoodVO fVO) {
+		mrs.removeFoodAJAX(fVO);
+		return "";
+	}
+	
+	
+	/**
+	 * 휴게소음식정보수정에 대한 ajax처리
+	 * @param fVO
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="ajax_foodInfo_update.do", method=POST)
+	public String updateFoodAJAX(FoodVO fVO,String radioChk) {
+		if(radioChk.equals("main")) {
+			fVO.setMain_chk("Y");
+			fVO.setRec_chk("N");
+		} else if(radioChk.equals("good")) {
+			fVO.setMain_chk("N");
+			fVO.setRec_chk("Y");
+		} else {
+			fVO.setMain_chk("N");
+			fVO.setRec_chk("N");
+		}
+		
+		mrs.modifyFoodInfoAJAX(fVO);
+		return "";
+	}
+	
+	
+	
+	/**
+	 * 휴게소삭제에 대한 처리
+	 * @param restarea_idx
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="manager_removeRest.do",method=POST)
 	public String delRest(int restarea_idx, Model model) {
 		DeleteImgDomain did = mrs.searchImg(restarea_idx);//이미지 먼저 불러놓고 도메인을 생성하고

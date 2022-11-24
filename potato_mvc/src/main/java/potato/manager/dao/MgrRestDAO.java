@@ -153,7 +153,7 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
-	//삭제할 과거 휴게소 이미지 불러오기
+	//휴게소 사진 수정 시 삭제할 과거 휴게소 이미지 불러오기
 	public String selectOldImg(int restarea_idx) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -187,7 +187,16 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
-	//과거음식사진불러오기
+	//음식인덱스 존재여부확인
+	public int selectIsFoodIdx(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.selectOne("potato.manager.rest.selectIsFoodIdx", fVO);
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
+	//휴게소 수정시 과거음식사진불러오기
 	public String selectDelFoodImg(FoodVO fVO) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
@@ -196,6 +205,53 @@ public class MgrRestDAO {
 		return img;
 	}
 	
+	//수정페이지 새로운 음식사진추가
+	public int insertUpdatedFoodImg(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.insert("potato.manager.rest.insertNewFoodImg", fVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
+	//수정페이지 새로운 음식정보수정
+	public int updateFoodInfo(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.update("potato.manager.rest.updateFoodInfo", fVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
+	//수정페이지 새로운 음식정보추가
+	public int insertUpdatedFoodInfo(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.insert("potato.manager.rest.insertNewFoodInfo", fVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
+	//수정페이지 음식테이블 레코드삭제
+	public int deleteFood(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.delete("potato.manager.rest.deleteFood", fVO);
+		if(cnt == 1) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
 	
 	//휴게소 삭제
 	public int deleteRest(int restarea_idx) {
@@ -209,7 +265,7 @@ public class MgrRestDAO {
 		return cnt;
 	}
 	
-	//삭제할 휴게소관련 이미지 호출
+	//휴게소 삭제시 삭제할 이미지 호출
 	public DeleteImgDomain selectDelImg(int restarea_idx) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();

@@ -123,7 +123,6 @@ function previewFoodFile(input,obj) {
    
 	if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
 	     alert('이미지 파일만 업로드 가능합니다.');
-	     //obj.parent().next().children().children().attr("src", "css/images/noImg.png");
 	     input.value = ''; 
 	     input.focus();
 	}

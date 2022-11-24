@@ -16,26 +16,84 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-<c:if test="${ requestScope.result eq 'success' }">
+<c:if test="${ result eq 'success' }">
 alert("휴게소가 수정되었습니다!");
 self.close();
 </c:if>
 
 $(function(){
 	
+	//기존 음식 개수 불러오기
 	<c:set var="size" value="${ fn:length(food)}"/>
 	var foodCnt = ${size} - 1;
-		
 	
-	
-	//사진등록 버튼 클릭했을 때
+	//반복될 음식추가영역
+	var contents ="<div class='food-info'><span><input type='button' class='round-blue-btn' value='사진첨부' /><input type='file' class='fileup2'/></span>";
+	    contents += "<div class='food-detail'><input type='hidden' name='food_idx'><div class='food-img-wrap'><img src='css/images/noImg.png' onerror=\"this.src='css/images/noImg.png'\"></div><div class='food-content'>";
+	    contents +="<span><label>이름 : </label><input type='text' name='foodName' placeholder='음식명을 기입해주세요.'/></span><span class='priceSpan'><label>가격 : </label><input type='text' name='foodPrice' maxlength='6' placeholder='가격을 기입해주세요.'/></span>";
+	    contents +="<span class='contSpan'><span><label>설명 : </label></span><textarea placeholder='음식설명을 기입해주세요.' class='conts'></textarea></span>";
+	    contents +="<span class='ingSpan'><span><label>재료 : </label></span><textarea placeholder='재료를 기입해주세요.' class='ings'></textarea></span>";
+	    contents +="<span class='radioSpan'><label>대표메뉴</label><input type='radio' value='main' onclick='return(false)'/><label>추천메뉴</label><input type='radio' value='good'/><label>선택안함</label><input type='radio' value='soso' checked='checked'/></span></div><div><input type='button' class='round-blue-btn' value='음식수정' name='foodChgBtn'></div></div></div>";
+	    
+	    //플러스 버튼눌렀을 시
+	    $(".plus-btn").click(function(){
+			if(foodCnt < 7) {
+				++foodCnt;
+				$(".appendBtn").before(contents);
+				
+				//사진올리기에 이름다르게명시
+				$(".fileup2").each(function(i,file){
+					$(this).attr("name","foodFile"+i);
+				});
+				
+				//라디오 이름다르게 명시
+				$(".radioSpan").each(function(i,span){
+					$(span).children("input").attr("name","radio"+i);
+				});
+				
+				//음식인데스 순서대로 생성
+				$("[name='food_idx']").each(function(i,idx){
+					$(idx).attr("value",i+1);
+				});
+				
+			} else {
+				alert("음식은 8개까지만 입력가능합니다.");
+			}
+		});
+	    
+	  	//빼기버튼 눌렀을 시
+		$(".minus-btn").click(function(){
+			if(foodCnt > 3) {
+				var rIdx = ${ rest.restarea_idx };
+				var fIdx = foodCnt+1
+				$.ajax({
+					type:"post",
+					url:"ajax_food_delete.do",
+					data:{restarea_idx:rIdx,food_idx:fIdx},
+					dataType:"text",
+					error: function(xhr) {
+						alert("음식삭제 과정에서 문제가 발생했습니다.")
+					},
+					success: function(data) {
+						/* console.log("성공"); */
+					}
+				});
+				$("[name='foodFile"+foodCnt+"']").parent().parent().remove();
+				--foodCnt;
+			} else {
+				alert("음식은 기본 4개이상 있어야합니다");
+			}
+		})
+	    
+	    
+	//휴게소사진등록 버튼 클릭했을 때
 	$("#uploadBtn").on("change", function(){
 		 previewFile(this);
 	});
 	
 	//수정버튼눌렀을 때
 	$("#updateBtn").click(function(){
-		if(confirm("수정하시겠습니까?")){
+		if(confirm("주의 : 음식정보는 수정버튼을 누르지 않을 경우 반영되지 않습니다. 수정하시겠습니까?")){
 			chkNull();
 		}
 	});
@@ -55,13 +113,13 @@ $(function(){
 		$(idx).attr("value",i+1);
 	});
 	
-	
-	
 });//ready
 
 //음식이미지선택시
 $(document).on("change",".fileup2",function(){
-	previewFoodFile(this,$(this));
+	if(previewFoodFile(this,$(this))){
+		return;
+	}
 	
  	var restIdx = ${ rest.restarea_idx };
 	var foodIdx = $(this).parent().next().children("[name='food_idx']").val()
@@ -79,11 +137,10 @@ $(document).on("change",".fileup2",function(){
 		contentType: false,
 		dataType:"text",
 		error: function(xhr) {
-			console.log(xhr.status);
-			alert("에러")
+			alert("이미지 업로드 과정에서 문제가 발생했습니다.")
 		},
 		success: function(data) {
-			console.log("성공");
+			/* console.log("성공"); */
 		}
 	}); 
 }); 
@@ -107,6 +164,7 @@ function previewFile(input) {
 
 //음식사진 등록 미리보기 & 확장자 유효성
 function previewFoodFile(input,obj) {
+	var returnFlag = false;
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -119,9 +177,59 @@ function previewFoodFile(input,obj) {
 	     alert('이미지 파일만 업로드 가능합니다.');
 	     input.value = ''; 
 	     input.focus();
-	     return;
+	     returnFlag = true;
 	}
+	return returnFlag;
 }
+
+
+//음식수정 눌렀을 시
+$(document).on("click","[name='foodChgBtn']",function(){
+		if(confirm("수정사항을 적용하시겠습니까?")){
+			var rIdx = ${rest. restarea_idx};
+			var fIdx = $(this).parent().prev().prev().prev().val();
+			
+			var name = $(this).parent().prev().children().children("input").val();
+			if(name.trim()==""){
+				alert("이름은 필수입니다");
+				return;
+			}
+			
+			var testPrice= /^[0-9]+$/;
+			var price = $(this).parent().prev().children(".priceSpan").children("input").val();
+			if(price.trim()=="" ||  !testPrice.test(price.trim()) ) {
+				alert("가격을 숫자형태로 입력해주세요");
+				return;
+			}
+			
+			var contents = $(this).parent().prev().children(".contSpan").children("textarea").val();
+			if(contents.trim() == ""){
+				alert("음식설명을 입력해주세요");
+				return;
+			}
+			
+			var ingredient = $(this).parent().prev().children(".ingSpan").children("textarea").val();
+			if(ingredient.trim() == "") {
+				alert("음식재료를 입력해주세요");
+				return;
+			}
+			
+			var radioChk =  $("input[name='radio"+(fIdx-1)+"']:checked").val();
+			
+			$.ajax({
+				type:"post",
+				url:"ajax_foodInfo_update.do",
+				data:{restarea_idx:rIdx,food_idx:fIdx,name:name,price:price,contents:contents,ingredient:ingredient,radioChk:radioChk},
+				dataType:"text",
+				error: function(xhr) {
+					alert("수정과정에서 문제가 발생했습니다.")
+				},
+				success: function(data) {
+					 console.log("성공"); 
+				}
+			});  
+		}
+});
 
 
 //전화번호하이푼
@@ -183,8 +291,9 @@ function chkNull(){
  	var foodImgFlag=false;
  	$(".fileup2").each(function(i,img){
 		var $img = $(img);
-		if($img.val().indexOf("fakepath") == -1){
-			foodImgFlag=true;
+		var checkImg = $img.parent().next().children(".food-img-wrap").children().attr("src");
+		if(checkImg.endsWith("noImg.png")) {
+			foodImgFlag = true;
 		}
 	});
 	if(foodImgFlag){
@@ -267,6 +376,7 @@ function chkNull(){
 	}
 	
 	
+	
 	$("#modiFrm").submit();
 }
 
@@ -316,23 +426,21 @@ function chkNull(){
 							<label>이름 : </label>
 							<input type="text" name="foodName" placeholder="음식명을 기입해주세요." value="${ food.name }"/>
 						</span>
-						<span>
+						<span class="priceSpan">
 							<label>가격 : </label>
 							<input type="text" name="foodPrice" maxlength="6" placeholder="가격을 기입해주세요." value="${ food.price }"/>
 						</span>
-						<span>
+						<span class="contSpan">
 							<span>
 								<label>설명 : </label>
 							</span>
 							<textarea placeholder="음식설명을 기입해주세요." class="conts"><c:out value="${ food.contents }"/></textarea>
-							<input type="hidden" name="foodConts">
 						</span>
-						<span>
-							<span>
+						<span class="ingSpan">
+							<span >
 								<label>재료 : </label>
 							</span>
 							<textarea placeholder="재료를 기입해주세요." class="ings"><c:out value="${ food.ingredient }"/></textarea>
-							<input type="hidden" name="foodIng">
 						</span>
 						<span class="radioSpan">
 							<label>대표메뉴</label>
@@ -344,7 +452,7 @@ function chkNull(){
 						</span>
 					</div>
 					<div>
-						<input type="button" class="round-blue-btn" value="수정">
+						<input type="button" class="round-blue-btn" value="음식수정" name="foodChgBtn">
 					</div>
 				</div>
 			</div>

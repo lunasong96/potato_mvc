@@ -236,6 +236,31 @@
  		where restarea_idx =#{restarea_idx} and food_idx = #{food_idx}
  	</select>
  	
+ 	<select id="selectIsFoodIdx" parameterType="potato.manager.vo.FoodVO" resultType="int">
+ 		select count(*)
+		from restarea_food
+		where food_idx=#{food_idx} and restarea_idx = #{restarea_idx}
+ 	</select>
  	
+ 	<insert id="insertNewFoodImg" parameterType="potato.manager.vo.FoodVO">
+ 		insert into restarea_food(restarea_idx,food_idx,img)
+ 		values(#{restarea_idx},#{food_idx},#{img})
+ 	</insert>
+ 	
+ 	<delete id="deleteFood" parameterType="potato.manager.vo.FoodVO">
+ 		delete from restarea_food
+ 		where restarea_idx = #{restarea_idx} and food_idx = #{food_idx}
+ 	</delete>
+ 	
+ 	<update id="updateFoodInfo" parameterType="potato.manager.vo.FoodVO">
+ 		update restarea_food
+ 		set name=#{name}, price=#{price}, contents=#{contents}, ingredient=#{ingredient}, main_chk=#{main_chk}, rec_chk=#{rec_chk}
+ 		where restarea_idx = #{restarea_idx} and food_idx = #{food_idx}
+ 	</update>
+ 	
+	<insert id="insertNewFoodInfo" parameterType="potato.manager.vo.FoodVO">
+		insert into restarea_food(restarea_idx, food_idx, name, price, contents, ingredient, main_chk, rec_chk)
+		values(#{restarea_idx},#{food_idx},#{name},#{price},#{contents},#{ingredient},#{main_chk},#{rec_chk})
+	</insert> 	
  	
 </mapper>
