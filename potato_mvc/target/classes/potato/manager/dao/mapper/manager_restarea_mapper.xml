@@ -224,6 +224,18 @@
  		where restarea_idx = #{idx}
  	</delete>
  	
+ 	<update id="updateFoodImg" parameterType="potato.manager.vo.FoodVO">
+ 		update restarea_food
+ 		set img = #{img}
+ 		where restarea_idx = #{restarea_idx} and food_idx = #{food_idx}
+ 	</update>
+ 	
+ 	<select id="selectOldFoomImg" parameterType="potato.manager.vo.FoodVO" resultType="String">
+ 		select img
+ 		from restarea_food
+ 		where restarea_idx =#{restarea_idx} and food_idx = #{food_idx}
+ 	</select>
+ 	
  	
  	
 </mapper>

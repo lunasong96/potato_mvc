@@ -51,6 +51,7 @@ $(function(){
 		}
 	});
 	
+	//빼기버튼 눌렀을 시
 	$(".minus-btn").click(function(){
 		if(foodCnt > 3) {
 			$("[name='foodFile"+foodCnt+"']").parent().parent().remove();
@@ -61,8 +62,6 @@ $(function(){
 	})
 	
 	
-	
-
 	//사진등록 버튼 클릭했을 때
 	$("#uploadBtn").on("change", function(){
 		 previewFile(this);
@@ -350,7 +349,7 @@ const autoHyphen2 = (target) => {
 						</span>
 						<span class="radioSpan">
 							<label>대표메뉴</label>
-							<input type="radio"  value="main" onclick="return(false)" checked="checked"/>
+							<input type="radio"  value="main" checked="checked"/>
 							<label>추천메뉴</label>
 							<input type="radio"  value="good" onclick="return(false)"/>
 							<label>선택안함</label>

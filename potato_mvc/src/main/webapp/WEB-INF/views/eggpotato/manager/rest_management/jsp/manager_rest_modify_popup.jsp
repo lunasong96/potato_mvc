@@ -23,18 +23,70 @@ self.close();
 
 $(function(){
 	
+	<c:set var="size" value="${ fn:length(food)}"/>
+	var foodCnt = ${size} - 1;
+		
+	
+	
 	//사진등록 버튼 클릭했을 때
 	$("#uploadBtn").on("change", function(){
 		 previewFile(this);
 	});
 	
-	//등록버튼눌렀을 때
+	//수정버튼눌렀을 때
 	$("#updateBtn").click(function(){
-		chkNull();
+		if(confirm("수정하시겠습니까?")){
+			chkNull();
+		}
+	});
+	
+	//사진올리기에 이름다르게명시
+	$(".fileup2").each(function(i,file){
+		$(this).attr("name","foodFile"+i);
+	});
+	
+	//라디오 이름다르게 명시
+	$(".radioSpan").each(function(i,span){
+		$(span).children("input").attr("name","radio"+i);
+	});
+	
+	//음식인데스 순서대로 생성
+	$("[name='food_idx']").each(function(i,idx){
+		$(idx).attr("value",i+1);
 	});
 	
 	
+	
 });//ready
+
+//음식이미지선택시
+$(document).on("change",".fileup2",function(){
+	previewFoodFile(this,$(this));
+	
+ 	var restIdx = ${ rest.restarea_idx };
+	var foodIdx = $(this).parent().next().children("[name='food_idx']").val()
+	
+	var form = new FormData();
+    form.append( "upFile", $(this)[0].files[0] );
+    form.append( "restarea_idx", restIdx );
+    form.append( "food_idx", foodIdx );
+    
+	$.ajax({
+		type:"post",
+		url:"ajax_foodImg_update.do",
+		data:form,
+		processData: false,
+		contentType: false,
+		dataType:"text",
+		error: function(xhr) {
+			console.log(xhr.status);
+			alert("에러")
+		},
+		success: function(data) {
+			console.log("성공");
+		}
+	}); 
+}); 
 
 //프로필사진 등록 미리보기 & 확장자 유효성
 function previewFile(input) {
@@ -51,9 +103,26 @@ function previewFile(input) {
 		input.value = ''; 
 		input.focus();
 	}
-    
-    
 }
+
+//음식사진 등록 미리보기 & 확장자 유효성
+function previewFoodFile(input,obj) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+        obj.parent().next().children().children().attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    } 
+   
+	if(!/\.(jpeg|jpg|png|gif|bmp|"")$/i.test(input.value)){ 
+	     alert('이미지 파일만 업로드 가능합니다.');
+	     input.value = ''; 
+	     input.focus();
+	     return;
+	}
+}
+
 
 //전화번호하이푼
 const autoHyphen2 = (target) => {
@@ -106,6 +175,97 @@ function chkNull(){
 		$("#tel").focus()
 		return;
 	}  
+
+/////////////////////////////////////음식관련 유효성////////////////////////////////////////
+/////////////////////////each함수 내부에서 return을 해봐야 결국 다음요소를 실행한다, 외부에서 리턴하게만들어준다///////////////////////////
+	
+  	//음식이미지
+ 	var foodImgFlag=false;
+ 	$(".fileup2").each(function(i,img){
+		var $img = $(img);
+		if($img.val().indexOf("fakepath") == -1){
+			foodImgFlag=true;
+		}
+	});
+	if(foodImgFlag){
+		alert("음식이미지는 필수입니다.");
+		return;
+	}
+	
+ 	//음식이름
+ 	var foodNameFlag = false;
+	$('[name="foodName"]').each(function(i,name){
+		if($(name).val().trim() == "") {
+			foodNameFlag = true;
+			$(name).focus();
+		}
+	}); 
+	if(foodNameFlag){
+		alert("음식이름을 입력해주세요");
+		return;
+	} 
+	
+	//음식가격
+	var foodPriceFlag = false;
+	$('[name="foodPrice"]').each(function(i,price){
+		var $price = $(price);
+		var testPrice= /^[0-9]+$/;
+		if($price.val().trim() == "" || !testPrice.test($price.val().trim()) ) {
+			foodPriceFlag = true;
+			$price.focus();
+		}
+	});   
+	if(foodPriceFlag) {
+		alert("가격을 숫자형태로 입력해 주세요");
+		return;
+	}
+	
+	//음식설명
+	var foodContsFlag = false;
+	$(".conts").each(function(i,conts){
+		var $conts = $(conts);
+		if($conts.val().trim() == "") {
+			foodContsFlag = true;
+			$conts.focus();
+		} else {
+			$conts.next().val($conts.val().trim());
+		}
+	}); 
+	if(foodContsFlag) {
+		alert("음식설명을 입력해주세요");
+		return;
+	} 
+	
+	
+	//음식재료
+	var foodIngsFlag = false;
+	$(".ings").each(function(i,ings){
+		var $ings = $(ings);
+		if($ings.val().trim() == "") {
+			foodIngsFlag = true;
+			$ings.focus();
+		} else {
+			$ings.next().val($ings.val().trim());
+		}
+	});
+	if(foodIngsFlag){
+		alert("음식재료를 입력해주세요");
+		return;
+	}
+	
+	//추천메뉴가 하나도 없을 시
+	var goodCnt = 0;
+	$("[value='good']").each(function(i,radio){
+		var $radio = $(radio);
+		if($radio.is(":checked")) {
+			++goodCnt;
+		}
+	});
+	if(goodCnt < 1) {
+		alert("추천메뉴는 1개이상 있어야합니다.");
+		return;
+	}
+	
 	
 	$("#modiFrm").submit();
 }
@@ -136,9 +296,64 @@ function chkNull(){
 			</div>
 		</div>
 		<p class="sep"/>
-		
-		<!-- 음식영역 -->
-		
+		<div class="rest-food">
+			<div class="food-head">
+				<span>음식</span>
+			</div>
+			<c:forEach var="food" items="${ food }">
+			<div class="food-info">
+				<span>
+					<input type="button" class="round-blue-btn" value="사진첨부" />
+					<input type="file" class="fileup2"/>
+				</span>
+				<div class="food-detail">
+					<input type="hidden" name="food_idx">
+					<div class="food-img-wrap">
+						<img src="http://localhost/potato/css/images/${food.img}" onerror="this.src='css/images/${food.img}'"/>
+					</div>
+					<div class="food-content">
+						<span>
+							<label>이름 : </label>
+							<input type="text" name="foodName" placeholder="음식명을 기입해주세요." value="${ food.name }"/>
+						</span>
+						<span>
+							<label>가격 : </label>
+							<input type="text" name="foodPrice" maxlength="6" placeholder="가격을 기입해주세요." value="${ food.price }"/>
+						</span>
+						<span>
+							<span>
+								<label>설명 : </label>
+							</span>
+							<textarea placeholder="음식설명을 기입해주세요." class="conts"><c:out value="${ food.contents }"/></textarea>
+							<input type="hidden" name="foodConts">
+						</span>
+						<span>
+							<span>
+								<label>재료 : </label>
+							</span>
+							<textarea placeholder="재료를 기입해주세요." class="ings"><c:out value="${ food.ingredient }"/></textarea>
+							<input type="hidden" name="foodIng">
+						</span>
+						<span class="radioSpan">
+							<label>대표메뉴</label>
+							<input type="radio" value="main"${ food.main_chk eq 'Y' ?" checked='checked'" : "" }${ food.main_chk eq 'N' ?" onclick='return(false)'" : "" }/>
+							<label>추천메뉴</label>
+							<input type="radio" value="good"${ food.rec_chk eq 'Y' ?" checked='checked'" : "" }${ food.main_chk eq 'Y' ?" onclick='return(false)'" : "" }/>
+							<label>선택안함</label>
+							<input type="radio" value="soso"${ food.main_chk ne 'Y' and food.rec_chk ne 'Y'  ?" checked='checked'" : "" }${ food.main_chk eq 'Y' ?" onclick='return(false)'" : "" }/>
+						</span>
+					</div>
+					<div>
+						<input type="button" class="round-blue-btn" value="수정">
+					</div>
+				</div>
+			</div>
+			</c:forEach>
+			<div class="appendBtn">
+				<button type="button" class="plus-btn">+</button>
+				<button type="button" class="minus-btn">-</button>
+			</div>
+		</div>
 		<p class="sep"/>
 		<div class="rest-info">
 			<span>기본정보</span>

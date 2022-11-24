@@ -1,10 +1,16 @@
 package potato.manager.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import potato.manager.dao.MgrRestDAO;
 import potato.manager.domain.DeleteImgDomain;
@@ -127,13 +133,42 @@ public class ManagerRestService {
 		imgFile.delete();
 	}
 	
-	
 	//휴게소 수정시 기존 편의시설 삭제
 	public int removeOldAnt(int restarea_idx) {
 		int cnt = mrDAO.deleteOldAmt(restarea_idx);
 		return cnt;
 	}
 	
+	public int modifyFoodImgAJAX(HttpServletRequest request) {
+		
+		
+		
+		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
+		int maxSize=1024*1024*20;
+		int cnt = 0;
+		try {
+			//이미지파일 추가
+			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
+			
+			FoodVO fVO = new FoodVO();
+			
+			fVO.setRestarea_idx(Integer.parseInt(mr.getParameter("restarea_idx")));
+			fVO.setFood_idx(Integer.parseInt(mr.getParameter("food_idx")));
+			fVO.setImg(mr.getFilesystemName("upFile"));
+			
+			String delImg = mrDAO.selectDelFoodImg(fVO);
+			
+			cnt = mrDAO.updateFoodImg(fVO);
+			
+			if(cnt == 1) {
+				removeOldImg(delImg);
+			}
+			
+		}catch( IOException ie){	
+		  ie.printStackTrace();
+		}
+		return cnt;
+	}
 	
 	//휴게소삭제
 	public int removeRest(int restarea_idx) {
@@ -149,8 +184,7 @@ public class ManagerRestService {
 	
 	//이미지파일을 삭제를 처리하는 매서드
 	public void removeImg(DeleteImgDomain did) {
-		File imgFile =new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+did.getImg());
-		imgFile.delete();
+		removeOldImg(did.getImg());
 		
 		String[] foodImgs = did.getFoodImg().split(",");
 		

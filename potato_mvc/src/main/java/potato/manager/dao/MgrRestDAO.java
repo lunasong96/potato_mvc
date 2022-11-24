@@ -162,6 +162,7 @@ public class MgrRestDAO {
 		return img;
 	}
 	
+	
 	//휴게소 수정시 기존 편의시설 삭제
 	public int deleteOldAmt(int restarea_idx) {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
@@ -172,6 +173,27 @@ public class MgrRestDAO {
 		}
 		mbh.closeHandler(ss);
 		return cnt;
+	}
+	
+	//음식사진이미지 수정
+	public int updateFoodImg(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		int cnt = ss.update("potato.manager.rest.updateFoodImg",fVO);
+		if(cnt ==1) {
+			ss.commit();
+		}
+		mbh.closeHandler(ss);
+		return cnt;
+	}
+	
+	//과거음식사진불러오기
+	public String selectDelFoodImg(FoodVO fVO) {
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		String img = ss.selectOne("potato.manager.rest.selectOldFoomImg", fVO);
+		mbh.closeHandler(ss);
+		return img;
 	}
 	
 	

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -205,9 +206,11 @@ public class ManagerRestareaController {
 	@RequestMapping(value="manager_rest_modifyPopup.do",method=POST)
 	public String restModifyPopup(int restarea_idx, Model model) {
 		
+		//기존정보 불러오기
 		model.addAttribute("lineList", mrs.searchLine());
 		model.addAttribute("doList", mrs.searchDo());
 		model.addAttribute("rest", mrs.searchRestInfo(restarea_idx));
+		model.addAttribute("food", mrs.searchRestFood(restarea_idx));
 		
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
 	}
@@ -245,7 +248,9 @@ public class ManagerRestareaController {
 				rVO.setCargolounge_chk("N");
 			}
 			
+			//휴게소인덱스 저장
 			int idx = rVO.getRestarea_idx();
+			
 			//수정되기전 이미지 미리저장
 			String img = mrs.searchOldImg(idx);
 			
@@ -284,6 +289,15 @@ public class ManagerRestareaController {
 			ie.printStackTrace();
 		}
 		return "manager/rest_management/jsp/manager_rest_modify_popup";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="ajax_foodImg_update.do", method= {POST,GET})
+	public String updateFoodImgAJAX(HttpServletRequest request) {
+		
+		mrs.modifyFoodImgAJAX(request);
+		
+		return "";
 	}
 	
 	@RequestMapping(value="manager_removeRest.do",method=POST)
