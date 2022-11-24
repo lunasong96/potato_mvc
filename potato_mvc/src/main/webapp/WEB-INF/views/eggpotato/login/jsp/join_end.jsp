@@ -33,12 +33,12 @@
 		<!-- main -->
 		<div class="main-container">
 			<h2 class="main-title">
-			*** 회원님
+			${ joinId } 회원님
 			<br/>
 			회원가입을 환영합니다.
 			</h2>
 			<div class="interval"></div>
-			<input type="button" value="시작하기" class="startBtn">
+			<input type="button" value="시작하기" class="startBtn" onclick="location.href='signUp4.do'">
 		</div>
 		<!-- //main -->
 	</div>

@@ -84,6 +84,14 @@ public class UserController {
 		return "login/jsp/service_check";
 	}
 	
+	
+	@RequestMapping(value = "/signUp4.do", method = GET)
+	public String signUp4(SessionStatus ss, HttpSession session) {
+		ss.isComplete();
+		session.invalidate();
+		return "redirect:user_mainhome.do";
+	}
+	
 	@RequestMapping(value = "/tos1.do", method = GET)
 	public String tos1() {
 		return "login/jsp/tos1";
@@ -129,9 +137,9 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/signUp3.do", method = POST)
 	public String signUpPage3(HttpServletRequest request, Model model, HttpSession session, UserInfoVO uiVO, SessionStatus ss) {
-		File saveDir=new File("E:/dev/workspace_spring/spring_mvc/src/main/webapp/upload/");
+		File saveDir=new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
 		int maxSize=1024*1024*20; //byte*kb*mb*gb;
-//		String responseURL="redirect:user_mainhome.do";
+		String url="redirect:user_mainhome.do";
 		try {
 			uiVO=(UserInfoVO)session.getAttribute("uiVO");
 			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(), 
@@ -143,15 +151,17 @@ public class UserController {
 			if( rename == null ) {
 				uiVO.setImg("basic.png");
 			}
-			us.addMember(uiVO);
-//			responseURL="redirect:user_mainhome.do";
 		} catch (IOException ie) {
 			ie.printStackTrace();
 		}
-		model.addAttribute("joinId", uiVO.getId());
 		ss.setComplete();
 		session.invalidate();
-		return "redirect:user_mainhome.do";
+		int cnt=us.addMember(uiVO);
+		if( cnt == 1 ) {
+			model.addAttribute("joinId", uiVO.getId());
+			url="login/jsp/join_end";
+		}
+		return url;
 	}
 	
 	/**

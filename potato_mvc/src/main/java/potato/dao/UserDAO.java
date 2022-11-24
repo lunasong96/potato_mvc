@@ -32,6 +32,7 @@ public class UserDAO {
 		SqlSession ss= mbh.getHandler();
 		//2. Äõ¸®½ÇÇà
 		cnt=ss.insert(UserMapper+"insertMember", uiVO);
+		ss.commit();
 		//3. ²÷±â
 		mbh.closeHandler(ss);
 		

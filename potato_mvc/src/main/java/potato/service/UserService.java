@@ -54,14 +54,10 @@ public class UserService {
 	 * @param uiVO
 	 * @return
 	 */
-	public boolean addMember(UserInfoVO uiVO) {
-		boolean flag=false;
+	public int addMember(UserInfoVO uiVO) {
 		int cnt = 0;
 		cnt=uDAO.insertMember(uiVO);
-		if( cnt != 0) {
-			flag=true;
-		}
-		return flag;
+		return cnt;
 	}
 	
 	/**
