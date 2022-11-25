@@ -27,7 +27,7 @@ public class DetailedController {
 	//휴게소 상세창 접속
 	@RequestMapping(value = "user_detailed.do", method={GET,POST})
 	public String userDetailedMove(Integer restarea_idx, Model model, HttpSession session, HttpServletRequest request) {
-		
+		 
 		model.addAttribute("rd", ds.getRestDetailed(restarea_idx));
 		model.addAttribute("bt", ds.getBookmarkTotal(restarea_idx));
 		model.addAttribute("rt", ds.getRateTotal(restarea_idx));
@@ -80,16 +80,27 @@ public class DetailedController {
 	//리뷰작성창 접속
 	@RequestMapping(value = "write.do", method=GET)
 	public String writePageMove(HttpSession session, int restarea_idx, Model model) {
+			String url="detailed/jsp/write";
+		
+		if(session.getAttribute("id")==null) {
+			url="forward:user_mainhome.do"; 
+			}
 		model.addAttribute("mrw", ds.moveReviewWrite(restarea_idx));
-		return "detailed/jsp/write";
+		return url;
 	}
 	
 	//리뷰수정창 접속
 	@RequestMapping(value = "rewrite.do", method= {GET,POST})
 	public String rewritePageMove(HttpSession session, DetailedReviewVO drVO, Model model) {
+		String url="detailed/jsp/re_write";
+		
+		if(session.getAttribute("id")==null) {
+			url="forward:user_mainhome.do"; 
+			}
+		
 		model.addAttribute("mrw", ds.moveReReviewWrite(drVO));
 		model.addAttribute("mri", ds.moveReReviewImg(drVO));
-		return "detailed/jsp/re_write";
+		return url;
 	}
 	
 	//휴게소 리뷰 + 버튼 페이징 (비동기)

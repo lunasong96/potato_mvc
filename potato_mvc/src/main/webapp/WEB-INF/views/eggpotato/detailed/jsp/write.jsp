@@ -232,7 +232,7 @@ function okReview() {
 		</div>
 		
 	</div>
-</div>
+</div> 
 <!-- container end -->
 
 <!-- footer -->

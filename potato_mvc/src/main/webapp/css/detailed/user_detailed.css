@@ -9,7 +9,7 @@
     margin: 0 auto;
     margin-top: 150px;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end; 
 }
 
 .title-wrap > span {
@@ -500,6 +500,7 @@ td > div > img {
 .re-foodimg {
 	width: 285.5px;
 	height: 200px;
+	object-fit: contain;	
 }
 
 .re-swiper-button-prev {

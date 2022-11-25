@@ -9,7 +9,7 @@
 
 .top {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: flex-end;	
 }
 
@@ -148,6 +148,7 @@
     border: 2px solid #C8C8C8;
     padding: 30px;	
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 .photo-preview-wrap {

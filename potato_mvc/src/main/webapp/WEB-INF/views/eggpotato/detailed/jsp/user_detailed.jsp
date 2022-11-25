@@ -198,7 +198,7 @@ function slider() {
 					content +="<div class='re-slider'><div class='swiper-button-prev re-swiper-button-prev'></div><div class='swiper re-mySwiper'><div class='swiper-wrapper re-swiper-wrapper'>";
 					
 					for(var j=0; j<$foodimg.length; j++){
-					content +="<div class='swiper-slide re-swiper-slide'><img src='css/images/"+$foodimg[j]+"' alt='리뷰사진' class='re-foodimg'></div>"
+					content +="<div class='swiper-slide re-swiper-slide'><img src='css/reviewImg/"+$foodimg[j]+"' alt='리뷰사진' class='re-foodimg'></div>"
 					}
 					
 					content +="</div></div><div class='swiper-button-next re-swiper-button-next'></div></div>";
@@ -283,7 +283,7 @@ function slider() {
 				var $foodimg;
 				
 				for(var i=0; i<review.length; i++){
-					var content =
+					var content = 
 						"<a href='javascript:profileMove(\""+review[i].id+"\");'><div class='review-exist'><div class='re-left'><img src='css/images/"+review[i].img+"' alt='프로필사진'></a></div>"+
 						"<div class='re-right'><a href='javascript:profileMove(\""+review[i].id+"\");'><span>"+review[i].nick+"</span></a><div class='star-rate'><span class='star-blank'></span><div class='re-star-wrap'><span class='star' style='width: "+(review[i].rating*20)+"%''></span></div><span class='rate-txt'>"+review[i].rating+"</span></div><p class='re-txt'>"+review[i].contents+"</p>";
 					
@@ -292,7 +292,7 @@ function slider() {
 						content +="<div class='re-slider'><div class='swiper-button-prev re-swiper-button-prev'></div><div class='swiper re-mySwiper'><div class='swiper-wrapper re-swiper-wrapper'>";
 						
 						for(var j=0; j<$foodimg.length; j++){
-						content +="<div class='swiper-slide re-swiper-slide'><img src='css/images/"+$foodimg[j]+"' alt='리뷰사진' class='re-foodimg'></div>"
+						content +="<div class='swiper-slide re-swiper-slide'><img src='css/reviewImg/"+$foodimg[j]+"' alt='리뷰사진' class='re-foodimg'></div>"
 						}
 						
 						content +="</div></div><div class='swiper-button-next re-swiper-button-next'></div></div>";
