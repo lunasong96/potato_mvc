@@ -3,12 +3,19 @@ package potato.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import potato.domain.UserDomain;
 import potato.service.MyPageService;
@@ -39,10 +46,10 @@ public class MyPageController {
 	//아이디, 비밀번호 확인
 	@RequestMapping(value="chkIdPass.do",method=POST)
 	public String chkIdPass(HttpSession session, LoginVO LVO,Model model) {
-		String result="redirect:login_page.do";
+		String result="redirect:myPageIn.do";
 		UserDomain ud=null;	
 		LVO.setId((String)session.getAttribute("id"));
-		model.addAttribute("pass",LVO.getPass());
+		//model.addAttribute("pass",LVO.getPass());
 		ud=us.searchMember(LVO);
 		if(ud !=null ) {
 			System.out.println("------아이디 비밀번호 확인 페이지: id is--------"+(String)session.getAttribute("id"));
@@ -68,10 +75,27 @@ public class MyPageController {
 	
 	//내 정보 수정(처리) 기본이미지는 삭제되지 않게 처리하기
 	@RequestMapping(value="my_info_edit_process.do",method = POST)
-		public String myEditProcess(HttpSession session, MyPageMyInfoEditVO mmeVO, Model model) {
-		mmeVO.setId((String)session.getAttribute("id"));
-		model.addAttribute("EditList", mps.updateInfo(mmeVO));
-			return "redirect:my_info_edit";
+		public String myEditProcess(HttpSession session, MyPageMyInfoEditVO mieVO, Model model, HttpServletRequest request) {
+		mieVO.setId((String)session.getAttribute("id"));
+		
+		
+		File saveDir=new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images");
+		int maxSize=1024*1024*20*20; // byte * kb * mb *gb
+		String responseURL="day1104/upload_err";
+		try {
+			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),maxSize, "UTF-8",
+					new DefaultFileRenamePolicy() );
+			
+			mieVO.setImg(mr.getFilesystemName("upfile"));
+			mieVO.setEmail(mr.getParameter("email"));
+			
+			mps.updateInfo(mieVO);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		model.addAttribute("EditList", mps.updateInfo((String)session.getAttribute("id"));
+			return "redirect:my_info_edit.do";
 	}//myInfoEditProcess
 	
 	//프로필 사진등록
@@ -101,7 +125,7 @@ public class MyPageController {
 			
 			model.addAttribute("cnt", cnt);
 		
-		return "forward:password_edit.do";
+		return "redirect:password_edit.do";
 	}//pwEditProcess
 	
 	//회원 탈퇴 폼
@@ -119,7 +143,7 @@ public class MyPageController {
 		mqVO.setId((String)session.getAttribute("id"));
 		int quitCount=mps.updateQuit(mqVO);
 		
-		return "forward:user_mainhome.do";//처리가 완료되면 메인화면으로 이동!
+		return "redirect:user_mainhome.do";//처리가 완료되면 메인화면으로 이동!
 	}//quitProcess
 	
 	

@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class MyPageMyInfoEditVO {
 
-	private String img,name,nick,id,phone,email;
-	private Date birth;
+	private String img,name,nick,id,phone,email,birth;
 	
 	public MyPageMyInfoEditVO() {
 	}
 
-	public MyPageMyInfoEditVO(String img, String name, String nick, String id, String phone, String email, Date birth) {
+	public MyPageMyInfoEditVO(String img, String name, String nick, String id, String phone, String email,
+			String birth) {
 		super();
 		this.img = img;
 		this.name = name;
@@ -69,11 +69,11 @@ public class MyPageMyInfoEditVO {
 		this.email = email;
 	}
 
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 
@@ -82,7 +82,4 @@ public class MyPageMyInfoEditVO {
 		return "MyPageMyInfoEditVO [img=" + img + ", name=" + name + ", nick=" + nick + ", id=" + id + ", phone="
 				+ phone + ", email=" + email + ", birth=" + birth + "]";
 	}
-	
-	
-	
 }//class

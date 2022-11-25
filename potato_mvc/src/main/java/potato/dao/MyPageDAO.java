@@ -31,7 +31,7 @@ public class MyPageDAO {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		//2. Äõ¸®¹® ½ÇÇà
-		sl=ss.selectOne("potato.mypageMapper.selectLogin");
+		sl=ss.selectOne("potato.mypageMapper.selectMyLogin");
 		//3. MyBatis Handler ²÷±â
 		mbh.closeHandler(ss);
 		return sl;
@@ -62,9 +62,8 @@ public class MyPageDAO {
 		
 		if(updateInfoCnt == 1 ) {
 			ss.commit();
-		}else {
-			ss.rollback();
 		}
+		
 		mbh.closeHandler(ss);
 		return updateInfoCnt;
 	}//updateInfo

@@ -5,8 +5,8 @@
   
   <mapper namespace="potato.mypageMapper">
   	<!-- 마이페이지 -->
-  	<select id="selectLogin"   resultType="String" parameterType="potato.vo.LoginVO">
-  		select  	id, pass
+  	<select id="selectMyLogin"   resultType="int" parameterType="potato.vo.LoginVO">
+  		select  	(count)id
 		from    	member
 		where 	id= #{ id, jdbcType=VARCHAR  } and pass= #{ pass, jdbcType=NUMERIC }
   	</select>
@@ -21,8 +21,8 @@
   	<!--  내 정보 수정 -->
   	<select id="updateMypageInfo"  resultType="int" parameterType="potato.vo.MyPageMyInfoEditVO">
   		update		member
-		set       		img =#{ img },phone=#{ phone },email=#{ email },birth=#{ birth }
-		where     	id= #{ candy };
+		set       		img =#{ img, jdbcType=VARCHAR },email=#{ email, jdbcType=VARCHAR }
+		where     	id= #{ id , jdbcType=VARCHAR}
   	</select>
   	
   	<!--  비밀번호 수정 -->

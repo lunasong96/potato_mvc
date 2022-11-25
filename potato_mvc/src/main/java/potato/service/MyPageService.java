@@ -31,7 +31,7 @@ public class MyPageService {
 	public String searchMyPageIn(String id) {
 		String sl=null;
 		sl=mDAO.selectLogin(id);
-		return sl;
+		return "";//dcgfdgdfgdfgdfgfdgddfgd
 	}//searchMyPageIn
 	
 	//내 정보 조회
