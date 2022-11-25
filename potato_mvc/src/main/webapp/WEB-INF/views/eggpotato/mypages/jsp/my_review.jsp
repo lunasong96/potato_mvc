@@ -132,33 +132,23 @@ function movePage( page ) {
 				<span class="rate-txt"><c:out value="${my.rating}"/></span>
 			</div>
 			<p class="re-txt">
-				<c:out value="${my.contents}"/>
+				<c:out value="${my.contents}" escapeXml="false"/>
 			</p>
-			
+			<c:if test="${ not empty my.foodimg }">
 			<div class="re-slider">
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
+			    	<c:forEach var="img" items="${ my.foodimg }">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/reviewImg/${img}" alt="리뷰사진" class="re-foodimg">
 			   			</div>
- 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
+ 			   		</c:forEach>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
 			</div>
-		
+			</c:if>
 			<div class="etc-icon-wrap">
 				<div class="etc-icon">
 					<div class="heart-icon-wrap">
@@ -221,6 +211,11 @@ function movePage( page ) {
 <%@ include file="../../common/jsp/user_footer.jsp" %>
 <!-- footer end -->
 </div>
+<form id="reviewFrm" method="get">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }">
+	<input type="hidden" id="id" name="id" value="${ sessionScope.id }">
+</form>
+
 
 </body>
 </html>

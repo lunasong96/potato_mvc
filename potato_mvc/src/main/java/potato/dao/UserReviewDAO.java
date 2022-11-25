@@ -151,5 +151,14 @@ public class UserReviewDAO {
 		cnt = ss.selectOne("potato.userReview.selTotalReview", mrVO);
 		return cnt;
 	}//selTotalReview
+	
+	//내가 좋아요한 총 리뷰수
+	public int selTotalLikedReview(MyReviewVO mrVO) {
+		int cnt = 0;
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		cnt = ss.selectOne("potato.userReview.selTotalLikedReview", mrVO);
+		return cnt;
+	}
 
 }//class

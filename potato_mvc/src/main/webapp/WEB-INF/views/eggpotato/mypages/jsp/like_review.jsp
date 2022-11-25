@@ -18,17 +18,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-//하트아이콘
+/* //하트아이콘
 $(document).on("click", ".heart-btn", function() {
-	/* $(this).toggleClass("hb-fill"); */
+	// $(this).toggleClass("hb-fill"); 
 	
 	var likeClass=$(this).attr("class");
 	var $id=$(this).attr("value");
 	var $reviewidx=$(this).prev().attr("value");
 	var hb=$(this);
-	/* var $test=$(this).next().children().text(); */
+	//var $test=$(this).next().children().text(); 
 	
-	var jsonParam= { restarea_idx: ${param.restarea_idx},
+	var jsonParam= { restarea_idx: ,
 			id_clicker: "${id}",
 			review_idx: $reviewidx,
 			id_writer: $id };
@@ -80,7 +80,7 @@ $(document).on("click", ".heart-btn", function() {
 	}
 	
 	
-})
+}) */
 
 function slider() {
 	$(".re-mySwiper").each(function(index,element) {
@@ -113,6 +113,12 @@ function slider() {
 			      });
 		 }
 	})
+}
+
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#reviewFrm").submit();
 }
 
 </script>
@@ -177,21 +183,11 @@ function slider() {
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
+			    		<c:forEach var="img" items="${ l.foodimg }">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/횡성.jpg" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/reviewImg/${img}" alt="리뷰사진" class="re-foodimg">
 			   			</div>
- 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/화성.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/치악.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/충주.png" alt="리뷰사진" class="re-foodimg">
-			   			</div>
-			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/주암.jpg" alt="리뷰사진" class="re-foodimg">
-			   			</div>
+			   			</c:forEach>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
@@ -249,6 +245,9 @@ function slider() {
 <%@ include file="../../common/jsp/user_footer.jsp" %>
 <!-- footer end -->
 </div>
-
+<form id="reviewFrm" method="get">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }">
+	<input type="hidden" id="id" name="id" value="${ sessionScope.id }">
+</form>
 </body>
 </html>

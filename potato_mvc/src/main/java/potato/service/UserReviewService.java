@@ -95,15 +95,22 @@ public class UserReviewService {
 	}
 ///////////////////페이징////////////////////		
 	
-	//전체 게시물수
+	//내가쓴 리뷰 전체 게시물수
 	public int searchTotalReview(MyReviewVO mrVO) {
 		int cnt = urDAO.selTotalReview(mrVO);
 		return cnt;
 	}
+	
+	//내가 좋아요한 리뷰 전체 게시물수
+	public int searchTotalLikedReview(MyReviewVO mrVO) {
+		int cnt = urDAO.selTotalLikedReview(mrVO);
+		return cnt;
+	}
+	
 
 	// 마지막페이지수
 	public int lastPage(int totalReview) {
-		int lastPage = (int) Math.ceil((double) totalReview / 3);
+		int lastPage = (int) Math.ceil((double) totalReview / 5);
 		return lastPage;
 	}
 
