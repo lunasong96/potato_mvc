@@ -16,12 +16,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 
-<c:if test="${cnt eq 1}">
+<c:if test="${updateCnt eq 1}">
 alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
 location.href="login_page.do";
 </c:if>
 
-<c:if test="${cnt eq 0}">
+<c:if test="${updateCnt eq 0}">
 alert("비밀번호를 다시 확인해주세요.");
 location.href="password_edit.do";
 </c:if>

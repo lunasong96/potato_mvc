@@ -21,23 +21,22 @@
   	<!--  내 정보 수정 -->
   	<select id="updateMypageInfo"  resultType="int" parameterType="potato.vo.MyPageMyInfoEditVO">
   		update		member
-		set       		img = #{ img }, name= #{ name }, nick= #{ nick }, 
-						phone= #{ phone }, email= #{ email }, birth= #{ birth }
-		where     	id=#{ id }
+		set       		img =#{ img },phone=#{ phone },email=#{ email },birth=#{ birth }
+		where     	id= #{ candy };
   	</select>
   	
   	<!--  비밀번호 수정 -->
   	<select id="updatePw" parameterType="potato.vo.MyPagePwEditVO">
   		update		member
-		set       		pass=#{new_pw}
-		where     	id= #{ id } and  pass= #{ pass }
+		set       		pass=#{new_pw, jdbcType=VARCHAR }
+		where     	id= #{ id, jdbcType=VARCHAR } and  pass= #{ pass , jdbcType=VARCHAR }
   	</select>
   	
   	<!--  회원 탈퇴 -->
-  	<select id="updateQuit" resultType="int" parameterType="potato.vo.MyPageQuitVO">
-  		update		member
-		set       		quit='Y' and quit_date=to_date(sysdate,'yy-mm-dd')
-		where    		where id= #{ id } and pass= #{ pass }
+  	<select id="updateQuit" parameterType="potato.vo.MyPageQuitVO">
+  		update			member
+		set       			quit='Y',quit_date=sysdate
+		where    	 	id=#{id} and pass=#{pass}
   	</select>
   	
   	<!-- 북마크한 휴게소 조회 -->

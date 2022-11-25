@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,16 +14,29 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+<c:if test="${quitCount eq 1}">
+	alert("회원 탈퇴가 완료되었습니다.");
+	location.href="user_mainhome.do";
+</c:if>
+
+<c:if test="${quitCount eq 0 }">
+	alert("회원 탈퇴가 취소되었습니다.");
+	location.href="my_info_edit.do";
+</c:if>
+
+
 $(function() {
 	$(".unregister_btn").click(function() {
-			if($("#pass").val().trim()==""){
-				alert("비밀번호를 입력해주세요.")
-				$("#pass").focus();
-				$("#pass").val("");
-				return;
-			}
-			if($("#pass").val()==("#pass")){
+		//	if($("#pass").val().trim()==""){
+			//	alert("비밀번호를 입력해주세요.")
+				//$("#pass").focus();
+				//$("#pass").val("");
+			//	return;
+			pass=$("#pass").val();
+			
+			if(pass == pass){
 			$("#unregeisterFrm").submit();
+			alert("회원탈퇴 되었습니다 !");
 			}
 	});//click
 });//ready

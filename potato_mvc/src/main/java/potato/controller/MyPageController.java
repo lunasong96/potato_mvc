@@ -31,7 +31,7 @@ public class MyPageController {
 		String url="mypages/jsp/mypage_in";
 	
 		  if(session.getAttribute("id")==null) {
-			url="forward:user_mainhome.do"; }
+			url="redirect:user_mainhome.do"; }
 			 System.out.println("------마이페이지에 진입 : id is--------"+(String)session.getAttribute("id"));
 		return "mypages/jsp/mypage_in";
 	}//myPageIn
@@ -39,17 +39,19 @@ public class MyPageController {
 	//아이디, 비밀번호 확인
 	@RequestMapping(value="chkIdPass.do",method=POST)
 	public String chkIdPass(HttpSession session, LoginVO LVO,Model model) {
+		String result="redirect:login_page.do";
 		UserDomain ud=null;	
 		LVO.setId((String)session.getAttribute("id"));
 		model.addAttribute("pass",LVO.getPass());
-		if(session.getAttribute("id")!=null) {
+		ud=us.searchMember(LVO);
+		if(ud !=null ) {
 			System.out.println("------아이디 비밀번호 확인 페이지: id is--------"+(String)session.getAttribute("id"));
 			System.out.println("-----아이디비밀번호 확인 : --------"+LVO);
-		ud=us.searchMember(LVO);
+			result= "redirect:my_info_edit.do";
 		}else {
-			return "login_page.do";
+			
 		}
-		return "redirect:my_info_edit.do";
+		return result;
 	}//chkIdPass
 	
 	//내 정보 수정 폼
@@ -57,15 +59,17 @@ public class MyPageController {
 	//정보 수정이기 때문에 forward보다는 redirect로 처리하는 것이 좋다.
 	@RequestMapping(value="my_info_edit.do",method = GET)
 	public String myInfoEdit(HttpSession session, Model model) {
-		model.addAttribute("MyInfoList", mps.searchInfo((String)session.getAttribute("id")));
-//		System.out.println(mps.searchInfo((String)session.getAttribute("id"))+"findMe");//확인용
 		System.out.println("------내 정보 수정 폼 : id is--------"+(String)session.getAttribute("id"));
+		
+		model.addAttribute("MyInfoList", mps.searchInfo((String)session.getAttribute("id")));
+		
 		return "mypages/jsp/my_info_edit";
 	}//myInfoEdit
 	
 	//내 정보 수정(처리) 기본이미지는 삭제되지 않게 처리하기
 	@RequestMapping(value="my_info_edit_process.do",method = POST)
 		public String myEditProcess(HttpSession session, MyPageMyInfoEditVO mmeVO, Model model) {
+		mmeVO.setId((String)session.getAttribute("id"));
 		model.addAttribute("EditList", mps.updateInfo(mmeVO));
 			return "redirect:my_info_edit";
 	}//myInfoEditProcess
@@ -91,8 +95,10 @@ public class MyPageController {
 	
 	//비밀번호 수정 처리
 	@RequestMapping(value = "password_edit_process.do" ,method= GET)
-		public String pwEditProcess(MyPagePwEditVO peVO, Model model ) {
-			int cnt=mps.modifyPw(peVO);
+		public String pwEditProcess(HttpSession session, MyPagePwEditVO peVO, Model model ) {
+		peVO.setId((String)session.getAttribute("id"));
+		int cnt=mps.modifyPw(peVO);
+			
 			model.addAttribute("cnt", cnt);
 		
 		return "forward:password_edit.do";
@@ -101,16 +107,19 @@ public class MyPageController {
 	//회원 탈퇴 폼
 	@RequestMapping(value = "unregister.do", method = GET)
 		public String unregister(HttpSession session) {
-		System.out.println("------ 회원탈퇴 폼: id is--------"+(String)session.getAttribute("id"));
+		
 			return "mypages/jsp/unregister";
 	}//quit
 	
 	//회원 탈퇴 처리
 	@RequestMapping(value = "unregister_process.do", method = POST)
 		public String quitProcess(HttpSession session, MyPageQuitVO mqVO ) {
-		int quitCnt=mps.updateQuit(mqVO);
-		System.out.println("------ 회원탈퇴 처리: id is--------"+(String)session.getAttribute("id"));
-		return "forward:user_mainhome.do";
+		//System.out.println("------ 회원탈퇴 폼: id is--------"+(String)session.getAttribute("id"));
+		//System.out.println("------ 회원탈퇴 처리: id is--------"+(String)session.getAttribute("id"));
+		mqVO.setId((String)session.getAttribute("id"));
+		int quitCount=mps.updateQuit(mqVO);
+		
+		return "forward:user_mainhome.do";//처리가 완료되면 메인화면으로 이동!
 	}//quitProcess
 	
 	

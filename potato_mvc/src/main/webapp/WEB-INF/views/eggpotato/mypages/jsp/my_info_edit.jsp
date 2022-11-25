@@ -13,7 +13,17 @@
 <link rel="stylesheet" type="text/css" href="css/mypages/my_info_edit.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-$(function() {
+<c:if test="${updateInfoCnt eq 1 }">
+	alert("정보가 성공적으로 수정되었습니다.");
+	location.href="my_info_edit.do";
+</c:if>
+
+<c:if test="${updateInfoCnt eq 0 }">
+	location.href="my_info_edit.do";
+</c:if>
+
+
+/* $(function() {
 	$("#imgBtn").click(function() {
 		//확장자 jpg, jpeg, png,gif만 가능
 		var fileName=$("upfile").val();
@@ -35,10 +45,14 @@ $(function() {
 		if(!flag){
 			alert("이미지 파일만 업로드 가능");
 			return;
-		}//end if
-		$(".edit_btn")
-		$("#MyInfoEditFrm").submit();
-		confirm("성공적으로 수정되었습니다.")
+		}//end if */
+		$(function() {
+			$(".edit_btn").click(function() {
+				$("#MyInfoEditFrm").submit();
+					confirm("성공적으로 수정되었습니다.")
+			
+		});//click
+			
 	});//click
 
 	
@@ -77,7 +91,7 @@ $(function() {
 
 <!-- 내 정보 수정 -->
 <div class="info_edit">
-	<c:if test ="${session!=null }"> <!-- 세션이 null이 아닐 때 -->
+	<%-- <c:if test ="${ud!=null }"> <!-- 세션이 null이 아닐 때 --> --%>
 	<div class="title">내 정보 수정</div>
 	<form action="my_info_edit_process.do" method="post" id="MyInfoEditFrm">
 		<c:forEach var="mil" items="${ MyInfoList }">
@@ -103,7 +117,7 @@ $(function() {
 		</tr>
 		<tr>
 			<th><label>닉네임</label></th>
-			<td><input type="text" value="<c:out value="${ mil.nick }"/>" id="nick"></td>
+			<td><input type="text" value="<c:out value="${ mil.nick }"/>" id="nick"  readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>아이디</label></th>
@@ -127,15 +141,14 @@ $(function() {
 		</tr>
 	</table>
 		</c:forEach>
-	<button class="edit_btn">확인</button>
 </form>
-</c:if>
-<c:if test="${ss==null }"><!-- 디자인 수정예정 -->
-	<div class="session_empty ">
-	로그인 후 사용해 주세요
-	<button type="button" onclick="location.href='login_page.do'" class="move_login">로그인 하기</button>
-	</div>
-</c:if>
+	<button class="edit_btn">확인</button>
+<%-- </c:if> --%>
+
+<!-- 세션이 null이면  메인페이지로 이동 -->
+<%-- <c:if test="${ud==null }">
+	 <c:redirect url="user_mainhome.do"></c:redirect>
+</c:if> --%>
 
 
 </div><!-- info_edit -->

@@ -26,13 +26,10 @@ function chkNull() {
 		return ;
 	}
 	
-	alert($("#passChk").val()); 
-/* if($("#pass").val()==$("#passChk").val()){  */
+	/* alert($("#passChk").val());  */
+	
 		$("#InFrm").submit();
-		alert("확인되었습니다");
-/* }else{  */
-	/* alert("비밀번호를 확인해주세요");  */
-	/*  }  */
+		/* alert("확인되었습니다"); */
 }
 </script>
 

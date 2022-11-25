@@ -49,8 +49,10 @@ public class MyPageService {
 	
 	//내 정보 수정
 	public int updateInfo(MyPageMyInfoEditVO mieVO) {
+		int updateInfoCnt=0;
+		updateInfoCnt=mDAO.updateInfo(mieVO);
 		
-		return 0; 
+		return updateInfoCnt; 
 	}//updateInfo
 	
 	//비밀번호 수정 처리
@@ -64,16 +66,16 @@ public class MyPageService {
 	
 	//회원탈퇴
 	public int updateQuit(MyPageQuitVO qVO) {
-		int quitCnt=0;
-		quitCnt=mDAO.updateQuit(qVO);
-		
-		return quitCnt;
+		int quitCount=0;
+		quitCount=mDAO.updateQuit(qVO);
+		return quitCount;
 	}//updateQuit
 	
 	//회원탈퇴 처리
-	public String quitProcess(HttpSession session, MyPageQuitVO qVO) {
-		return null;
-	}//quitProcess
+	//public String quitProcess(HttpSession session, MyPageQuitVO qVO) {
+		//탈퇴 처리가 완료되면 메인으로 이동시키기
+		//return null;
+//	}//quitProcess
 	
 	
 	//북마크한 휴게소 조회

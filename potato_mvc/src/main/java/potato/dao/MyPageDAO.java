@@ -53,46 +53,57 @@ public class MyPageDAO {
 	
 	//내 정보 수정
 	public int updateInfo(MyPageMyInfoEditVO mieVO) {
-		int updateCnt=0;
-		//1. MyBatis Handler 얻기
+		int updateInfoCnt=0;
+		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		//2. 쿼리문 실행
-		updateCnt=ss.update("potato.mypageMapper.updateMypageInfo",mieVO);
-		//3. MyBatis Handler 끊기
-		return updateCnt;
+		
+		updateInfoCnt=ss.update("potato.mypageMapper.updateMypageInfo",mieVO);
+		
+		if(updateInfoCnt == 1 ) {
+			ss.commit();
+		}else {
+			ss.rollback();
+		}
+		mbh.closeHandler(ss);
+		return updateInfoCnt;
 	}//updateInfo
 	
 	//비밀번호 수정
 	public int updatePw(MyPagePwEditVO peVO) {
-		int cnt=0;
-		//1. MyBatis Handler 얻기
+		int updateCnt=0;
+		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession session=mbh.getHandler();
-		//2. 쿼리문 실행
-		cnt=session.update("potato.mypageMapper.updatePw",peVO);
 		
-		if(cnt==1) {
+		updateCnt=session.update("potato.mypageMapper.updatePw",peVO);
+		
+		if(updateCnt==1) { //수정사항이 있으면 커밋
 			session.commit();
-		}else {
+		}else { //수정사항이 없으면
 			session.rollback();
 		}
-		//3. MyBatis Handler 끊기
+		
 		mbh.closeHandler(session);
 		
-		return cnt;
+		return updateCnt;
 	}//updatePw
 	
 	//회원 탈퇴
 	public int updateQuit(MyPageQuitVO qVO) {
-		int quitCnt=0;
+		int quitCount=0;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession session=mbh.getHandler();
 		
-		quitCnt=session.update("potato.mypageMapper.updateQuit",qVO);
+		quitCount=session.update("potato.mypageMapper.updateQuit",qVO);
 		
-		return quitCnt;
+		if(quitCount ==1) {
+			session.commit();
+			session.close();
+		}
+		mbh.closeHandler(session);
+		return quitCount;
 	}//updateQuit
 	
 	
