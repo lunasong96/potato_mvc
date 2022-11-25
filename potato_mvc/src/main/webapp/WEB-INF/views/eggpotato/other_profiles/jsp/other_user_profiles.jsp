@@ -37,12 +37,18 @@ $(function() {
 		$(".bi-bookmark ").toggleClass("bb-add");
 	})
 	
-	$(".report-btn").click(function() {
-		window.open("other_review_report.do","popup_report",
+	/* $(".report-btn").click(function() {
+		window.open("other_review_report.do?id="+id,"popup_report",
 		"width=520,height=470,top=203,left=1336");
-	})
+	}) */
 	
-})
+});
+
+function popupOpen(id ,restarea_idx, review_idx){
+	
+		window.open("other_review_report.do?id="+id+"&restarea_idx="+restarea_idx+"&review_idx="+review_idx,"popup_report",
+		"width=520,height=470,top=203,left=1336");
+}
 
 	//하트아이콘
 	$(document).on("click", ".heart-btn", function() {
@@ -95,30 +101,27 @@ function slider() {
 <div class="container"><!-- container -->
 <!-- 건들지마  -->
 <div class="main"><!-- main -->
-<!-- 타사용자 프로필 -->
 <div class="profile">
 	<img src="css/images/${img}" class="photo">
 	<span class="nick"><c:out value="${nick}"/></span>
 	<span class="cnt">(리뷰 수 : <c:out value="${rCnt}"/>건)</span>
 </div>
-<!-- 타사용자 프로필 -->
 <!-- 리뷰 -->
-<c:forEach var="rev" items="${ rAll }">
-
+<c:forEach var="rev" items="${rAll}">
 <div class="review-wrap">
 		<div class="review-exist">
 		<div class="re-left">
 			<img src="css/images/${rev.img}" alt="프로필사진">
 		</div>
-		
 		<div class="re-right">
 		<!-- 휴게소명 시작-->
 		<div style="margin-bottom: 10px;">
-			<span style="font-size: 19px;color: white;padding: 5px 10px;background-color: #DCC1A0;
-			border-radius: 7px;"><c:out value="${rev.name}"/></span>
+			<span style="font-size: 19px;color: white;padding: 5px 10px;
+			background-color: #DCC1A0;border-radius: 7px;">
+			<c:out value="${rev.name}"/></span>
 		</div>	
 		<!-- 휴게소명 끝-->
-			<span><c:out value="${rev.nick}"/></span>
+		<span><c:out value="${rev.nick}"/></span>
 			<div class="star-rate">
 				<span class="star-blank"></span>
 				<div class="re-star-wrap">
@@ -134,11 +137,11 @@ function slider() {
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
-			    		<c:forEach var="rev" items="${revAll}">
+			    		<%-- <c:forEach var="rev" items="${revAll}">
 			   			<div class="swiper-slide re-swiper-slide">
 			   				<img src="css/images/${rev.foodimg}" alt="리뷰사진" class="re-foodimg">
 			   			</div>
-			   			</c:forEach>
+			   			</c:forEach> --%>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
@@ -155,7 +158,7 @@ function slider() {
 						<span><c:out value="좋아요(${rev.liked})"/></span>
 					</div>
 					<div class="report-icon">
-						<button type="button" class="report-btn">
+						<button type="button" id="report-btn" class="report-btn" onclick="popupOpen('${rev.id}',${rev.restarea_idx} ,${rev.review_idx})">
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
 							  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
 							</svg>
@@ -190,6 +193,15 @@ function slider() {
 
 </div><!-- main -->
 <!-- 건들지마  -->
+
+	<form method="post" id="reportPop" name="reportPop"> <!-- 신고창이동 -->
+		<input type="hidden" name="id" id="id" value="${id}">
+		<input type="hidden" name="id_writer" id="id_writer" value="${param.id_writer}">
+		<input type="hidden" name="review_idx" id="review_idx" value="${param.review_idx}">
+		<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx}">
+		<input type="hidden" name="nick" id="nick" value="${param.nick}">
+	</form>
+
 </div><!-- container end -->
 
 <!-- footer -->

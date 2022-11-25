@@ -40,13 +40,13 @@ function report() {
 		<span>리뷰 신고하기</span>
 	</div>
 	<div class="middle">
-		<p>신고대상자: <span>${param.nick}</span></p>
+		<p>신고대상자: <span>${param.id}</span></p>
 		<div class="radio-wrap">
-			<c:forEach var="rp" items="${rp }">
-				<div class="rr-wrap">
-					<input type="radio" name="report-radio" class="rr" value="${rp.report_idx}">${rp.reason}
-				</div>
-			</c:forEach>
+				<c:forEach var="rp" items="${rp}">
+					<div class="rr-wrap">
+						<input type="radio" name="report-radio" class="rr" value="${rp.report_idx}">${rp.reason}
+					</div>
+				</c:forEach>
 			<!-- 삭제 금지 -->
 			<div class="rr-wrap"></div>
 			<!-- 삭제금지 -->
@@ -57,7 +57,7 @@ function report() {
 	</div>
 </div>
 
-<form method="get" id="reportFrm" action="detailed_report.do">
+<form method="get" id="reportFrm" action="other_report_process.do">
 	<input type="hidden" id="id_reporter" name="id_reporter" value="${param.id }"/>
 	<input type="hidden" id="id_writer" name="id_writer" value="${param.id_writer }"/>
 	<input type="hidden" id="report_idx" name="report_idx" value="${param.report_idx }"/>

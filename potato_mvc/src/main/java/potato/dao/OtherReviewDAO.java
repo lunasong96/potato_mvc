@@ -32,25 +32,17 @@ public class OtherReviewDAO {
 		return otherNick;
 	}//selOtherNick
 	
-	/**
-	 * ¸®ºä¼ö
-	 * @param orVO
-	 * @return
-	 */
-	public int selOtherRev(OtherReviewVO orVO) {
-		int otherRev = 0;
+	//ÃÑ ¸®ºä ¼ö
+	public int selOtherRevCnt(OtherReviewVO orVO) {
+		int otherRevCnt = 0;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		otherRev = ss.selectOne("potato.otherReview.selOtherRev", orVO);
+		otherRevCnt = ss.selectOne("potato.otherReview.selOtherRevCnt", orVO);
 		mbh.closeHandler(ss);
-		return otherRev;
+		return otherRevCnt;
 	}//selTotalRev
 	
-	/**
-	 * ¸®ºäÁ¶È¸
-	 * @param orVO
-	 * @return
-	 */
+	//¸®ºäÁ¶È¸
 	public List<OtherReviewDomain> selOtherRevAll(OtherReviewVO orVO){
 		List<OtherReviewDomain> list= null;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
@@ -62,12 +54,12 @@ public class OtherReviewDAO {
 	
 	//»ç¿ëÀÚ½Å°í ÆË¾÷Ã¢ ¶ç¿ì±â
 	public List<OtherReviewReportDomain> selOtherRevReport() {
-		List<OtherReviewReportDomain> ord=null;
+		List<OtherReviewReportDomain> orrd=null;
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		ord=ss.selectList("potato.otherReview.selOtherRevReport");
+		orrd=ss.selectList("potato.otherReview.selOtherRevReport");
 		mbh.closeHandler(ss);
-		return ord;
+		return orrd;
 	}//selRevReport
 	
 	//½Å°í Á¢¼ö
@@ -90,6 +82,5 @@ public class OtherReviewDAO {
 		mbh.closeHandler(ss);
 		return otherRevReportChk;
 	}//selRevReportChk
-		
 
 }//class

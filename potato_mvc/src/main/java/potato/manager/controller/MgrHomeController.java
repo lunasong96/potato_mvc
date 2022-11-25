@@ -27,9 +27,9 @@ public class MgrHomeController {
 	@RequestMapping(value="mgr_home.do",method=GET)
 	public String mgrHomeMove(HttpSession session,Model model) {
 
-//		if(session.getAttribute("manager_id")==null) {
-//			url="forward:managerlogin_page.do";
-//		}
+		if(session.getAttribute("manager_id")==null) {
+			return "forward:managerlogin_page.do";
+		}
 		
 	//view로 전송
 		//오늘 신고 수

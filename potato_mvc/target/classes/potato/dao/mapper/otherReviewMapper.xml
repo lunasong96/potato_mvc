@@ -3,25 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="potato.otherReview">
-
-<!-- ///////////////////타사용자리뷰조회////////////////////	 -->
 <!-- 사용자프로필 -->
 	<select id="selOtherImg" parameterType="potato.vo.OtherReviewVO" resultType="String">
 	select img
 	from member
-	where id='${otherPid}'
+	where id=#{otherPid}
 	</select>
-<!-- 사용자프로필 -->
 	<select id="selOtherNick" parameterType="potato.vo.OtherReviewVO" resultType="String">
 	select nick
 	from member
-	where id='${otherPid}'
+	where id=#{otherPid}
 	</select>
 <!-- 리뷰수 -->
-	<select id="selOtherRev" parameterType="potato.vo.OtherReviewVO" resultType="int">
+	<select id="selOtherRevCnt" parameterType="potato.vo.OtherReviewVO" resultType="int">
 	select count(*)
 	from review
-	where id='${otherPid}'
+	where id=#{otherPid}
 	</select>
 <!-- 리뷰조회 -->
 	<select id="selOtherRevAll" parameterType="potato.vo.OtherReviewVO" resultType="potato.domain.OtherReviewDomain">
@@ -30,9 +27,9 @@
     '([^,]+)(,\1)+', '\1') idclick, nvl(regexp_count(regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx),
     '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
    from   review_img ri, review r, liked l, member m, restarea res
-   where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
-         and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=r.restarea_idx and l.ID_WRITER(+) = r.id
-         and m.id(+)=r.id and r.restarea_idx(+)  = res.restarea_idx) and r.id=#{otherPid}
+   where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx and l.review_idx(+)=r.review_idx
+          and l.restarea_idx(+)=r.restarea_idx and l.ID_WRITER(+) = r.id and m.id(+)=r.id and r.restarea_idx(+)  = res.restarea_idx)
+          and r.id=#{otherPid}
    group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img ,res.name
    order by post_date desc, review_idx desc
 	</select>
@@ -40,6 +37,17 @@
 	<select id="selOtherRevReport" resultType="potato.domain.OtherReviewReportDomain">
 	select report_idx, reason
 	from report_reason
-</select>
+	</select>
+<!-- 신고 접수 -->
+	<insert id="insertRevReport" parameterType="potato.vo.OtherReviewReportVO">
+	insert into report(id_reporter, id_writer, report_idx, restarea_idx, review_idx)
+	values (#{id_reporter}, #{id_writer}, #{report_idx}, #{restarea_idx}, #{review_idx})
+	</insert>
+<!-- 신고 접수 유무ㅡ -->
+	<select id="selOtherRevReportChk" resultType="int" parameterType="potato.vo.OtherReviewReportVO">
+	select count(*) rpcnt
+	from report
+	where id_reporter=#{id_reporter} and review_idx=#{review_idx} and restarea_idx=#{restarea_idx}
+	</select>	
 
 </mapper>

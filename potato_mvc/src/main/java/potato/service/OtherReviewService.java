@@ -37,9 +37,9 @@ public class OtherReviewService {
 	
 	//사용자신고 팝업창 띄우기
 	public List<OtherReviewReportDomain> searchOtherRevReport() {
-		List<OtherReviewReportDomain> ord=null;
-		ord=orDAO.selOtherRevReport();
-		return ord;
+		List<OtherReviewReportDomain> orrd=null;
+		orrd=orDAO.selOtherRevReport();
+		return orrd;
 	}
 	
 	//신고 접수
@@ -50,7 +50,7 @@ public class OtherReviewService {
 	}
 	
 	//신고 접수 유무
-	public Integer searchRevReportChk(OtherReviewReportVO orrVO) {
+	public Integer searchOtherRevReportChk(OtherReviewReportVO orrVO) {
 		Integer otherRevReportChk=0;
 		otherRevReportChk=orDAO.selOtherRevReportChk(orrVO);
 		return otherRevReportChk;
@@ -59,7 +59,7 @@ public class OtherReviewService {
 	
 	//전체리뷰수
 	public int searchOtherRev(OtherReviewVO orVO) {
-		int otherRev=orDAO.selOtherRev(orVO);
+		int otherRev=orDAO.selOtherRevCnt(orVO);
 		return otherRev;
 	}//searchOtherRev
 
