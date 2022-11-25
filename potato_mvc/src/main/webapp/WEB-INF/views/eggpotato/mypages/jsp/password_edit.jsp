@@ -26,6 +26,17 @@ alert("비밀번호를 다시 확인해주세요.");
 location.href="password_edit.do";
 </c:if>
 
+//공백사용못하게
+function noSpaceForm(obj) { 
+    var str_space = /\s/;  // 공백체크
+    if(str_space.exec(obj.value)) { //공백 체크
+        alert("해당 항목에는 공백을 사용할수 없습니다.");
+        obj.focus();
+        obj.value = obj.value.replace(' ',''); // 공백제거
+        return false;
+    }
+}
+
 $(function() {
 	$(".pw_edit_form_btn").click(function() {
 		//현재 비밀번호 유효성 검사

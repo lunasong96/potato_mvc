@@ -27,7 +27,6 @@ function chkNull() {
 	}
 	
 	/* alert($("#passChk").val());  */
-	
 		$("#InFrm").submit();
 		/* alert("확인되었습니다"); */
 }
