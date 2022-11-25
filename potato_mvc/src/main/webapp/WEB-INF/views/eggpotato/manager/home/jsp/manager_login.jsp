@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +37,10 @@ function chkNull(){
 	
 	$("#managerloginFrm").submit();
 }//chkNull
+<c:if test="${ not empty login_flag and !login_flag }" >
+alert("로그인 실패 ");
+</c:if>
+
 </script>
 
 </head>

@@ -6,7 +6,7 @@ package potato.domain;
  * @author user
  */
 public class UserDomain {
-	private String id, nick, img;
+	private String id, nick, img, quit;
 
 	public String getId() {
 		return id;
@@ -32,9 +32,17 @@ public class UserDomain {
 		this.img = img;
 	}
 
+	public String getQuit() {
+		return quit;
+	}
+
+	public void setQuit(String quit) {
+		this.quit = quit;
+	}
+
 	@Override
 	public String toString() {
-		return "UserDomain [id=" + id + ", nick=" + nick + ", img=" + img + "]";
+		return "UserDomain [id=" + id + ", nick=" + nick + ", img=" + img + ", quit=" + quit + "]";
 	}
 
 }

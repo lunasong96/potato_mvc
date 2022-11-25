@@ -34,7 +34,31 @@ function chkNull(){
 		return;
 	}//end if
 	
-	$("#loginFrm").submit();
+	var id = $("#id").val();
+	var pass= $("#pass").val();
+	$.ajax({
+		type:"post",
+		url:"login.do",
+		data:{"id":id, "pass":pass},
+		dataType:"json",
+		error: function ( xhr ) {
+			alert("로그인에 문제가 발생했습니다. 잠시 후 다시 시도해 주시기 바랍니다.");
+			console.log( xhr.status );
+		}, success: function( jsonObj ) {
+			if( jsonObj.quit =="Y" ) {
+				alert("탈퇴된 회원입니다.");
+				return;
+			} else{ 
+				if( jsonObj.id !="" && jsonObj.id != null ){
+					location.href="user_mainhome.do";
+				} else{
+					alert("아이디나 비밀번호가 틀렸습니다. 로그인에 실패하셨습니다.");
+				}//end else
+					
+			}//end else
+				
+		}//success
+	});//ajax
 }//chkNull
 </script>
 

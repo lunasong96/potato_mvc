@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -46,19 +47,39 @@ public class UserController {
 		return "manager/home/jsp/manager_login";
 	}//loginPage
 	
+//	@RequestMapping(value = "/login.do", method = POST)
+//	public String login(LoginVO lVO, HttpSession ss) {
+//		String url="redirect:user_mainhome.do";
+//		UserDomain ud = null;
+//		ud=us.searchMember(lVO);
+//		if( ud.getQuit() == "Y" ) {
+//		ss.setAttribute("id", ud.getId());
+//		ss.setAttribute("nick", ud.getNick());
+//		ss.setAttribute("img", ud.getImg());
+//		}
+//		return url;
+//	}//login
+	
+	@ResponseBody
 	@RequestMapping(value = "/login.do", method = POST)
-	public String login(LoginVO lVO, HttpSession ss) {
-		String url="redirect:user_mainhome.do";
-		UserDomain ud = null;
+	public String login(LoginVO lVO, HttpSession session, String id, String pass) {
+		UserDomain ud=null;
+		lVO.setId(id);
+		lVO.setPass(pass);
 		ud=us.searchMember(lVO);
-		ss.setAttribute("id", ud.getId());
-		ss.setAttribute("nick", ud.getNick());
-		ss.setAttribute("img", ud.getImg());
-		return url;
+		session.setAttribute("id", ud.getId());
+		session.setAttribute("nick", ud.getNick());
+		session.setAttribute("img", ud.getImg());
+		JSONObject jsonObj=new JSONObject();
+		jsonObj.put("id", ud.getId());
+		jsonObj.put("nick", ud.getNick());
+		jsonObj.put("quit", ud.getQuit());
+		jsonObj.put("img", ud.getImg());
+		return jsonObj.toJSONString();
 	}//login
 	
 	@RequestMapping(value = "/managerlogin.do", method = POST)
-	public String managerlogin(ManagerLoginVO mlVO, HttpSession ss) {
+	public String managerlogin(ManagerLoginVO mlVO, HttpSession ss, Model	m) {
 		String url="";
 		boolean flag=us.searchManager(mlVO);
 		System.out.println(flag);
@@ -67,6 +88,7 @@ public class UserController {
 			url="redirect:mgr_home.do";
 		} else {
 			url="manager/home/jsp/manager_login";
+			ss.setAttribute("login_flag", false);
 		}
 		return url;
 	}//login
