@@ -32,9 +32,8 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="selectForgotPw" parameterType="fpVO"
-	resultType="String">
-		select pass
+	<select id="selectForgotPw" parameterType="fpVO" resultType="int">
+		select COUNT(pass)
 		from member
 		where id= #{ id } and name= #{ name } and phone= #{ phone }
 	</select>

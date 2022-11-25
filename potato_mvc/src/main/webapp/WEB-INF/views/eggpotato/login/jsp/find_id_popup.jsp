@@ -10,7 +10,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
+function setLogin(){
+	window.opener.moveLogin();
+	window.close();
+}
+function setFind() {
+	window.opener.moveFind();
+	window.close();
+}
 </script>
 
 </head>
@@ -22,14 +29,14 @@
 		<div class="box-title">아이디</div>
 		<!-- main -->
 		<div class="main-container">
-			<input type="text" class="text-read" value="kingpotato" readonly="readonly"><br/>
-			<input type="button" value="로그인" class="loginBtn">
+			<input type="text" class="text-read" value="${ sessionScope.findId }" readonly="readonly"><br/>
+			<input type="button" value="로그인" class="loginBtn" onclick="setLogin(); return false;">
 			<span class="line_or">
 				::before
 				<span class="txt_or">또는</span>
 				::after
 			</span>
-			<input type="button" value="비밀번호 찾기" class="findBtn">
+			<input type="button" value="비밀번호 찾기" class="findBtn" onclick="setFind(); return false;">
 		</div>
 		<!-- //main -->
 	</div>

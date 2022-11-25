@@ -14,12 +14,54 @@
 <script type="text/javascript">
 $(function() {
 	$("#findBtn").click(function() {
-		/* window.open("forgotPwChk.do", "비밀번호 찾기", "width=350,height=280,top=220,left=700") */
 		chkNull();
 	});
 });
 function chkNull() {
-	$("#forgotPwFrm").submit();
+	if( $("#name").val().trim() == "" ){
+		alert("이름을 입력하세요");
+		$("#name").val("");
+		$("#name").focus();
+		return;
+	}//end if
+	
+	if( $("#id").val().trim() == "" ){
+		alert("아이디를 입력하세요");
+		$("#id").val("");
+		$("#id").focus();
+		return;
+	}//end if
+	
+	if( $("#phone").val().trim() == "" ){
+		alert("전화번호를 입력하세요");
+		$("#phone").val("");
+		$("#phone").focus();
+		return;
+	}//end if
+	
+	var name= $("#name").val();
+	var id= $("#id").val();
+	var phone= $("#phone").val();
+	$.ajax({
+		type:"post",
+		url:"forgotPwChk.do",
+		data:{"name":name, "id":id, "phone":phone},
+		dataType:"json",
+		error: function ( xhr ) {
+			alert("비밀번호 찾기에 문제가 발생했습니다. 잠시 후 다시 시도해 주시기 바랍니다.");
+			console.log( xhr.status );
+		}, success: function( jsonObj ) {
+			if( jsonObj.pass !="" && jsonObj.pass != null ) {
+				window.open("forgotPwPop.do", "비밀번호 찾기", "width=350,height=280,top=220,left=700");
+			} else{ 
+				alert("입력하신 정보로 조회된 정보가 없습니다. 다시 입력해주세요.");
+			}//end else
+				
+		}//success
+	});//ajax
+}
+function moveLogin(){
+	location.href="login_page.do";
 }
 </script>
 

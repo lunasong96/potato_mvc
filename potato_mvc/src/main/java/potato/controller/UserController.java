@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -38,27 +37,21 @@ public class UserController {
 	@Autowired(required = false)
 	private UserService us;
 	
+
+	/**
+	 * 로그인 페이지 이동
+	 * @return
+	 */
 	@RequestMapping(value = "/login_page.do", method = GET)
-	public String loginPage() {
+	public String loginPage(HttpSession session) {
+		session.invalidate();
 		return "login/jsp/login";
 	}//loginPage
+	
 	@RequestMapping(value = "/managerlogin_page.do", method = GET)
 	public String managerloginPage() {
 		return "manager/home/jsp/manager_login";
 	}//loginPage
-	
-//	@RequestMapping(value = "/login.do", method = POST)
-//	public String login(LoginVO lVO, HttpSession ss) {
-//		String url="redirect:user_mainhome.do";
-//		UserDomain ud = null;
-//		ud=us.searchMember(lVO);
-//		if( ud.getQuit() == "Y" ) {
-//		ss.setAttribute("id", ud.getId());
-//		ss.setAttribute("nick", ud.getNick());
-//		ss.setAttribute("img", ud.getImg());
-//		}
-//		return url;
-//	}//login
 	
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = POST)
@@ -143,7 +136,13 @@ public class UserController {
 	public String signUpPage2(HttpServletRequest request, Model model, UserInfoVO uiVO, HttpSession session) {
 		String year=request.getParameter("year");
 		String month=request.getParameter("month");
+		if( month.length() == 1 ) {
+			month="0"+month;
+		}
 		String day=request.getParameter("day");
+		if( day.length() == 1 ) {
+			day="0"+day;
+		}
 		String birth= year+"-"+month+"-"+day;
 		uiVO.setBirth(birth);
 		session.setAttribute("uiVO", uiVO);
@@ -209,13 +208,25 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/forgotId.do", method = GET)
-	public String forgotUserId() {
+	public String forgotUserId(HttpSession session) {
+		session.invalidate();
 		return "login/jsp/find_id";
 	}
 	
 	@RequestMapping(value = "/forgotPw.do", method = GET)
-	public String forgotUserPw() {
+	public String forgotUserPw(HttpSession session) {
+		session.invalidate();
 		return "login/jsp/find_pass";
+	}
+	
+	@RequestMapping(value = "/forgotIdPop.do", method = GET)
+	public String forgotIdPop() {
+		return "login/jsp/find_id_popup";
+	}
+	
+	@RequestMapping(value = "/forgotPwPop.do", method = GET)
+	public String forgotPwPop() {
+		return "login/jsp/find_pass_popup";
 	}
 	
 	/**
@@ -224,23 +235,33 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/forgotIdChk.do", method= POST) 
-	public String forgotUserIdChk(ForgotIdVO fiVO, Model model) { 
+	public String forgotUserIdChk(ForgotIdVO fiVO, HttpSession session, String name, String birth, String phone) { 
 		String id="";
-		id=us.searchId(fiVO); 
-		model.addAttribute("id", id); 
-		return "login/jsp/lolo";
+		fiVO.setName(name);
+		fiVO.setBirth(birth);
+		fiVO.setPhone(phone);
+		id=us.searchId(fiVO);
+		session.setAttribute("findId", id);
+		JSONObject jsonObj=new JSONObject();
+		jsonObj.put("id", id);
+		return jsonObj.toJSONString();
 	}
 	 
 	
+	@ResponseBody
 	@RequestMapping(value = "/forgotPwChk.do", method = POST)
-	public String forgotUserPwChk(ForgotPwVO fpVO, Model model) {
+	public String forgotUserPwChk(ForgotPwVO fpVO, HttpSession session, String id, String name, String phone) {
 		String pass="";
+		fpVO.setId(id);
+		fpVO.setName(name);
+		fpVO.setPhone(phone);
 		pass=us.searchPw(fpVO);
-		model.addAttribute("id", fpVO.getId());
-		model.addAttribute("pass", pass);
-		return "login/jsp/lolo";
-//		return "login/jsp/find_pass_popup";
+		session.setAttribute("findPw", pass);
+		JSONObject jsonObj=new JSONObject();
+		jsonObj.put("pass", pass);
+		return jsonObj.toJSONString();
 	}
 	
 }//class

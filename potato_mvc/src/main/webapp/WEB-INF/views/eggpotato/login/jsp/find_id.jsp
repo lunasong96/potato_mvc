@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +15,59 @@
 <script type="text/javascript">
 $(function() {
 	$("#findBtn").click(function() {
-		/* window.open("forgotIdChk.do", "아이디 찾기", "width=350,height=320,top=220,left=700"); */
 		chkNull();
 	});
 });
 
 function chkNull() {
-	$("#forgotIdFrm").submit();
+	if( $("#name").val().trim() == "" ){
+		alert("이름을 입력하세요");
+		$("#name").val("");
+		$("#name").focus();
+		return;
+	}//end if
+	
+	if( $("#birth").val().trim() == "" ){
+		alert("생년월일을 입력하세요");
+		$("#birth").val("");
+		$("#birth").focus();
+		return;
+	}//end if
+	
+	if( $("#phone").val().trim() == "" ){
+		alert("전화번호를 입력하세요");
+		$("#phone").val("");
+		$("#phone").focus();
+		return;
+	}//end if
+	
+	var name= $("#name").val();
+	var birth= $("#birth").val();
+	var phone= $("#phone").val();
+	$.ajax({
+		type:"post",
+		url:"forgotIdChk.do",
+		data:{"name":name, "birth":birth, "phone":phone},
+		dataType:"json",
+		error: function ( xhr ) {
+			alert("아이디 찾기에 문제가 발생했습니다. 잠시 후 다시 시도해 주시기 바랍니다.");
+			console.log( xhr.status );
+		}, success: function( jsonObj ) {
+			if( jsonObj.id !="" && jsonObj.id != null ) {
+				window.open("forgotIdPop.do", "아이디 찾기", "width=350,height=320,top=220,left=700");
+			} else{ 
+				alert("입력하신 정보로 조회된 아이디가 없습니다. 다시 입력해주세요.");
+			}//end else
+				
+		}//success
+	});//ajax
+}
+
+function moveLogin(){
+	location.href="login_page.do";
+}
+function moveFind() {
+	location.href="forgotPw.do";
 }
 </script>
 

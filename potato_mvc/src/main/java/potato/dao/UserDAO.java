@@ -110,7 +110,6 @@ public class UserDAO {
 	 */
 	public String selectId(ForgotIdVO fiVO) {
 		String id="";
-	 
 		MyBatisHandler mbh=MyBatisHandler.getInstance(); 
 		SqlSession ss=mbh.getHandler();
 		id= ss.selectOne(UserMapper+"selectForgotId", fiVO); 
@@ -123,16 +122,15 @@ public class UserDAO {
 	 * @param fpVO
 	 * @return
 	 */
-	public String selectPw(ForgotPwVO fpVO) {
-		String pw="";
-		
+	public int selectPw(ForgotPwVO fpVO) {
+		int cnt=0;
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		
-		pw= ss.selectOne(UserMapper+"selectForgotPw", fpVO);
+		cnt= ss.selectOne(UserMapper+"selectForgotPw", fpVO);
 		mbh.closeHandler(ss);
 		
-		return pw;
+		return cnt;
 	}//selectId
 	
 	/**
@@ -140,14 +138,13 @@ public class UserDAO {
 	 * @param fpVO
 	 * @return
 	 */
-	public int updatePw(ForgotPwVO fpVO) {
-		int cnt=0;
+	public void updatePw(ForgotPwVO fpVO) {
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
-		cnt = ss.update(UserMapper, fpVO);
+		ss.update(UserMapper+"updatePw", fpVO);
+		ss.commit();
 		mbh.closeHandler(ss);
-		return cnt;
 	}//updatePw
 	
 }//class

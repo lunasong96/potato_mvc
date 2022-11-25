@@ -10,7 +10,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
+function setLogin(){
+	window.opener.moveLogin();
+	window.close();
+}
 </script>
 
 </head>
@@ -19,11 +22,11 @@
 	<!-- box-main -->
 	<div class="box-main">
 		
-		<div class="box-title">임시 비밀번호</div>
+		<div class="box-title">비밀번호</div>
 		<!-- main -->
 		<div class="main-container">
-			<input type="text" class="text-read" value="1Qs2Vd3@!F" readonly="readonly"><br/>
-			<input type="button" value="로그인" class="loginBtn">
+			<input type="text" class="text-read" value="${ sessionScope.findPw }" readonly="readonly" ><br/>
+			<input type="button" value="로그인" class="loginBtn" onclick="setLogin(); return false;">
 		</div>
 		<!-- //main -->
 	</div>
