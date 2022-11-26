@@ -326,20 +326,20 @@ function checkNick(){
 		<div class="main-container">
 		<form action="signUp2.do" method="post" id="joinFrm">
 			<h2 class="input-title">아이디</h2>
-			<input type="text" placeholder="아이디" class="id" name="id" id="id" oninput = "checkId()"><br/>
+			<input type="text" placeholder="아이디" class="id" name="id" id="id" oninput = "checkId()" maxlength="20"><br/>
 			<!-- id ajax 중복체크 -->
 			<span class="id_ok" id="id_ok">사용 가능한 아이디입니다.</span>
 			<span class="id_already" id="id_already">누군가 이 아이디를 사용하고 있어요.</span>
 			<h2 class="input-title">비밀번호</h2>
-			<input type="password" placeholder="비밀번호" class="pass" name="pass" id="pass">
+			<input type="password" placeholder="비밀번호" class="pass" name="pass" id="pass" maxlength="20">
 			<div id="keyShow">SHOW</div><br/>
 			<h2 class="input-title">비밀번호 재확인</h2>
-			<input type="password" placeholder="비밀번호 재확인" class="pass" name="passChk" id="passChk">
+			<input type="password" placeholder="비밀번호 재확인" class="pass" name="passChk" id="passChk" maxlength="20">
 			<div id="keyShow2">SHOW</div><br/>
 			<h2 class="input-title">이름</h2>
-			<input type="text" placeholder="이름" class="text-join" name="name" id="name"><br/>
+			<input type="text" placeholder="이름" class="text-join" name="name" id="name" maxlength="20"><br/>
 			<h2 class="input-title">별명</h2>
-			<input type="text" placeholder="별명" class="text-join" name="nick" id="nick" oninput = "checkNick()"><br/>
+			<input type="text" placeholder="별명" class="text-join" name="nick" id="nick" oninput = "checkNick()" maxlength="20"><br/>
 			<span class="nick_ok" id="nick_ok">사용 가능한 닉네임입니다.</span>
 			<span class="nick_already" id="nick_already">누군가 이 닉네임를 사용하고 있어요.</span>
 			<h2 class="input-title">생년월일</h2>
