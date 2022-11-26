@@ -39,7 +39,7 @@ public class MyPageController {
 	
 		  if(session.getAttribute("id")==null) {
 			url="redirect:user_mainhome.do"; }
-			 System.out.println("------마이페이지에 진입 : id is--------"+(String)session.getAttribute("id"));
+			 //System.out.println("------마이페이지에 진입 : id is--------"+(String)session.getAttribute("id"));
 		return "mypages/jsp/mypage_in";
 	}//myPageIn
 	
@@ -47,16 +47,14 @@ public class MyPageController {
 	@RequestMapping(value="chkIdPass.do",method=POST)
 	public String chkIdPass(HttpSession session, LoginVO LVO,Model model) {
 		String result="redirect:myPageIn.do";
-		UserDomain ud=null;	
 		LVO.setId((String)session.getAttribute("id"));
-		//model.addAttribute("pass",LVO.getPass());
-		ud=us.searchMember(LVO);
-		if(ud !=null ) {
+		int cnt = us.searchMember(LVO);
+		if(  cnt == 1 ) {
 			System.out.println("------아이디 비밀번호 확인 페이지: id is--------"+(String)session.getAttribute("id"));
 			System.out.println("-----아이디비밀번호 확인 : --------"+LVO);
 			result= "redirect:my_info_edit.do";
 		}else {
-			
+			session.setAttribute("passFlag", false);
 		}
 		return result;
 	}//chkIdPass

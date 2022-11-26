@@ -72,7 +72,7 @@ function chkNull() {
 </div>
 
 <!-- 비밀번호 입력-확인 -->
-<form id="InFrm" action="chkIdPass.do" method="post" >
+<form id="InFrm" action="chkIdPass2.do" method="post" >
 <div class="pw_chk">
 	<input type="hidden" name="id"  id="id" value="${ sessionScope.id }"/>
 	<%-- <input type="hidden" name="pass"  id="pass" value="${ pass }"/> --%>
