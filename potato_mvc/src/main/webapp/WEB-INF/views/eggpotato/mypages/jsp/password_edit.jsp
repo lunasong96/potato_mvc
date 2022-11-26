@@ -40,13 +40,49 @@ function noSpaceForm(obj) {
 $(function() {
 	$(".pw_edit_form_btn").click(function() {
 		//현재 비밀번호 유효성 검사
+		if($("#pass").val().trim()==""){
+		alert("비밀번호를 입력해주세요.");
+		return;
+	}
+	//새 비밀번호도 공백 제거
+	if($("#new_pw").val().trim()==""){
+		alert("신규 비밀번호를 입력해주세요.");
+		return;
+}
+		//8~20자의 영문,숫자, 특수문자를 혼합하여 입력
+		var pw=$("#new_pw").val();
+		var num=pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/ig);
+		var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		
+		 if(pw.length < 8 || pw.length > 20){
+
+			  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+			  return false;
+			 }else if(pw.search(/\s/) != -1){
+			  alert("비밀번호는 공백 없이 입력해주세요.");
+			  return false;
+			 }else if(num < 0 || eng < 0 || spe < 0 ){
+			  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+			  return false;
+			 }else {
+				console.log("통과"); 
+			 }
+		
+		 //새 비밀번호 확인 유효성 검사
+		if($("#newPwChk").val().trim()==""){
+			alert("신규 비밀번호를 입력해주세요.");
+				return;
+			}
 		
 		//새 비밀번호 유효성 검사
-		newPw=$("#new_pw").val();
-		newPwChk=$("#newPwChk").val();
+		//newPw=$("#new_pw").val();
+		//newPwChk=$("#newPwChk").val();
 		
-		if(newPw !=newPwChk){
+		if($("#new_pw").val()!=$("#newPwChk").val() ) {
 			alert("신규 비밀번호와 신규 비밀번호 확인이 일치하지 않습니다.");
+			$("#newPwChk").val("");
+			$("#newPwChk").focus();
 			return;
 		}
 		$("#passEditFrm").submit();

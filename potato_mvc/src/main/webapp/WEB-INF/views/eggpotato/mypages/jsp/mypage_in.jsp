@@ -12,24 +12,35 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+
+//공백사용못하게
+function noSpaceForm(obj) { 
+    var str_space = /\s/;  // 공백체크
+    if(str_space.exec(obj.value)) { //공백 체크
+        alert("해당 항목에는 공백을 사용할수 없습니다.");
+        obj.focus();
+        obj.value = obj.value.replace(' ',''); // 공백제거
+        return false;
+    }
+}
+
 $(function() {
 	$(".pw_chk_btn").click(function() {
 		chkNull();
 	});//click
-	
 });//ready
+
 function chkNull() {
 	if($("#passChk").val().trim() == ""){
 		$("#passChk").focus();
 		$("#passChk").val("");
-		
+		alert("비밀번호를 입력해주세요!");
 		return ;
 	}
-	
-	/* alert($("#passChk").val());  */
+		alert("확인되었습니다");
 		$("#InFrm").submit();
-		/* alert("확인되었습니다"); */
 }
+	
 </script>
 
 </head>

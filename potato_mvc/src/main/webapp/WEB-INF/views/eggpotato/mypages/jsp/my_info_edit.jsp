@@ -148,7 +148,7 @@ function readURL(input) {
 		</tr>
 		<tr>
 			<th><label>이메일</label></th>
-			<td><input type="text"  value="<c:out value=" ${ mil.email }"/>" name="email" id="email" maxlength="100"></td>
+			<td><input type="text"  value="<c:out value="${ mil.email }"/>" name="email" id="email" maxlength="100"></td>
 		</tr>
 	</table>
 		</c:forEach>
