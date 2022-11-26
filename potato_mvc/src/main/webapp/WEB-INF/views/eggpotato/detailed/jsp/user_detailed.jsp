@@ -415,8 +415,16 @@ function slider() {
 	})
 	
 	function profileMove(otherPId){
-		$("#otherPid").val(otherPId);
-		$("#otherFrm").submit();
+		
+		if("${id}"=="") {
+			alert("로그인이 필요한 동작입니다.");
+		}else if(otherPId=="${id}") {
+			location.href="myPageIn2.do";
+		}else {
+			$("#otherPid").val(otherPId);
+			$("#otherFrm").submit();
+		}
+		
 	}
 	
 	function reportMove(writeId, reviewIdx, nick) {
