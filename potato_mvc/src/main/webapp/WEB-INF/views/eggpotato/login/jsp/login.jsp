@@ -77,8 +77,8 @@ function chkNull(){
 		<!-- main -->
 		<div class="login-main">
 		<form method="post" action="login.do"  id="loginFrm">
-			<input type="text" placeholder="아이디" name="id" id="id" class="id"><br/>
-			<input type="password" placeholder="비밀번호" name="pass" id="pass" class="pass"><br/>
+			<input type="text" placeholder="아이디" name="id" id="id" class="id" maxlength="20"><br/>
+			<input type="password" placeholder="비밀번호" name="pass" id="pass" class="pass" maxlength="20"><br/>
 			<input type="button" value="로그인" class="loginBtn" id="loginBtn">
 		</form>
 		</div>
