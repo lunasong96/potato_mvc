@@ -18,18 +18,15 @@
 <!-- ///////////////////사용자리뷰조회////////////////////	 -->
 <!-- My리뷰조회 --> <!-- 쿼리 아직이라 다시 -->
 	<select id="selMyRevAll" parameterType="potato.vo.MyReviewVO" resultType="potato.domain.MyReviewDomain">
-		select
-			(select listagg(img,',') img from review_img where review_idx=re.review_idx and restarea_idx =re.restarea_idx and id = re.id ) foodimg,
-			(select img from member where id=re.id) img, 
-			(select nick from member where id=re.id) nick, 
-			re.review_idx, re.restarea_idx, 
-			(select name from restarea where restarea_idx = re.restarea_idx) name, 
-			re.contents, re.rating, re.id, re.post_date, (select count(ID_clicker) from liked where REVIEW_IDX = re.REVIEW_IDX and ID_WRITER=re.ID and RESTAREA_IDX = re.RESTAREA_IDX  ) liked
-		from review re
-		where re.id = #{id}
-		order by re.post_date desc, re.review_idx desc
-		offset (#{pageFlag}-1)*5 rows
-		fetch next 5 rows only
+		select r.review_idx, r.id, m.nick, m.img, re.name, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
+					regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1') idclick,
+					nvl(regexp_count(regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
+		from   review_img ri, review r, liked l, member m, restarea re
+		where  (ri.review_idx(+)=r.review_idx and ri.id(+)=r.id and ri.restarea_idx(+)=r.restarea_idx
+					and l.review_idx(+)=r.review_idx and l.restarea_idx(+)=r.restarea_idx
+					and m.id(+)=r.id and r.restarea_idx(+)=re.restarea_idx )and r.id=${id}
+		group by r.review_idx, r.id, r.rating, r.contents, r.post_date, m.nick, m.img, re.name
+		order by post_date, review_idx;
 	</select>
 <!-- ///////////////////좋아요한리뷰조회//////////////////// -->
 <!-- Like리뷰조회 --> <!-- 쿼리 아직이라 다시 -->

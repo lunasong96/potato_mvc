@@ -65,6 +65,15 @@
 	border-radius: 50%;
 }
 
+#uploadBtn {
+    border: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    opacity: 0;
+}
+
 .imgBtn {
 	width: 110px;
 	height: 40px;
@@ -73,6 +82,20 @@
 	border: 0px;
 	margin: 20px;
 	font-size: 15px;
+}
+
+.imgupBtn {
+    width: 110px;
+    height: 40px;
+    cursor: pointer;
+    background-color: #DEAE75;
+    border: 0px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 20px;
+    font-size: 15px;
 }
 
 .joinBtn {
