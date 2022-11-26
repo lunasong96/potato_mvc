@@ -57,7 +57,7 @@ function report() {
 	</div>
 </div>
 
-<form method="get" id="reportFrm" action="other_review_report.do">
+<form method="get" id="reportFrm" action="detailed_report.do">
 	<input type="hidden" id="id_reporter" name="id_reporter" value="${param.id }"/>
 	<input type="hidden" id="id_writer" name="id_writer" value="${param.id_writer }"/>
 	<input type="hidden" id="report_idx" name="report_idx" value="${param.report_idx }"/>

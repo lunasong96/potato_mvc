@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import potato.domain.MyReviewDomain;
+import potato.service.DetailedService;
 import potato.service.UserReviewService;
 import potato.vo.MyPageMyReviewVO;
 import potato.vo.MyReviewVO;
@@ -26,6 +27,7 @@ public class UserReviewController {
 	
 	@Autowired(required = false)
 	private UserReviewService urs;
+	
 ///////////////////사용자리뷰조회////////////////////
 	
 	//사용자리뷰조회
@@ -104,39 +106,5 @@ public class UserReviewController {
 		return jsonObj;
 	}
 	
-	//사용자신고 팝업창 띄우기
-	@RequestMapping(value="like_review_report.do",method=GET)
-	public String lRevReportMove(HttpServletRequest request,MypageReportVO mrVO, Model model) {
-		model.addAttribute("rp", urs.searchRevReport());
-		
-		mrVO.setId_reporter(request.getParameter("id"));
-		mrVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
-		mrVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
-		
-		model.addAttribute("rpc", urs.searchRevReportChk(mrVO));
-		return "mypages/jsp/report_review_popup";
-	}
-	
-	//리뷰 신고 접수
-	@RequestMapping(value = "mypage_report.do", method= {GET,POST})
-	public String setReport(HttpServletRequest request, MypageReportVO mrVO, Model model) {
-		urs.setRevReport(mrVO);
-		
-		mrVO.setId_reporter(request.getParameter("id_reporter"));
-		mrVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
-		mrVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
-		
-		model.addAttribute("rpc", urs.searchRevReportChk(mrVO));
-		
-		return "mypages/jsp/report_review_popup";
-	}
-	
-	////리뷰 삭제
-	@ResponseBody
-	@RequestMapping(value = "del_my_review.do", method= {GET,POST})
-	public String delMyReview(MyPageMyReviewVO mpmrVO) {
-		String jsonObj=urs.getRevDel(mpmrVO);
-		return jsonObj;
-	}
 	
 }//class

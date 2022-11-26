@@ -17,27 +17,12 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-//하트아이콘
-
-	$(function() {
+$(function() {
 		
-		$(".bookmark-icon-btn").click(function() {
-			$(".bookmark-icon-btn").toggleClass("bibtn-add");
-			$(".bi-bookmark ").toggleClass("bb-add");
-		})
+	//리뷰 슬라이드 호출
+	slider();
 		
-		$(".report-btn").click(function() {
-			window.open("report_review_popup.jsp","popup_report",
-			"width=520,height=470,top=203,left=1336");
-		})
-		$(document).on("click", ".heart-btn", function() {
-	$(this).toggleClass("hb-fill");
-})
-		
-		//리뷰 슬라이드 호출
-		slider();
-		
-	})//ready
+})//ready
 
 function slider() {
 	$(".re-mySwiper").each(function(index,element) {
@@ -72,11 +57,107 @@ function slider() {
 	})
 }
 
+//하트아이콘
+$(document).on("click", ".heart-btn", function() {
+	
+	var likeClass=$(this).attr("class");
+	var $reviewidx=$(this).attr("value");
+	var $restarea_idx=$(this).parent().next().children().attr("value");
+	var hb=$(this);
+	
+	var jsonParam= { restarea_idx: $restarea_idx,
+			id_clicker: "${id}",
+			review_idx: $reviewidx,
+			id_writer: "${id}" };
+		
+	 if(likeClass=="heart-btn hb-fill") { //좋아요 취소
+		$(this).removeClass("hb-fill");
+	
+			$.ajax({
+			url:"ajax_detailed_likeDel.do",
+			data: jsonParam,
+			type: "post",
+			dataType: "text",
+			error: function(xhr) {
+				alert(xhr.responseText),
+				alert(xhr.statusText),
+				console.log(xhr.status);
+				alert("에러")
+			},
+			success: function(data) {
+				hb.next().children().text(parseInt(hb.next().children().text()) - 1);
+				/* console.log("삭제성공"); */
+			}
+		}) 
+				
+		
+	}else { //좋아요 등록
+		$(this).addClass("hb-fill");
+		
+		 	$.ajax({
+			url:"ajax_detailed_likeAdd.do",
+			data:  jsonParam,
+			type: "post",
+			dataType: "text",
+			error: function(xhr) {
+				alert(xhr.responseText),
+				alert(xhr.statusText),
+				console.log(xhr.status);
+				alert("에러")
+			},
+			success: function(data) {
+				hb.next().children().text(parseInt(hb.next().children().text()) + 1);
+				/* console.log("추가성공"); */
+			}
+		})
+		
+	}
+	
+	
+})
+
+	function deleteR(reviewIdx, restareaIdx) {
+		
+		var jsonParam= { restarea_idx: restareaIdx,
+				review_idx: reviewIdx};
+			
+		var conFlag=confirm("리뷰를 삭제하시겠습니까?");
+		
+		if(conFlag==true) {
+			$.ajax({
+				url:"detailed_review_delete.do",
+				data:  jsonParam,
+				type: "post",
+				dataType: "text",
+				error: function(xhr) {
+					alert(xhr.responseText),
+					alert(xhr.statusText),
+					console.log(xhr.status);
+					alert("에러")
+				},
+				success: function(data) {
+					alert("리뷰를 삭제했습니다.");
+					location.reload();
+				}
+			})
+			
+		}
+		
+		
+	}
+
 //페이징
 function movePage( page ) {
 	$("#pageFlag").val( page );
 	$("#reviewFrm").submit();
 }
+
+function editR(reviewIdx, restareaIdx) {
+	$("#review_idx2").val(reviewIdx);
+	$("#restarea_idx").val(restareaIdx);
+	$("#editReview").submit();
+}
+
 </script>
 
 </head>
@@ -121,7 +202,7 @@ function movePage( page ) {
 		<div class="re-right">
 			<div style="margin-bottom: 10px;">
 				<span style="font-size: 19px;color: white;padding: 5px 10px;background-color: #DCC1A0;
-				border-radius: 7px;"><c:out value="${my.name}"/></span>
+				border-radius: 7px;"><a href="user_detailed.do?restarea_idx=${my.restarea_idx }"><c:out value="${my.name}"/></a></span>
 			</div>	
 			<span><c:out value="${my.nick}"/></span>
 			<div class="star-rate">
@@ -139,7 +220,7 @@ function movePage( page ) {
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
-			    	<c:forEach var="img" items="${ my.foodimg }">
+			    	<c:forEach var="img" items="${my.foodimg }">
 			   			<div class="swiper-slide re-swiper-slide">
 			   				<img src="css/reviewImg/${img}" alt="리뷰사진" class="re-foodimg">
 			   			</div>
@@ -152,15 +233,15 @@ function movePage( page ) {
 			<div class="etc-icon-wrap">
 				<div class="etc-icon">
 					<div class="heart-icon-wrap">
-						<button type="button" class="heart-btn">
+						<button type="button" class="${my.clickount eq 1? 'heart-btn hb-fill':'heart-btn'}" value="${my.review_idx}">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
 							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 							</svg>
 						</button>
-						<span><c:out value="좋아요(${my.liked})"/></span>
+						<span>좋아요(<span><c:out value="${my.liked}"/></span>)</span>
 					</div>
 					<div class="edit-icon">
-						<a href="" class="edit-link">
+						<a href="javascript:editR(${my.review_idx},${my.restarea_idx});" value="${my.restarea_idx}">
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
 							  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
 							</svg>
@@ -168,7 +249,7 @@ function movePage( page ) {
 						<span>수정</span>
 					</div>
 					<div class="delete-icon">
-						<button type="button" class="delete-btn">
+						<button type="button" class="delete-btn" onclick='javascript:deleteR(${my.review_idx},${my.restarea_idx});'>
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
 							  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
 							</svg>
@@ -216,6 +297,10 @@ function movePage( page ) {
 	<input type="hidden" id="id" name="id" value="${ sessionScope.id }">
 </form>
 
+<form method="post" action="rewrite.do" id="editReview"> <!-- 리뷰수정창이동 -->
+	<input type="hidden" name="review_idx" id="review_idx2" value="${param.review_idx}">
+	<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx}">
+</form>
 
 </body>
 </html>

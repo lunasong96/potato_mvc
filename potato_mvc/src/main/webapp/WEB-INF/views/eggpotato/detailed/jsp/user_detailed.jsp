@@ -368,7 +368,7 @@ function slider() {
 		
 		if("${id}"=="") {
 			alert("로그인이 필요한 동작입니다.")
-		}else if(likeClass=="heart-btn hb-fill") { //즐겨찾기 취소
+		}else if(likeClass=="heart-btn hb-fill") { //좋아요 취소
 			$(this).removeClass("hb-fill");
 		
  			$.ajax({
@@ -389,7 +389,7 @@ function slider() {
 			}) 
 					
 			
-		}else { //즐겨찾기 등록
+		}else { //좋아요 등록
 			$(this).addClass("hb-fill");
 			
  		 	$.ajax({

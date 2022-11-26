@@ -5,8 +5,9 @@ import java.util.Arrays;
 
 public class MyReviewDomain {
 	private String nick, contents, id, img, name, foodimg;
-	private int restarea_idx, review_idx, rating, liked;
+	private int restarea_idx, review_idx, rating, liked, clickount;
 	private Date post_date;
+	
 	public String getNick() {
 		return nick;
 	}
@@ -67,6 +68,12 @@ public class MyReviewDomain {
 	public void setLiked(int liked) {
 		this.liked = liked;
 	}
+	public int getClickount() {
+		return clickount;
+	}
+	public void setClickount(int clickount) {
+		this.clickount = clickount;
+	}
 	public Date getPost_date() {
 		return post_date;
 	}
@@ -77,7 +84,7 @@ public class MyReviewDomain {
 	public String toString() {
 		return "MyReviewDomain [nick=" + nick + ", contents=" + contents + ", id=" + id + ", img=" + img + ", name="
 				+ name + ", foodimg=" + foodimg + ", restarea_idx=" + restarea_idx + ", review_idx=" + review_idx
-				+ ", rating=" + rating + ", liked=" + liked + ", post_date=" + post_date + "]";
+				+ ", rating=" + rating + ", liked=" + liked + ", clickount=" + clickount + ", post_date=" + post_date
+				+ "]";
 	}
-	
 }
