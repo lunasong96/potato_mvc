@@ -193,6 +193,16 @@ function editR(reviewIdx, restareaIdx) {
 <div class="review">
 <!-- 리뷰 -->
 <div class="review-wrap">
+<div class="title">내가 쓴 리뷰</div>
+<!-- 북마크한 휴게소가 없을 경우 -->
+<c:if test="${ empty mAll }">
+<div class="empty">
+	<svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" color="#593000">
+  		<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+	</svg>
+	리뷰를 작성해보세요
+</div>
+</c:if>
 <c:forEach var="my" items="${ mAll }">
 		<div class="review-exist">
 		<div class="re-left">
