@@ -130,20 +130,20 @@ $(function() {
 			<tr>
 				<th><label for="password">현재 비밀번호</label></th>
 				<td>
-					<input type="password" id="pass"  name="pass"  placeholder="비밀번호를 입력해주세요." class="pw">
+					<input type="password" id="pass"  name="pass"  placeholder="   비밀번호를 입력해주세요." class="pw">
 				</td>
 			</tr>
 			<tr>
 				<th><label for="password">신규 비밀번호</label></th>
 				<td>
-					<input type="password" id="new_pw" name="new_pw"  placeholder="비밀번호를 입력해주세요." class="pw">
-					<span class="txt">* 비밀번호는 *8~20자의 영문,숫자,특수문자를 혼합하여 입력해주세요.</span>
+					<input type="password" id="new_pw" name="new_pw"  placeholder="   비밀번호를 입력해주세요." class="pw">
+					<span class="txt">* 비밀번호는 8~20자의 영문,숫자,특수문자를 혼합하여 입력해주세요.</span>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="password">신규 비밀번호 확인</label></th>
 				<td>
-					<input type="password" id="newPwChk"  name="newPwChk" placeholder="비밀번호를 입력해주세요." class="pw">
+					<input type="password" id="newPwChk"  name="newPwChk" placeholder="   비밀번호를 입력해주세요." class="pw">
 				</td>
 			</tr>
 		</table>

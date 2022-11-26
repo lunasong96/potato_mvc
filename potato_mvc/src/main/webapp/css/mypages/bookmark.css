@@ -29,6 +29,9 @@
     color: #593000;
 }
 
+.listwrap{
+	width: 1200px;
+}
 .review{
 	width:1650px;
 }
@@ -81,14 +84,16 @@
 }
 
 .list{
-	width: 800px;
-	height: 70px;
-	margin: 0px auto;
-	display: flex;
-	align-items:center;
-	flex-direction: row;
-	justify-content: space-around;
-	border-bottom: 1px solid #ddd;
+	width: 888px;
+    height: 70px;
+    background-color: #FFF;
+    padding: 5px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
 }
 .list-item{
 	width: 400px;

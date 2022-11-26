@@ -1,24 +1,23 @@
 @charset "UTF-8";
 
 .info_edit{
-	width: 1100px;
-	height: 900px;
-	margin: 0px auto;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
+	width: 1300px;
+    margin: 0 auto;
+    margin-top: 120px;
 }
 .title{
-	font-size: 35px;
-	font-weight: bold;
-	width:400px;
+    width: 1300px;
+    font-size: 34px;
+    font-weight: bold;
+    color: #593000;
+    padding-bottom: 10px;
 }
 .info_edit>table {
-	width: 100%;
+	width: 1200px;
 } 
 table{
-	width: 100%;
+	width: 1155px;
+    margin: 25px 0 55px 0;
 }
 .profile_img{
 	display: flex;
@@ -27,6 +26,7 @@ table{
 
 .img_btn{
 	background-color:#DCC1A0;
+	color: #593000;
 	width: 90px;
 	height: 50px;
 	border: 0px;
@@ -45,17 +45,19 @@ table{
 }
 
 .birth{
+	 padding-left: 10px;
 	 border: 1px solid #dedede;
 	 border-radius: 5px;
 	 height: 40px;
 }
 div.info_edit table th{
 	background-color: #DCC1A0;
+	color: #593000;
 	vertical-align: middle;
 	letter-spacing: -1px;
 	padding: 3px 0 0;
 	height: 70px;
-	width:160px;
+	width:190px;
 	font-size: 17px;
 	
 }
@@ -66,13 +68,13 @@ div.info_edit table td{
 	background-color: #fff;
 }
 .info_edit>form>table>tbody>tr>td {
-	padding: 15px 5px 15px 15px;
+	padding: 15px 5px 15px 25px;
 }
 .info_edit table tr td input[type="text"] {
 	height: 40px;
 	border: 1px solid #dedede;
 	font-size: 14px;
-	padding: 3px 0 0;
+	padding-left: 10px;
 	vertical-align: middle;
 	box-sizing: border-box;
 	border-radius: 5px;
@@ -88,13 +90,15 @@ div.info_edit table td{
 }
 
 .edit_btn{ 
-	width: 100px;
-	height: 50px;
-	background-color:#DCC1A0;
-	border: 0px;
-	border-radius: 5px;
-	margin: 0px auto;
-	font-size: 17px;
+    display: block;
+    margin: 0px auto;
+    margin-bottom: 100px;
+    width: 130px;
+    height: 55px;
+    background-color: #DCC1A0;
+    color: #593000;
+    border-radius: 5px;
+    font-size: 18px;
 }
 /* 사진등록  */
 .upload-button {

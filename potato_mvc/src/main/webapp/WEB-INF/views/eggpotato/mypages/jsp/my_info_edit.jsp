@@ -117,7 +117,7 @@ function readURL(input) {
 			</th>
 			<td>
 				<div class="profile_img">
-					<img src="http://localhost/potato/css/images/${mil.img }"  id="preview" name="img" class="profileImg" style="margin: 5px 30px; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://localhost/potato/css/images/${mil.img }"  id="preview" name="img" class="profileImg" style="margin: 5px 30px 5px 0; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
 				<div class="upload-button">
 					<input type="button" value="사진 등록" class="img_btn" id="imgBtn">
 					<input type="file" name="upfile" id="uploadBtn" onchange="readURL(this)"/>
@@ -128,15 +128,15 @@ function readURL(input) {
 		</tr>
 		<tr>
 			<th><label>성명</label></th>
-			<td><input type="text" value="<c:out value="  ${ mil.name }"/>" id="name" readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.name }"/>" id="name" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>닉네임</label></th>
-			<td><input type="text" value="<c:out value="  ${ mil.nick }"/>" id="nick"  readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.nick }"/>" id="nick"  readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>아이디</label></th>
-			<td><input type="text" value="<c:out value="  ${ mil.id }"/>" id="id" readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.id }"/>" id="id" readonly="readonly"></td>
 		</tr>
 		<tr>
 			<th><label>생년월일</label></th>
@@ -147,7 +147,7 @@ function readURL(input) {
 		<tr>
 			<th><label>휴대폰</label></th>
 				<td>
-					<input type="text" name="phone_num" value="<c:out value="  ${ mil.phone }"/>"  readonly="readonly">
+					<input type="text" name="phone_num" value="<c:out value="${ mil.phone }"/>"  readonly="readonly">
 				</td>
 		</tr>
 		<tr>
