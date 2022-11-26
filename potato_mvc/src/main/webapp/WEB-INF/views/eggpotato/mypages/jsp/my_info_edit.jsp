@@ -21,6 +21,8 @@
 <c:if test="${updateInfoCnt eq 0 }">
 	location.href="my_info_edit.do";
 </c:if>
+
+
 		$(function() {
 			//사진등록 삭제버튼 클릭 시
 			 $("#img_del_btn").click(function() {
@@ -43,10 +45,11 @@
 function readURL(input) {
 	 alert("이미지");
 		 if (input.files && input.files[0]) {
-			   var reader = new FileReader();
+			 var reader = new FileReader();
 			   reader.onload = function(e) {
 					    document.getElementById('preview').src = e.target.result;
-					    };
+					    $("#imgChk").attr("value","N");
+			   };
 				    reader.readAsDataURL(input.files[0]);
 				  } else {
 						  
@@ -63,8 +66,9 @@ function readURL(input) {
 				    }
 				}
 		function deleteFile() {
-			alert("에러");
+			alert("삭제");
 			 $("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
+			 $("#uploadBtn").val("");
 				}
 				
 			

@@ -79,13 +79,18 @@ public class MyPageController {
 		
 		File saveDir=new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images");
 		int maxSize=1024*1024*20*20; // byte * kb * mb *gb
-		String responseURL="day1104/upload_err";
+		//String responseURL="day1104/upload_err";
 		try {
 			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),maxSize, "UTF-8",
 					new DefaultFileRenamePolicy() );
-			
+			String rename=mr.getFilesystemName("upfile");
+			//System.out.println(imgChk + " : findME");
 			mieVO.setImg(mr.getFilesystemName("upfile"));
 			mieVO.setEmail(mr.getParameter("email"));
+
+			if( rename == null  ) {
+				mieVO.setImg("basic.png");
+			}
 			
 			mps.updateInfo(mieVO);
 			
