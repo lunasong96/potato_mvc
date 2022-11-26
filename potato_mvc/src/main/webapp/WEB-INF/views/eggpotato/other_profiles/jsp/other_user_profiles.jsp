@@ -69,8 +69,10 @@ $(document).on("click", ".heart-btn", function() {
 			id_clicker: "${id}",
 			review_idx: $reviewidx,
 			id_writer: $id_writer };
-	
-	if(likeClass=="heart-btn hb-fill") { //좋아요 취소
+
+	if("${id}"=="") {
+		alert("로그인이 필요한 동작입니다.")
+	}else if(likeClass=="heart-btn hb-fill") { //좋아요 취소
 		$(this).removeClass("hb-fill");
 		
 			$.ajax({
@@ -201,7 +203,7 @@ $("#editReview").submit();
 		<div class="re-right">
 		<div style="margin-bottom: 10px;">
 			<span style="font-size: 19px;color: white;padding: 5px 10px; background-color: #DCC1A0;
-			border-radius: 7px;"><c:out value="${rev.name}"/></span>
+			border-radius: 7px;"><a href="user_detailed.do?restarea_idx=${rev.restarea_idx }"><c:out value="${rev.name}"/></a></span>
 		</div>	
 		<span><c:out value="${rev.nick}"/></span>
 			<div class="star-rate">
@@ -233,7 +235,7 @@ $("#editReview").submit();
 				<div class="etc-icon-wrap">
 				<div class="etc-icon" value="${rev.id }">
 					<div class="heart-icon-wrap" value="${rev.restarea_idx}">
-						<button type="button" class="heart-btn hb-fill" value="${rev.review_idx}">
+						<button type="button" class="${rev.clickcount eq 1? 'heart-btn hb-fill':'heart-btn'}" value="${rev.review_idx}">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
 							  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 							</svg>

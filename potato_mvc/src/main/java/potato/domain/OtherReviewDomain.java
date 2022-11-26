@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class OtherReviewDomain {
 	private String name, id, nick, img, foodimg, contents;
-	private int review_idx, restarea_idx, liked, rating;
+	private int review_idx, restarea_idx, liked, rating, clickcount;
 	private Date post_date;
 	public String getName() {
 		return name;
@@ -66,18 +66,27 @@ public class OtherReviewDomain {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+	public int getClickcount() {
+		return clickcount;
+	}
+	public void setClickcount(int clickcount) {
+		this.clickcount = clickcount;
+	}
 	public Date getPost_date() {
 		return post_date;
 	}
 	public void setPost_date(Date post_date) {
 		this.post_date = post_date;
 	}
-	
 	@Override
 	public String toString() {
 		return "OtherReviewDomain [name=" + name + ", id=" + id + ", nick=" + nick + ", img=" + img + ", foodimg="
 				+ foodimg + ", contents=" + contents + ", review_idx=" + review_idx + ", restarea_idx=" + restarea_idx
-				+ ", liked=" + liked + ", rating=" + rating + ", post_date=" + post_date + "]";
+				+ ", liked=" + liked + ", rating=" + rating + ", clickcount=" + clickcount + ", post_date=" + post_date
+				+ "]";
 	}
+
+	
+	
 	
 }

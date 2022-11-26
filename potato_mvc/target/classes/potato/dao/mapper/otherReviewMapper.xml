@@ -31,7 +31,7 @@
                re.contents, re.rating, re.id, re.post_date, (select count(id_clicker) from liked where review_idx = re.review_idx and id_writer=re.id and restarea_idx = re.restarea_idx  ) liked,
                (select count(*)
       from  liked
-      where review_idx = re.review_idx and restarea_idx=re.restarea_idx and id_writer=#{otherPid} and id_clicker=#{otherPid}) clickcount
+      where review_idx = re.review_idx and restarea_idx=re.restarea_idx and id_writer=#{otherPid} and id_clicker=#{id}) clickcount
             from review re
             where re.id = #{otherPid}
       order by re.post_date desc, re.review_idx desc

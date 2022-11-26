@@ -38,6 +38,8 @@ public class OtherReviewController {
 		int startNum = ors.startNum(curPage);
 		int isLast = ors.isLast(lastPage, startNum);
 		
+		String id=(String) session.getAttribute("id");
+		orVO.setId(id);
 		List<OtherReviewDomain> list=ors.searchOtherRevAll(orVO);
 		//view·Î Àü¼Û
 		model.addAttribute("lastPage", lastPage);
