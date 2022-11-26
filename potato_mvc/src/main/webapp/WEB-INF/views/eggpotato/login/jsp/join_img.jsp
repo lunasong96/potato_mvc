@@ -55,6 +55,7 @@ function readURL(input) {
 	}
 function deleteFile() {
  	$("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
+ 	$("#uploadBtn").val("");
 }
 
 //null 검사
