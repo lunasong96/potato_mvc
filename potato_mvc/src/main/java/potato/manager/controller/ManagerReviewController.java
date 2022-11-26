@@ -31,10 +31,11 @@ public class ManagerReviewController {
 	@RequestMapping(value = "manager_review.do", method = {POST,GET})//최초요청은 get이고 이후 요청은 post로 받기위한 처리
 	public String reviewMain(SearchReviewVO srVO, Model model, HttpSession session) {
 		String url = "manager/review_management/jsp/manager_review_management";
-		/*
-		 * 세션처리하면 주석풀기 if(session.getAttribute("manager_id")==null) {
-		 * url="forward:managerlogin_page.do"; }
-		 */
+	
+		if(session.getAttribute("manager_id")==null) {
+			url="forward:managerlogin_page.do"; 
+		}
+		 
 		
 		//검색옵션에 따라 컬럼명을 동적으로 만들기 위한 설정 
 		if (srVO.getSearchType() != null && !"".equals(srVO.getSearchType())) {

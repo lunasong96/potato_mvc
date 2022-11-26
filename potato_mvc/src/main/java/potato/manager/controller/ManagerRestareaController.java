@@ -45,12 +45,12 @@ public class ManagerRestareaController {
 	@RequestMapping(value="manager_restarea.do",method= {GET, POST})
 	public String restMain(SearchRestVO srVO, Model model, HttpSession session) {
 		String url="manager/rest_management/jsp/manager_rest_management";
-		/*
-		 * 세션처리하면 주석풀기
+		
+		
 		if(session.getAttribute("manager_id")==null) {
 			url="forward:managerlogin_page.do";
 		}
-		*/
+		
 		
 		//페이징
 		int totalReview = mrs.searchTotalRest(srVO);
