@@ -41,14 +41,10 @@ public class UserService {
 	 * @param mlVO
 	 * @return
 	 */
-	public boolean searchManager(ManagerLoginVO mlVO) {
-		boolean flag=false;
-		String result="";
-		result=uDAO.selectManager(mlVO);
-		if( result != null && !result.equals("") ) {
-			flag= true;
-		}
-		return flag;
+	public int searchManager(ManagerLoginVO mlVO) {
+		int cnt=0;
+		cnt=uDAO.selectManager(mlVO);
+		return cnt;
 	}
 	
 	/**

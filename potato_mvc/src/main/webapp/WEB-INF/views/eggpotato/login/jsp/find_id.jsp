@@ -10,7 +10,17 @@
 <link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
 <link rel="stylesheet" type="text/css" href="css/login/find_id.css"/>
+<style type="text/css">
+.birth_chk{
+color:#008000;
+display: none;
+}
 
+.phone_chk{
+color:#008000;
+display: none;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -69,6 +79,31 @@ function moveLogin(){
 function moveFind() {
 	location.href="forgotPw.do";
 }
+
+//전화번호 하이픈입력
+const autoHyphen = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	 
+	 $("#phone_chk").css("display","inline-block");
+	 if( target.value.length == 13 ) {
+		 $("#phone_chk").css("display", "none");
+	 }
+}
+
+//생년월일 하이픈입력
+const autoBirth = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{3,4})(\d{1,2})(\d{2})$/, `$1-$2-$3`);
+	 
+	 $("#birth_chk").css("display","inline-block");
+	 if( target.value.length == 10 ) {
+		 $("#birth_chk").css("display", "none");
+	 }
+}
+
 </script>
 
 </head>
@@ -92,9 +127,11 @@ function moveFind() {
 			<h2 class="input-title">이름</h2>
 			<input type="text" placeholder="이름" class="text-box" name="name" id="name"><br/>
 			<h2 class="input-title">생년월일</h2>
-			<input type="text" placeholder="생년월일" class="text-box" name="birth" id="birth"><br/>
+			<input type="text" placeholder="생년월일" class="text-box" name="birth" id="birth" oninput="autoBirth(this)" maxlength="10"><br/>
+			<span class="birth_chk" id="birth_chk">생년월일 19990101 식으로 입력해주시면 됩니다. </span>
 			<h2 class="input-title">휴대전화</h2>
-			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone"><br/>
+			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13"><br/>
+			<span class="phone_chk" id="phone_chk"> 01012345678 식으로 입력해주시면 됩니다. </span>
 			</form>
 			<input type="button" value="아이디 찾기" class="findBtn" id="findBtn">
 		</div>

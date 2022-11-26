@@ -17,9 +17,8 @@
 	</select>
 	
 	<!-- 매니저 로그인 -->
-	<select id="selectManagerLogin" parameterType="mlVO"
-	resultType="String">
-		select manager_id
+	<select id="selectManagerLogin" parameterType="mlVO" resultType="int">
+		select COUNT(manager_id)
 		from manager
 		where manager_id= #{ manager_id } and pass= #{ pass }
 	</select>

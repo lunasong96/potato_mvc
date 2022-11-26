@@ -29,6 +29,31 @@ display: none;
 color:#6A82FB; 
 display: none;
 }
+
+.phone_chk{
+color:#008000;
+display: none;
+}
+
+#keyShow {
+  position: absolute;
+  display: none;
+  margin-left: -60px;
+  margin-top: 24px;
+  font-size: 13px;
+  cursor: pointer;
+  color: grey;
+}
+
+#keyShow2 {
+  position: absolute;
+  display: none;
+  margin-left: -60px;
+  margin-top: 24px;
+  font-size: 13px;
+  cursor: pointer;
+  color: grey;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -38,6 +63,53 @@ $(function(){
 		//null 검사
 		chkNull();
 	});//click
+	
+	$("#pass").on("keyup", function(event) {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		    $("#checkKey").triggerHandler("click");
+		  } else {
+		    if (this.value) {
+		      $("#keyShow").css("display", "inline-block");
+		    } else {
+		      $("#keyShow").hide();
+		    }
+		  }
+		}).focus();
+
+		$("#keyShow").on("click", function() {
+		  if ($("#pass").attr("type") == "password") {
+		    $("#pass").attr("type", "text");
+		    $($(this)).text("H I D E");
+		  } else {
+		    $("#pass").attr("type", "password");
+		    $($(this)).text("SHOW");
+		  }
+		});
+		
+	$("#passChk").on("keyup", function(event) {
+		  if (event.keyCode === 13) {
+		    event.preventDefault();
+		    $("#checkKey").triggerHandler("click");
+		  } else {
+		    if (this.value) {
+		      $("#keyShow2").css("display", "inline-block");
+		    } else {
+		      $("#keyShow2").hide();
+		    }
+		  }
+		}).focus();
+
+		$("#keyShow2").on("click", function() {
+		  if ($("#passChk").attr("type") == "password") {
+		    $("#passChk").attr("type", "text");
+		    $($(this)).text("H I D E");
+		  } else {
+		    $("#passChk").attr("type", "password");
+		    $($(this)).text("SHOW");
+		  }
+		});
+	
 });//ready
 
 //null 검사
@@ -78,17 +150,21 @@ function chkNull(){
 
 	 if(pw.length < 8 || pw.length > 20){
 
-	  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+	  alert("비밀번호를 8자리 ~ 20자리 이내로 입력해주세요.");
+	  $("#pass").focus();
 	  return false;
 	 }else if(pw.search(/\s/) != -1){
 	  alert("비밀번호는 공백 없이 입력해주세요.");
+	  $("#pass").focus();
 	  return false;
 	 }else if(num < 0 || eng < 0 || spe < 0 ){
-	  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+	  alert("비밀번호를 영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+	  $("#pass").focus();
 	  return false;
 	 }else {
 		console.log("통과"); 
 	 }
+	 
 	//비밀번호확인 필수 입력	
 	if($("#passChk").val().trim() !== $("#pass").val().trim()) {
 		alert("비밀번호가 일치하지 않습니다.");
@@ -127,14 +203,13 @@ function chkNull(){
  	var minYear= 1900
  	var numYear = parseInt($("#year").val());
  	if( numYear < minYear || numYear > maxYear ){
- 		alert("1900~"+maxYear+"년까지 입력가능합니다.");
+ 		alert(생년월일은+ "1900~"+maxYear+"년까지 입력가능합니다.");
 		$("#year").focus();
 		return;
  	}
 	$("#joinFrm").submit();
 }//chkNull
 
-//전화번호 하이픈입력
 const autoNum = (target) => {
 	 target.value = target.value
 	   .replace(/[^0-9]/g, '');
@@ -145,6 +220,11 @@ const autoHyphen = (target) => {
 	 target.value = target.value
 	   .replace(/[^0-9]/g, '')
 	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	 
+	 $("#phone_chk").css("display","inline-block");
+	 if( target.value.length == 10 ) {
+		 $("#phone_chk").css("display", "none");
+	 }
 }
 
 //이메일한글입력 방지 
@@ -245,9 +325,11 @@ function checkNick(){
 			<span class="id_ok" id="id_ok">사용 가능한 아이디입니다.</span>
 			<span class="id_already" id="id_already">누군가 이 아이디를 사용하고 있어요.</span>
 			<h2 class="input-title">비밀번호</h2>
-			<input type="password" placeholder="비밀번호" class="pass" name="pass" id="pass"><br/>
+			<input type="password" placeholder="비밀번호" class="pass" name="pass" id="pass">
+			<div id="keyShow">SHOW</div><br/>
 			<h2 class="input-title">비밀번호 재확인</h2>
-			<input type="password" placeholder="비밀번호 재확인" class="pass" name="passChk" id="passChk"><br/>
+			<input type="password" placeholder="비밀번호 재확인" class="pass" name="passChk" id="passChk">
+			<div id="keyShow2">SHOW</div><br/>
 			<h2 class="input-title">이름</h2>
 			<input type="text" placeholder="이름" class="text-join" name="name" id="name"><br/>
 			<h2 class="input-title">별명</h2>
@@ -270,6 +352,7 @@ function checkNick(){
 			<input type="text" placeholder="이메일" class="text-join" name="email" id="email" maxlength="50" onkeydown="noKor1();" onkeyup="noSpaceForm(this)"><br/>
 			<h2 class="input-title">휴대전화</h2>
 			<input type="text" placeholder="전화번호 입력" class="text-join" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13"><br/>
+			<span class="phone_chk" id="phone_chk"> 01012345678 식으로 입력해주시면 됩니다. </span>
 			<input type="button" value="다음" class="nextBtn" id="nextBtn">
 		</form>
 		</div>

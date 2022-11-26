@@ -9,7 +9,12 @@
 <link rel="stylesheet" type="text/css" href="css/common/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/common/user_wrap_container.css"/>
 <link rel="stylesheet" type="text/css" href="css/login/find_pass.css"/>
-
+<style type="text/css">
+.phone_chk{
+color:#008000;
+display: none;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
@@ -63,6 +68,18 @@ function chkNull() {
 function moveLogin(){
 	location.href="login_page.do";
 }
+
+//전화번호 하이픈입력
+const autoHyphen = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+	 
+	 $("#phone_chk").css("display","inline-block");
+	 if( target.value.length == 10 ) {
+		 $("#phone_chk").css("display", "none");
+	 }
+}
 </script>
 
 </head>
@@ -88,7 +105,8 @@ function moveLogin(){
 			<h2 class="input-title">아이디</h2>
 			<input type="text" placeholder="아이디" class="id" name="id" id="id"><br/>
 			<h2 class="input-title">휴대전화</h2>
-			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone"><br/>
+			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13"><br/>
+			<span class="phone_chk" id="phone_chk"> 01012345678 식으로 입력해주시면 됩니다. </span>
 			</form>
 			<input type="button" value="비밀번호 찾기" class="findBtn" id="findBtn">
 		</div>

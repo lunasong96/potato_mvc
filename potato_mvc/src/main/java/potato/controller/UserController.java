@@ -48,11 +48,23 @@ public class UserController {
 		return "login/jsp/login";
 	}//loginPage
 	
+	/**
+	 * 매니저 로그인 페이지 이동
+	 * @return
+	 */
 	@RequestMapping(value = "/managerlogin_page.do", method = GET)
 	public String managerloginPage() {
 		return "manager/home/jsp/manager_login";
 	}//loginPage
 	
+	/**
+	 * 회원 로그인
+	 * @param lVO
+	 * @param session
+	 * @param id
+	 * @param pass
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = POST)
 	public String login(LoginVO lVO, HttpSession session, String id, String pass) {
@@ -71,21 +83,33 @@ public class UserController {
 		return jsonObj.toJSONString();
 	}//login
 	
+
+	/**
+	 * 매니저 로그인
+	 * @param mlVO
+	 * @param ss
+	 * @return
+	 */
+	@ResponseBody
 	@RequestMapping(value = "/managerlogin.do", method = POST)
-	public String managerlogin(ManagerLoginVO mlVO, HttpSession ss, Model	m) {
-		String url="";
-		boolean flag=us.searchManager(mlVO);
-		System.out.println(flag);
-		if( flag ) {
-			ss.setAttribute("manager_id", mlVO.getManager_id());
-			url="redirect:mgr_home.do";
-		} else {
-			url="manager/home/jsp/manager_login";
-			ss.setAttribute("login_flag", false);
+	public String managerlogin(ManagerLoginVO mlVO, String manager_id, String pass, HttpSession session) {
+		mlVO.setManager_id(manager_id);
+		mlVO.setPass(pass);
+		int cnt=us.searchManager(mlVO);
+		if( cnt ==1 ) {
+			session.setAttribute("manager_id", manager_id);
 		}
-		return url;
+		JSONObject jsonObj=new JSONObject();
+		jsonObj.put("cnt", cnt);
+		return jsonObj.toJSONString();
 	}//login
 	
+	/**
+	 * 로그아웃
+	 * @param ss
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "logout.do", method = GET)
 	public String logout( SessionStatus ss, HttpSession session) {
 		String url="redirect:user_mainhome.do";
@@ -94,24 +118,28 @@ public class UserController {
 		return url;
 	}//logout
 	
+	/**
+	 * 회원가입페이지 1이동
+	 * @return
+	 */
 	@RequestMapping(value = "/signUpAgree.do", method = GET)
 	public String signUpAgreePage() {
 		return "login/jsp/service_check";
 	}
 	
-	
-	@RequestMapping(value = "/signUp4.do", method = GET)
-	public String signUp4(SessionStatus ss, HttpSession session) {
-		ss.isComplete();
-		session.invalidate();
-		return "redirect:user_mainhome.do";
-	}
-	
+	/**
+	 * 이용약관1 이동
+	 * @return
+	 */
 	@RequestMapping(value = "/tos1.do", method = GET)
 	public String tos1() {
 		return "login/jsp/tos1";
 	}
 	
+	/**
+	 * 이용약관2 이동
+	 * @return
+	 */
 	@RequestMapping(value = "/tos2.do", method = GET)
 	public String tos2() {
 		return "login/jsp/tos2";
@@ -186,6 +214,19 @@ public class UserController {
 	}
 	
 	/**
+	 * 회원가입에서 메인페이지 이동
+	 * @param ss
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/signUp4.do", method = GET)
+	public String signUp4(SessionStatus ss, HttpSession session) {
+		ss.isComplete();
+		session.invalidate();
+		return "redirect:user_mainhome.do";
+	}
+	
+	/**
 	 * 아이디 중복확인
 	 * @return
 	 */
@@ -207,23 +248,41 @@ public class UserController {
 		return jsonObj;
 	}
 	
+	/**
+	 * 아이디 찾기 페이지 이동
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/forgotId.do", method = GET)
 	public String forgotUserId(HttpSession session) {
 		session.invalidate();
 		return "login/jsp/find_id";
 	}
 	
+	/**
+	 * 비밀번호 찾기 이동
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/forgotPw.do", method = GET)
 	public String forgotUserPw(HttpSession session) {
 		session.invalidate();
 		return "login/jsp/find_pass";
 	}
 	
+	/**
+	 * 아이디찾기 팝업창
+	 * @return
+	 */
 	@RequestMapping(value = "/forgotIdPop.do", method = GET)
 	public String forgotIdPop() {
 		return "login/jsp/find_id_popup";
 	}
 	
+	/**
+	 * 비밀번호찾기 팝업창
+	 * @return
+	 */
 	@RequestMapping(value = "/forgotPwPop.do", method = GET)
 	public String forgotPwPop() {
 		return "login/jsp/find_pass_popup";
@@ -250,6 +309,15 @@ public class UserController {
 	}
 	 
 	
+	/**
+	 * 비밀번호 찾기
+	 * @param fpVO
+	 * @param session
+	 * @param id
+	 * @param name
+	 * @param phone
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/forgotPwChk.do", method = POST)
 	public String forgotUserPwChk(ForgotPwVO fpVO, HttpSession session, String id, String name, String phone) {
