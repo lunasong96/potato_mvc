@@ -33,7 +33,6 @@ $(function() {
 });//ready
 
 function readURL(input) {
-	 alert("이미지");
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();
 	    reader.onload = function(e) {
@@ -55,7 +54,6 @@ function readURL(input) {
 	    }
 	}
 function deleteFile() {
-	alert("에러");
  	$("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
 }
 
@@ -84,7 +82,7 @@ function chkNull(){
 		<div class="main-container">
 			<form action="signUp3.do" method="post" id="joinFrm" enctype="multipart/form-data">
 			<h2 class="main-title">프로필 사진</h2><br/>
-			<img src="css/login/images/img1.png" class="main-profile" id="preview"/><br/>
+			<img src="css/login/images/basic.png" class="main-profile" id="preview"/><br/>
 			<input type="file" name="upfile" id="uploadBtn" onchange="readURL(this);"/>
 			<label for="uploadBtn" class="imgupBtn">사진등록</label>
 			<input type="button" value="삭제" class="imgBtn" id="deleteBtn">
