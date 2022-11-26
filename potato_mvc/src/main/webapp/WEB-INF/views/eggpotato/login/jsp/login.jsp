@@ -27,7 +27,7 @@ function chkNull(){
 		$("#id").val("");
 		$("#id").focus();
 		return;
-	}//end if
+	}
 	if( $("#pass").val().trim() == "" ){
 		alert("비밀번호를 입력하세요");
 		$("#pass").val("");
@@ -46,18 +46,16 @@ function chkNull(){
 			alert("로그인에 문제가 발생했습니다. 잠시 후 다시 시도해 주시기 바랍니다.");
 			console.log( xhr.status );
 		}, success: function( jsonObj ) {
-			if( jsonObj.quit =="Y" ) {
-				alert("탈퇴된 회원입니다.");
-				return;
-			} else{ 
-				if( jsonObj.id !="" && jsonObj.id != null ){
+			if( jsonObj.flag) { 
+				if( jsonObj.quit =="Y" ) {
+					alert("탈퇴된 회원입니다.");
+					return;
+				} else{ 
 					location.href="user_mainhome.do";
-				} else{
-					alert("아이디나 비밀번호가 틀렸습니다. 로그인에 실패하셨습니다.");
 				}//end else
-					
-			}//end else
-				
+			} else{
+				alert("아이디나 비밀번호가 틀렸습니다. 로그인에 실패하셨습니다.");
+			}
 		}//success
 	});//ajax
 }//chkNull

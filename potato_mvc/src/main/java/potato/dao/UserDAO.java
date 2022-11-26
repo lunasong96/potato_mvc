@@ -40,16 +40,30 @@ public class UserDAO {
 	}//insertMember
 	
 	/**
+	 * 유저로그인
+	 * @param lVO
+	 * @return
+	 */
+	public int selectLogin(LoginVO lVO) {
+		int cnt=0;
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		cnt = ss.selectOne(UserMapper+"selectLogin", lVO);
+		mbh.closeHandler(ss);
+		return cnt;
+	}//selectManager
+	
+	/**
 	 * 유저 로그인
 	 * @param lVO
 	 * @return
 	 */
-	public UserDomain selectLogin(LoginVO lVO) {
+	public UserDomain selectLoginInfo(LoginVO lVO) {
 		UserDomain ud= null;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		ud=ss.selectOne(UserMapper+"selectMemberLogin", lVO);
+		ud=ss.selectOne(UserMapper+"selectLoginInfo", lVO);
 		mbh.closeHandler(ss);
 		return ud;
 	}//selectLogin

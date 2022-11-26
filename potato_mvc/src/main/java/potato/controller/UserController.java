@@ -68,18 +68,25 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = POST)
 	public String login(LoginVO lVO, HttpSession session, String id, String pass) {
-		UserDomain ud=null;
 		lVO.setId(id);
 		lVO.setPass(pass);
-		ud=us.searchMember(lVO);
-		session.setAttribute("id", ud.getId());
-		session.setAttribute("nick", ud.getNick());
-		session.setAttribute("img", ud.getImg());
+		
 		JSONObject jsonObj=new JSONObject();
-		jsonObj.put("id", ud.getId());
-		jsonObj.put("nick", ud.getNick());
-		jsonObj.put("quit", ud.getQuit());
-		jsonObj.put("img", ud.getImg());
+		UserDomain ud=null;
+		jsonObj.put("flag", false);
+		int cnt=us.searchMember(lVO);
+		
+		if( cnt == 1) {
+			ud=us.searchMemberInfo(lVO);
+			session.setAttribute("id", ud.getId());
+			session.setAttribute("nick", ud.getNick());
+			session.setAttribute("img", ud.getImg());
+			jsonObj.put("id", ud.getId());
+			jsonObj.put("nick", ud.getNick());
+			jsonObj.put("quit", ud.getQuit());
+			jsonObj.put("img", ud.getImg());
+			jsonObj.put("flag", true);
+		}
 		return jsonObj.toJSONString();
 	}//login
 	

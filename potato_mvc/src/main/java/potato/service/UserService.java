@@ -25,14 +25,18 @@ public class UserService {
 	@Autowired(required = false)
 	private UserDAO uDAO;
 	
+	public int searchMember(LoginVO lVO) {
+		int cnt= uDAO.selectLogin(lVO);
+		return cnt;
+	}
+	
 	/**
 	 * 유저 로그인
 	 * @param lVO
 	 * @return
 	 */
-	public UserDomain searchMember(LoginVO lVO) {
-		UserDomain ud = null;
-		ud=uDAO.selectLogin(lVO);
+	public UserDomain searchMemberInfo(LoginVO lVO) {
+		UserDomain ud = uDAO.selectLoginInfo(lVO);
 		return ud;
 	}
 	

@@ -119,8 +119,15 @@ function chkNull(){
 		$("#id").val("");
 		$("#id").focus();
 		return;
-	}//end if
-	
+	} else {
+			var idChk = $("#id").val(); 
+			var regExp = /^[a-z]+[a-z0-9]{5,19}$/g;
+		 
+			if( !regExp.test(idChk) ) {
+				alert("영문자로 시작하는 영문자 또는 숫자 6~20자로 아이디를 입력해주세요.");
+				return;
+			}
+	}
 	//비밀번호 필수 입력
 	if( $("#pass").val().trim() == "" ){
 		alert("비밀번호를 입력하세요");
