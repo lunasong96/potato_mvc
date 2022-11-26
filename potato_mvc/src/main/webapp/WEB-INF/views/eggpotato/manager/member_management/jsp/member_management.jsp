@@ -104,7 +104,7 @@ function movePage( page ) {
 				</select>
 				
 				<div class="search_wrap">
-					<input type="text" id="idSearch" name="idSearch" class="search_txt" placeholder="아이디를 입력해주세요." autocomplete="off">
+					<input type="text" id="idSearch" value="${ param.id }" name="idSearch" class="search_txt" placeholder="아이디를 입력해주세요." autocomplete="off">
 					<button type="button" class="search_btn" id="searchBtn"><strong>검색</strong></button>
 				</div>			
 			</div><!-- mm_top end -->
@@ -122,7 +122,7 @@ function movePage( page ) {
 					<c:forEach var="member" items="${ memberList }">
 					<tr>
 					<td><a href="javascript:infoPopup('${member.id}')" style="color:black">${member.id}</a></td><td>${member.nick}</td><td><fmt:formatDate value="${member.join_date}" pattern="yyyy-MM-dd"/></td><td>${member.birth}</td>
-					<td><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단" onclick="showPopup('${member.id}','${member.nick}')"></td>
+					<td><a href="javascript:showPopup('${member.id}','${member.nick}')"><input type="button" class="inputBtn" id="blockBtn" name="blockBtn" value="차단"></a></td>
 					</tr>
 				</c:forEach>
 				</c:when>
@@ -148,7 +148,7 @@ function movePage( page ) {
 					</c:if>
 					<c:forEach var="block" items="${memberList}">
 						<tr><td>${block.id }</td><td>${block.nick}</td><td>${block.reason }</td>
-						<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></td></tr>
+						<td><a href="mgr_unblock.do?id=${ block.id }"><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></a></td></tr>
 					</c:forEach>
 					</table>
 				
@@ -191,7 +191,7 @@ function movePage( page ) {
 <!-- 회원 불러오기 -->
 <form id="memberFrm" action="mgr_memberManagement.do" method="post">
 	<input type="hidden" id="id" name="id" value="${param.id }"/>
-	<input type="hidden" id="memberCategory" name="memberCat" value="${empty param.memberType? 1:param.memberType }"/>
+	<input type="hidden" id="memberCategory" name="memberCat" value="${empty param.memberCat? 1:param.memberCat }"/>
 	<input type="hidden" id="memberType" name="memberType" value="${empty param.memberType? 1:param.memberType }"/>
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
 </form>
@@ -199,6 +199,11 @@ function movePage( page ) {
 <!-- 회원정보 상세창 불러오기 -->
 <form id="infoFrm" action="mgr_memberInfoPopup.do" method="post">
 	<input type="hidden" id="infoId" name="id">
+</form>
+
+<!-- 차단 해제 -->
+<form id="unblockFrm" action="mgr_unblock.do">
+	<input type="hidden" id="unblockId" name="id">
 </form>
 
 </body>

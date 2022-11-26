@@ -2,6 +2,7 @@ package potato.manager.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
@@ -85,15 +86,13 @@ public class MgrMemberDAO {
 	}
 	
 	//회원 차단
-	public int insertBlock(ManagerBlockVO mbVO) {
+	public int insertBlock(ManagerBlockVO mbVO) throws PersistenceException {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession session=mbh.getHandler();
 		
 		int cnt=session.insert("potato.manager.mgrMemberMapper.blockMember",mbVO);
-		if(cnt!=0) {
+		if(cnt == 1) {
 			session.commit();
-		}else {
-			session.rollback();
 		}
 		
 		mbh.closeHandler(session);

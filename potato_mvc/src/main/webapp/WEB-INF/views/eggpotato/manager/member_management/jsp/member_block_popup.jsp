@@ -12,21 +12,26 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
-if(${blockCnt}==1){
-	alert("해당 회원이 차단되었습니다.")	
+<c:if test="${blockFlag eq 'N'}">
+	alert("해당 회원이 차단되었습니다.");	
 	self.close();
-}
+</c:if>
+<c:if test="${blockFlag eq 'Y'}">
+alert("이미 차단된 회원입니다.");
+self.close();
+</c:if>
 
-function block(){
+$(function(){
+	$("#blockBtn").click(function(){
 	var idx= $("[name='report-radio']:checked").val();
-	alert(idx);
 	if(idx==null){
 		alert("차단 사유를 선택하세요.");
 	}else{
+	$("#block_idx").val(idx);
 	$("#blockFrm").submit();
-	}
-}
+		}
+	})
+});
 </script>
 
 </head>
@@ -57,7 +62,7 @@ function block(){
 
 <form id="blockFrm" action="mgr_block.do" method="get">
 	<input type="hidden" id="blockId" name="id" value="${param.blockId }">
-	<input type="hidden" id="blockIdx" name="block_idx" value="${param.block_idx}">
+	<input type="hidden" id="block_idx" name="block_idx" value="${param.block_idx}">
 </form>
 
 </body>

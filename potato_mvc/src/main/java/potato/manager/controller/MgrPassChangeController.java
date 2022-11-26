@@ -23,12 +23,17 @@ public class MgrPassChangeController {
 	//forward로 변경하기
 	@RequestMapping(value="/mgrPassChange.do",method={GET,POST})
 	public String passChange(HttpSession session) {
-		session.setAttribute("id","potatoking");
-		return "manager/pass_change/jsp/manager_password_change";
-	}
+		String url="manager/pass_change/jsp/manager_password_change";
+		
+		if(session.getAttribute("manager_id")==null) {
+			url="forward:managerlogin_page.do"; 
+		}
+		
+		return url;
+	}		
 	
 	//비번 변경 처리
-	@RequestMapping(value="/mgrPassChangeProcess.do",method=POST)
+	@RequestMapping(value="/mgrPassChangeProcess.do",method={GET,POST})
 	public String passChangeProcess(MgrPassChangeVO mpcVO, Model model) {
 		
 		

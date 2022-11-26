@@ -26,7 +26,7 @@ $(function() {
 <div class="header">
 	<div class="wrap-banner">
 		<div class="banner-left">
-			<a href="../../list/jsp/list_view_all.jsp" class="list-link">휴게소</a>
+			<a href="allList.do" class="list-link">휴게소</a>
 			<div class="searchWrap">
 				<input type="text" placeholder="휴게소를 검색해보세요." class="searchBar" autocomplete="off" required="required">
 				<button type="button" class="searchIcon" id="searchIconBtn">

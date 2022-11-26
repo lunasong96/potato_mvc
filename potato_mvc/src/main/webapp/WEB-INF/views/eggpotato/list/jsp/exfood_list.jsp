@@ -12,7 +12,36 @@
 <link rel="stylesheet" type="text/css" href="css/list/exfood_list.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-
+function doMap(num){
+	switch(num){
+	case 1:
+		$(".local-img").attr("src","css/images/seoul.jpg")
+		break;
+	case 2:
+		$(".local-img").attr("src","css/images/gangwon.jpg")
+		break;
+	case 3:
+		$(".local-img").attr("src","css/images/chung-cheong.jpg")
+		break;
+	case 4:
+		$(".local-img").attr("src","css/images/daejeon.jpg")
+		break;
+	case 5:
+		$(".local-img").attr("src","css/images/chonbuk.jpg")
+		break;
+	case 6:
+		$(".local-img").attr("src","css/images/gwangju.jpg")
+		break;
+	case 7:
+		$(".local-img").attr("src","css/images/daegu.jpg")
+		break;
+	case 8:
+		$(".local-img").attr("src","css/images/busan.jpg")
+		break;
+		
+	}
+	
+}
 </script>
 
 </head>
@@ -30,17 +59,17 @@
 		<div class="navi">
 			<ul class="navibar">
 				<li class="navi-item">
-					<a class="navi-link" href="list_view_all.jsp">전체 휴게소</a>
+					<a class="navi-link" href="allList.do">전체 휴게소</a>
 				</li>
 				<li class="navi-item">
-					<a class="navi-link" href="highway_list.jsp">고속도로별 휴게소</a>
+					<a class="navi-link" href="mapPin.do">고속도로별 휴게소</a>
 				</li>
 				<li class="blank"></li>
 				<li class="navi-item">
-					<a class="navi-link" href="do_list.jsp">도별 휴게소</a>
+					<a class="navi-link" href="doMap.do">도별 휴게소</a>
 				</li>
 				<li class="navi-item">
-					<a class="navi-link" href="exfood_list.jsp">ex-FOOD</a>
+					<a class="navi-link" href="exFood.do">ex-FOOD</a>
 				</li>
 			</ul>
 		</div>
@@ -65,35 +94,35 @@
 				<div class="content-right">
 					<div class="exfood-navi">
 						<ul class="food-navibar">
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(1)">
 								<div class="navi-do">수도권</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(2)">
 								<div class="navi-do">강원</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(3)">
 								<div class="navi-do">충북</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(4)">
 								<div class="navi-do">대전 충남</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(5)">
 								<div class="navi-do">전북</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(6)">
 								<div class="navi-do">광주 전남</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(7)">
 								<div class="navi-do">대구 경북</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>
-							<li class="food-navi-item">
+							<li class="food-navi-item" onclick="doMap(8)">
 								<div class="navi-do">부산 경남</div>
 								<div class="navi-logo"><img src="css/images/ex-food로고.png" class="img"></div>
 							</li>

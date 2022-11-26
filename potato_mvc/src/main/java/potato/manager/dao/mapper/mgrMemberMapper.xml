@@ -57,7 +57,7 @@
 <!-- 회원 차단 -->
 <insert id="blockMember" parameterType="potato.manager.vo.ManagerBlockVO">
 	insert into manager_block(id,block_idx,block_date)
-	values(#{id},#{block_idx},sysdate)	
+	values(#{id},#{block_idx},sysdate)
 </insert>
 
 <!-- 차단 해제 -->

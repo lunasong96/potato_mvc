@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,6 @@ public class MgrMemberService {
 		}else if("3".equals(memberCat)) {
 			list=mmDAO.selectBlockMember(mmVO);
 		}//end else 
-		System.out.println( list );
 		return list;
 	}
 	
@@ -51,16 +51,21 @@ public class MgrMemberService {
 	}
 	
 	//회원 차단하기(차단회원 목록에 추가)
-	public int addBlock(ManagerBlockVO mbVO) {
-		int cnt=mmDAO.insertBlock(mbVO);
-		
-		return cnt;
+	public String addBlock(ManagerBlockVO mbVO) {
+		String blockFlag="N";	
+		try {
+			mmDAO.insertBlock(mbVO);
+		}catch (PersistenceException se) {
+			blockFlag="Y";	
+		}
+
+		return blockFlag;
 	}
 	
 	//차단 해제
 	public int removeBlock(String id) {
-		int cnt=mmDAO.deleteBlock(id);
 		
+		int cnt=mmDAO.deleteBlock(id);
 		return cnt;
 	}
 	
@@ -92,7 +97,7 @@ public class MgrMemberService {
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
-		System.out.println(startNum+" "+ lastPage +" "+ isLast);
+//		System.out.println(startNum+" "+ lastPage +" "+ isLast);
 		
 		return isLast;
 	}

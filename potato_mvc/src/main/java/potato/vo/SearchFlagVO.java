@@ -1,20 +1,17 @@
 package potato.vo;
 
 public class SearchFlagVO {
-	private String keyword,url;
-	private int filterFlag, startNum, endNum,totalPages;
+	private String keyword;
+	private int filterFlag, pageFlag=1;
 	
 	public SearchFlagVO() {
 		
 	}
 
-	public SearchFlagVO(String keyword, String url, int filterFlag, int startNum, int endNum, int totalPages) {
+	public SearchFlagVO(String keyword, int filterFlag, int pageFlag) {
 		this.keyword = keyword;
-		this.url = url;
 		this.filterFlag = filterFlag;
-		this.startNum = startNum;
-		this.endNum = endNum;
-		this.totalPages = totalPages;
+		this.pageFlag = pageFlag;
 	}
 
 	public String getKeyword() {
@@ -25,14 +22,6 @@ public class SearchFlagVO {
 		this.keyword = keyword;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 	public int getFilterFlag() {
 		return filterFlag;
 	}
@@ -41,34 +30,18 @@ public class SearchFlagVO {
 		this.filterFlag = filterFlag;
 	}
 
-	public int getStartNum() {
-		return startNum;
+	public int getPageFlag() {
+		return pageFlag;
 	}
 
-	public void setStartNum(int startNum) {
-		this.startNum = startNum;
-	}
-
-	public int getEndNum() {
-		return endNum;
-	}
-
-	public void setEndNum(int endNum) {
-		this.endNum = endNum;
-	}
-
-	public int getTotalPages() {
-		return totalPages;
-	}
-
-	public void setTotalPages(int totalPages) {
-		this.totalPages = totalPages;
+	public void setPageFlag(int pageFlag) {
+		this.pageFlag = pageFlag;
 	}
 
 	@Override
 	public String toString() {
-		return "SearchFlagVO [keyword=" + keyword + ", url=" + url + ", filterFlag=" + filterFlag + ", startNum="
-				+ startNum + ", endNum=" + endNum + ", totalPages=" + totalPages + "]";
+		return "SearchFlagVO [keyword=" + keyword + ", filterFlag=" + filterFlag + ", pageFlag="
+				+ pageFlag + "]";
 	}
 	
 }

@@ -28,6 +28,11 @@ public class MgrMemberController {
 	//회원목록 조회
 	@RequestMapping(value="/mgr_memberManagement.do",method= {GET,POST})
 	public String memberList(String memberCat, MgrMemberVO mmVO,Model model, HttpSession session) {
+		String url="manager/member_management/jsp/member_management";
+		
+		if(session.getAttribute("manager_id")==null) {
+			url="forward:managerlogin_page.do"; 
+		}else {
 		//멤버 타입
 		int memberType=mmVO.getMemberType();
 		model.addAttribute("memberType",memberType);
@@ -50,8 +55,9 @@ public class MgrMemberController {
 		List<MgrMemberDomain> list=mms.searchMember(mmVO,memberCat,session);
 		
 		model.addAttribute("memberList", list);
+		}
 
-		return "manager/member_management/jsp/member_management";
+		return url;
 	}//memberList
 	
 	//회원 상세정보 팝업창 띄우기
@@ -76,24 +82,20 @@ public class MgrMemberController {
 	//회원 차단
 	@RequestMapping(value="/mgr_block.do",method={GET,POST})
 	public String block(HttpServletRequest request,ManagerBlockVO mbVO,Model model) {
-		int cnt=mms.addBlock(mbVO);
+		String blockFlag=mms.addBlock(mbVO);
 		mbVO.setId(request.getParameter("id"));
-		mbVO.setBlock_idx(Integer.parseInt(request.getParameter("block_idx")));
-		/*
-		 * 이미 차단된 적 있을 때 어떻게 표현해야 되지..
-		 * if(mbVO.getBlock_idx() != 0) { mms.addBlock(mbVO); }
-		 */
-		
-		model.addAttribute("blockCnt",cnt);
-		return "forward:mgr_memberManagement.do";
+		mbVO.setBlock_idx(Integer.parseInt(request.getParameter("block_idx"))); 
+
+		model.addAttribute("blockFlag",blockFlag);
+		return "manager/member_management/jsp/member_block_popup";
 	}
 	
 	//차단 해제
-	@RequestMapping(value="/mgr_unblock.do",method=POST)
+	@RequestMapping(value="/mgr_unblock.do",method={GET,POST})
 	public String unblock(String id,Model model) {
 		int unblockCnt=mms.removeBlock(id);
 		model.addAttribute("unblockCnt",unblockCnt);
 		
-		return "forward:mgr_memberManagement.do";
+		return "manager/member_management/jsp/member_management";
 	}
 }//class
