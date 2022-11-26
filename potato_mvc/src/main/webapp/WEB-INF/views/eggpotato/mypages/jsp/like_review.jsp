@@ -214,7 +214,7 @@ function editR(reviewIdx, restareaIdx) {
 	<svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" color="#593000">
   		<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 	</svg>
-	좋아요를 눌러보세요
+	좋아요를 눌러보세요 :)
 </div>
 </c:if>
 <c:forEach var="l" items="${ lAll }">

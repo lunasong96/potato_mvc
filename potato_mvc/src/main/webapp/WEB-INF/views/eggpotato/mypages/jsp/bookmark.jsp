@@ -38,42 +38,32 @@ function removeBookmark( restarea_idx){
 
 <!-- container -->
 <div class="container">
-<%-- 네비바 필요한 경우에 사용할것, 필요없으면 삭제~ --%>
-
-
-<%-- 마이페이지용 --%>
+<div class="main">
 <div class="wrap-navi">
-		<div class="navi">
-			<div class="profileWrap">
-				<div class="img">
-					<img src="http://localhost/potato/css/images/${ img }"   id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
-				</div>
-				<div class="nickname"><c:out value="${ nick }"/> </div>
-			</div>			
+	<div class="navi">
+		<div class="profileWrap">
+			<div class="img">
+				<img src="css/images/${img}"  id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+			</div>
+			<div class="nickname"><c:out value="${nick}"/></div>
+		</div>			
 			<a class="navi-link" href="my_info_edit.do">내 정보 수정</a>
 			<a class="navi-link2" href="password_edit.do">비밀번호 수정</a>
 			<a class="navi-link2" href="unregister.do">회원탈퇴</a>
 			<a class="navi-link" href="my_review.do">내가 쓴 리뷰</a>
 			<a class="navi-link" href="like_review.do">좋아요한 리뷰</a>
 			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
-		</div><!-- navi -->
-	
+	</div>
+</div>
+
+<!-- 오 : 즐겨찾기  -->
+<div class="review">
+<div class="review-wrap">
+	<div class="title">휴게소 즐겨찾기</div>
 
 <%-- 네비바 끝 --%>
 <!-- 작업시작 -->
-<div class="bookmarkWrap">
-	<div class="title">휴게소 즐겨찾기</div  >
-	<!-- 	<div class="profile">
-			<div class="profileImg">
-					<img src=""  id="profileImg" name="profileImg" class="profileImg" style="margin: 5px 30px; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
-				<div class="profileContent">
-					<div class="nick">
-						닉네임
-					</div>nick
-				</div>profileContent
-			</div>profileImg
-		</div>profile -->
-	<div class="listWrap">
+<div class="listWrap">
 <form id="delBookmarkFrm" method="post" action="delBookmark.do" >
 <input type="hidden" value="${id }" name="id">
 			<input type="hidden" id="restarea_idx" name="restarea_idx">
@@ -88,17 +78,18 @@ function removeBookmark( restarea_idx){
 <!-- 북마크한 휴게소가 없을 경우 -->
 <c:if test="${ empty bookmarklist }">
 <div class="empty">
-	<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
-  	<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  	<path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+	<svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16"  color="#593000">
+  		<path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+  		<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
 	</svg>
-	즐겨찾기한 휴게소가 없습니다.
+	마음에 드는 휴게소를 찾아보세요 :)
 </div>
 </c:if>
 
 	</div><!-- listWrap -->
-	</div><!-- bookmarkWrap -->
-</div><!-- wrap-navi -->
+	</div><!-- ewview wrap-->
+	</div><!-- ewview -->
+</div><!-- main -->
 
 </div><!-- container -->
 <!-- container end -->

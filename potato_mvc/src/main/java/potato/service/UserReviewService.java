@@ -6,12 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import potato.dao.UserReviewDAO;
-import potato.domain.MyPageReportDomain;
 import potato.domain.MyReviewDomain;
-import potato.vo.MyPageMyReviewVO;
 import potato.vo.MyReviewVO;
-import potato.vo.MypageLikeReviewVO;
-import potato.vo.MypageReportVO;
 
 @Component
 public class UserReviewService {
@@ -44,55 +40,6 @@ public class UserReviewService {
 		return llist;
 	}
 
-/////좋아요/////	
-	//리뷰 좋아요 추가
-	public String getLikeAdd(MypageLikeReviewVO mplrVO) {
-		String addlike=urDAO.insertLikeAdd(mplrVO);
-		return addlike;
-	}
-		
-	//리뷰 좋아요 삭제
-	public String getLikeDel(MypageLikeReviewVO mplrVO) {
-		String delLike=urDAO.delLike(mplrVO);
-		return delLike;
-	}
-	
-/////신고/////		
-	//사용자신고 팝업창 띄우기
-	public List<MyPageReportDomain> searchRevReport() {
-		List<MyPageReportDomain> mprd=null;
-		mprd=urDAO.selRevReport();
-		return mprd;
-	}
-
-	//신고 접수
-	public Integer setRevReport(MypageReportVO mprVO) {
-		Integer revReport=0;
-		revReport=urDAO.insertRevReport(mprVO);
-		return revReport;
-	}
-	
-	//신고 접수 유무
-	public Integer searchRevReportChk(MypageReportVO mprVO) {
-		Integer revReportChk=0;
-		revReportChk=urDAO.selRevReportChk(mprVO);
-		return revReportChk;
-	}
-
-/////수정/////
-	//리뷰 수정창 이동
-	public MyReviewDomain searchRevEdit(MyPageMyReviewVO mpmrVO) {
-		MyReviewDomain mrd=urDAO.selRevEdit(mpmrVO);
-		return mrd;
-	}
-	
-/////삭제/////		
-	//리뷰 삭제
-	public String getRevDel(MyPageMyReviewVO mpmrVO) {
-		String delmyRev=null;
-		delmyRev=urDAO.delmyRev(mpmrVO);
-		return delmyRev;
-	}
 ///////////////////페이징////////////////////		
 	
 	//내가쓴 리뷰 전체 게시물수

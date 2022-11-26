@@ -5,22 +5,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import potato.domain.MyReviewDomain;
-import potato.service.DetailedService;
 import potato.service.UserReviewService;
-import potato.vo.MyPageMyReviewVO;
 import potato.vo.MyReviewVO;
-import potato.vo.MypageLikeReviewVO;
-import potato.vo.MypageReportVO;
 
 @Controller
 public class UserReviewController {
@@ -89,22 +83,5 @@ public class UserReviewController {
 		
 		return "mypages/jsp/like_review";
 	}//likeReviewMove
-	
-	//리뷰 좋아요 추가(비동기)
-	@ResponseBody
-	@RequestMapping(value = "ajax_addLike.do", method= {GET,POST})
-	public String enterLike(HttpSession session, MypageLikeReviewVO mlrVO) {
-		String jsonObj=urs.getLikeAdd(mlrVO);
-		return jsonObj;
-	}
-
-	//리뷰 좋아요 삭제(비동기)
-	@ResponseBody
-	@RequestMapping(value = "ajax_delLike.do", method= {GET,POST})
-	public String cancelLike(HttpSession session, MypageLikeReviewVO mlrVO) {
-		String jsonObj=urs.getLikeDel(mlrVO);
-		return jsonObj;
-	}
-	
 	
 }//class
