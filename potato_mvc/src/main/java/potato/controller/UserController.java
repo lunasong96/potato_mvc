@@ -204,7 +204,7 @@ public class UserController {
 			uiVO.setImg(mr.getFilesystemName("upfile"));
 			//JSP에서 입력값을 보여주기위해 model에 VO를 넣는다.
 			String rename=mr.getFilesystemName("upfile");
-			if( rename == null ) {
+			if( rename == null && !"".equals(rename) ) {
 				uiVO.setImg("basic.png");
 			}
 		} catch (IOException ie) {

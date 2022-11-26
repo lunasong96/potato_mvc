@@ -54,7 +54,7 @@ function readURL(input) {
 	    }
 	}
 function deleteFile() {
- 	$("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
+ 	$("#preview").attr("src", "css/images/basic.png");
  	$("#uploadBtn").val("");
 }
 

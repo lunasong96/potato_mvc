@@ -219,7 +219,7 @@ function chkNull(){
  	var minYear= 1900
  	var numYear = parseInt($("#year").val());
  	if( numYear < minYear || numYear > maxYear ){
- 		alert(생년월일은+ "1900~"+maxYear+"년까지 입력가능합니다.");
+ 		alert("년도는 1900~"+maxYear+"년까지 입력가능합니다.");
 		$("#year").focus();
 		return;
  	}
