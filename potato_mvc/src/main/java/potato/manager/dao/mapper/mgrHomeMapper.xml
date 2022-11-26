@@ -105,6 +105,7 @@
 	<select id="selectAllMem" resultType="int">
 	select count(*)
 	from member
+	where quit='N'
 	</select>
 	<!-- 회원현황(탈퇴) -->
 	<select id="selectQuitMem" resultType="int">

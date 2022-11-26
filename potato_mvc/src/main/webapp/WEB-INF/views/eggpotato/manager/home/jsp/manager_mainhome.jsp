@@ -67,7 +67,7 @@
 				<div style="margin: 20px 20px 40px 20px;">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16" color="#5C3300">
   				<path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
-				</svg><span class="label">방문자 현황</span>
+				</svg><span class="label">주간 방문자 현황</span>
 				</div>
 				<div>
 				<canvas id="mixed-chart" width="815" height="400"></canvas>
@@ -92,7 +92,7 @@
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16" color="#5C3300">
 				<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
  				<path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-				</svg><span class="label">회원 현황</span>
+				</svg><span class="label">오늘의 회원 현황</span>
 				</div>
 				<div>
 				<canvas id="doughnut-chart" width="450" height="400"></canvas>
@@ -142,13 +142,13 @@
 				</svg></p></a>
 				</div>
 				<div class="list-text-1" style="padding-top: 20px">
-					<p>전체 회원</p><p><c:out value="${allMemCnt}"/>명</p>
+					<p>오늘 신규 회원</p><p><c:out value="${newMemCnt}"/>명</p>
 				</div>
 				<div class="list-text-2">
-					<p>신규 회원</p><p><c:out value="${newMemCnt}"/>명</p>
+					<p>오늘 탈퇴 회원</p><p><c:out value="${quitMemCnt}"/>명</p>
 				</div>
 				<div class="list-text-1">
-					<p>탈퇴 회원</p><p><c:out value="${quitMemCnt}"/>명</p>
+					<p>전체 회원</p><p><c:out value="${allMemCnt}"/>명</p>
 				</div>
 			</div>
 			<div  class="rank">
