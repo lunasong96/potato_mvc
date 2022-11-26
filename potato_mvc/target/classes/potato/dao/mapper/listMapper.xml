@@ -60,7 +60,7 @@ where line_idx=5
 <!-- 도 클릭시 해당 휴게소 목록 보여주기 -->
 <select id="doList" resultType="potato.domain.RestAreaListDomain" parameterType="potato.vo.DoSearchVO">
 select ra.name,(select nvl(substr(avg(rating),1,3),0) from review where restarea_idx=ra.restarea_idx) rating,
-l.line,d.kr_do,ra.img,(select count(*) from bookmark where restarea_idx = ra.restarea_idx) bookmarkCnt
+l.line,d.kr_do,ra.img,(select count(*) from bookmark where restarea_idx = ra.restarea_idx) bookmarkCnt,ra.restarea_idx
 from restarea ra,line l, do d
 where (l.line_idx(+)=ra.line_idx and d.do_idx(+)=ra.do_idx) and ra.do_idx = #{do_idx}
 <if test="filterFlag == 1">
