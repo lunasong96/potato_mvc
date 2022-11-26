@@ -98,6 +98,15 @@ public class ListDAO {
 		return list;
 	}//selectDoList
 	
+	//도 이름 가져오기
+	public String selectDoName(int do_idx) {
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		String doName=ss.selectOne("potato.listMapper.doName",do_idx);
+		
+		return doName;
+	}
+	
 	//도 휴게소 목록에서 검색, 정렬
 	public List<RestAreaListDomain> selectSearchArrangeDo(SearchFlagVO sfVO){
 		

@@ -69,6 +69,13 @@ public class ListService {
 		return list;
 	}//searchDoList
 	
+	//도 이름 가져오기
+	public String searchDoName(int do_idx) {
+		String name=lDAO.selectDoName(do_idx);
+		
+		return name;
+	}
+	
 	//도 휴게소 목록에서 검색, 정렬
 	public List<RestAreaListDomain> searchArrangeDo(SearchFlagVO sfVO) {
 		
@@ -107,8 +114,7 @@ public class ListService {
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
-		
-		System.out.println("-------------"+startNum+" "+ lastPage +" "+ isLast);
+		System.out.println("-------------"+isLast+" "+startNum+" "+lastPage);
 		return isLast;
 	}
 	

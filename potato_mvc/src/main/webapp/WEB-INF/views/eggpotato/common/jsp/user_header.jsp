@@ -19,6 +19,11 @@ $(function() {
 	         logo.removeClass('shadow');
 	     }
 	 });
+	 
+	 $("#searchIconBtn").click(function(){
+		 $("#keyword").val($("#search").val());
+		 $("#headerFrm").submit();
+	 })
 });
 </script>
 </head>
@@ -28,7 +33,7 @@ $(function() {
 		<div class="banner-left">
 			<a href="allList.do" class="list-link">휴게소</a>
 			<div class="searchWrap">
-				<input type="text" placeholder="휴게소를 검색해보세요." class="searchBar" autocomplete="off" required="required">
+				<input type="text" placeholder="휴게소를 검색해보세요." class="searchBar" autocomplete="off" required="required" id="search" name="search">
 				<button type="button" class="searchIcon" id="searchIconBtn">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="css-1o7j8sd">
 					<path stroke="currentColor" d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -78,5 +83,8 @@ $(function() {
 		</div>
 	</div>
 </div>
+<form id="headerFrm" action="header.do">
+	<input type="hidden" id="keyword" name="keyword" value="${param.keyword }"/>
+</form>
 </body>
 </html>

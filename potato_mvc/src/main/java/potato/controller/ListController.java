@@ -25,20 +25,16 @@ public class ListController {
 	@Autowired(required = false)
 	private ListService ls;
 	
-	//헤더(검색,연관검색어)
-	@RequestMapping(value="/header.do",method=GET)
-	public String userHeader() {
-		
-		return "common/jsp/user_header";
-	}
+	
 	
 	//전체 휴게소 목록
-	@RequestMapping(value="/allList.do", method={GET,POST})
+	@RequestMapping(value={"/allList.do","/header.do"}, method={GET,POST})
 	public String allRestAreaList(SearchFlagVO sfVO, Model model) {
 		
 		List<RestAreaListDomain> list=ls.searchAllList(sfVO);
 		model.addAttribute("allList",list);
 		
+		System.out.println(sfVO + "findme");
 		//페이징 변수
 		int totalPages = ls.searchTotalPages(sfVO);
 		int lastPage = ls.lastPage(totalPages);
@@ -79,6 +75,10 @@ public class ListController {
 	public String doRestAreaList(DoSearchVO dsVO, Model model) {
 		List<RestAreaListDomain> list = ls.searchDoList(dsVO);
 		model.addAttribute("doRestList",list);
+		
+		String doName = ls.searchDoName(dsVO.getDo_idx());
+		model.addAttribute("doName",doName);
+		
 
 		//페이징 변수
 		int totalPages = ls.searchDoTotalPages(dsVO);
@@ -92,7 +92,6 @@ public class ListController {
 		model.addAttribute("startNum", startNum);
 		model.addAttribute("isLast", isLast);
 		model.addAttribute("currentPage", currentPage);
-		
 		
 		return "list/jsp/do_list_details";
 	}

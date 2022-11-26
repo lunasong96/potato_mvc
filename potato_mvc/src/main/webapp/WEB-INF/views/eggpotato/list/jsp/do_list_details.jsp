@@ -14,7 +14,25 @@
 <link rel="stylesheet" type="text/css" href="css/list/do_list_details.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+//가나다순,인기순 정렬
+$(function(){
+	$("#btn1").click(function(){
+		$("#filterFlag").val($("#btn1").val());
+		$("#listFrm").submit();
+		
+	})
+	$("#btn2").click(function(){
+		$("#filterFlag").val($("#btn2").val());
+		$("#listFrm").submit();
+		
+	})
+});
 
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#listFrm").submit();
+}
 </script>
 
 </head>
@@ -53,12 +71,12 @@
 			<div class="main">
 				<!-- 카테고리명 -->
 				<div class="cat-name">
-				도별 휴게소 ( 수도권 )
+				도별 휴게소 ( ${doName } )
 				</div>
 				<div class="array">
-				<input type="button" value="가나다순" class="btn">
+				<button type="button" class="btn" id="btn1" name="filterFlag" value="1" ${param.filterFlag eq 1 ? " style='font-weight:bold;color:black'" : "" } >가나다순</button>
 				<div class='v-line'></div>
-				<input type="button" value="인기순" class="btn">
+				<button type="button" class="btn" id="btn2" name="filterFlag" value="2" ${param.filterFlag eq 2 ? " style='font-weight:bold;color:black'" : "" } >인기순</button>
 				</div>
 				
 				<div class="content-list">
@@ -113,5 +131,11 @@
 <!-- footer end -->
 
 </div>
+<!-- 페이징 -->
+<form id="listFrm">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
+	<input type="hidden" id="do_idx" name="do_idx" value="${param.do_idx }"/>
+	<input type="hidden" id="filterFlag" name="filterFlag"/>
+</form>
 </body>
 </html>

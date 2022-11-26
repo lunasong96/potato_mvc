@@ -2,7 +2,7 @@ package potato.vo;
 
 public class SearchFlagVO {
 	private String keyword;
-	private int filterFlag, pageFlag=1;
+	private int filterFlag=1, pageFlag=1;
 	
 	public SearchFlagVO() {
 		

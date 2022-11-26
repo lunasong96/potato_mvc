@@ -1,14 +1,15 @@
 package potato.vo;
 
 public class DoSearchVO {
-	private int pageFlag=1,do_idx;
+	private int pageFlag=1,do_idx,filterFlag=1;
 
 	public DoSearchVO() {
 	}
 
-	public DoSearchVO(int pageFlag, int do_idx) {
+	public DoSearchVO(int pageFlag, int do_idx, int filterFlag) {
 		this.pageFlag = pageFlag;
 		this.do_idx = do_idx;
+		this.filterFlag = filterFlag;
 	}
 
 	public int getPageFlag() {
@@ -27,9 +28,17 @@ public class DoSearchVO {
 		this.do_idx = do_idx;
 	}
 
+	public int getFilterFlag() {
+		return filterFlag;
+	}
+
+	public void setFilterFlag(int filterFlag) {
+		this.filterFlag = filterFlag;
+	}
+
 	@Override
 	public String toString() {
-		return "doSearchVO [pageFlag=" + pageFlag + ", do_idx=" + do_idx + "]";
+		return "DoSearchVO [pageFlag=" + pageFlag + ", do_idx=" + do_idx + ", filterFlag=" + filterFlag + "]";
 	}
 
 }
