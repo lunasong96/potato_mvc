@@ -183,12 +183,21 @@ function chkNull(){
 		alert("전화번호를 정확히 입력해주세요");	
 	return;
 	}
-	//이메일 필수 입력	
+	
+	//이메일 필수 입력	및 정규식
  	if($("#email").val().trim()=="") {
 		alert("이메일을 입력하세요");
 		$("#email").focus();
 		return;
+	} else {
+ 	var emailVal = $("#email").val();
+ 	let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+		if( !regex.test(emailVal) ){
+			alert("이메일 형식에 맞게 입력해주세요");
+			return;
+		}
 	}
+ 	
  	//생년 필수 입력	
 	if($("#year").val().trim()=="") {
 		alert("생년을 입력하세요");
@@ -225,16 +234,6 @@ const autoHyphen = (target) => {
 	 if( target.value.length == 10 ) {
 		 $("#phone_chk").css("display", "none");
 	 }
-}
-
-//이메일한글입력 방지 
-function noKor1() {
-	$("#email").keyup(function(event){
-		if (!(event.keyCode >=37 && event.keyCode<=40)) {
-			var inputVal = $(this).val();
-			$(this).val(inputVal.replace(/[^a-z._0-9^-]/gi,''));		
-		}
-	});
 }
 
 //공백사용못하게
