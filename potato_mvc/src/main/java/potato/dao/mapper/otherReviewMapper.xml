@@ -38,21 +38,5 @@
       offset (#{pageFlag}-1)*3 rows
       fetch next 3 rows only
 	</select>
-<!-- 신고창 접속 -->
-	<select id="selOtherRevReport" resultType="potato.domain.OtherReviewReportDomain">
-	select report_idx, reason
-	from report_reason
-	</select>
-<!-- 신고 접수 -->
-	<insert id="insertRevReport" parameterType="potato.vo.OtherReviewReportVO">
-	insert into report(id_reporter, id_writer, report_idx, restarea_idx, review_idx)
-	values (#{id_reporter}, #{id_writer}, #{report_idx}, #{restarea_idx}, #{review_idx})
-	</insert>
-<!-- 신고 접수 유무ㅡ -->
-	<select id="selOtherRevReportChk" resultType="int" parameterType="potato.vo.OtherReviewReportVO">
-	select count(*) rpcnt
-	from report
-	where id_reporter=#{id_reporter} and review_idx=#{review_idx} and restarea_idx=#{restarea_idx}
-	</select>	
 
 </mapper>

@@ -5,7 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import potato.domain.OtherReviewDomain;
 import potato.service.OtherReviewService;
-import potato.vo.OtherReviewReportVO;
 import potato.vo.OtherReviewVO;
 
 @Controller
@@ -50,37 +48,5 @@ public class OtherReviewController {
 		System.out.println( "------------" + list );
 		return  "other_profiles/jsp/other_user_profiles";
 	}//otherReviewMove
-	
-	//사용자신고 팝업창 띄우기
-	@RequestMapping(value="other_review_report.do",method={GET,POST})
-	public String oRevReportMove(HttpServletRequest request,OtherReviewReportVO orrVO, Model model) {
-		model.addAttribute("rp", ors.searchOtherRevReport());
-		
-		orrVO.setId_reporter(request.getParameter("id"));
-		orrVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
-		orrVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
-		
-		model.addAttribute("orp", ors.searchOtherRevReportChk(orrVO));
-		return "other_profiles/jsp/report_review_popup";
-	}
-	
-	//리뷰 신고 접수
-	@RequestMapping(value = "other_report_process.do", method= {GET,POST})
-	public String setReport(HttpServletRequest request, OtherReviewReportVO orrVO, Model model) {
-		System.out.println(orrVO+"findme");
-		
-		//ors.addOtherRevReport(orrVO);
-		
-		
-		orrVO.setId_reporter(request.getParameter("id_reporter"));
-		orrVO.setRestarea_idx(Integer.parseInt(request.getParameter("restarea_idx")));
-		orrVO.setReview_idx(Integer.parseInt(request.getParameter("review_idx")));
-		
-		model.addAttribute("orp", ors.searchOtherRevReportChk(orrVO));
-		
-		return "other_profiles/jsp/report_review_popup";
-	}
-		
-	
 
 }//class

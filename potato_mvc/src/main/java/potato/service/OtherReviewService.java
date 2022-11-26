@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 import potato.dao.OtherReviewDAO;
 import potato.domain.OtherReviewDomain;
-import potato.domain.OtherReviewReportDomain;
-import potato.vo.OtherReviewReportVO;
 import potato.vo.OtherReviewVO;
 
 @Component
@@ -34,28 +32,6 @@ public class OtherReviewService {
 		List<OtherReviewDomain> list = orDAO.selOtherRevAll(orVO);
 		return list;
 	}
-	
-	//사용자신고 팝업창 띄우기
-	public List<OtherReviewReportDomain> searchOtherRevReport() {
-		List<OtherReviewReportDomain> orrd=null;
-		orrd=orDAO.selOtherRevReport();
-		return orrd;
-	}
-	
-	//신고 접수
-	public Integer addOtherRevReport(OtherReviewReportVO orrVO) {
-		Integer otherRevReport=0;
-		otherRevReport=orDAO.insertOtherRevReport(orrVO);
-		return otherRevReport;
-	}
-	
-	//신고 접수 유무
-	public Integer searchOtherRevReportChk(OtherReviewReportVO orrVO) {
-		Integer otherRevReportChk=0;
-		otherRevReportChk=orDAO.selOtherRevReportChk(orrVO);
-		return otherRevReportChk;
-	}
-	
 	
 	//전체리뷰수
 	public int searchOtherRev(OtherReviewVO orVO) {
