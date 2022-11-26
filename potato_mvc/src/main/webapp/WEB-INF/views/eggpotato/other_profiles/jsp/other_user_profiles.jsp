@@ -46,7 +46,7 @@ $(function() {
 
 function popupOpen(id ,restarea_idx, review_idx){
 	
-		window.open("other_review_report.do?id="+id+"&restarea_idx="+restarea_idx+"&review_idx="+review_idx,"popup_report",
+		window.open("other_review_report.do?id="+id+/* "&nick="+nick+ */"&restarea_idx="+restarea_idx+"&review_idx="+review_idx,"popup_report",
 		"width=520,height=470,top=203,left=1336");
 }
 
@@ -88,39 +88,42 @@ function slider() {
 	})
 	
 }
+	
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#reviewFrm").submit();
+}
+	
 </script>
 </head>
 <body>
-<div class="wrap"><!-- wrap -->
-
+<div class="wrap">
 <!-- header -->
 <%@ include file="../../common/jsp/user_header.jsp" %>
 <!-- header end-->
 
-
-<div class="container"><!-- container -->
-<!-- 건들지마  -->
-<div class="main"><!-- main -->
+<div class="container">
+<div class="main">
 <div class="profile">
 	<img src="css/images/${img}" class="photo">
 	<span class="nick"><c:out value="${nick}"/></span>
 	<span class="cnt">(리뷰 수 : <c:out value="${rCnt}"/>건)</span>
 </div>
 <!-- 리뷰 -->
-<c:forEach var="rev" items="${rAll}">
 <div class="review-wrap">
-		<div class="review-exist">
+<c:forEach var="rev" items="${rAll}">
+	<div class="review-exist">
 		<div class="re-left">
 			<img src="css/images/${rev.img}" alt="프로필사진">
 		</div>
+<!-- 건들지마  -->
+		
 		<div class="re-right">
-		<!-- 휴게소명 시작-->
 		<div style="margin-bottom: 10px;">
-			<span style="font-size: 19px;color: white;padding: 5px 10px;
-			background-color: #DCC1A0;border-radius: 7px;">
-			<c:out value="${rev.name}"/></span>
+			<span style="font-size: 19px;color: white;padding: 5px 10px; background-color: #DCC1A0;
+			border-radius: 7px;"><c:out value="${rev.name}"/></span>
 		</div>	
-		<!-- 휴게소명 끝-->
 		<span><c:out value="${rev.nick}"/></span>
 			<div class="star-rate">
 				<span class="star-blank"></span>
@@ -130,23 +133,23 @@ function slider() {
 				<span class="rate-txt"><c:out value="${rev.rating}"/></span>
 			</div>
 			<p class="re-txt">
-				<c:out value="${rev.contents}"/>
+				<c:out value="${rev.contents}" escapeXml="false"/>
 			</p>
-			
+			<c:if test="${ not empty rev.foodimg }">
 			<div class="re-slider">
 				<div class="swiper-button-prev re-swiper-button-prev"></div>
 			    <div class="swiper re-mySwiper">
 			    	<div class="swiper-wrapper re-swiper-wrapper">
-			    		<%-- <c:forEach var="rev" items="${revAll}">
+			    	<c:forEach var="img" items="${ rev.foodimg }">
 			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/${rev.foodimg}" alt="리뷰사진" class="re-foodimg">
+			   				<img src="css/reviewImg/${img}" alt="리뷰사진" class="re-foodimg">
 			   			</div>
-			   			</c:forEach> --%>
+ 			   		</c:forEach>
 			    	</div>
 			    </div>
 				<div class="swiper-button-next re-swiper-button-next"></div>
 			</div>
-		
+			</c:if>
 			<div class="etc-icon-wrap">
 				<div class="etc-icon">
 					<div class="heart-icon-wrap">
@@ -168,15 +171,17 @@ function slider() {
 				</div>
 				<span class="date"><fmt:formatDate value="${rev.post_date}" pattern="yyyy-MM-dd" /></span>
 			</div>
-		</div>
+			
+		</div><!-- re-right -->
+<!-- 건들지마  -->
 	</div>
-</div>	
 </c:forEach>
+</div>	
 <!-- 리뷰 -->
 
 <!-- 페이지 -->
 	<div class="page">
-		<c:if test="${ not empty reviewList }">
+		<c:if test="${ not empty rAll }">
 			<c:if test="${ startNum ne 1 }">
 				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
 				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
@@ -192,22 +197,25 @@ function slider() {
 	</div>
 
 </div><!-- main -->
-<!-- 건들지마  -->
-
-	<form method="post" id="reportPop" name="reportPop"> <!-- 신고창이동 -->
-		<input type="hidden" name="id" id="id" value="${id}">
-		<input type="hidden" name="id_writer" id="id_writer" value="${param.id_writer}">
-		<input type="hidden" name="review_idx" id="review_idx" value="${param.review_idx}">
-		<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx}">
-		<input type="hidden" name="nick" id="nick" value="${param.nick}">
-	</form>
-
 </div><!-- container end -->
 
 <!-- footer -->
 <%@ include file="../../common/jsp/user_footer.jsp" %>
 <!-- footer end -->
+</div>
 
-</div><!-- wrap -->
+<form id="reviewFrm" method="get">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }">
+	<input type="hidden" id="id" name="otherPid" value="${ param.otherPid }">
+</form>
+
+<form method="post" id="reportPop" name="reportPop"> <!-- 신고창이동 -->
+	<input type="hidden" name="id" id="id" value="${id}">
+	<input type="hidden" name="id_writer" id="id_writer" value="${param.id_writer}">
+	<input type="hidden" name="review_idx" id="review_idx" value="${param.review_idx}">
+	<input type="hidden" name="restarea_idx" id="restarea_idx" value="${param.restarea_idx}">
+	<input type="hidden" name="nick" id="nick" value="${param.nick}">
+</form>
+
 </body>
 </html>
