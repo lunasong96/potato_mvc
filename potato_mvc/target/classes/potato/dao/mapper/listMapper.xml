@@ -72,6 +72,11 @@ ${ra.name} like '%'||#{keyword}||'%'
 where (ra.line_idx=l.line_idx and ra.do_idx=d.do_idx) and ra.do_idx=#{do_idx}
 </select>
 
+<!-- 선택한 도 이름 가져오기 -->
+<select id="doName" resultType="String" parameterType="int">
+
+</select>
+
 <!-- 페이징 -->
 <select id="listPage" resultType="int" parameterType="potato.vo.SearchFlagVO">
 select count(restarea_idx) cnt
