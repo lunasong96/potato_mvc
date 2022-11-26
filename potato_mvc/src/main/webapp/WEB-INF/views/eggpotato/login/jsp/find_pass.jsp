@@ -101,9 +101,9 @@ const autoHyphen = (target) => {
 		<div class="main-container">
 			<form method="post" action="forgotPwChk.do" id="forgotPwFrm">
 			<h2 class="input-title">이름</h2>
-			<input type="text" placeholder="이름" class="text-box" name="name" id="name"><br/>
+			<input type="text" placeholder="이름" class="text-box" name="name" id="name" maxlength="20"><br/>
 			<h2 class="input-title">아이디</h2>
-			<input type="text" placeholder="아이디" class="id" name="id" id="id"><br/>
+			<input type="text" placeholder="아이디" class="id" name="id" id="id" maxlength="20"><br/>
 			<h2 class="input-title">휴대전화</h2>
 			<input type="text" placeholder="전화번호 입력" class="text-box" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13"><br/>
 			<span class="phone_chk" id="phone_chk"> 01012345678 식으로 입력해주시면 됩니다. </span>

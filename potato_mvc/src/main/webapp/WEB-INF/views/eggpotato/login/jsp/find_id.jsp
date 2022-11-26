@@ -125,7 +125,7 @@ const autoBirth = (target) => {
 		<div class="main-container">
 			<form action="forgotIdChk.do" method="post" id="forgotIdFrm">
 			<h2 class="input-title">이름</h2>
-			<input type="text" placeholder="이름" class="text-box" name="name" id="name"><br/>
+			<input type="text" placeholder="이름" class="text-box" name="name" id="name" maxlength="20"><br/>
 			<h2 class="input-title">생년월일</h2>
 			<input type="text" placeholder="생년월일" class="text-box" name="birth" id="birth" oninput="autoBirth(this)" maxlength="10"><br/>
 			<span class="birth_chk" id="birth_chk">생년월일 19990101 식으로 입력해주시면 됩니다. </span>
