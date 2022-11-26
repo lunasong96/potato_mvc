@@ -225,8 +225,8 @@ function getResult( data ) {
 							<tr>
 								<!-- 버튼의 value에 리뷰를 식별할 수 있는 3가지 값을 넣고 스크립트에서 받아서 hidden form으로 넘겨준다. -->
 								<td><input type="checkbox" name="reviewChk" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"/></td>
-								<td><c:out value="${ rev.name }"/></td><td><button type="button" class="popup-btn" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"><c:out value="${ rev.contents }"/></button></td>
-								<td><c:out value="${ rev.rating }"/></td><td><c:out value="${ rev.id }"/></td><td><fmt:formatDate value="${ rev.post_date }" pattern="yyyy-MM-dd hh:mm:ss"/></td><td><c:out value="${ rev.report_cnt }"/></td>
+								<td class="nameTd"><c:out value="${ rev.name }"/></td><td><button type="button" class="popup-btn" value="${ rev.review_idx },${rev.id},${ rev.restarea_idx }"><c:out value="${ rev.contents }" escapeXml="false"/></button></td>
+								<td><c:out value="${ rev.rating }"/></td><td class="idTd"><c:out value="${ rev.id }"/></td><td class="dateTd"><fmt:formatDate value="${ rev.post_date }" pattern="yyyy-MM-dd hh:mm:ss"/></td><td><c:out value="${ rev.report_cnt }"/></td>
 							</tr>
 						</c:forEach> 
 					</table>

@@ -85,12 +85,10 @@ function slider() {
 		</div>
 		
 		<div class="re-right">
-			<div>
-				<a href="#void" style="text-decoration : none;font-size: 19px; color: white;border: 0px solid; padding: 4px 20px 1px 20px;background-color: #DCC1A0; border-radius: 7px;">
-				<c:out value="${ reviewDetail.name }"/>
-				</a>
-			</div>
-			<span><c:out value="${ reviewDetail.nick }"/></span>
+			 <div style="margin-bottom: 10px;">
+		         <span style="font-size: 19px;color: white;padding: 5px 10px; background-color: #DCC1A0;
+		         border-radius: 7px;"><c:out value="${ reviewDetail.name }"/></span>
+		      </div>
 			<div class="star-rate">
 				<span class="star-blank"></span>
 				<div class="re-star-wrap">
@@ -99,7 +97,7 @@ function slider() {
 				<span class="rate-txt"><c:out value="${ reviewDetail.rating }"/></span>
 			</div>
 			<p class="re-txt">
-				<c:out value="${ reviewDetail.contents }"/>
+				<c:out value="${ reviewDetail.contents }" escapeXml="false"/>
 			</p>
 			
 			<div class="re-slider">
@@ -116,7 +114,7 @@ function slider() {
  			   			</c:forEach>
  			   			</c:when>
  			   			<c:otherwise>
- 			   			&lt;리뷰 이미지가 없습니다.&gt;
+ 			   			<div class="reviewDiv"><div>&lt;리뷰 이미지가 없습니다.&gt;</div></div>
  			   			</c:otherwise>
  			   			</c:choose>
 			    	</div>

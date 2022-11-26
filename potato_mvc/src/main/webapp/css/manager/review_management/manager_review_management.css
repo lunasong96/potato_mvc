@@ -105,6 +105,18 @@
       vertical-align: middle;
 }
 
+.nameTd {
+	width: 200px;
+}
+
+.idTd {
+	width: 150px;	
+}
+
+.dateTd {
+	width: 200px;
+}
+
 .popup-btn{
 	background-color:transparent;
 }

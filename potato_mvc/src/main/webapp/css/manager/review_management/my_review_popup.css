@@ -72,6 +72,17 @@ td > div > img {
     border-bottom:2px solid black;
 }
 
+.reviewDiv {
+	width: 1200px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviewDiv > div {
+    width: 260px;	
+}
+
 .review-txt {
 	display: flex;
     justify-content: space-between;
