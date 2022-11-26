@@ -82,7 +82,7 @@ function chkNull(){
 		<div class="main-container">
 			<form action="signUp3.do" method="post" id="joinFrm" enctype="multipart/form-data">
 			<h2 class="main-title">프로필 사진</h2><br/>
-			<img src="css/login/images/basic.png" class="main-profile" id="preview"/><br/>
+			<img src="css/images/basic.png" class="main-profile" id="preview"/><br/>
 			<input type="file" name="upfile" id="uploadBtn" onchange="readURL(this);"/>
 			<label for="uploadBtn" class="imgupBtn">사진등록</label>
 			<input type="button" value="삭제" class="imgBtn" id="deleteBtn">
