@@ -97,7 +97,7 @@
 <!-- 리뷰 조회 -->
 <select id="selReviewAll" resultType="potato.domain.DetailedReviewDomain" parameterType="potato.vo.DetailedReviewVO">
 <!--  리뷰 조회(최신순) -->
-select r.review_idx, r.id, m.nick, m.img, regexp_replace(listagg(ri.img, ',') within group(order by img_idx), '([^,]+)(,\1)+', '\1') foodimg,
+select r.review_idx, r.id, m.nick, m.img, listagg(ri.img, ',') within group(order by img_idx) foodimg,
 			regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1') idclick,
 			nvl(regexp_count(regexp_replace(listagg(id_clicker, ',') within group(order by l.review_idx), '([^,]+)(,\1)+', '\1'), ',')+1,0) liked, r.rating, r.contents, r.post_date
 from   review_img ri, review r, liked l, member m
