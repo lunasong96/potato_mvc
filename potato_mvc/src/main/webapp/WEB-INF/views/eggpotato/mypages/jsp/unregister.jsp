@@ -16,12 +16,15 @@
 <script type="text/javascript">
 <c:if test="${quitCount eq 1}">
 	alert("회원 탈퇴가 완료되었습니다.");
-	location.href="user_mainhome.do";
+	location.href="unregister_process2.do";
 </c:if>
 
 <c:if test="${quitCount eq 0 }">
-	alert("회원 탈퇴가 취소되었습니다.");
-	location.href="my_info_edit.do";
+	alert("입력된 비밀번호가 틀려 회원탈퇴가 완료되지 않았습니다.");
+	<%
+	session.setAttribute("quitCount", 2);
+	%>
+	location.href="unregister.do";
 </c:if>
 
 
@@ -33,6 +36,7 @@ $(function() {
 				alert("비밀번호가 일치하지 않습니다.");
 			}else{
 			$("#unregeisterFrm").submit();
+			
 			}
 	});//click
 });//ready

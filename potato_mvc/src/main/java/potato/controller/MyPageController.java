@@ -143,14 +143,23 @@ public class MyPageController {
 	
 	//È¸¿ø Å»Åð Ã³¸®
 	@RequestMapping(value = "unregister_process.do", method = POST)
-		public String quitProcess(HttpSession session, MyPageQuitVO mqVO,SessionStatus ss ) {
+		public String quitProcess(HttpSession session, MyPageQuitVO mqVO) {
 		mqVO.setId((String)session.getAttribute("id"));
+		String url="";
 		int quitCount=mps.updateQuit(mqVO);
-		session.invalidate();
-		ss.isComplete();
+		
 		session.setAttribute("quitCount", quitCount);
-		return "redirect:user_mainhome.do";//Ã³¸®°¡ ¿Ï·áµÇ¸é ¸ÞÀÎÈ­¸éÀ¸·Î ÀÌµ¿!
+		return "redirect:unregister.do";
 	}//quitProcess
+	
+	//È¸¿ø Å»Åð Ã³¸®
+	@RequestMapping(value = "unregister_process2.do", method = GET)
+	public String quitProcess(HttpSession session) {
+		session.invalidate();
+		return "redirect:user_mainhome.do";
+	}//quitProcess
+	
+	
 	
 	
 	//Áñ°ÜÃ£±âÇÑ ÈÞ°Ô¼Ò

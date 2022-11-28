@@ -65,6 +65,14 @@ function readURL(input) {
 					       return;
 				    }
 				}
+		
+//전화번호 하이픈입력
+const autoHyphen = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+}
+
 		function deleteFile() {
 			//alert("삭제");
 			 $("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
@@ -147,7 +155,7 @@ function readURL(input) {
 		<tr>
 			<th><label>휴대폰</label></th>
 				<td>
-					<input type="text" name="phone" maxlength="13" value="<c:out value="${ mil.phone }"/>" >
+					<input type="text" name="phone"  oninput="autoHyphen(this)" maxlength="13" value="<c:out value="${ mil.phone }"/>" >
 				</td>
 		</tr>
 		<tr>
