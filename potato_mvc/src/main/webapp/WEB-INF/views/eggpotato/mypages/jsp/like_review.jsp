@@ -185,8 +185,7 @@ function editR(reviewIdx, restareaIdx) {
 <!-- container -->
 <div class="container">
 <div class="main">
-<!-- 건들ㄴ -->
-<!-- 왼 : 네비바  -->
+
 <div class="wrap-navi">
 	<div class="navi">
 		<div class="profileWrap">
@@ -203,9 +202,9 @@ function editR(reviewIdx, restareaIdx) {
 			<a class="navi-link" href="bookmark.do">휴게소 즐겨찾기</a>
 	</div>
 </div>
-<!-- 오 : 리뷰+페이징  -->
+
 <div class="review">
-<!-- 리뷰 -->
+
 <div class="review-wrap">
 <div class="title">좋아요한 리뷰</div>
 <!-- 북마크한 휴게소가 없을 경우 -->
@@ -317,9 +316,7 @@ function editR(reviewIdx, restareaIdx) {
 			</c:if>
 		</c:if>
 	</div>
-<!-- 페이징 -->
 </div>
-<!-- 건들ㄴ -->
 </div>
 </div>
 <!-- container end -->

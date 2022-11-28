@@ -198,7 +198,6 @@ $("#editReview").submit();
 		<div class="re-left">
 			<img src="css/images/${rev.img}" alt="프로필사진">
 		</div>
-<!-- 건들지마  -->
 		
 		<div class="re-right">
 		<div style="margin-bottom: 10px;">
@@ -275,11 +274,9 @@ $("#editReview").submit();
 			</div>
 			
 		</div><!-- re-right -->
-<!-- 건들지마  -->
 	</div>
 </c:forEach>
 </div>	
-<!-- 리뷰 -->
 
 <!-- 페이지 -->
 	<div class="page">

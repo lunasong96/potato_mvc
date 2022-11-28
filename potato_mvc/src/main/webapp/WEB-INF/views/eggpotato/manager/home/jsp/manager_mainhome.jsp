@@ -27,7 +27,6 @@
 <!-- container -->
 <div class="container" style="background-color: #F8F9FB;">
 	<div class="main">
-<!-- 건들지마세요 -->
 	<div style="display: flex;border-bottom: 1px solid grey;align-items: center; margin-bottom: 20px;">
 		<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
 	  	<path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707L7.293 1.5Z"/>
@@ -164,15 +163,9 @@
 				</div>
 			</div>
 		</div><!-- 3 -->
-<!-- 건들지마세요 -->
 	</div>
 </div>
 <!-- container end -->
-
-<!-- footer -->
-<!-- footer end -->
-
 </div>
-
 </body>
 </html>
