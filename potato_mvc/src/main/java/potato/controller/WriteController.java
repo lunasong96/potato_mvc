@@ -76,7 +76,7 @@ public class WriteController {
 	@ResponseBody
 	@RequestMapping(value = "ajax_img_upload.do", method=POST)
 	public void enterLike(HttpServletRequest request) {
-		File saveDir = new File("/home/ubuntu/potato_mvc/css/images/");
+		File saveDir = new File("/home/ubuntu/potato_mvc/css/reviewImg/");
 		int maxSize=1024*1024*20;
 		try {
 			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(), maxSize, "UTF-8", new DefaultFileRenamePolicy());
