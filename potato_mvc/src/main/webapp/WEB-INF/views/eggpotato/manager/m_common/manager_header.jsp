@@ -23,7 +23,7 @@ $(function() {
 
 	<div class="wrap-banner">
 		<div class="banner">
-			<a href="mgr_home.do"><img src="css/images/logo.png" class="header-logo-png"></a>
+			<a href="user_mainhome.do"><img src="css/images/logo.png" class="header-logo-png"></a>
 			<span class="head-text">관리</span>
 		</div>
 		<div class="wrap-login">
