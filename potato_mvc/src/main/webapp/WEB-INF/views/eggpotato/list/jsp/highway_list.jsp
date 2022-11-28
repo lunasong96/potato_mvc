@@ -240,7 +240,7 @@ $(function(){
 				<div class="cat-name">고속도로별 휴게소</div>
 			<div class="select-line">
 			<!-- 지도 -->
-				<div style="padding: 50px 50px;">
+				<div style="padding: 50px 20px;">
 				<div id="map" style="width:1000px;height:800px;">
 				</div>	
 			</div>

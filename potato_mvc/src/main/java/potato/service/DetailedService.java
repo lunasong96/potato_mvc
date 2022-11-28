@@ -147,11 +147,9 @@ public class DetailedService {
 			jo.put("idclick", dd.getIdclick());
 			js.add(jo);
 		}//end for
-		//System.out.println("js:   "+js+"find me");
 		
 		jsonObj.put("review", js);
 		
-		//System.out.println("jsonObj:   "+jsonObj.toJSONString()+"find me");
 		
 		
 		return jsonObj.toJSONString();

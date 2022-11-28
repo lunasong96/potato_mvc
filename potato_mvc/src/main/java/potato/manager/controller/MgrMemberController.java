@@ -47,8 +47,6 @@ public class MgrMemberController {
 		int currentPage = mmVO.getPageFlag();
 		int startNum = mms.startNum(currentPage);
 		int isLast = mms.isLast(lastPage,startNum);
-		System.out.println( "totalPages : " +totalPages + ",lastPage : " + lastPage +
-				",currentPage : " + currentPage+ ",startNum : " + startNum+ ",isLast: " + isLast);
 		
 		//view로 전송
 		model.addAttribute("lastPage", lastPage);
@@ -69,7 +67,6 @@ public class MgrMemberController {
 	//회원 상세정보 팝업창 띄우기
 	@RequestMapping(value="/mgr_memberInfoPopup.do",method=GET)
 	public String memberInfoPopup(String memberId, Model model) {
-		System.out.println("---------상세창 : "+memberId);
 		model.addAttribute("memberData",mms.searchMemberInfo(memberId));
 		
 		return "manager/member_management/jsp/member_info_popup";

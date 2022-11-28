@@ -40,7 +40,6 @@ public class MyPageController {
 	
 		  if(session.getAttribute("id")==null) {
 			url="redirect:user_mainhome.do"; }
-			 //System.out.println("------마이페이지에 진입 : id is--------"+(String)session.getAttribute("id"));
 		return "mypages/jsp/mypage_in";
 	}//myPageIn
 	
@@ -63,7 +62,6 @@ public class MyPageController {
 	//정보 수정이기 때문에 forward보다는 redirect로 처리하는 것이 좋다.
 	@RequestMapping(value="my_info_edit.do",method = GET)
 	public String myInfoEdit(HttpSession session, Model model) {
-		//System.out.println("------내 정보 수정 폼 : id is--------"+(String)session.getAttribute("id"));
 		
 		model.addAttribute("MyInfoList", mps.searchInfo((String)session.getAttribute("id")));
 		
@@ -88,7 +86,6 @@ public class MyPageController {
 			mieVO.setEmail(mr.getParameter("email"));
 			mieVO.setPhone(mr.getParameter("phone"));
 
-			//System.out.println(mieVO +"내 정보");
 			
 			if( rename == null  ) {
 				mieVO.setImg("basic.png");
@@ -165,7 +162,6 @@ public class MyPageController {
 	//즐겨찾기한 휴게소
 	@RequestMapping(value = "bookmark.do", method=GET)
 		public String bookmark(HttpSession session, Model model) {
-		//System.out.println(mps.searchBookmark((String)session.getAttribute("id"))+"findMe");
 		model.addAttribute("bookmarklist",mps.searchBookmark((String)session.getAttribute("id")));
 		
 		return "mypages/jsp/bookmark";

@@ -115,7 +115,6 @@ public class MyPageDAO {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		
-		//System.out.println(ss.selectList("potato.mypageMapper.selectBookmark", id)+"findMe");
 		mbd=ss.selectList("potato.mypageMapper.selectBookmark", id);
 		
 		mbh.closeHandler(ss);

@@ -57,7 +57,6 @@ public class OtherReviewService {
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
-		System.out.println(startNum+" "+ lastPage +" "+ isLast);
 		
 		return isLast;
 	}

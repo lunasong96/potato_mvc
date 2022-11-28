@@ -450,7 +450,7 @@ const autoHyphen2 = (target) => {
 				</span>
 				<div class="food-detail">
 					<div class="food-img-wrap">
-						<img src="http://localhost/potato/css/images/noImg.png" onerror="this.src='css/images/noImg.png'"/>
+						<img src="http://potato.sist.co.kr/css/images/noImg.png" onerror="this.src='css/images/noImg.png'"/>
 					</div>
 					<div class="food-content">
 						<span>

@@ -35,7 +35,6 @@ public class UserReviewDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler(); 
 		
-		System.out.println("-----mrVO DAO -"+ mrVO);
 		mlist = ss.selectList("potato.userReview.selMyRevAll", mrVO);
 		mbh.closeHandler(ss);
 		return mlist;		

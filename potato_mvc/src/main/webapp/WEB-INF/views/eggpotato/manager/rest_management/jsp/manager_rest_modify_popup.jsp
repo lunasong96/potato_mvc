@@ -419,7 +419,7 @@ function chkNull(){
 				<div class="food-detail">
 					<input type="hidden" name="food_idx">
 					<div class="food-img-wrap">
-						<img src="http://localhost/potato/css/images/${food.img}" onerror="this.src='css/images/${food.img}'"/>
+						<img src="http://potato.sist.co.kr/css/images/${food.img}" onerror="this.src='css/images/${food.img}'"/>
 					</div>
 					<div class="food-content">
 						<span>

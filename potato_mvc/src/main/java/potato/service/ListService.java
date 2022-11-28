@@ -114,7 +114,6 @@ public class ListService {
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
-		System.out.println("-------------"+isLast+" "+startNum+" "+lastPage);
 		return isLast;
 	}
 	

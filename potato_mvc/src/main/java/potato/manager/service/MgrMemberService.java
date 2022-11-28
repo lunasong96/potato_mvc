@@ -53,7 +53,6 @@ public class MgrMemberService {
 	//회원 차단하기(차단회원 목록에 추가)
 	public String addBlock(ManagerBlockVO mbVO) {
 		String blockFlag="N";	
-		System.out.println(mbVO.getId());
 		try {
 			mmDAO.insertBlock(mbVO);
 		}catch (PersistenceException se) {
@@ -74,7 +73,6 @@ public class MgrMemberService {
 	//전체 페이지수
 	public int searchTotalPages(String memberCat,MgrMemberVO mmVO) {
 		int cnt=0;
-		System.out.println("----memberCat"+memberCat);
 		if("1".equals(memberCat)) {
 			cnt=mmDAO.selectTotalPages1(mmVO);
 		}else if("2".equals(memberCat)) {

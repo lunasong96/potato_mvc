@@ -73,7 +73,6 @@ public class UserReviewService {
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
-		System.out.println(startNum+" "+ lastPage +" "+ isLast);
 		
 		return isLast;
 	}

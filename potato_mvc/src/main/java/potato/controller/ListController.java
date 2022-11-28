@@ -34,7 +34,6 @@ public class ListController {
 		List<RestAreaListDomain> list=ls.searchAllList(sfVO);
 		model.addAttribute("allList",list);
 		
-		System.out.println(sfVO + "findme");
 		//페이징 변수
 		int totalPages = ls.searchTotalPages(sfVO);
 		int lastPage = ls.lastPage(totalPages);

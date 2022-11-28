@@ -47,7 +47,6 @@ public class OtherReviewController {
 		model.addAttribute("isLast", isLast);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("rAll", list);
-		System.out.println( "------------" + list );
 		return  "other_profiles/jsp/other_user_profiles";
 	}//otherReviewMove
 

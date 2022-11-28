@@ -65,7 +65,6 @@ public class MgrMemberDAO {
 		SqlSession session=mbh.getHandler();
 		
 		mmd=session.selectOne("potato.manager.mgrMemberMapper.infoPopup",id);
-		System.out.println( "-------------"+ mmd);
 		mbh.closeHandler(session);
 		
 		return mmd;
@@ -108,9 +107,7 @@ public class MgrMemberDAO {
 		int cnt=session.delete("potato.manager.mgrMemberMapper.unblock",id);
 		if(cnt!=0) {
 			session.commit();
-			System.out.println("차단 해제 성공");
 		}else {
-			System.out.println("차단 해제 실패");
 		}
 		
 		mbh.closeHandler(session);
