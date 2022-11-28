@@ -80,28 +80,39 @@ function movePage( page ) {
 				</div>
 				
 				<div class="content-list">
-					<!-- 상품 불러오기 -->
-					<c:forEach var="kr" items="${doRestList }" >
-					<div class="card">
-						<div class="card-photo">
-							<a class="card-link" href="user_detailed.do?restarea_idx=${kr.restarea_idx }"><img alt="휴게소 이미지" src="css/images/${kr.img }"/></a>
+					<c:if test="${empty doRestList}">
+						<div class="noResult">
+							 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
+								 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+								 <path d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+							</svg>
+							<span>보여드릴 휴게소가 없습니다.</span>
 						</div>
-						<div class="card-name">${kr.name }</div>
-						<div class="card-star">
-							<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16" color="#F1C40F">
-  							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-							</svg></span><span class="card-star-text">
-								<c:choose>	
-									<c:when test="${kr.rating eq 0}">0</c:when>
-									<c:otherwise>
-										<fmt:formatNumber value="${ kr.rating }" pattern="0.0"/>
-									</c:otherwise>
-								</c:choose>
-							</span>
+					</c:if>
+					<c:if test="${not empty doRestList}">
+						<!-- 상품 불러오기 -->
+						<c:forEach var="kr" items="${doRestList }" >
+						<div class="card">
+							<div class="card-photo">
+								<a class="card-link" href="user_detailed.do?restarea_idx=${kr.restarea_idx }"><img alt="휴게소 이미지" src="css/images/${kr.img }"/></a>
+							</div>
+							<div class="card-name">${kr.name }</div>
+							<div class="card-star">
+								<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16" color="#F1C40F">
+	  							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+								</svg></span><span class="card-star-text">
+									<c:choose>	
+										<c:when test="${kr.rating eq 0}">0</c:when>
+										<c:otherwise>
+											<fmt:formatNumber value="${ kr.rating }" pattern="0.0"/>
+										</c:otherwise>
+									</c:choose>
+								</span>
+							</div>
+							<div class="card-addr">${ kr.line }(${ kr.kr_do })</div>
 						</div>
-						<div class="card-addr">${ kr.line }(${ kr.kr_do })</div>
-					</div>
-					</c:forEach>
+						</c:forEach>
+					</c:if>
 				</div>
 				
 		<!-- 페이지 -->
@@ -135,7 +146,7 @@ function movePage( page ) {
 <form id="listFrm">
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
 	<input type="hidden" id="do_idx" name="do_idx" value="${param.do_idx }"/>
-	<input type="hidden" id="filterFlag" name="filterFlag"/>
+	<input type="hidden" id="filterFlag" name="filterFlag" value="${ empty param.filterFlag ? 1 : param.filterFlag }"/>
 </form>
 </body>
 </html>

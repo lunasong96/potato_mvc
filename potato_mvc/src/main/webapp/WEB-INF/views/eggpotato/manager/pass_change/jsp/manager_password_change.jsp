@@ -17,7 +17,7 @@
 
 <c:if test="${cnt eq 1}">
 alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
-location.href="login_page.do";
+location.href="managerlogin_page.do";
 </c:if>
 
 <c:if test="${cnt eq 0}">
@@ -28,11 +28,28 @@ location.href="mgrPassChange.do";
 
 $(function(){
 	$("#btn").click(function(){
-		//현재 비밀번호 유효성 검사
-		
 		//새 비밀번호 유효성 검사
 		newPw = $("#new_pw").val();
 		newPwChk = $("#newPwChk").val();
+		
+		//8~20자의 영문,숫자, 특수문자를 혼합하여 입력
+		var num = newPw.search(/[0-9]/g);
+		var eng = newPw.search(/[a-z]/ig);
+		var spe = newPw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		
+		 if(newPw.length < 8 || newPw.length > 20){
+
+			  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+			  return false;
+			 }else if(newPw.search(/\s/) != -1){
+			  alert("비밀번호는 공백 없이 입력해주세요.");
+			  return false;
+			 }else if(num < 0 || eng < 0 || spe < 0 ){
+			  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+			  return false;
+			 }else {
+				console.log("통과"); 
+			 }
 		
 		if(newPw!=newPwChk){
 			alert("새 비밀번호와 새 비밀번호 확인이 일치하지 않습니다.");
@@ -72,7 +89,7 @@ $(function(){
 			<tr>
 				<th><label for="managerId">아이디</label></th>
 				<td>
-					<input type="text" id="manager_id" class="inputBox" value="admin" readonly="readonly"/>
+					<input type="text" id="manager_id" class="inputBox" value="potatoking" readonly="readonly"/>
 				</td>
 			</tr>
 			<tr>

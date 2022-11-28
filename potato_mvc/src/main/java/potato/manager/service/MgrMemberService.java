@@ -53,6 +53,7 @@ public class MgrMemberService {
 	//회원 차단하기(차단회원 목록에 추가)
 	public String addBlock(ManagerBlockVO mbVO) {
 		String blockFlag="N";	
+		System.out.println(mbVO.getId());
 		try {
 			mmDAO.insertBlock(mbVO);
 		}catch (PersistenceException se) {
@@ -71,8 +72,16 @@ public class MgrMemberService {
 	
 	////////////////////////페이징////////////////////
 	//전체 페이지수
-	public int searchTotalPages(MgrMemberVO mmVO) {
-		int cnt=mmDAO.selectTotalPages(mmVO);
+	public int searchTotalPages(String memberCat,MgrMemberVO mmVO) {
+		int cnt=0;
+		System.out.println("----memberCat"+memberCat);
+		if("1".equals(memberCat)) {
+			cnt=mmDAO.selectTotalPages1(mmVO);
+		}else if("2".equals(memberCat)) {
+			cnt=mmDAO.selectTotalPages2(mmVO);
+		}else if("3".equals(memberCat)) {
+			cnt=mmDAO.selectTotalPages3(mmVO);
+		}
 		
 		return cnt;
 	}
@@ -92,12 +101,11 @@ public class MgrMemberService {
 	}
 	
 	// 한 페이지당 보여줄 페이지 수, 마지막 페이지보다 적다면 다시 계산
-	public int isLast(int startNum, int lastPage) {
+	public int isLast( int lastPage,int startNum) {
 		int isLast = 2; // 3페이직 씩 0,1,2
 		if (startNum + 3 > lastPage) {
 			isLast = lastPage - startNum;
 		}
-//		System.out.println(startNum+" "+ lastPage +" "+ isLast);
 		
 		return isLast;
 	}

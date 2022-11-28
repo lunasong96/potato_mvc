@@ -117,13 +117,33 @@ public class MgrMemberDAO {
 		return cnt;
 	}
 	
-	//ÆäÀÌÂ¡(ÃÑ °Ô½Ã¹° ¼ö)
-	public int selectTotalPages(MgrMemberVO mmVO) {
+	//ÆäÀÌÂ¡(ÀüÃ¼ »ç¿ëÀÚ ÃÑ ÀÎ¿ø¼ö)
+	public int selectTotalPages1(MgrMemberVO mmVO) {
 		int cnt=0;
 		
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession session=mbh.getHandler();
-		cnt=session.selectOne("potato.manager.mgrMemberMapper.selectTotalPages",mmVO);
+		cnt=session.selectOne("potato.manager.mgrMemberMapper.selectTotalPages1",mmVO);
+		
+		return cnt;
+	}
+	//ÆäÀÌÂ¡(Å»Åğ È¸¿ø ÃÑ ÀÎ¿ø¼ö)
+	public int selectTotalPages2(MgrMemberVO mmVO) {
+		int cnt=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		cnt=session.selectOne("potato.manager.mgrMemberMapper.selectTotalPages2",mmVO);
+		
+		return cnt;
+	}
+	//ÆäÀÌÂ¡(ÃÑ °Ô½Ã¹° ¼ö)
+	public int selectTotalPages3(MgrMemberVO mmVO) {
+		int cnt=0;
+		
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession session=mbh.getHandler();
+		cnt=session.selectOne("potato.manager.mgrMemberMapper.selectTotalPages3",mmVO);
 		
 		return cnt;
 	}

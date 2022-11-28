@@ -18,12 +18,12 @@
 $(function(){
 	//검색버튼 클릭
 	$("#searchBtn").click(function(){
-		var input=$("#idSearch").val();
-		if(input.trim().length<2){
+		var txt=$("#searchTxt").val();
+		if(txt.trim().length<2){
 			alert("2자 이상 입력하세요.");
 			return;
 		}
-	$("#id").val($("#idSearch").val());
+	$("#searchWord").val($("#searchTxt").val());
 	$("#memberFrm").submit();
 	});
 	
@@ -32,16 +32,8 @@ $(function(){
 		$("#blockFrm").submit();
 	});
 		
-	//차단 해제 버튼 클릭
-	$("#unblockBtn").click(function(){
-	    if (!confirm("해당 회원을 차단 해제하겠습니까?")) {
-	        // 취소(아니오) 버튼 클릭 시 이벤트
-	        alert("취소되었습니다.")
-	    } else {
-	        // 확인(예) 버튼 클릭 시 이벤트
-	        alert("차단 해제되었습니다.")
-	    }
-	});
+
+
 	
 	
 });//ready
@@ -50,7 +42,8 @@ $(function(){
 function tableChange(){
 	var key=$("#memberCat").val();
 	
-	$("#memberCategory").val($("#memberCat").val());
+	$("#memberCategory").val(key);
+	$("#pageFlag").val(1);
 	$("#memberFrm").submit();
 }//tableChange
 	
@@ -69,6 +62,18 @@ function showPopup(blockId, nick){
 function movePage( page ) {
 	$("#pageFlag").val( page );
 	$("#memberFrm").submit();
+}
+
+function unblock(id) {
+	if (!confirm("해당 회원을 차단 해제하겠습니까?")) {
+        // 취소(아니오) 버튼 클릭 시 이벤트
+        alert("취소되었습니다.");
+    } else {
+        // 확인(예) 버튼 클릭 시 이벤트
+        $("#unblockId").val(id)
+        $("#unblockFrm").submit();
+        alert("차단 해제되었습니다.")
+    }
 }
 </script>
 </head>
@@ -103,12 +108,17 @@ function movePage( page ) {
 					<option value="3"${ param.memberCat eq "3"?" selected='selected'":"" }>차단 회원</option>
 				</select>
 				
+				<form id="memberFrm" action="mgr_memberManagement.do" method="get">
+					<input type="hidden" id="searchWord" name="searchWord" value="${ param.searchWord }"/>
+					<input type="hidden" id="memberCategory" name="memberCat" value="${empty param.memberCat? 1:param.memberCat }"/>
+					<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
+				</form>
 				<div class="search_wrap">
-					<input type="text" id="idSearch" value="${ param.id }" name="idSearch" class="search_txt" placeholder="아이디를 입력해주세요." autocomplete="off">
+					<input type="text" id="searchTxt" value="${ param.searchWord }" name="searchTxt" class="search_txt" placeholder="아이디를 입력해주세요." autocomplete="off">
 					<button type="button" class="search_btn" id="searchBtn"><strong>검색</strong></button>
 				</div>			
 			</div><!-- mm_top end -->
-			
+			<!-- 회원 불러오기 -->
 			<div class="table_wrap">
 			
 				<table class="table1">
@@ -147,8 +157,10 @@ function movePage( page ) {
 						<tr><td colspan="5">조회된 결과가 없습니다.</td></tr>
 					</c:if>
 					<c:forEach var="block" items="${memberList}">
-						<tr><td>${block.id }</td><td>${block.nick}</td><td>${block.reason }</td>
-						<td><a href="mgr_unblock.do?id=${ block.id }"><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제"></a></td></tr>
+						<tr>
+							<td><a href="javascript:infoPopup('${block.id}')" style="color:black">${block.id }</a></td><td>${block.nick}</td><td>${block.reason }</td>
+							<td><input type="button" class="inputBtn" id="unblockBtn" name="unblockBtn" value="해제" onclick="unblock('${block.id}')"></td>
+						</tr>
 					</c:forEach>
 					</table>
 				
@@ -169,13 +181,16 @@ function movePage( page ) {
 							<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
 							<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
 						</c:if>
-						<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+						
+				
+						<c:forEach step="1" var="i" begin="0" end="${isLast}">
 							<a href="javascript:movePage(${ startNum+i })" ${ currentPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
 						</c:forEach>
 						<c:if test="${ lastPage gt startNum+2 }">
 							<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
 							<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
 						</c:if>
+					
 					</c:if>
 		</div>
 <!-- 건들지마세요 -->
@@ -188,22 +203,15 @@ function movePage( page ) {
 
 </div>
 
-<!-- 회원 불러오기 -->
-<form id="memberFrm" action="mgr_memberManagement.do" method="post">
-	<input type="hidden" id="id" name="id" value="${param.id }"/>
-	<input type="hidden" id="memberCategory" name="memberCat" value="${empty param.memberCat? 1:param.memberCat }"/>
-	<input type="hidden" id="memberType" name="memberType" value="${empty param.memberType? 1:param.memberType }"/>
-	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1 : param.pageFlag }"/>
-</form>
 
 <!-- 회원정보 상세창 불러오기 -->
-<form id="infoFrm" action="mgr_memberInfoPopup.do" method="post">
+<form id="infoFrm" action="mgr_memberInfoPopup.do" method="get">
 	<input type="hidden" id="infoId" name="id">
 </form>
 
 <!-- 차단 해제 -->
 <form id="unblockFrm" action="mgr_unblock.do">
-	<input type="hidden" id="unblockId" name="id">
+	<input type="hidden" id="unblockId" name="unblockId"/>
 </form>
 
 </body>

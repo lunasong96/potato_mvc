@@ -8,8 +8,8 @@
 	select id,nick,join_date,birth
 	from member
 	where quit='N'
-	<if test="id != null and id != ''">
-       and id like '%'||#{id}||'%'
+	<if test="searchWord != null and searchWord != ''">
+       and id like '%'||#{searchWord}||'%'
     </if> 
     	offset (#{pageFlag}-1)*10 rows
 		fetch next 10 rows only
@@ -20,8 +20,8 @@
 	select id,nick,join_date,quit_date
 	from member
 	where quit='Y'
-	<if test="id != null and id != ''">
-       and id like '%'||#{id}||'%'
+	<if test="searchWord != null and searchWord != ''">
+       and id like '%'||#{searchWord}||'%'
     </if> 
     	offset (#{pageFlag}-1)*10 rows
 		fetch next 10 rows only
@@ -34,7 +34,7 @@
 	where 
 	(m.id=mb.id and br.block_idx=mb.block_idx)
 	<if test="id != null and id != ''">
-		and mb.id like '%'||#{id}||'%'
+		and mb.id like '%'||#{searchWord}||'%'
 	</if>
 		offset (#{pageFlag}-1)*10 rows
 		fetch next 10 rows only
@@ -66,13 +66,32 @@
 	where id=#{id}
 </delete>
 
-<!-- 페이징 -->
-<select id="selectTotalPages" parameterType="potato.manager.vo.MgrMemberVO" resultType="int">
+<!-- 전체 사용자 목록 페이징 -->
+<select id="selectTotalPages1" parameterType="potato.manager.vo.MgrMemberVO" resultType="int">
 	select count(*) cnt
 	from member 
-	where 1=1
-	<if test="id != null and id != ''">
-       and id like '%'||#{id}||'%'
+	where quit='N'
+	<if test="searchWord != null and searchWord != ''">
+       and id like '%'||#{searchWord}||'%'
+    </if> 
+</select>
+
+<!-- 탈퇴 회원 목록페이징 -->
+<select id="selectTotalPages2" parameterType="potato.manager.vo.MgrMemberVO" resultType="int">
+	select count(*) cnt
+	from member 
+	where quit='Y'
+	<if test="searchWord != null and searchWord != ''">
+       and id like '%'||#{searchWord}||'%'
+    </if> 
+</select>
+
+<!-- 차단 회원 목록페이징 -->
+<select id="selectTotalPages3" parameterType="potato.manager.vo.MgrMemberVO" resultType="int">
+	select count(*) cnt
+	from manager_block 
+	<if test="searchWord != null and searchWord != ''">
+       and id like '%'||#{searchWord}||'%'
     </if> 
 </select>
 

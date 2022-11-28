@@ -37,19 +37,25 @@ public class MgrMemberController {
 		int memberType=mmVO.getMemberType();
 		model.addAttribute("memberType",memberType);
 
+		if(memberCat == null || "".equals(memberCat)) {
+			memberCat="1";
+		}
+		
 		//페이징 변수
-		int totalPages = mms.searchTotalPages(mmVO);
+		int totalPages = mms.searchTotalPages(memberCat,mmVO);
 		int lastPage = mms.lastPage(totalPages);
 		int currentPage = mmVO.getPageFlag();
 		int startNum = mms.startNum(currentPage);
-		int isLast = mms.isLast(startNum,lastPage);
-		
+		int isLast = mms.isLast(lastPage,startNum);
+		System.out.println( "totalPages : " +totalPages + ",lastPage : " + lastPage +
+				",currentPage : " + currentPage+ ",startNum : " + startNum+ ",isLast: " + isLast);
 		
 		//view로 전송
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("startNum", startNum);
 		model.addAttribute("isLast", isLast);
 		model.addAttribute("currentPage", currentPage);
+		
 		
 		//회원 목록
 		List<MgrMemberDomain> list=mms.searchMember(mmVO,memberCat,session);
@@ -70,7 +76,7 @@ public class MgrMemberController {
 	}//memberInfoPopup
 	
 	//회원 차단 팝업창 띄우기
-	@RequestMapping(value="/mgr_memberBlockPopup.do",method=GET)
+	@RequestMapping(value="/mgr_memberBlockPopup.do",method={GET,POST})
 	public String memberBlockPopup(HttpServletRequest request,String id, Model model) {
 		id=request.getParameter("id");
 		model.addAttribute("reasonList",mms.searchReason());
@@ -92,10 +98,11 @@ public class MgrMemberController {
 	
 	//차단 해제
 	@RequestMapping(value="/mgr_unblock.do",method={GET,POST})
-	public String unblock(String id,Model model) {
-		int unblockCnt=mms.removeBlock(id);
+	public String unblock(HttpServletRequest request,Model model) {
+		int unblockCnt=mms.removeBlock(request.getParameter("unblockId"));
+		
 		model.addAttribute("unblockCnt",unblockCnt);
 		
-		return "manager/member_management/jsp/member_management";
+		return "forward:/mgr_memberManagement.do";
 	}
 }//class

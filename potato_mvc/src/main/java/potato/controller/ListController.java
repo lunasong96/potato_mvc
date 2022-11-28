@@ -88,6 +88,7 @@ public class ListController {
 		int isLast = ls.isLast(startNum,lastPage);
 		
 		//view·Î Àü¼Û
+		model.addAttribute("totalPages",totalPages);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("startNum", startNum);
 		model.addAttribute("isLast", isLast);
