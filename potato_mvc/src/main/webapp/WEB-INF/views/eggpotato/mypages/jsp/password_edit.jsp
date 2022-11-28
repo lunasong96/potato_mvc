@@ -107,7 +107,7 @@ $(function() {
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
-					<img src="http://localhost/potato/css/images/${ img }"   id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://potato.sist.co.kr/css/images/${ img }"   id="profileImg" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
 				<div class="nickname"><c:out value="${ nick }"/></div>
 			</div>			

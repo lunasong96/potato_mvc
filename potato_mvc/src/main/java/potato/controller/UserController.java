@@ -195,7 +195,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/signUp3.do", method = POST)
 	public String signUpPage3(HttpServletRequest request, Model model, HttpSession session, UserInfoVO uiVO, SessionStatus ss) {
-		File saveDir=new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
+		File saveDir=new File("/home/ubuntu/potato_mvc/css/images/");
 		int maxSize=1024*1024*20; //byte*kb*mb*gb;
 		String url="redirect:user_mainhome.do";
 		try {

@@ -76,7 +76,7 @@ public class MyPageController {
 		mieVO.setId((String)session.getAttribute("id"));
 		
 		
-		File saveDir=new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images");
+		File saveDir=new File("/home/ubuntu/potato_mvc/css/images/");
 		int maxSize=1024*1024*20*20; // byte * kb * mb *gb
 		//String responseURL="day1104/upload_err";
 		try {

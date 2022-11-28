@@ -76,7 +76,7 @@ const autoHyphen = (target) => {
 
 		function deleteFile() {
 			//alert("삭제");
-			 $("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
+			 $("#preview").attr("src", "http://potato.sist.co.kr/css/images/basic.png");
 			 $("#uploadBtn").val("");
 				}
 				
@@ -99,7 +99,7 @@ const autoHyphen = (target) => {
 		<div class="navi">
 			<div class="profileWrap">
 				<div class="img">
-					<img src="http://localhost/potato/css/images/${ img }"  id="img" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://potato.sist.co.kr/css/images/${ img }"  id="img" name="profileImg" class="img" style="margin: 5px 30px; width: 150px; height: 150px; background: #f8edeb; border-radius: 50%;">
 				</div>
 				<div class="nickname"><c:out value="${ nick }"/></div>
 			</div>			
@@ -126,7 +126,7 @@ const autoHyphen = (target) => {
 			</th>
 			<td>
 				<div class="profile_img">
-					<img src="http://localhost/potato/css/images/${mil.img }"  id="preview" name="img" class="profileImg" style="margin: 5px 30px 5px 0; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
+					<img src="http://potato.sist.co.kr/css/images/${mil.img }"  id="preview" name="img" class="profileImg" style="margin: 5px 30px 5px 0; width: 70px; height: 70px; background: #f8edeb; border-radius: 50%;">
 				<div class="upload-button">
 					<input type="button" value="사진 등록" class="img_btn" id="imgBtn">
 					<input type="file" name="upfile" id="uploadBtn" onchange="readURL(this)"/>

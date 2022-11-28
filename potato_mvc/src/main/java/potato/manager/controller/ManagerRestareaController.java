@@ -103,7 +103,7 @@ public class ManagerRestareaController {
 	@RequestMapping(value="manager_rest_add.do", method=POST)
 	public String newRest(HttpServletRequest request) {
 		//이미지저장공간과 크기 설정
-		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
+		File saveDir = new File("/home/ubuntu/potato_mvc/css/images/");
 		int maxSize=1024*1024*20;
 		try {
 			//이미지파일 추가
@@ -224,7 +224,7 @@ public class ManagerRestareaController {
 	@RequestMapping(value="manager_rest_modify.do", method= {POST,GET})
 	public String restModify(HttpServletRequest request) {
 		//이미지저장공간과 크기 설정
-		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
+		File saveDir = new File("/home/ubuntu/potato_mvc/css/images/");
 		int maxSize=1024*1024*20;
 		try {
 			//이미지파일 추가

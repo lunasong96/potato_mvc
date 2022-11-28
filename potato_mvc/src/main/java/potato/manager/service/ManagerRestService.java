@@ -129,7 +129,7 @@ public class ManagerRestService {
 	
 	//휴게소 수정전, 음식 수정전 이미지파일 삭제 
 	public void removeOldImg(String img) {
-		File imgFile =new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+img);
+		File imgFile =new File("/home/ubuntu/potato_mvc/css/images/"+img);
 		imgFile.delete();
 	}
 	
@@ -141,7 +141,7 @@ public class ManagerRestService {
 	
 	//음식사진 수정 및 추가에 대한 AJAX처리
 	public void modifyFoodImgAJAX(HttpServletRequest request) {
-		File saveDir = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/");
+		File saveDir = new File("/home/ubuntu/potato_mvc/css/images/");
 		int maxSize=1024*1024*20;
 		int cnt = 0;
 		try {
@@ -216,7 +216,7 @@ public class ManagerRestService {
 		
 		File foodImgFile = null;
 		for(String imgs : foodImgs) {
-			foodImgFile = new File("C:/Users/user/git/potato_mvc/potato_mvc/src/main/webapp/css/images/"+imgs);
+			foodImgFile = new File("/home/ubuntu/potato_mvc/css/images/"+imgs);
 			foodImgFile.delete();
 		}
 	}
