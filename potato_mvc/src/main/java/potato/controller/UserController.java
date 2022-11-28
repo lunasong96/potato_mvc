@@ -79,15 +79,15 @@ public class UserController {
 		if( cnt == 1 ) {
 			ud=us.searchMemberInfo(lVO);
 			if( "N".equals(ud.getQuit()) ) {
-			session.setAttribute("id", ud.getId());
-			session.setAttribute("nick", ud.getNick());
-			session.setAttribute("img", ud.getImg());
+				session.setAttribute("id", ud.getId());
+				session.setAttribute("nick", ud.getNick());
+				session.setAttribute("img", ud.getImg());
+			}//end if
 			jsonObj.put("id", ud.getId());
 			jsonObj.put("nick", ud.getNick());
 			jsonObj.put("quit", ud.getQuit());
 			jsonObj.put("img", ud.getImg());
 			jsonObj.put("flag", true);
-			}//end if
 		}//end if
 		return jsonObj.toJSONString();
 	}//login
