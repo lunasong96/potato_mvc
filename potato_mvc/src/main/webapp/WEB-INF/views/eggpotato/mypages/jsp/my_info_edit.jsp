@@ -37,8 +37,9 @@
 					$("uploadBtn").click();
 				});//click
 			$(".edit_btn").click(function() {
-				$("#MyInfoEditFrm").submit();
-					confirm("성공적으로 수정되었습니다.")
+				if(confirm("수정하시겠습니까?")){
+					$("#MyInfoEditFrm").submit();
+				}
 			});//click
 		});//ready
 		
