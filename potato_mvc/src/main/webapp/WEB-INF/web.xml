@@ -45,12 +45,12 @@
 	</filter-mapping>
 
 	<!-- 에러 페이지의 설정 : 운영할 때 주석 풀어주세요 -->
-	<!--  <error-page>
+	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/eggpotato/error/404.html</location>
 	  </error-page>
 	  <error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/eggpotato/error/500.html</location>
-	  </error-page> -->
+	  </error-page>
 </web-app>
