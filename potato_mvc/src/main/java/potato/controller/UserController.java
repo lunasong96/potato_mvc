@@ -68,6 +68,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value = "/login.do", method = POST)
 	public String login(LoginVO lVO, HttpSession session, String id, String pass) {
+		
 		lVO.setId(id);
 		lVO.setPass(pass);
 		
@@ -75,9 +76,9 @@ public class UserController {
 		UserDomain ud=null;
 		jsonObj.put("flag", false);
 		int cnt=us.searchMember(lVO);
-		
-		if( cnt == 1) {
+		if( cnt == 1 ) {
 			ud=us.searchMemberInfo(lVO);
+			if( "N".equals(ud.getQuit()) ) {
 			session.setAttribute("id", ud.getId());
 			session.setAttribute("nick", ud.getNick());
 			session.setAttribute("img", ud.getImg());
@@ -86,7 +87,8 @@ public class UserController {
 			jsonObj.put("quit", ud.getQuit());
 			jsonObj.put("img", ud.getImg());
 			jsonObj.put("flag", true);
-		}
+			}//end if
+		}//end if
 		return jsonObj.toJSONString();
 	}//login
 	
