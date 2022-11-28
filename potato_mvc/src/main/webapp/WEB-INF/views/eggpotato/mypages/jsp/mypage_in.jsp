@@ -75,7 +75,6 @@ function chkNull() {
 <form id="InFrm" action="chkIdPass.do" method="post" >
 <div class="pw_chk">
 	<input type="hidden" name="id"  id="id" value="${ sessionScope.id }"/>
-	<%-- <input type="hidden" name="pass"  id="pass" value="${ pass }"/> --%>
 	<input type="password" name="pass" id="passChk" placeholder="비밀번호 입력" size="30" class="pw">
 	<input type="button" value="확인" class="pw_chk_btn" >
 </div>

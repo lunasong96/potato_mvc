@@ -43,7 +43,7 @@
 		});//ready
 		
 function readURL(input) {
-	 alert("이미지");
+	// alert("이미지");
 		 if (input.files && input.files[0]) {
 			 var reader = new FileReader();
 			   reader.onload = function(e) {
@@ -66,7 +66,7 @@ function readURL(input) {
 				    }
 				}
 		function deleteFile() {
-			alert("삭제");
+			//alert("삭제");
 			 $("#preview").attr("src", "http://localhost/potato/css/images/basic.png");
 			 $("#uploadBtn").val("");
 				}
@@ -128,26 +128,26 @@ function readURL(input) {
 		</tr>
 		<tr>
 			<th><label>성명</label></th>
-			<td><input type="text" value="<c:out value="${ mil.name }"/>" id="name" readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.name }"/>" id="name" readonly="readonly" style="background-color: #EEEEEE"></td>
 		</tr>
 		<tr>
 			<th><label>닉네임</label></th>
-			<td><input type="text" value="<c:out value="${ mil.nick }"/>" id="nick"  readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.nick }"/>" id="nick"  readonly="readonly" style="background-color: #EEEEEE"></td>
 		</tr>
 		<tr>
 			<th><label>아이디</label></th>
-			<td><input type="text" value="<c:out value="${ mil.id }"/>" id="id" readonly="readonly"></td>
+			<td><input type="text" value="<c:out value="${ mil.id }"/>" id="id" readonly="readonly"style="background-color: #EEEEEE"></td>
 		</tr>
 		<tr>
 			<th><label>생년월일</label></th>
 				<td>
-					<input type="date" name="birth1" id="birth1"  value="<c:out value="${ mil.birth }"/>"  class="birth" readonly="readonly">
+					<input type="date" name="birth" id="birth"  value="<c:out value="${ mil.birth }"/>"  class="birth" >
 				</td>
 		</tr>
 		<tr>
 			<th><label>휴대폰</label></th>
 				<td>
-					<input type="text" name="phone_num" value="<c:out value="${ mil.phone }"/>"  readonly="readonly">
+					<input type="text" name="phone" maxlength="13" value="<c:out value="${ mil.phone }"/>" >
 				</td>
 		</tr>
 		<tr>

@@ -21,7 +21,7 @@
   	<!--  내 정보 수정 -->
   	<select id="updateMypageInfo"  resultType="int" parameterType="potato.vo.MyPageMyInfoEditVO">
   		update		member
-		set       		img =#{ img, jdbcType=VARCHAR },email=#{ email, jdbcType=VARCHAR }
+		set       		img =#{ img, jdbcType=VARCHAR }, email=#{ email, jdbcType=VARCHAR },phone=#{ phone, jdbcType=VARCHAR },birth=#{birth, jdbcType=VARCHAR }
 		where     	id= #{ id , jdbcType=VARCHAR}
   	</select>
   	

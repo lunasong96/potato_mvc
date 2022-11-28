@@ -81,7 +81,9 @@ public class MyPageDAO {
 			session.commit();
 		}else { //수정사항이 없으면
 			session.rollback();
+			
 		}
+		
 		
 		mbh.closeHandler(session);
 		

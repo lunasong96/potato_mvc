@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -50,8 +51,6 @@ public class MyPageController {
 		LVO.setId((String)session.getAttribute("id"));
 		int cnt = us.searchMember(LVO);
 		if(  cnt == 1 ) {
-			System.out.println("------아이디 비밀번호 확인 페이지: id is--------"+(String)session.getAttribute("id"));
-			System.out.println("-----아이디비밀번호 확인 : --------"+LVO);
 			result= "redirect:my_info_edit.do";
 		}else {
 			session.setAttribute("passFlag", false);
@@ -64,7 +63,7 @@ public class MyPageController {
 	//정보 수정이기 때문에 forward보다는 redirect로 처리하는 것이 좋다.
 	@RequestMapping(value="my_info_edit.do",method = GET)
 	public String myInfoEdit(HttpSession session, Model model) {
-		System.out.println("------내 정보 수정 폼 : id is--------"+(String)session.getAttribute("id"));
+		//System.out.println("------내 정보 수정 폼 : id is--------"+(String)session.getAttribute("id"));
 		
 		model.addAttribute("MyInfoList", mps.searchInfo((String)session.getAttribute("id")));
 		
@@ -84,21 +83,21 @@ public class MyPageController {
 			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),maxSize, "UTF-8",
 					new DefaultFileRenamePolicy() );
 			String rename=mr.getFilesystemName("upfile");
-			//System.out.println(imgChk + " : findME");
 			mieVO.setImg(mr.getFilesystemName("upfile"));
+			mieVO.setBirth(mr.getParameter("birth"));
 			mieVO.setEmail(mr.getParameter("email"));
+			mieVO.setPhone(mr.getParameter("phone"));
 
+			//System.out.println(mieVO +"내 정보");
+			
 			if( rename == null  ) {
 				mieVO.setImg("basic.png");
 			}
-			
 			mps.updateInfo(mieVO);
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		model.addAttribute("EditList", mps.updateInfo((String)session.getAttribute("id"));
-			return "redirect:my_info_edit.do";
+			return "redirect:login_page.do";
 	}//myInfoEditProcess
 	
 	//프로필 사진등록
@@ -114,21 +113,25 @@ public class MyPageController {
 	}//delProfileImg
 	
 	//비밀번호 수정 폼
-	@RequestMapping(value="password_edit.do",method =GET)
+	@RequestMapping(value="password_edit.do",method ={GET,POST})
 		public String pwEdit(HttpSession session) {
+			String url="login/jsp/login.jsp";
+			
+			if(session.getAttribute("id")==null) {
+				url="forward:login_page.do"; 
+			}
 		
 			return "mypages/jsp/password_edit";
 	}//pwEdit
 	
 	//비밀번호 수정 처리
-	@RequestMapping(value = "password_edit_process.do" ,method= GET)
+	@RequestMapping(value = "password_edit_process.do" ,method= {GET,POST})
 		public String pwEditProcess(HttpSession session, MyPagePwEditVO peVO, Model model ) {
 		peVO.setId((String)session.getAttribute("id"));
-		int cnt=mps.modifyPw(peVO);
-			
-			model.addAttribute("cnt", cnt);
+		int updateCnt=mps.modifyPw(peVO);
+			model.addAttribute("updateCnt", updateCnt);
 		
-		return "redirect:password_edit.do";
+		return "forward:password_edit.do";
 	}//pwEditProcess
 	
 	//회원 탈퇴 폼
@@ -140,12 +143,12 @@ public class MyPageController {
 	
 	//회원 탈퇴 처리
 	@RequestMapping(value = "unregister_process.do", method = POST)
-		public String quitProcess(HttpSession session, MyPageQuitVO mqVO ) {
-		//System.out.println("------ 회원탈퇴 폼: id is--------"+(String)session.getAttribute("id"));
-		//System.out.println("------ 회원탈퇴 처리: id is--------"+(String)session.getAttribute("id"));
+		public String quitProcess(HttpSession session, MyPageQuitVO mqVO,SessionStatus ss ) {
 		mqVO.setId((String)session.getAttribute("id"));
 		int quitCount=mps.updateQuit(mqVO);
-		
+		session.invalidate();
+		ss.isComplete();
+		session.setAttribute("quitCount", quitCount);
 		return "redirect:user_mainhome.do";//처리가 완료되면 메인화면으로 이동!
 	}//quitProcess
 	

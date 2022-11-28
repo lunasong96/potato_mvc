@@ -27,16 +27,12 @@
 
 $(function() {
 	$(".unregister_btn").click(function() {
-		//	if($("#pass").val().trim()==""){
-			//	alert("비밀번호를 입력해주세요.")
-				//$("#pass").focus();
-				//$("#pass").val("");
-			//	return;
 			pass=$("#pass").val();
 			
-			if(pass == pass){
+			if(pass != pass){
+				alert("비밀번호가 일치하지 않습니다.");
+			}else{
 			$("#unregeisterFrm").submit();
-			alert("회원탈퇴 되었습니다 !");
 			}
 	});//click
 });//ready

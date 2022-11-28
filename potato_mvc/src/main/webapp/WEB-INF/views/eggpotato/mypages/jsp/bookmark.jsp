@@ -21,7 +21,7 @@ $(function() {
 function removeBookmark( restarea_idx){
 	//alert( "삭제할 키 " +  restarea_idx)	
 	$("#restarea_idx").val( restarea_idx );
-	alert($("#restarea_idx").val());
+	//alert($("#restarea_idx").val()); //삭제하는 휴게소 인덱스 번호 안뜨게
 	$("#delBookmarkFrm").submit();
 }
 	

@@ -28,7 +28,7 @@ public class ConnectionController {
 	//아이디, 비밀번호 확인
 	@RequestMapping(value="chkIdPass2.do",method=POST)
 	public String chkIdPass(HttpSession session, LoginVO LVO,Model model) {
-		String result="redirect:my_review.do";
+		String result="redirect:myPageIn2.do";
 		LVO.setId((String)session.getAttribute("id"));
 		int cnt = us.searchMember(LVO);
 		if(  cnt == 1 ) {
