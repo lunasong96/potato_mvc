@@ -278,7 +278,6 @@ function slider() {
 				var jsonStr=JSON.stringify(data);
 				var jsonParse=JSON.parse(jsonStr);
 				var review=jsonParse.review;
-				console.log(review);
 				
 				var $foodimg;
 				
