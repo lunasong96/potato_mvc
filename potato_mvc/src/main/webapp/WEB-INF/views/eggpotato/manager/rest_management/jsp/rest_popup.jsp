@@ -82,7 +82,16 @@ $(function() {
 				<div class="star-wrap">
 					<span class="star" style="width: ${ detail.totalRating*20 }%"></span>
 				</div>
-				<span class="rate-txt"><c:out value="${ detail.totalRating }"/></span>
+				<span class="rate-txt">
+				<c:choose>
+				<c:when test="${ detail.totalRating eq 0  }">
+				0
+				</c:when>
+				<c:otherwise>
+				<fmt:formatNumber pattern=".0" value="${ detail.totalRating }"/>
+				</c:otherwise>
+				</c:choose>
+				</span>
 			</div>
 			<div class="bookmark-wrap">
 				<div>

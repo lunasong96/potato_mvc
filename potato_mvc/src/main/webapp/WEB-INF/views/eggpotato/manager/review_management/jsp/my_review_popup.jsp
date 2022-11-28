@@ -109,7 +109,7 @@ function slider() {
 			   			<c:when test="${  not empty reviewDetail.reviewImg }">
  			   			<c:forEach var="img" items="${ imgArr }">
  			   			<div class="swiper-slide re-swiper-slide">
-			   				<img src="css/images/${ img }"  class="re-foodimg">
+			   				<img src="css/reviewImg/${ img }"  class="re-foodimg">
 			   			</div>
  			   			</c:forEach>
  			   			</c:when>
