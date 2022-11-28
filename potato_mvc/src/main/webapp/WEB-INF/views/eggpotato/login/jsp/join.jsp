@@ -109,7 +109,6 @@ $(function(){
 		    $($(this)).text("SHOW");
 		  }
 		});
-	
 });//ready
 
 //null 검사
@@ -128,6 +127,13 @@ function chkNull(){
 				return;
 			}
 	}
+	
+	if( $("#idChk").attr("value") == "N" ){
+		alert("사용 중인 아이디이거나 아이디 중복검사가 완료되지 않았습니다");
+		$("#id").focus();
+		return;
+	}
+	
 	//비밀번호 필수 입력
 	if( $("#pass").val().trim() == "" ){
 		alert("비밀번호를 입력하세요");
@@ -179,18 +185,31 @@ function chkNull(){
 		return;
 	}
 	
-	//번호 필수 입력	
-	if($("#phone").val().trim()=="") {
-		alert("휴대폰번호를 입력하세요");
-		$("#phone").focus();
+	
+ 	if( $("#NickChk").attr("value") == "N" ){
+		alert("사용 중인 닉네임이거나 닉네임 중복검사가 완료되지 않았습니다");
+		$("#nick").focus();
 		return;
 	}
-	//번호 유효성
-	if ($("#phone").val().length <= 11) {
-		alert("전화번호를 정확히 입력해주세요");	
-	return;
+ 	
+ 	//생년 필수 입력	
+	if($("#year").val().trim()=="") {
+		alert("생년을 입력하세요");
+		$("#year").focus();
+		return;
 	}
-	
+ 	
+ 	//년도 범위 제한
+ 	let date= new Date();
+ 	var maxYear= parseInt(date.getFullYear());
+ 	var minYear= 1900
+ 	var numYear = parseInt($("#year").val());
+ 	if( numYear < minYear || numYear > maxYear ){
+ 		alert("년도는 1900~"+maxYear+"년까지 입력가능합니다.");
+		$("#year").focus();
+		return;
+ 	}
+ 	
 	//이메일 필수 입력	및 정규식
  	if($("#email").val().trim()=="") {
 		alert("이메일을 입력하세요");
@@ -205,24 +224,19 @@ function chkNull(){
 		}
 	}
  	
- 	//생년 필수 입력	
-	if($("#year").val().trim()=="") {
-		alert("생년을 입력하세요");
-		$("#year").focus();
+	//번호 필수 입력	
+	if($("#phone").val().trim()=="") {
+		alert("휴대폰번호를 입력하세요");
+		$("#phone").focus();
 		return;
 	}
- 	
- 	
- 	//년도 범위 제한
- 	let date= new Date();
- 	var maxYear= parseInt(date.getFullYear());
- 	var minYear= 1900
- 	var numYear = parseInt($("#year").val());
- 	if( numYear < minYear || numYear > maxYear ){
- 		alert("년도는 1900~"+maxYear+"년까지 입력가능합니다.");
-		$("#year").focus();
-		return;
- 	}
+	
+	//번호 유효성
+	if ($("#phone").val().length <= 11) {
+		alert("전화번호를 정확히 입력해주세요");	
+	return;
+	}
+	
 	$("#joinFrm").submit();
 }//chkNull
 
@@ -269,11 +283,12 @@ function checkId(){
             if(num == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
                 $("#id_ok").css("display","inline-block"); 
                 $("#id_already").css("display", "none");
+                $("#idChk").attr("value", "Y");
             } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
                 $("#id_already").css("display","inline-block");
                 $("#id_ok").css("display", "none");
                 alert("중복된 아이디입니다.");
-                $('#id').val('');
+                $("#idChk").attr("value", "N");
             }
         },
     
@@ -295,14 +310,14 @@ function checkNick(){
             if(num == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
                 $("#nick_ok").css("display","inline-block"); 
                 $("#nick_already").css("display", "none");
+                $("#NickChk").attr("value", "Y");
             } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
                 $("#nick_already").css("display","inline-block");
                 $("#nick_ok").css("display", "none");
                 alert("중복된 닉네임입니다");
-                $('#nick').val('');
+                $("#NickChk").attr("value", "N");
             }
         },
-    
     });//ajax
     };//checkId
 </script>
@@ -326,7 +341,8 @@ function checkNick(){
 		<div class="main-container">
 		<form action="signUp2.do" method="post" id="joinFrm">
 			<h2 class="input-title">아이디</h2>
-			<input type="text" placeholder="아이디" class="id" name="id" id="id" oninput = "checkId()" maxlength="20"><br/>
+			<input type="text" placeholder="아이디" class="id" name="id" id="id" oninput = "checkId()" maxlength="20">
+			<input type="hidden" name="idChk" id="idChk" value="N">
 			<!-- id ajax 중복체크 -->
 			<span class="id_ok" id="id_ok">사용 가능한 아이디입니다.</span>
 			<span class="id_already" id="id_already">누군가 이 아이디를 사용하고 있어요.</span>
@@ -340,6 +356,7 @@ function checkNick(){
 			<input type="text" placeholder="이름" class="text-join" name="name" id="name" maxlength="20"><br/>
 			<h2 class="input-title">별명</h2>
 			<input type="text" placeholder="별명" class="text-join" name="nick" id="nick" oninput = "checkNick()" maxlength="20"><br/>
+			<input type="hidden" name="NickChk" id="NickChk" value="N">
 			<span class="nick_ok" id="nick_ok">사용 가능한 닉네임입니다.</span>
 			<span class="nick_already" id="nick_already">누군가 이 닉네임를 사용하고 있어요.</span>
 			<h2 class="input-title">생년월일</h2>
@@ -355,7 +372,7 @@ function checkNick(){
 			</c:forEach>
 			</select>
 			<h2 class="input-title">이메일</h2>
-			<input type="text" placeholder="이메일" class="text-join" name="email" id="email" maxlength="50" onkeydown="noKor1();" onkeyup="noSpaceForm(this)"><br/>
+			<input type="text" placeholder="이메일" class="text-join" name="email" id="email" maxlength="50" onkeyup="noSpaceForm(this)"><br/>
 			<h2 class="input-title">휴대전화</h2>
 			<input type="text" placeholder="전화번호 입력" class="text-join" name="phone" id="phone" oninput="autoHyphen(this)" maxlength="13"><br/>
 			<span class="phone_chk" id="phone_chk"> 01012345678 식으로 입력해주시면 됩니다. </span>
