@@ -200,6 +200,10 @@ public class UserController {
 		String url="redirect:user_mainhome.do";
 		try {
 			uiVO=(UserInfoVO)session.getAttribute("uiVO");
+			if( uiVO == null ) {
+				session.invalidate();
+				return "redirect:user_mainhome.do";
+			}
 			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(), 
 					maxSize, "UTF-8", new DefaultFileRenamePolicy());
 			//3. 파라메터를 받기( VO에 넣어야 한다면 VO를 생성하여 값을 넣는다.
