@@ -18,6 +18,7 @@
 
 var pinNum;
 var markers = [];
+var infowindows = [];
 
 $(function(){
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -38,37 +39,14 @@ $(function(){
 		</c:forEach>
 ];
 	
-	for (var i = 0; i < positions.length; i ++) {
-	    // 마커를 생성합니다
-	    	var marker = new kakao.maps.Marker({
-	        map: map, // 마커를 표시할 지도
-	        position: positions[i].latlng // 마커의 위치
-	    });
-
-	    // 마커에 표시할 인포윈도우를 생성합니다 
-	    var infowindow = new kakao.maps.InfoWindow({
-	        content: positions[i].content // 인포윈도우에 표시할 내용
-	    });
-
-	    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-	    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-	    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-	    kakao.maps.event.addListener(marker, 'click', clickListener(map, marker, infowindow));
-	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-	    kakao.maps.event.removeListener(marker, 'click', clickOutListener(infowindow));
-	
-	 	// 생성된 마커를 배열에 추가합니다
-	    markers.push(marker);
-	}
-	
-	
 	$(".btn").click(function(){
 		pinNum=$(this).val();
 		
 	
 		if(pinNum=="경부"){
 			hideMarkers();
+			closeInfowindow();
+			$(".cat-name").text("경부고속도로 휴게소");
 			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 			var positions = [
 					
@@ -84,7 +62,8 @@ $(function(){
 		if(pinNum=="남해"){
 			
 			hideMarkers();
-			
+			closeInfowindow();
+			$(".cat-name").text("남해고속도로 휴게소");
 			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 			var positions = [
 					
@@ -99,6 +78,8 @@ $(function(){
 		
 		if(pinNum=="서해안"){
 			hideMarkers();
+			closeInfowindow();
+			$(".cat-name").text("서해안고속도로 휴게소");
 			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 			var positions = [
 					
@@ -113,6 +94,8 @@ $(function(){
 		
 		if(pinNum=="영동"){
 			hideMarkers();
+			closeInfowindow();
+			$(".cat-name").text("영동고속도로 휴게소");
 			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 			var positions = [
 					
@@ -127,6 +110,8 @@ $(function(){
 		
 		if(pinNum=="중부"){
 			hideMarkers();
+			closeInfowindow();
+			$(".cat-name").text("중부내륙고속도로 휴게소");
 			// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 			var positions = [
 					
@@ -161,6 +146,8 @@ $(function(){
 	
 	 	// 생성된 마커를 배열에 추가합니다
 	    markers.push(marker);
+	 	
+	    infowindows.push(infowindow);
 	}
 	
 	})
@@ -199,6 +186,13 @@ $(function(){
 	function setMarkers(map) {
 	    for (var i = 0; i < markers.length; i++) {
 	        markers[i].setMap(map);
+	    }            
+	}
+	
+	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+	function closeInfowindow() {
+	    for (var i = 0; i < infowindows.length; i++) {
+	    	infowindows[i].close();
 	    }            
 	}
 	
@@ -247,7 +241,7 @@ $(function(){
 			<div class="select-line">
 			<!-- 지도 -->
 				<div style="padding: 50px 50px;">
-				<div id="map" style="width:930px;height:1111px;">
+				<div id="map" style="width:1000px;height:800px;">
 				</div>	
 			</div>
 			<div style="padding:50px 0">
